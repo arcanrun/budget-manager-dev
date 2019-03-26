@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { Header, BottomBar, Card } from "./components";
 import { WholeBudgetContainer } from "./containers";
 import { user } from "./static/user-data";
-import { toggleMenu } from "./actions";
 
 type PROPS = {
   onClick: () => mixed,
@@ -34,11 +33,9 @@ class App extends React.Component<PROPS> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
-  menuIsVisible: state.menu.visible
-});
+const mapStateToProps = (state: State) => ({});
 
 export default connect(
   mapStateToProps,
-  { onClick: toggleMenu }
+  {}
 )(App);

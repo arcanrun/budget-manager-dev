@@ -1,4 +1,5 @@
+//@flow
 import { combineReducers } from "redux";
-import { menu } from "./menu";
+import { user } from "./user";
 
-export const rootReducer = combineReducers({ menu });
+export const rootReducer = combineReducers({ user });

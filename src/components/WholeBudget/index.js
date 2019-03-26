@@ -5,12 +5,16 @@ import React from "react";
 import "./style.css";
 
 type PROPS = {
-  wholeBudget?: number
+  wholeBudget?: number,
+  onClick: () => mixed
 };
-const WholeBudget = ({ wholeBudget }: PROPS) => (
+const WholeBudget = ({ wholeBudget, onClick }: PROPS) => (
   <div className="whole-budget">
     {wholeBudget || (
-      <span style={{ color: "#B3B3B3", fontWeight: "bold" }}>
+      <span
+        onClick={() => onClick(15000)}
+        style={{ color: "#B3B3B3", fontWeight: "bold" }}
+      >
         Введите ваш текущий бюджет
       </span>
     )}

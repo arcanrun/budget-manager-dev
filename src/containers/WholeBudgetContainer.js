@@ -3,9 +3,13 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { WholeBudget } from "../components";
-import { userActions } from "../actions";
+import { addWholeBudget } from "../actions";
+
+const mapStateToProps = state => ({
+  wholeBudget: state.user.budget
+});
 
 export const WholeBudgetContainer = connect(
-  null,
-  null
+  mapStateToProps,
+  { onClick: addWholeBudget }
 )(WholeBudget);

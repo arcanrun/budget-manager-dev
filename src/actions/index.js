@@ -1,4 +1,3 @@
 //@flow
-import { toggleMenu } from "./menuActions";
-
-export { toggleMenu };
+import { addWholeBudget } from "./userActions";
+export { addWholeBudget };
