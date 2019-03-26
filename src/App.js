@@ -20,6 +20,7 @@ class App extends React.Component<PROPS> {
           <Route exact path="/" component={Manager} />
           <Route path="/profile" component={Profile} />
         </Switch>
+
         <BottomBar />
       </>
     );
