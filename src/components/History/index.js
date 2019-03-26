@@ -1,5 +1,7 @@
+//@flow
 import React from "react";
 
-const History = () => <div>HISTORY</div>;
-
+const History = () => {
+  return <div>HISTORY</div>;
+};
 export { History };

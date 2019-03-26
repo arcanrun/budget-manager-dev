@@ -8,6 +8,7 @@ import { Icon } from "./Icon";
 import { Manager } from "./Manager";
 import { History } from "./History";
 import { Profile } from "./Profile";
+import { ActiveLink } from "./ActiveLink";
 export {
   Header,
   Menu,
@@ -17,5 +18,6 @@ export {
   Icon,
   Manager,
   History,
-  Profile
+  Profile,
+  ActiveLink
 };
