@@ -10,15 +10,15 @@ const BottomBar = () => (
   <div className="bottom-bar">
     <NavLink exact to="/history" className="bottom-bar__item">
       <Icon icon="history" color="#200A9C" />
-      <span>Item</span>
+      <div />
     </NavLink>
     <NavLink exact to="/" className="bottom-bar__item">
       <Icon icon="money-bag" color="#200A9C" />
-      <span>Item</span>
+      <div />
     </NavLink>
     <NavLink exact to="/profile" className="bottom-bar__item">
       <Icon icon="profile" color="#200A9C" />
-      <span>Item</span>
+      <div />
     </NavLink>
   </div>
 );

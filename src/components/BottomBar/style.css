@@ -10,8 +10,11 @@
   align-items: center;
 }
 .bottom-bar__item {
+  display: inline-block;
+  position: relative;
   align-items: center;
   padding-top: 10px;
+  padding-bottom: 10px;
   cursor: pointer;
   display: flex;
   flex-flow: wrap column;
@@ -19,7 +22,17 @@
   text-transform: uppercase;
   color: rgb(92, 92, 92);
 }
-.bottom-bar__item span {
+.bottom-bar__item div {
+  display: inline-block;
+  background-color: #f72d6b;
   font-size: 10px;
   padding: 5px;
+  margin-bottom: -5px;
+
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+.bottom-bar__item .active span {
+  color: red;
 }
