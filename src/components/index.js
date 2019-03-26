@@ -5,4 +5,17 @@ import { BottomBar } from "./BottomBar";
 import { WholeBudget } from "./WholeBudget";
 import { Card } from "./Card";
 import { Icon } from "./Icon";
-export { Header, Menu, BottomBar, WholeBudget, Card, Icon };
+import { Manager } from "./Manager";
+import { History } from "./History";
+import { Profile } from "./Profile";
+export {
+  Header,
+  Menu,
+  BottomBar,
+  WholeBudget,
+  Card,
+  Icon,
+  Manager,
+  History,
+  Profile
+};

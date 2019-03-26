@@ -1,6 +1,5 @@
 //@flow
 import * as React from "react";
-import ReactSVG from "react-svg";
 
 import "./style.css";
 import "../../static/icons.css";
