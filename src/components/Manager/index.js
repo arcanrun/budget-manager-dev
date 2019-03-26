@@ -2,23 +2,26 @@
 import React from "react";
 
 import { Card } from "../index";
-import { WholeBudgetContainer } from "../../containers";
-import { PayDay, Modal } from "../index";
+import { PayDay, Modal, WholeBudget } from "../index";
 
-class Manager extends React.Component<{}, {}> {
-  state = {
-    modelIsVisible: false
-  };
+type PROPS = {
+  modalIsVisible: boolean,
+  onClickToggleModal: Function
+};
+
+class Manager extends React.Component<PROPS, {}> {
   render() {
+    const { modalIsVisible, onClickToggleModal } = this.props;
     return (
       <>
         <Card headerTitle={"общий бюджет"} icon={"money-bag"}>
-          <WholeBudgetContainer />
+          {/* <WholeBudgetContainer /> */}
+          <WholeBudget onClick={onClickToggleModal} />
         </Card>
         <Card headerTitle={"календарь"} icon={"calendar"}>
           <PayDay />
         </Card>
-        {!this.state.modelIsVisible || <Modal />}
+        {!modalIsVisible || <Modal onClick={onClickToggleModal} />}
       </>
     );
   }
