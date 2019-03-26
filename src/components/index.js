@@ -10,6 +10,7 @@ import { History } from "./History";
 import { Profile } from "./Profile";
 import { ActiveLink } from "./ActiveLink";
 import { PayDay } from "./PayDay";
+import { Modal } from "./Modal";
 export {
   Header,
   Menu,
@@ -21,5 +22,6 @@ export {
   History,
   Profile,
   ActiveLink,
-  PayDay
+  PayDay,
+  Modal
 };

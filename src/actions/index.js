@@ -1,3 +1,4 @@
 //@flow
 import { addWholeBudget } from "./userActions";
-export { addWholeBudget };
+import { toggleModal } from "./modalActions";
+export { addWholeBudget, toggleModal };

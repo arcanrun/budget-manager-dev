@@ -11,7 +11,7 @@ type PROPS = {
 const WholeBudget = ({ wholeBudget, onClick }: PROPS) => (
   <div className="whole-budget">
     {wholeBudget || (
-      <span className="whole-budget__enter" onClick={() => onClick(15000)}>
+      <span className="whole-budget__enter" onClick={onClick}>
         Введите ваш текущий бюджет
       </span>
     )}

@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { WholeBudget } from "../components";
-import { addWholeBudget } from "../actions";
+import { toggleModal } from "../actions";
 
 const mapStateToProps = state => ({
   wholeBudget: state.user.budget
@@ -11,5 +11,5 @@ const mapStateToProps = state => ({
 
 export const WholeBudgetContainer = connect(
   mapStateToProps,
-  { onClick: addWholeBudget }
+  { onClick: toggleModal }
 )(WholeBudget);

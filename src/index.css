@@ -8,6 +8,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #eaeff2;
 }
+#modal {
+  position: relative;
+  z-index: 1000;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
