@@ -1,28 +1,39 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+//@flow
+import React from "react";
+import { connect } from "react-redux";
 
-class App extends Component {
+import { Header, BottomBar } from "./components";
+import { user } from "./static/user-data";
+import { toggleMenu } from "./actions";
+
+type PROPS = {
+  onClick: () => mixed,
+  menuIsVisible: boolean
+};
+type MenuState = {
+  visible: boolean
+};
+
+type State = {
+  menu: MenuState
+};
+
+class App extends React.Component<PROPS> {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <>
+        <Header title={"менеджер"} />
+        <BottomBar />
+      </>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state: State) => ({
+  menuIsVisible: state.menu.visible
+});
+
+export default connect(
+  mapStateToProps,
+  { onClick: toggleMenu }
+)(App);
