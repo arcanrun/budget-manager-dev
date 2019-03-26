@@ -6,6 +6,7 @@ import "./style.css";
 import MonyeBag from "../../static/money-bag.svg";
 import History from "../../static/history.svg";
 import Profile from "../../static/profile.svg";
+import Calendar from "../../static/calendar.svg";
 
 type PROPS = {|
   icon: string,
@@ -37,6 +38,15 @@ const Icon = ({ icon, color }: PROPS) => {
           src={Profile}
           wrapper="span"
           svgClassName="profile"
+          svgStyle={{ fill: color }}
+        />
+      );
+    case "calendar":
+      return (
+        <ReactSVG
+          src={Calendar}
+          wrapper="span"
+          svgClassName="calendar"
           svgStyle={{ fill: color }}
         />
       );

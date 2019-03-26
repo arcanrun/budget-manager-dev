@@ -7,6 +7,7 @@ type UserState = {
   sure_name: string,
   history?: Array<any>,
   budget?: number,
+  pay_day?: string,
   calc?: {
     "50"?: number,
     "30"?: number,
@@ -23,6 +24,7 @@ const initialState: UserState = {
   sure_name: "Durov",
   history: [],
   budget: undefined,
+  pay_day: undefined,
   calc: {
     "50": undefined,
     "30": undefined,

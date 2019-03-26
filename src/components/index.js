@@ -9,6 +9,7 @@ import { Manager } from "./Manager";
 import { History } from "./History";
 import { Profile } from "./Profile";
 import { ActiveLink } from "./ActiveLink";
+import { PayDay } from "./PayDay";
 export {
   Header,
   Menu,
@@ -19,5 +20,6 @@ export {
   Manager,
   History,
   Profile,
-  ActiveLink
+  ActiveLink,
+  PayDay
 };

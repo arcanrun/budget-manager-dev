@@ -1,4 +1,4 @@
-.whole-budget__enter {
+.pay-day__enter {
   display: inline-block;
   color: #828282;
   text-align: center;
@@ -7,6 +7,7 @@
   transition: 0.3s;
   cursor: pointer;
 }
-.whole-budget__enter:hover {
+
+.pay-day__enter:hover {
   color: #f72d6b;
 }

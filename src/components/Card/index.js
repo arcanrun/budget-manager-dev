@@ -16,7 +16,7 @@ const Card = ({ children, headerTitle, icon }: PROPS) => (
   <div className="card">
     <div className="card__header">
       <Icon icon={icon} color="#B3B3B3" />
-      <span>{headerTitle}</span>
+      <span className="card__title">{headerTitle}</span>
     </div>
     {children}
   </div>
