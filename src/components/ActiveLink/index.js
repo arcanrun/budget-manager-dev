@@ -13,7 +13,7 @@ type PROPS = {
 const ActiveLink = ({ to, icon }: PROPS) => (
   <Route
     path={to}
-    exact={true}
+    exact
     children={({ match }) => (
       <Link to={to} className="bottom-bar__item">
         <Icon icon={icon} color={match ? "#F72D6B" : "#200A9E"} />
