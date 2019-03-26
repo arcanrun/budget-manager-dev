@@ -2,7 +2,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { Header, BottomBar } from "./components";
+import { Header, BottomBar, Card } from "./components";
+import { WholeBudgetContainer } from "./containers";
 import { user } from "./static/user-data";
 import { toggleMenu } from "./actions";
 
@@ -23,6 +24,10 @@ class App extends React.Component<PROPS> {
     return (
       <>
         <Header title={"менеджер"} />
+        <Card headerTitle={"общий бюджет"} icon={"money-bag"}>
+          <WholeBudgetContainer />
+        </Card>
+
         <BottomBar />
       </>
     );
