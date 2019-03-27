@@ -11,7 +11,7 @@ type PROPS = {
 const PayDay = ({ payDay, onClick }: PROPS) => (
   <div className="pay-day">
     {payDay || (
-      <span className="pay-day__enter" onClick={() => onClick(15000)}>
+      <span className="pay-day__enter" onClick={onClick}>
         Введите дату получения зарплаты
       </span>
     )}

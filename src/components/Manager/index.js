@@ -6,22 +6,25 @@ import { PayDay, Modal, WholeBudget } from "../index";
 
 type PROPS = {
   modalIsVisible: boolean,
-  onClickToggleModal: Function
+  onClickToggleModal: Function,
+  typeModal: string
 };
 
 class Manager extends React.Component<PROPS, {}> {
   render() {
-    const { modalIsVisible, onClickToggleModal } = this.props;
+    const { modalIsVisible, onClickToggleModal, typeModal } = this.props;
     return (
       <>
         <Card headerTitle={"общий бюджет"} icon={"money-bag"}>
           {/* <WholeBudgetContainer /> */}
-          <WholeBudget onClick={onClickToggleModal} />
+          <WholeBudget onClick={() => onClickToggleModal("budget")} />
         </Card>
         <Card headerTitle={"календарь"} icon={"calendar"}>
-          <PayDay />
+          <PayDay onClick={() => onClickToggleModal("payday")} />
         </Card>
-        {!modalIsVisible || <Modal onClick={onClickToggleModal} />}
+        {!modalIsVisible || (
+          <Modal onClick={onClickToggleModal} typeModal={typeModal} />
+        )}
       </>
     );
   }

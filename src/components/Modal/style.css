@@ -29,6 +29,8 @@
   margin-bottom: 20px;
 }
 .modal__card-btns-block button {
+  cursor: pointer;
+  text-transform: uppercase;
   border: 0px;
   background: #110261;
   color: #fff;
@@ -37,6 +39,16 @@
   margin: 5px;
   border-radius: 50px;
   width: 40%;
+  transition: 0.2s;
+}
+.modal__card-btns-block button:hover {
+  box-shadow: 2px 2px 4px 2px #808080;
+}
+.modal__card-btns-block button:active {
+  box-shadow: none;
+}
+.modal__card-btns-block button:nth-child(2) {
+  background: #0fde8c;
 }
 .modal__title {
   color: #8e8d8d;
@@ -49,4 +61,9 @@
   border-radius: 3px;
   background: #eaeff2;
   font-size: 20px;
+  transition: 0.2s;
+}
+
+.modal__card-input_error {
+  background: #ffb0b0;
 }

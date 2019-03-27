@@ -3,10 +3,11 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { Manager } from "../components";
-import { toggleModal } from "../actions";
+import { toggleModal } from "../actions/";
 
 const mapStateToProps = state => ({
-  modalIsVisible: state.modal.modalIsVisible
+  modalIsVisible: state.modal.modalIsVisible,
+  typeModal: state.modal.typeModal
 });
 
 export const ManagerContainer = connect(
