@@ -19,76 +19,52 @@ class Modal extends React.Component<PROPS, {}> {
     super(props);
     this.modalInput = React.createRef();
   }
-  handleOK = () => {
-    const errorClass = "modal__card-input_error";
-    const inputVal = this.modalInput.current.value;
-    const input = this.modalInput.current;
 
-    if (!inputVal) {
-      input.classList.add(errorClass);
-    } else {
-      this.props.onClick(this.props.typeModal);
-    }
-  };
-
-  validate = (input,typeModal) => {
-  const errorClass = "modal__card-input_error";
-  const val = input.value;
-  const input = input
-  // console.log(val && !isNaN(val), input);
-
-  switch (typeModal) {
-    case "budget":
-      if (val && !isNaN(val)) {
-        input.classList.remove(errorClass);
-      } else if (isNaN(val)) {
-        input.classList.add(errorClass);
-      } else {
-        input.classList.add(errorClass);
-      }
-      break;
-    case "payday":
-      if (val && isNaN(val)) {
-        input.classList.remove(errorClass);
-      } else if (!isNaN(val)) {
-        input.classList.add(errorClass);
-      } else {
-        input.classList.add(errorClass);
-      }
-      break;
-    default:
-      console.log("¯|_(ツ)_/¯");
-      break;
-  };
-
-  handleInput = (e: any, typeModal: string) => {
-    const errorClass = "modal__card-input_error";
-    const val = e.target.value;
-    const input = e.target;
-    // console.log(val && !isNaN(val), input);
+  validate = (inputElement: any, typeModal: string) => {
+    const val = inputElement.value;
 
     switch (typeModal) {
       case "budget":
         if (val && !isNaN(val)) {
-          input.classList.remove(errorClass);
+          return true;
         } else if (isNaN(val)) {
-          input.classList.add(errorClass);
+          return false;
         } else {
-          input.classList.add(errorClass);
+          return false;
         }
-        break;
       case "payday":
         if (val && isNaN(val)) {
-          input.classList.remove(errorClass);
+          return true;
         } else if (!isNaN(val)) {
-          input.classList.add(errorClass);
+          return false;
         } else {
-          input.classList.add(errorClass);
+          return false;
         }
-        break;
       default:
         console.log("¯|_(ツ)_/¯");
         break;
+    }
+  };
+  handleOK = () => {
+    const errorClass = "modal__card-input_error";
+    const input = this.modalInput.current;
+
+    if (this.validate(input, this.props.typeModal)) {
+      this.props.onClick(this.props.typeModal);
+    } else {
+      input.classList.add(errorClass);
+    }
+  };
+  handleInput = (e: any, typeModal: string) => {
+    const errorClass = "modal__card-input_error";
+    const input = e.target;
+
+    if (this.validate(input, typeModal)) {
+      input.classList.remove(errorClass);
+    } else {
+      input.classList.add(errorClass);
+    }
+    switch (typeModal) {
     }
   };
 
