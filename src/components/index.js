@@ -11,6 +11,7 @@ import { Profile } from "./Profile";
 import { ActiveLink } from "./ActiveLink";
 import { PayDay } from "./PayDay";
 import { Modal } from "./Modal";
+import { Spinner } from "./Spinner";
 export {
   Header,
   Menu,
@@ -23,5 +24,6 @@ export {
   Profile,
   ActiveLink,
   PayDay,
-  Modal
+  Modal,
+  Spinner
 };

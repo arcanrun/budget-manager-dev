@@ -3,10 +3,12 @@ import React from "react";
 
 import { Card } from "../index";
 import { PayDay, Modal, WholeBudget } from "../index";
+import { addWholeBudget } from "../../actions";
 
 type PROPS = {
   modalIsVisible: boolean,
   onClickToggleModal: Function,
+  addWholeBudget: Function,
   typeModal: string
 };
 
@@ -23,7 +25,11 @@ class Manager extends React.Component<PROPS, {}> {
           <PayDay onClick={() => onClickToggleModal("payday")} />
         </Card>
         {!modalIsVisible || (
-          <Modal onClick={onClickToggleModal} typeModal={typeModal} />
+          <Modal
+            onClick={onClickToggleModal}
+            typeModal={typeModal}
+            {...this.props}
+          />
         )}
       </>
     );

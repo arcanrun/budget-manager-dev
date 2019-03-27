@@ -4,7 +4,7 @@ import React from "react";
 import "./style.css";
 
 type PROPS = {
-  payDay: string,
+  payDay?: string,
   onClick: Function
 };
 

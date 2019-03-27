@@ -64,6 +64,6 @@
   transition: 0.2s;
 }
 
-.modal__card-input_error-input {
+.modal__card-input_error {
   background: #ffb0b0;
 }

@@ -1,28 +1,43 @@
 //@flow
-// const requestAddWholeBudget = () => ({
-//   type: "ADD_BUDGET_REQUEST",
+import {
+  ADD_BUDGET_REQUEST,
+  ADD_BUDGET_SUCCESS,
+  ADD_BUDGET_FAILURE
+} from "../constants";
+import { API } from "../API";
 
-//   isFetching: true
-// });
-// const successtAddWholeBudget = () => ({
-//   type: "ADD_BUDGET_SUCCESS",
-//   isFetching: false
-// });
-// const failuretAddWholeBudget = message => ({
-//   type: "ADD_BUDGET_FAILURE",
-//   error: {
-//     error: true,
-//     message
-//   }
-// });
-
-// export const addWholeBudget = (budget: number) => {
-//   return dispatch: * => {
-
-//   };
-// };
-
-export const addWholeBudget = (budget: number): Object => ({
-  type: "ADD_BUDGET",
-  payload: budget
+const requestAddWholeBudget = () => ({
+  type: ADD_BUDGET_REQUEST,
+  payload: {
+    isFetching: true
+  }
 });
+const successAddWholeBudget = budget => ({
+  type: ADD_BUDGET_SUCCESS,
+
+  payload: {
+    budget,
+    isFetching: false
+  }
+});
+const failuretAddWholeBudget = message => ({
+  type: ADD_BUDGET_FAILURE,
+  error: {
+    isFetching: false,
+    error: true,
+    message
+  }
+});
+
+export const addWholeBudget = (budget: number) => {
+  return (dispatch: any) => {
+    dispatch(requestAddWholeBudget());
+    fetch(API.ADD_BUDGET, {
+      method: "POST",
+      body: JSON.stringify({ vk_id: "123456", budget })
+    })
+      .then(res => res.json())
+      .then(res => successAddWholeBudget(res.RESPONSE))
+      .catch(err => dispatch(failuretAddWholeBudget(err)));
+  };
+};

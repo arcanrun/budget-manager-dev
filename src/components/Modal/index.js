@@ -20,16 +20,49 @@ class Modal extends React.Component<PROPS, {}> {
     this.modalInput = React.createRef();
   }
   handleOK = () => {
-    const errorClass = "modal__card-input_error-input";
+    const errorClass = "modal__card-input_error";
     const inputVal = this.modalInput.current.value;
     const input = this.modalInput.current;
 
     if (!inputVal) {
       input.classList.add(errorClass);
+    } else {
+      this.props.onClick(this.props.typeModal);
     }
   };
+
+  validate = (input,typeModal) => {
+  const errorClass = "modal__card-input_error";
+  const val = input.value;
+  const input = input
+  // console.log(val && !isNaN(val), input);
+
+  switch (typeModal) {
+    case "budget":
+      if (val && !isNaN(val)) {
+        input.classList.remove(errorClass);
+      } else if (isNaN(val)) {
+        input.classList.add(errorClass);
+      } else {
+        input.classList.add(errorClass);
+      }
+      break;
+    case "payday":
+      if (val && isNaN(val)) {
+        input.classList.remove(errorClass);
+      } else if (!isNaN(val)) {
+        input.classList.add(errorClass);
+      } else {
+        input.classList.add(errorClass);
+      }
+      break;
+    default:
+      console.log("¯|_(ツ)_/¯");
+      break;
+  };
+
   handleInput = (e: any, typeModal: string) => {
-    const errorClass = "modal__card-input_error-input";
+    const errorClass = "modal__card-input_error";
     const val = e.target.value;
     const input = e.target;
     // console.log(val && !isNaN(val), input);
@@ -54,11 +87,8 @@ class Modal extends React.Component<PROPS, {}> {
         }
         break;
       default:
-        console.log("¯_(ツ)_/¯");
+        console.log("¯|_(ツ)_/¯");
         break;
-    }
-    if (val) {
-      input.classList.remove("modal__card-input_error");
     }
   };
 
@@ -79,7 +109,7 @@ class Modal extends React.Component<PROPS, {}> {
             onChange={e => this.handleInput(e, typeModal)}
           />
           <div className="modal__card-btns-block">
-            <button onClick={() => onClick("budget")}>отмена</button>
+            <button onClick={() => onClick(typeModal)}>отмена</button>
             <button onClick={this.handleOK}>ок</button>
           </div>
         </div>
