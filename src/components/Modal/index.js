@@ -20,16 +20,45 @@ class Modal extends React.Component<PROPS, {}> {
     this.modalInput = React.createRef();
   }
   handleOK = () => {
+    const errorClass = "modal__card-input_error-input";
     const inputVal = this.modalInput.current.value;
     const input = this.modalInput.current;
+
     if (!inputVal) {
-      input.classList.add("modal__card-input_error");
+      input.classList.add(errorClass);
     }
   };
-  handleInput = (e: any) => {
+  handleInput = (e: any, typeModal: string) => {
+    const errorClass = "modal__card-input_error-input";
     const val = e.target.value;
+    const input = e.target;
+    // console.log(val && !isNaN(val), input);
+
+    switch (typeModal) {
+      case "budget":
+        if (val && !isNaN(val)) {
+          input.classList.remove(errorClass);
+        } else if (isNaN(val)) {
+          input.classList.add(errorClass);
+        } else {
+          input.classList.add(errorClass);
+        }
+        break;
+      case "payday":
+        if (val && isNaN(val)) {
+          input.classList.remove(errorClass);
+        } else if (!isNaN(val)) {
+          input.classList.add(errorClass);
+        } else {
+          input.classList.add(errorClass);
+        }
+        break;
+      default:
+        console.log("¯_(ツ)_/¯");
+        break;
+    }
     if (val) {
-      e.target.classList.remove("modal__card-input_error");
+      input.classList.remove("modal__card-input_error");
     }
   };
 
@@ -47,7 +76,7 @@ class Modal extends React.Component<PROPS, {}> {
             className="modal__card-input"
             type="text"
             autoFocus
-            onChange={this.handleInput}
+            onChange={e => this.handleInput(e, typeModal)}
           />
           <div className="modal__card-btns-block">
             <button onClick={() => onClick("budget")}>отмена</button>
