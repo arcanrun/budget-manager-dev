@@ -2,7 +2,10 @@
 import {
   ADD_BUDGET_REQUEST,
   ADD_BUDGET_SUCCESS,
-  ADD_BUDGET_FAILURE
+  ADD_BUDGET_FAILURE,
+  GET_BUDGET_FAILURE,
+  GET_BUDGET_SUCCESS,
+  GET_BUDGET_REQUEST
 } from "../constants";
 import { API } from "../API";
 
@@ -39,9 +42,48 @@ export const addWholeBudget = (budget: number) => {
       .then(res => res.json())
       .then(res => {
         // setTimeout(() => dispatch(successAddWholeBudget(res.RESPONSE)), 5000);
-        dispatch(successAddWholeBudget(res.RESPONSE));
+        dispatch(successAddWholeBudget(res.PAYLOAD));
         return res;
       })
       .catch(err => dispatch(failuretAddWholeBudget(err)));
+  };
+};
+
+const getBudgetRequest = () => ({
+  type: GET_BUDGET_REQUEST,
+  payload: {
+    isFetching: true
+  }
+});
+const successGetBudget = budget => ({
+  type: GET_BUDGET_SUCCESS,
+
+  payload: {
+    budget,
+    isFetching: false
+  }
+});
+const failuretGetBudget = message => ({
+  type: GET_BUDGET_FAILURE,
+  error: {
+    isFetching: false,
+    error: true,
+    message
+  }
+});
+
+export const getWholeBudget = () => {
+  return (dispatch: any) => {
+    dispatch(getBudgetRequest());
+    fetch(API.ADD_BUDGET, {
+      method: "POST",
+      body: JSON.stringify({ vk_id: "123456" })
+    })
+      .then(res => res.json())
+      .then(res => {
+        !res.STATUS || dispatch(successGetBudget(res.RESPONSE));
+        return res;
+      })
+      .catch(err => dispatch(failuretGetBudget(err)));
   };
 };

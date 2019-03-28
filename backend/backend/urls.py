@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('add-budget/', views.add_budget),
     path('add-payday/', views.add_payday),
+    path('get-budget/', views.get_budget),
 ]

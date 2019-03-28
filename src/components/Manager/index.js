@@ -18,6 +18,7 @@ type PROPS = {
 };
 
 class Manager extends React.Component<PROPS, {}> {
+  componentDidMount() {}
   render() {
     const {
       modalIsVisible,
