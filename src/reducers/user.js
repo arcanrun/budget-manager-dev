@@ -5,7 +5,10 @@ import {
   ADD_BUDGET_SUCCESS,
   ADD_PAYDAY_FAILURE,
   ADD_PAYDAY_SUCCESS,
-  ADD_PAYDAY_REQUEST
+  ADD_PAYDAY_REQUEST,
+  GET_BUDGET_REQUEST,
+  GET_BUDGET_SUCCESS,
+  GET_BUDGET_FAILURE
 } from "../constants";
 type UserState = {
   vk_id: number,
@@ -54,6 +57,7 @@ export const initialState: UserState = {
 export function user(state: UserState = initialState, action: Object) {
   switch (action.type) {
     case ADD_BUDGET_REQUEST:
+    case GET_BUDGET_REQUEST:
       return {
         ...state,
         wholeBudget: {
@@ -63,6 +67,7 @@ export function user(state: UserState = initialState, action: Object) {
       };
 
     case ADD_BUDGET_SUCCESS:
+    case GET_BUDGET_SUCCESS:
       return {
         ...state,
         wholeBudget: {
@@ -73,6 +78,7 @@ export function user(state: UserState = initialState, action: Object) {
       };
 
     case ADD_BUDGET_FAILURE:
+    case GET_BUDGET_FAILURE:
       return { ...state, budget: action.payload };
 
     case ADD_PAYDAY_REQUEST:

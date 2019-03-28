@@ -3,7 +3,12 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { Manager } from "../components";
-import { toggleModal, addWholeBudget, addPayDay } from "../actions/";
+import {
+  toggleModal,
+  addWholeBudget,
+  addPayDay,
+  getWholeBudget
+} from "../actions/";
 
 const mapStateToProps = state => ({
   modalIsVisible: state.modal.modalIsVisible,
@@ -16,5 +21,5 @@ const mapStateToProps = state => ({
 
 export const ManagerContainer = connect(
   mapStateToProps,
-  { onClickToggleModal: toggleModal, addWholeBudget, addPayDay }
+  { onClickToggleModal: toggleModal, addWholeBudget, addPayDay, getWholeBudget }
 )(Manager);

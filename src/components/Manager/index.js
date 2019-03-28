@@ -3,10 +3,10 @@ import React from "react";
 
 import { Card } from "../index";
 import { PayDay, Modal, WholeBudget } from "../index";
-import { addPayDay } from "../../actions";
+import { addPayDay, getWholeBudget } from "../../actions";
 
 type PROPS = {
-  modalIsVisible: boolean,
+  getWholeBudget: Function,
   onClickToggleModal: Function,
   addWholeBudget: Function,
   addPayDay: Function,
@@ -14,11 +14,16 @@ type PROPS = {
   wholeBudget: number,
   payday: string,
   wholeBudget_isFetching: boolean,
-  payday_isFetching: boolean
+  payday_isFetching: boolean,
+  modalIsVisible: boolean
 };
 
 class Manager extends React.Component<PROPS, {}> {
-  componentDidMount() {}
+  componentDidMount() {
+    if (!this.props.wholeBudget) {
+      this.props.getWholeBudget();
+    }
+  }
   render() {
     const {
       modalIsVisible,

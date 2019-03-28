@@ -7,4 +7,4 @@ class Vkuser(models.Model):
     pay_day = models.TextField(max_length=100)
 
     def __str__(self):
-        return '%s %s' % (self.id_vk, self.budget)
+        return '%s :: %s' % (self.id_vk, self.budget)

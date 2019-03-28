@@ -42,12 +42,22 @@ def add_budget(request):
 def get_budget(request):
     req = json.loads(str(request.body, encoding='utf-8'))
     print('[add_budget:RECIVED]-->', req)
-    response = {'RESPONSE': 'ERROR'}
+    response = {'RESPONSE': 'ERROR', 'PAYLOAD': ''}
 
     vk_id = req['vk_id']
 
-    response['RESPONSE'] = vk_id
+    all_users = Vkuser.objects.all()
 
+    for field in all_users:
+        if (vk_id == field.id_vk):
+            response['RESPONSE'] = True
+            response['PAYLOAD'] = field.budget
+            print('[add_budget:RESPONSE]-->', response)
+            return JsonResponse(response)
+
+    response['RESPONSE'] = False
+    response['PAYLOAD'] = 'undefined'
+    print('[add_budget:RESPONSE]-->', response)
     return JsonResponse(response)
 
 
