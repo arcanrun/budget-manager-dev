@@ -8,7 +8,10 @@ import {
   ADD_PAYDAY_REQUEST,
   GET_BUDGET_REQUEST,
   GET_BUDGET_SUCCESS,
-  GET_BUDGET_FAILURE
+  GET_BUDGET_FAILURE,
+  GET_PAYDAY_FAILURE,
+  GET_PAYDAY_REQUEST,
+  GET_PAYDAY_SUCCESS
 } from "../constants";
 type UserState = {
   vk_id: number,
@@ -82,6 +85,7 @@ export function user(state: UserState = initialState, action: Object) {
       return { ...state, budget: action.payload };
 
     case ADD_PAYDAY_REQUEST:
+    case GET_PAYDAY_REQUEST:
       return {
         ...state,
         pay_day: {
@@ -90,6 +94,7 @@ export function user(state: UserState = initialState, action: Object) {
         }
       };
     case ADD_PAYDAY_SUCCESS:
+    case GET_PAYDAY_SUCCESS:
       return {
         ...state,
         pay_day: {
@@ -99,6 +104,7 @@ export function user(state: UserState = initialState, action: Object) {
         }
       };
     case ADD_PAYDAY_FAILURE:
+    case GET_PAYDAY_FAILURE:
       return { ...state, pay_day: action.payload };
     default:
       return state;

@@ -3,13 +3,14 @@ import React from "react";
 
 import { Card } from "../index";
 import { PayDay, Modal, WholeBudget } from "../index";
-import { addPayDay, getWholeBudget } from "../../actions";
+import { addPayDay, getWholeBudget, getPayDay } from "../../actions";
 
 type PROPS = {
   getWholeBudget: Function,
   onClickToggleModal: Function,
   addWholeBudget: Function,
   addPayDay: Function,
+  getPayDay: Function,
   typeModal: string,
   wholeBudget: number,
   payday: string,
@@ -20,9 +21,8 @@ type PROPS = {
 
 class Manager extends React.Component<PROPS, {}> {
   componentDidMount() {
-    if (!this.props.wholeBudget) {
-      this.props.getWholeBudget();
-    }
+    if (!this.props.wholeBudget) this.props.getWholeBudget();
+    if (!this.props.payday) this.props.getPayDay();
   }
   render() {
     const {

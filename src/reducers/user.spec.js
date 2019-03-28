@@ -1,7 +1,7 @@
 import deepcopy from "deepcopy";
 
 import { user, initialState } from "./user";
-import { successPayDay } from "../actions/paydayActions";
+import { successPayDay, successGetPayDay } from "../actions/paydayActions";
 import {
   successGetBudget,
   successAddWholeBudget
@@ -34,12 +34,21 @@ describe("REDUCERS TESTING", () => {
     expect(user(initialState, action)).toEqual(initialStateForTesting);
   });
 
-  it("should retrun state with bduget on which get after load Manager component", () => {
+  it("should retrun state with budget  after load Manager component", () => {
     const initialStateForTesting = deepcopy(initialState);
 
     initialStateForTesting.wholeBudget.budget = 15000;
     initialStateForTesting.wholeBudget.isFetching = false;
     const action = successGetBudget(15000);
+
+    expect(user(initialState, action)).toEqual(initialStateForTesting);
+  });
+  it("should retrun state with payday after load Manager component", () => {
+    const initialStateForTesting = deepcopy(initialState);
+    const enteredDate = "15.02.2019";
+    const action = successGetPayDay(enteredDate);
+    initialStateForTesting.pay_day.isFetching = false;
+    initialStateForTesting.pay_day.pay_day = enteredDate;
 
     expect(user(initialState, action)).toEqual(initialStateForTesting);
   });

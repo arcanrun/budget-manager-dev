@@ -7,7 +7,8 @@ import {
   toggleModal,
   addWholeBudget,
   addPayDay,
-  getWholeBudget
+  getWholeBudget,
+  getPayDay
 } from "../actions/";
 
 const mapStateToProps = state => ({
@@ -21,5 +22,11 @@ const mapStateToProps = state => ({
 
 export const ManagerContainer = connect(
   mapStateToProps,
-  { onClickToggleModal: toggleModal, addWholeBudget, addPayDay, getWholeBudget }
+  {
+    onClickToggleModal: toggleModal,
+    addWholeBudget,
+    addPayDay,
+    getWholeBudget,
+    getPayDay
+  }
 )(Manager);
