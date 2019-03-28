@@ -37,7 +37,11 @@ export const addWholeBudget = (budget: number) => {
       body: JSON.stringify({ vk_id: "123456", budget })
     })
       .then(res => res.json())
-      .then(res => successAddWholeBudget(res.RESPONSE))
+      .then(res => {
+        // setTimeout(() => dispatch(successAddWholeBudget(res.RESPONSE)), 5000);
+        dispatch(successAddWholeBudget(res.RESPONSE));
+        return res;
+      })
       .catch(err => dispatch(failuretAddWholeBudget(err)));
   };
 };

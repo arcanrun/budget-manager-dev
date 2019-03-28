@@ -7,7 +7,9 @@ import "./style.css";
 
 type PROPS = {
   onClick: Function,
-  typeModal: string
+  typeModal: string,
+  addWholeBudget: Function,
+  addPayDay: Function
 };
 
 const ModalDiv =
@@ -48,9 +50,22 @@ class Modal extends React.Component<PROPS, {}> {
   handleOK = () => {
     const errorClass = "modal__card-input_error";
     const input = this.modalInput.current;
+    const inputVal = input.value;
+    const { typeModal } = this.props;
 
     if (this.validate(input, this.props.typeModal)) {
       this.props.onClick(this.props.typeModal);
+      switch (typeModal) {
+        case "budget":
+          this.props.addWholeBudget(inputVal);
+          break;
+        case "payday":
+          this.props.addPayDay(inputVal);
+          break;
+        default:
+          console.log("MISSING DISPATCHER FOR TYPE:", typeModal);
+          break;
+      }
     } else {
       input.classList.add(errorClass);
     }

@@ -1,19 +1,25 @@
 //@flow
 import React from "react";
 
-import "./style.css";
+import style from "./PayDay.module.css";
+import { Spinner } from "../index";
 
 type PROPS = {
-  payDay?: string,
-  onClick: Function
+  payday: ?string,
+  onClick: Function,
+  isFetching: boolean
 };
 
-const PayDay = ({ payDay, onClick }: PROPS) => (
-  <div className="pay-day">
-    {payDay || (
-      <span className="pay-day__enter" onClick={onClick}>
-        Введите дату получения зарплаты
-      </span>
+const PayDay = ({ payday, onClick, isFetching }: PROPS) => (
+  <div className={style.payday}>
+    {isFetching ? (
+      <Spinner />
+    ) : (
+      payday || (
+        <span className={style.enter} onClick={onClick}>
+          Введите дату получения зарплаты
+        </span>
+      )
     )}
   </div>
 );

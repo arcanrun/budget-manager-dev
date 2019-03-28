@@ -2,7 +2,10 @@
 import {
   ADD_BUDGET_FAILURE,
   ADD_BUDGET_REQUEST,
-  ADD_BUDGET_SUCCESS
+  ADD_BUDGET_SUCCESS,
+  ADD_PAYDAY_FAILURE,
+  ADD_PAYDAY_SUCCESS,
+  ADD_PAYDAY_REQUEST
 } from "../constants";
 type UserState = {
   vk_id: number,
@@ -11,7 +14,7 @@ type UserState = {
   sure_name: string,
   history?: Array<any>,
   wholeBudget?: Object,
-  pay_day?: string,
+  pay_day?: Object,
   calc?: {
     "50"?: number,
     "30"?: number,
@@ -21,7 +24,7 @@ type UserState = {
   }
 };
 
-const initialState: UserState = {
+export const initialState: UserState = {
   vk_id: 123456,
   avatar: "",
   name: "Pavel",
@@ -33,7 +36,12 @@ const initialState: UserState = {
     error: false,
     error_message: undefined
   },
-  pay_day: undefined,
+  pay_day: {
+    pay_day: undefined,
+    isFetching: false,
+    error: false,
+    error_message: undefined
+  },
   calc: {
     "50": undefined,
     "30": undefined,
@@ -53,6 +61,7 @@ export function user(state: UserState = initialState, action: Object) {
           isFetching: action.payload.isFetching
         }
       };
+
     case ADD_BUDGET_SUCCESS:
       return {
         ...state,
@@ -62,8 +71,29 @@ export function user(state: UserState = initialState, action: Object) {
           budget: action.payload.budget
         }
       };
+
     case ADD_BUDGET_FAILURE:
       return { ...state, budget: action.payload };
+
+    case ADD_PAYDAY_REQUEST:
+      return {
+        ...state,
+        pay_day: {
+          ...state.pay_day,
+          isFetching: action.payload.isFetching
+        }
+      };
+    case ADD_PAYDAY_SUCCESS:
+      return {
+        ...state,
+        pay_day: {
+          ...state.pay_day,
+          isFetching: action.payload.isFetching,
+          pay_day: action.payload.payday
+        }
+      };
+    case ADD_PAYDAY_FAILURE:
+      return { ...state, pay_day: action.payload };
     default:
       return state;
   }

@@ -2,7 +2,7 @@
 import React from "react";
 import "./style.css";
 const Spinner = () => (
-  <div class="lds-roller">
+  <div className="lds-roller">
     <div />
     <div />
     <div />

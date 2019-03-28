@@ -1,7 +1,7 @@
 //@flow
 import * as React from "react";
 
-import "./style.css";
+import style from "./Card.module.css";
 import "../../static/icons.css";
 
 import { Icon } from "../Icon";
@@ -13,10 +13,10 @@ type PROPS = {
 };
 
 const Card = ({ children, headerTitle, icon }: PROPS) => (
-  <div className="card">
-    <div className="card__header">
+  <div className={style.card}>
+    <div className={style.header}>
       <Icon icon={icon} color="#B3B3B3" />
-      <span className="card__title">{headerTitle}</span>
+      <span className={style.title}>{headerTitle}</span>
     </div>
     {children}
   </div>

@@ -12,12 +12,20 @@ def add_budget(request):
     print('[add_budget:RECIVED]-->', req)
     response = {'RESPONSE': 'ERROR'}
 
+    vk_id = req['vk_id']
+    budget = req['budget']
+    response['RESPONSE'] = budget
+
     return JsonResponse(response)
 
 
 def add_payday(request):
     req = json.loads(str(request.body, encoding='utf-8'))
-    print('[add_budget:RECIVED]-->', req)
+    print('[add_payday:RECIVED]-->', req)
     response = {'RESPONSE': 'ERROR'}
+
+    vk_id = req['vk_id']
+    payday = req['payday']
+    response['RESPONSE'] = payday
 
     return JsonResponse(response)
