@@ -103,7 +103,6 @@ class Modal extends React.Component<PROPS, STATE> {
 
   handleInput = (e: any, typeModal: string) => {
     const input = e.target;
-    console.log("ss");
     this.setState({ inputValue: e.target.value }, () => {
       if (this.validate(typeModal)) {
         this.setState({ isErrorValidation: false });
@@ -119,13 +118,15 @@ class Modal extends React.Component<PROPS, STATE> {
     modifiers: Object,
     dayPickerInput: DayPickerInput
   ) => {
-    console.log(selectedDay);
-    // this.setState({
-    //   inputValue: "" + selectedDay
-    // });
     const input = dayPickerInput.getInput();
-    console.log(input);
-    // this.displayValidation(input, this.props.typeModal);
+    console.log(this.state.isErrorValidation);
+    this.setState({ inputValue: input.value }, () => {
+      if (this.validate(this.props.typeModal)) {
+        this.setState({ isErrorValidation: false });
+      } else {
+        this.setState({ isErrorValidation: true });
+      }
+    });
   };
   render() {
     const { onClick, typeModal } = this.props;
@@ -140,24 +141,32 @@ class Modal extends React.Component<PROPS, STATE> {
             {isTypePayday ? "Введите день зарплаты" : null}
           </div>
           {isTypePayday ? (
+            // <DayPickerInput
+            //   style={{ width: "100%" }}
+            //   classNames={{
+            //     overlay: DPStyle.datePicker,
+            //     overlayWrapper: DPStyle.datePickerWrapper
+            //   }}
+            //   onDayChange={this.handleDayChange}
+            //   component={props => (
+            //     <input
+            //       placeholder="ГГГГ-ММ-ДД"
+            //       {...props}
+            //       className={
+            //         isErrorValidation
+            //           ? "modal__card-input_error modal__card-input"
+            //           : "modal__card-input"
+            //       }
+            //     />
+
+            //   )}
+            // />
             <DayPickerInput
-              style={{ width: "100%" }}
+              onDayChange={this.handleDayChange}
               classNames={{
                 overlay: DPStyle.datePicker,
                 overlayWrapper: DPStyle.datePickerWrapper
               }}
-              onDayChange={this.handleDayChange}
-              component={props => (
-                <input
-                  placeholder="ГГГГ-ММ-ДД"
-                  {...props}
-                  className={
-                    isErrorValidation
-                      ? "modal__card-input_error modal__card-input"
-                      : "modal__card-input"
-                  }
-                />
-              )}
             />
           ) : isTypeBudget ? (
             <input
