@@ -2,9 +2,14 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+import DayPickerInput from "react-day-picker/DayPickerInput";
+import "react-day-picker/lib/style.css";
 
 import "./style.css";
 import { PayDay } from "../PayDay";
+import { isDate } from "../Calendar/calendarHelper";
+import DPStyle from "../Calendar/Calendar.module.css";
+import "../Calendar/calndarRedefined.css";
 
 type PROPS = {
   onClick: Function,
@@ -13,18 +18,43 @@ type PROPS = {
   addPayDay: Function
 };
 
+type STATE = {
+  inputValue: ?string,
+  isErrorValidation: boolean
+};
+
 const ModalDiv =
   document.getElementById("modal") || document.createElement("div");
 
-class Modal extends React.Component<PROPS, {}> {
-  modalInput: any;
+class Modal extends React.Component<PROPS, STATE> {
   constructor(props: PROPS) {
     super(props);
-    this.modalInput = React.createRef();
+    this.state = {
+      inputValue: null,
+      isErrorValidation: false
+    };
   }
+  displayValidation = (input: any, typeModal: string) => {
+    const errorClass = "modal__card-input_error";
+    // const inputValue = input.value;
+    const inputValue = this.state.inputValue;
 
-  validate = (inputElement: any, typeModal: string) => {
-    const val = inputElement.value;
+    console.log(inputValue);
+    this.setState(
+      (prevState, props) => {
+        return { inputValue };
+      },
+      () => {
+        if (this.validate(typeModal)) {
+          this.setState({ isErrorValidation: false });
+        } else {
+          this.setState({ isErrorValidation: true });
+        }
+      }
+    );
+  };
+  validate = (typeModal: string) => {
+    const val = this.state.inputValue;
 
     switch (typeModal) {
       case "budget":
@@ -36,9 +66,9 @@ class Modal extends React.Component<PROPS, {}> {
           return false;
         }
       case "payday":
-        if (val && isNaN(val)) {
+        if (val && isDate(val)) {
           return true;
-        } else if (!isNaN(val)) {
+        } else if (!isDate(val)) {
           return false;
         } else {
           return false;
@@ -50,12 +80,11 @@ class Modal extends React.Component<PROPS, {}> {
   };
   handleOK = () => {
     const errorClass = "modal__card-input_error";
-    const input = this.modalInput.current;
-    const inputVal = input.value;
+    const inputVal = this.state.inputValue;
     const { typeModal } = this.props;
 
-    if (this.validate(input, this.props.typeModal)) {
-      this.props.onClick(this.props.typeModal);
+    if (this.validate(typeModal)) {
+      this.props.onClick(typeModal);
       switch (typeModal) {
         case "budget":
           this.props.addWholeBudget(inputVal);
@@ -68,26 +97,41 @@ class Modal extends React.Component<PROPS, {}> {
           break;
       }
     } else {
-      input.classList.add(errorClass);
+      this.setState({ isErrorValidation: true });
     }
   };
+
   handleInput = (e: any, typeModal: string) => {
-    const errorClass = "modal__card-input_error";
     const input = e.target;
+    console.log("ss");
+    this.setState({ inputValue: e.target.value }, () => {
+      if (this.validate(typeModal)) {
+        this.setState({ isErrorValidation: false });
+      } else {
+        this.setState({ isErrorValidation: true });
+      }
+    });
 
-    if (this.validate(input, typeModal)) {
-      input.classList.remove(errorClass);
-    } else {
-      input.classList.add(errorClass);
-    }
-    switch (typeModal) {
-    }
+    // this.displayValidation(input, this.props.typeModal);
   };
-
+  handleDayChange = (
+    selectedDay: ?Date,
+    modifiers: Object,
+    dayPickerInput: DayPickerInput
+  ) => {
+    console.log(selectedDay);
+    // this.setState({
+    //   inputValue: "" + selectedDay
+    // });
+    const input = dayPickerInput.getInput();
+    console.log(input);
+    // this.displayValidation(input, this.props.typeModal);
+  };
   render() {
     const { onClick, typeModal } = this.props;
     const isTypePayday = typeModal === "payday";
     const isTypeBudget = typeModal === "budget";
+    const { isErrorValidation } = this.state;
     return ReactDOM.createPortal(
       <div className="modal">
         <div className="modal__card">
@@ -95,13 +139,40 @@ class Modal extends React.Component<PROPS, {}> {
             {isTypeBudget ? "Введите бюджет" : null}
             {isTypePayday ? "Введите день зарплаты" : null}
           </div>
-          <input
-            ref={this.modalInput}
-            className="modal__card-input"
-            type={isTypeBudget ? "text" : isTypePayday ? "date" : "text"}
-            autoFocus
-            onChange={e => this.handleInput(e, typeModal)}
-          />
+          {isTypePayday ? (
+            <DayPickerInput
+              style={{ width: "100%" }}
+              classNames={{
+                overlay: DPStyle.datePicker,
+                overlayWrapper: DPStyle.datePickerWrapper
+              }}
+              onDayChange={this.handleDayChange}
+              component={props => (
+                <input
+                  placeholder="ГГГГ-ММ-ДД"
+                  {...props}
+                  className={
+                    isErrorValidation
+                      ? "modal__card-input_error modal__card-input"
+                      : "modal__card-input"
+                  }
+                />
+              )}
+            />
+          ) : isTypeBudget ? (
+            <input
+              className={
+                isErrorValidation
+                  ? "modal__card-input_error modal__card-input"
+                  : "modal__card-input"
+              }
+              autoFocus
+              onChange={e => this.handleInput(e, typeModal)}
+            />
+          ) : (
+            ""
+          )}
+
           <div className="modal__card-btns-block">
             <button onClick={() => onClick(typeModal)}>отмена</button>
             <button onClick={this.handleOK}>ок</button>
