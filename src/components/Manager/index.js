@@ -1,5 +1,6 @@
 //@flow
 import React from "react";
+import DayPickerInput from "react-day-picker/DayPickerInput";
 
 import { Card } from "../index";
 import { PayDay, Modal, WholeBudget } from "../index";

@@ -26,6 +26,22 @@ type STATE = {
 const ModalDiv =
   document.getElementById("modal") || document.createElement("div");
 
+class Input extends React.Component<{ isErrorValidation: boolean }, {}> {
+  render() {
+    const { isErrorValidation, ...rest } = this.props;
+    return (
+      <input
+        className={
+          isErrorValidation
+            ? "modal__card-input_error modal__card-input"
+            : "modal__card-input"
+        }
+        {...rest}
+      />
+    );
+  }
+}
+
 class Modal extends React.Component<PROPS, STATE> {
   constructor(props: PROPS) {
     super(props);
@@ -118,9 +134,8 @@ class Modal extends React.Component<PROPS, STATE> {
     modifiers: Object,
     dayPickerInput: DayPickerInput
   ) => {
-    const input = dayPickerInput.getInput();
-    console.log(this.state.isErrorValidation);
-    this.setState({ inputValue: input.value }, () => {
+    console.log(this.props.typeModal);
+    this.setState({ inputValue: dayPickerInput.getInput().props.value }, () => {
       if (this.validate(this.props.typeModal)) {
         this.setState({ isErrorValidation: false });
       } else {
@@ -167,6 +182,12 @@ class Modal extends React.Component<PROPS, STATE> {
                 overlay: DPStyle.datePicker,
                 overlayWrapper: DPStyle.datePickerWrapper
               }}
+              dayPickerProps={{
+                todayButton: "Сегодня",
+                fixedWeeks: true
+              }}
+              inputProps={{ isErrorValidation }}
+              component={Input}
             />
           ) : isTypeBudget ? (
             <input
