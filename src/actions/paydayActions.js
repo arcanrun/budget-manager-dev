@@ -82,6 +82,7 @@ export const getPayDay = (payday: string) => {
         res.RESPONSE
           ? dispatch(successGetPayDay(res.PAYLOAD))
           : dispatch(successGetPayDay(undefined));
+
         return res;
       })
       .catch(err => dispatch(failureGetPayDay(err)));

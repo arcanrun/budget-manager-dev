@@ -1,10 +1,12 @@
 //@flow
 import React from "react";
-import DayPickerInput from "react-day-picker/DayPickerInput";
+import DayPicker from "react-day-picker";
+import "react-day-picker/lib/style.css";
 
-import { Card } from "../index";
+import "./style.css";
+import { Card, Spinner } from "../index";
 import { PayDay, Modal, WholeBudget } from "../index";
-import { addPayDay, getWholeBudget, getPayDay } from "../../actions";
+const date = new Date();
 
 type PROPS = {
   getWholeBudget: Function,
@@ -20,11 +22,40 @@ type PROPS = {
   modalIsVisible: boolean
 };
 
-class Manager extends React.Component<PROPS, {}> {
+type STATE = {
+  tempPayDay: ?string
+};
+
+class Manager extends React.Component<PROPS, STATE> {
+  state = {
+    tempPayDay: undefined
+  };
   componentDidMount() {
     if (!this.props.wholeBudget) this.props.getWholeBudget();
     if (!this.props.payday) this.props.getPayDay();
   }
+  handleDayClick = (day: string, { selected }: { selected: boolean }) => {
+    this.setState({
+      tempPayDay: selected ? undefined : day
+    });
+  };
+  handleNewPayDay = e => {
+    const btnType = e.target.dataset.btnType;
+    const { tempPayDay } = this.state;
+
+    switch (btnType) {
+      case "ok":
+        this.props.addPayDay(tempPayDay.toLocaleDateString());
+        this.setState({ tempPayDay: undefined });
+        break;
+      case "chanel":
+        this.setState({ tempPayDay: undefined });
+        break;
+      default:
+        console.log("hmm...");
+        this.setState({ tempPayDay: undefined });
+    }
+  };
   render() {
     const {
       modalIsVisible,
@@ -35,6 +66,7 @@ class Manager extends React.Component<PROPS, {}> {
       wholeBudget_isFetching,
       payday_isFetching
     } = this.props;
+    const { tempPayDay } = this.state;
     return (
       <>
         <Card
@@ -55,11 +87,38 @@ class Manager extends React.Component<PROPS, {}> {
           rightIcon={"pencil"}
           onClick={() => onClickToggleModal("payday")}
         >
-          <PayDay
-            onClick={() => onClickToggleModal("payday")}
-            isFetching={payday_isFetching}
-            payday={payday}
+          <DayPicker
+            showOutsideDays
+            todayButton="Сегодня"
+            onDayClick={this.handleDayClick}
+            selectedDays={this.state.tempPayDay}
           />
+          <div className="pickle__footer">
+            {payday_isFetching ? (
+              <Spinner />
+            ) : !payday && !tempPayDay ? (
+              "Выбирите дату получения зарплаты"
+            ) : !tempPayDay ? (
+              <div className="pickle__counter">
+                <span>N</span>
+                <span>Дней до зарплаты</span>
+              </div>
+            ) : (
+              <div>
+                Дата получения зарплаты
+                <br />
+                <b>{tempPayDay.toLocaleDateString()}</b>
+                <div
+                  className="pickle__control-btns"
+                  onClick={this.handleNewPayDay}
+                >
+                  <button data-btn-type="ok">ok</button>
+                  {"    "}
+                  <button data-btn-type="chanel">cancel</button>
+                </div>
+              </div>
+            )}
+          </div>
         </Card>
         {!modalIsVisible || (
           <Modal
