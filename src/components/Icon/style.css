@@ -2,7 +2,12 @@
 .calendar,
 .profile,
 .history,
-.money-bag-icon {
+.money-bag-icon,
+.pencil {
   width: 20px;
   height: 20px;
+  transition: 0.2s;
+}
+.pencil:hover {
+  fill: #f72d6b !important;
 }

@@ -4,6 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "./style.css";
+import { PayDay } from "../PayDay";
 
 type PROPS = {
   onClick: Function,
@@ -85,17 +86,19 @@ class Modal extends React.Component<PROPS, {}> {
 
   render() {
     const { onClick, typeModal } = this.props;
+    const isTypePayday = typeModal === "payday";
+    const isTypeBudget = typeModal === "budget";
     return ReactDOM.createPortal(
       <div className="modal">
         <div className="modal__card">
           <div className="modal__title">
-            {typeModal === "budget" ? "Введите бюджет" : null}
-            {typeModal === "payday" ? "Введите день зарплаты" : null}
+            {isTypeBudget ? "Введите бюджет" : null}
+            {isTypePayday ? "Введите день зарплаты" : null}
           </div>
           <input
             ref={this.modalInput}
             className="modal__card-input"
-            type="text"
+            type={isTypeBudget ? "text" : isTypePayday ? "date" : "text"}
             autoFocus
             onChange={e => this.handleInput(e, typeModal)}
           />

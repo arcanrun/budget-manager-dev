@@ -7,6 +7,7 @@ import MonyeBag from "../../static/money-bag.svg";
 import History from "../../static/history.svg";
 import Profile from "../../static/profile.svg";
 import Calendar from "../../static/calendar.svg";
+import Pencil from "../../static/pencil.svg";
 
 type PROPS = {|
   icon: string,
@@ -50,6 +51,17 @@ const Icon = ({ icon, color }: PROPS) => {
           svgStyle={{ fill: color }}
         />
       );
+    case "pencil":
+      return (
+        <ReactSVG
+          className="hoverable"
+          src={Pencil}
+          wrapper="span"
+          svgClassName="pencil"
+          svgStyle={{ fill: color }}
+        />
+      );
+
     default:
       return <b>{icon}</b>;
   }

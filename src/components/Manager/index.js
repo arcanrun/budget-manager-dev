@@ -36,14 +36,24 @@ class Manager extends React.Component<PROPS, {}> {
     } = this.props;
     return (
       <>
-        <Card headerTitle={"общий бюджет"} icon={"money-bag"}>
+        <Card
+          headerTitle={"общий бюджет"}
+          icon={"money-bag"}
+          rightIcon={"pencil"}
+          onClick={() => onClickToggleModal("budget")}
+        >
           <WholeBudget
             onClick={() => onClickToggleModal("budget")}
             wholeBudget={wholeBudget}
             isFetching={wholeBudget_isFetching}
           />
         </Card>
-        <Card headerTitle={"календарь"} icon={"calendar"}>
+        <Card
+          headerTitle={"календарь"}
+          icon={"calendar"}
+          rightIcon={"pencil"}
+          onClick={() => onClickToggleModal("payday")}
+        >
           <PayDay
             onClick={() => onClickToggleModal("payday")}
             isFetching={payday_isFetching}
