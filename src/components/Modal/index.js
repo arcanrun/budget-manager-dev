@@ -119,22 +119,19 @@ class Modal extends React.Component<PROPS, STATE> {
 
   handleInput = (e: any, typeModal: string) => {
     const input = e.target;
-    this.setState({ inputValue: e.target.value }, () => {
+    this.setState({ inputValue: input.value }, () => {
       if (this.validate(typeModal)) {
         this.setState({ isErrorValidation: false });
       } else {
         this.setState({ isErrorValidation: true });
       }
     });
-
-    // this.displayValidation(input, this.props.typeModal);
   };
   handleDayChange = (
     selectedDay: ?Date,
     modifiers: Object,
     dayPickerInput: DayPickerInput
   ) => {
-    console.log(this.props.typeModal);
     this.setState({ inputValue: dayPickerInput.getInput().props.value }, () => {
       if (this.validate(this.props.typeModal)) {
         this.setState({ isErrorValidation: false });
@@ -148,6 +145,7 @@ class Modal extends React.Component<PROPS, STATE> {
     const isTypePayday = typeModal === "payday";
     const isTypeBudget = typeModal === "budget";
     const { isErrorValidation } = this.state;
+
     return ReactDOM.createPortal(
       <div className="modal">
         <div className="modal__card">
@@ -156,26 +154,6 @@ class Modal extends React.Component<PROPS, STATE> {
             {isTypePayday ? "Введите день зарплаты" : null}
           </div>
           {isTypePayday ? (
-            // <DayPickerInput
-            //   style={{ width: "100%" }}
-            //   classNames={{
-            //     overlay: DPStyle.datePicker,
-            //     overlayWrapper: DPStyle.datePickerWrapper
-            //   }}
-            //   onDayChange={this.handleDayChange}
-            //   component={props => (
-            //     <input
-            //       placeholder="ГГГГ-ММ-ДД"
-            //       {...props}
-            //       className={
-            //         isErrorValidation
-            //           ? "modal__card-input_error modal__card-input"
-            //           : "modal__card-input"
-            //       }
-            //     />
-
-            //   )}
-            // />
             <DayPickerInput
               onDayChange={this.handleDayChange}
               classNames={{
