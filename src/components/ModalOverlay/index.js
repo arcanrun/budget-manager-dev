@@ -85,18 +85,18 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     const { onClick, typeModal } = this.props;
     // const isTypeBudget = typeModal === "budget";
     const { isErrorValidation } = this.state;
-
+    const budgetInputCard = (
+      <InputCard
+        title={"Введите бюджет"}
+        isErrorValidation={isErrorValidation}
+        typeModal={typeModal}
+        handleInput={this.handleInput}
+        onClick={onClick}
+        handleOK={this.handleOK}
+      />
+    );
     return ReactDOM.createPortal(
-      <div className="modal">
-        <InputCard
-          title={"Введите бюджет"}
-          isErrorValidation={isErrorValidation}
-          typeModal={typeModal}
-          handleInput={this.handleInput}
-          onClick={onClick}
-          handleOK={this.handleOK}
-        />
-      </div>,
+      <div className="modal">{budgetInputCard}</div>,
       ModalDiv
     );
   }

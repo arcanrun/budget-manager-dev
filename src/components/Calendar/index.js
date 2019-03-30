@@ -12,7 +12,6 @@ import {
   msToDays,
   addSuffix
 } from "./calendarHelper";
-import { Icon } from "../index";
 
 type PROPS = {
   handleDayClick: Function,

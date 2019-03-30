@@ -2,7 +2,7 @@
 import React from "react";
 
 import { Card, Overlay } from "../index";
-import { ModalOverlay, WholeBudget, Calendar, Spinner } from "../index";
+import { ModalOverlay, WholeBudget, Calendar } from "../index";
 import style from "./Manager.module.css";
 
 type PROPS = {
@@ -63,37 +63,43 @@ class Manager extends React.Component<PROPS, STATE> {
     } = this.props;
     const { tempPayDay } = this.state;
     const overlay = <Overlay />;
-
+    const budgetCard = (
+      <Card
+        headerTitle={"общий бюджет"}
+        icon={"money-bag"}
+        rightIcon={"pencil"}
+        onClick={() => onClickToggleModal("budget")}
+      >
+        {wholeBudget_isFetching ? overlay : ""}
+        <WholeBudget
+          onClick={() => onClickToggleModal("budget")}
+          wholeBudget={wholeBudget}
+        />
+      </Card>
+    );
+    const calendarCard = (
+      <Card headerTitle={"календарь"} icon={"calendar"}>
+        {payday_isFetching ? overlay : ""}
+        <Calendar
+          handleDayClick={this.handleDayClick}
+          handleNewPayDay={this.handleNewPayDay}
+          tempPayDay={tempPayDay}
+          payday={payday}
+        />
+      </Card>
+    );
+    const modalOverlay = (
+      <ModalOverlay
+        onClick={onClickToggleModal}
+        typeModal={typeModal}
+        {...this.props}
+      />
+    );
     return (
       <>
-        <Card
-          headerTitle={"общий бюджет"}
-          icon={"money-bag"}
-          rightIcon={"pencil"}
-          onClick={() => onClickToggleModal("budget")}
-        >
-          {wholeBudget_isFetching ? overlay : ""}
-          <WholeBudget
-            onClick={() => onClickToggleModal("budget")}
-            wholeBudget={wholeBudget}
-          />
-        </Card>
-        <Card headerTitle={"календарь"} icon={"calendar"}>
-          {payday_isFetching ? overlay : ""}
-          <Calendar
-            handleDayClick={this.handleDayClick}
-            handleNewPayDay={this.handleNewPayDay}
-            tempPayDay={tempPayDay}
-            payday={payday}
-          />
-        </Card>
-        {!modalIsVisible || (
-          <ModalOverlay
-            onClick={onClickToggleModal}
-            typeModal={typeModal}
-            {...this.props}
-          />
-        )}
+        {budgetCard}
+        {calendarCard}
+        {!modalIsVisible || modalOverlay}
       </>
     );
   }
