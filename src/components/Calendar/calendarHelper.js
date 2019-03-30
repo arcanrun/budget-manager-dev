@@ -186,3 +186,35 @@ export default (month = THIS_MONTH, year = THIS_YEAR) => {
   // Combines all dates from previous, current and next months
   return [...prevMonthDates, ...thisMonthDates, ...nextMonthDates];
 };
+
+export const stringToDate = string => {
+  const ms = Date.parse(string);
+  let date = new Date(ms);
+  return date;
+};
+
+export const dateToString = date => {
+  let str = date;
+  return str;
+};
+
+export const msToDays = millisec => {
+  if (millisec < 0) return 0;
+  let seconds = (millisec / 1000).toFixed(1);
+
+  let minutes = (millisec / (1000 * 60)).toFixed(1);
+
+  let hours = (millisec / (1000 * 60 * 60)).toFixed(1);
+
+  let days = (millisec / (1000 * 60 * 60 * 24)).toFixed(1);
+
+  if (seconds < 60) {
+    return seconds + " Sec";
+  } else if (minutes < 60) {
+    return minutes + " Min";
+  } else if (hours < 24) {
+    return hours + " Hrs";
+  } else {
+    return days + " Days";
+  }
+};

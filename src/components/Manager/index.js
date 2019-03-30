@@ -1,12 +1,9 @@
 //@flow
 import React from "react";
-import DayPicker from "react-day-picker";
-import "react-day-picker/lib/style.css";
 
-import "./style.css";
 import { Card, Spinner } from "../index";
 import { PayDay, Modal, WholeBudget } from "../index";
-const date = new Date();
+import { Calendar } from "../Calendar";
 
 type PROPS = {
   getWholeBudget: Function,
@@ -39,13 +36,13 @@ class Manager extends React.Component<PROPS, STATE> {
       tempPayDay: selected ? undefined : day
     });
   };
-  handleNewPayDay = e => {
+  handleNewPayDay = (e: any) => {
     const btnType = e.target.dataset.btnType;
     const { tempPayDay } = this.state;
 
     switch (btnType) {
       case "ok":
-        this.props.addPayDay(tempPayDay.toLocaleDateString());
+        this.props.addPayDay(tempPayDay);
         this.setState({ tempPayDay: undefined });
         break;
       case "chanel":
@@ -57,6 +54,11 @@ class Manager extends React.Component<PROPS, STATE> {
     }
   };
   render() {
+    const birthdayStyle = `.DayPicker-Day--highlighted {
+      background-color: orange;
+      color: white;
+    }`;
+    const highlighted = {};
     const {
       modalIsVisible,
       onClickToggleModal,
@@ -81,44 +83,14 @@ class Manager extends React.Component<PROPS, STATE> {
             isFetching={wholeBudget_isFetching}
           />
         </Card>
-        <Card
-          headerTitle={"календарь"}
-          icon={"calendar"}
-          rightIcon={"pencil"}
-          onClick={() => onClickToggleModal("payday")}
-        >
-          <DayPicker
-            showOutsideDays
-            todayButton="Сегодня"
-            onDayClick={this.handleDayClick}
-            selectedDays={this.state.tempPayDay}
+        <Card headerTitle={"календарь"} icon={"calendar"}>
+          <Calendar
+            handleDayClick={this.handleDayClick}
+            handleNewPayDay={this.handleNewPayDay}
+            payday_isFetching={payday_isFetching}
+            tempPayDay={tempPayDay}
+            payday={payday}
           />
-          <div className="pickle__footer">
-            {payday_isFetching ? (
-              <Spinner />
-            ) : !payday && !tempPayDay ? (
-              "Выбирите дату получения зарплаты"
-            ) : !tempPayDay ? (
-              <div className="pickle__counter">
-                <span>N</span>
-                <span>Дней до зарплаты</span>
-              </div>
-            ) : (
-              <div>
-                Дата получения зарплаты
-                <br />
-                <b>{tempPayDay.toLocaleDateString()}</b>
-                <div
-                  className="pickle__control-btns"
-                  onClick={this.handleNewPayDay}
-                >
-                  <button data-btn-type="ok">ok</button>
-                  {"    "}
-                  <button data-btn-type="chanel">cancel</button>
-                </div>
-              </div>
-            )}
-          </div>
         </Card>
         {!modalIsVisible || (
           <Modal

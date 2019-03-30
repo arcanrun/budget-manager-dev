@@ -44,6 +44,29 @@
 .DayPicker-Body {
   font-size: 12px;
 }
+
+.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+  position: relative;
+
+  background-color: #f72d6b;
+  color: #f0f8ff;
+}
+
+.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside):hover {
+  background-color: #51a0fa;
+}
+
+.DayPicker:not(.DayPicker--interactionDisabled)
+  .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
+  background-color: #f0f8ff;
+}
+
+.DayPicker-Day--today {
+  color: #ffffff;
+  font-weight: 700;
+  background-color: #0fde8c;
+}
+
 .pickle__footer {
   text-align: center;
   font-size: 25px;
