@@ -28,23 +28,7 @@ class Modal extends React.Component<PROPS, STATE> {
       isErrorValidation: false
     };
   }
-  displayValidation = (input: any, typeModal: string) => {
-    const inputValue = this.state.inputValue;
 
-    console.log(inputValue);
-    this.setState(
-      (prevState, props) => {
-        return { inputValue };
-      },
-      () => {
-        if (this.validate(typeModal)) {
-          this.setState({ isErrorValidation: false });
-        } else {
-          this.setState({ isErrorValidation: true });
-        }
-      }
-    );
-  };
   validate = (typeModal: string) => {
     const val = this.state.inputValue;
 
@@ -59,7 +43,7 @@ class Modal extends React.Component<PROPS, STATE> {
         }
 
       default:
-        console.log("¯|_(ツ)_/¯");
+        console.log("typeModal: ¯|_(ツ)_/¯");
         break;
     }
   };
@@ -109,6 +93,7 @@ class Modal extends React.Component<PROPS, STATE> {
           </div>
           {isTypeBudget ? (
             <input
+              placeholder="00000.00"
               className={
                 isErrorValidation
                   ? "modal__card-input_error modal__card-input"

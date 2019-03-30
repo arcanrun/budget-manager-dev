@@ -38,9 +38,7 @@ class Manager extends React.Component<PROPS, STATE> {
   };
   handleNewPayDay = (e: any) => {
     const btnType = e.target.dataset.btnType;
-    const chooserBtn = btnType === "ok " || btnType === "chanel";
     const { tempPayDay } = this.state;
-    console.log(e.target);
     switch (btnType) {
       case "ok":
         this.props.addPayDay(tempPayDay);
