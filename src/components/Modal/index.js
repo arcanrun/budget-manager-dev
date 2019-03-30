@@ -2,13 +2,8 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import DayPickerInput from "react-day-picker/DayPickerInput";
-import "react-day-picker/lib/style.css";
 
 import "./style.css";
-import { PayDay } from "../PayDay";
-import { isDate } from "../Calendar/calendarHelper";
-import DPStyle from "../Calendar/Calendar.module.css";
 
 type PROPS = {
   onClick: Function,
@@ -25,22 +20,6 @@ type STATE = {
 const ModalDiv =
   document.getElementById("modal") || document.createElement("div");
 
-class Input extends React.Component<{ isErrorValidation: boolean }, {}> {
-  render() {
-    const { isErrorValidation, ...rest } = this.props;
-    return (
-      <input
-        className={
-          isErrorValidation
-            ? "modal__card-input_error modal__card-input"
-            : "modal__card-input"
-        }
-        {...rest}
-      />
-    );
-  }
-}
-
 class Modal extends React.Component<PROPS, STATE> {
   constructor(props: PROPS) {
     super(props);
@@ -50,8 +29,6 @@ class Modal extends React.Component<PROPS, STATE> {
     };
   }
   displayValidation = (input: any, typeModal: string) => {
-    const errorClass = "modal__card-input_error";
-    // const inputValue = input.value;
     const inputValue = this.state.inputValue;
 
     console.log(inputValue);
@@ -80,21 +57,13 @@ class Modal extends React.Component<PROPS, STATE> {
         } else {
           return false;
         }
-      case "payday":
-        if (val && isDate(val)) {
-          return true;
-        } else if (!isDate(val)) {
-          return false;
-        } else {
-          return false;
-        }
+
       default:
         console.log("¯|_(ツ)_/¯");
         break;
     }
   };
   handleOK = () => {
-    const errorClass = "modal__card-input_error";
     const inputVal = this.state.inputValue;
     const { typeModal } = this.props;
 
@@ -126,22 +95,9 @@ class Modal extends React.Component<PROPS, STATE> {
       }
     });
   };
-  handleDayChange = (
-    selectedDay: ?Date,
-    modifiers: Object,
-    dayPickerInput: DayPickerInput
-  ) => {
-    this.setState({ inputValue: dayPickerInput.getInput().props.value }, () => {
-      if (this.validate(this.props.typeModal)) {
-        this.setState({ isErrorValidation: false });
-      } else {
-        this.setState({ isErrorValidation: true });
-      }
-    });
-  };
+
   render() {
     const { onClick, typeModal } = this.props;
-    const isTypePayday = typeModal === "payday";
     const isTypeBudget = typeModal === "budget";
     const { isErrorValidation } = this.state;
 
@@ -150,23 +106,8 @@ class Modal extends React.Component<PROPS, STATE> {
         <div className="modal__card">
           <div className="modal__title">
             {isTypeBudget ? "Введите бюджет" : null}
-            {isTypePayday ? "Введите день зарплаты" : null}
           </div>
-          {isTypePayday ? (
-            <DayPickerInput
-              onDayChange={this.handleDayChange}
-              classNames={{
-                overlay: DPStyle.datePicker,
-                overlayWrapper: DPStyle.datePickerWrapper
-              }}
-              dayPickerProps={{
-                todayButton: "Сегодня",
-                fixedWeeks: true
-              }}
-              inputProps={{ isErrorValidation }}
-              component={Input}
-            />
-          ) : isTypeBudget ? (
+          {isTypeBudget ? (
             <input
               className={
                 isErrorValidation

@@ -12,7 +12,7 @@ import {
   msToDays,
   addSuffix
 } from "./calendarHelper";
-import { Spinner, Icon } from "../index";
+import { Icon } from "../index";
 
 type PROPS = {
   handleDayClick: Function,
@@ -47,16 +47,12 @@ class Calendar extends React.Component<PROPS, {}> {
           <button
             data-btn-type="ok"
             className={[style.btn, style.btnOk].join(" ")}
-          >
-            <Icon icon={"check"} color={"#ffffff"} />
-          </button>
+          />
           {"    "}
           <button
             data-btn-type="chanel"
             className={[style.btn, style.btnChanel].join(" ")}
-          >
-            <Icon icon={"cross"} color={"#ffffff"} />
-          </button>
+          />
         </div>
       </div>
     );

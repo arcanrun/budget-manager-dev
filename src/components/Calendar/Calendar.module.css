@@ -36,6 +36,8 @@
 }
 
 .btnOk {
+  background: url("../../static/check.svg") no-repeat;
+  background-position: center;
   transition: 0.2s;
   background-color: #0fde8c;
 }
@@ -43,6 +45,8 @@
   background-color: #0fde8b83;
 }
 .btnChanel {
+  background: url("../../static/cross-white.svg") no-repeat;
+  background-position: center;
   background-color: #f72d6b;
 }
 .btnChanel:hover {
@@ -50,6 +54,7 @@
 }
 
 .btn {
+  background-size: 25px 25px;
   border: none;
   color: #ffffff;
   padding: 15px;
