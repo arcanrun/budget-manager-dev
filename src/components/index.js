@@ -10,10 +10,11 @@ import { History } from "./History";
 import { Profile } from "./Profile";
 import { ActiveLink } from "./ActiveLink";
 import { PayDay } from "./PayDay";
-import { Modal } from "./Modal";
+import { ModalOverlay } from "./ModalOverlay";
 import { Spinner } from "./Spinner";
 import { Calendar } from "./Calendar";
 import { Overlay } from "./Overlay";
+import { InputCard } from "./InputCard";
 export {
   Header,
   Menu,
@@ -26,8 +27,9 @@ export {
   Profile,
   ActiveLink,
   PayDay,
-  Modal,
+  ModalOverlay,
   Spinner,
   Calendar,
-  Overlay
+  Overlay,
+  InputCard
 };

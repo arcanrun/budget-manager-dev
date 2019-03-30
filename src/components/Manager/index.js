@@ -2,7 +2,7 @@
 import React from "react";
 
 import { Card, Overlay } from "../index";
-import { Modal, WholeBudget, Calendar, Spinner } from "../index";
+import { ModalOverlay, WholeBudget, Calendar, Spinner } from "../index";
 import style from "./Manager.module.css";
 
 type PROPS = {
@@ -88,7 +88,7 @@ class Manager extends React.Component<PROPS, STATE> {
           />
         </Card>
         {!modalIsVisible || (
-          <Modal
+          <ModalOverlay
             onClick={onClickToggleModal}
             typeModal={typeModal}
             {...this.props}

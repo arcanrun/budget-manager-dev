@@ -4,6 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "./style.css";
+import { InputCard } from "../index";
 
 type PROPS = {
   onClick: Function,
@@ -20,7 +21,7 @@ type STATE = {
 const ModalDiv =
   document.getElementById("modal") || document.createElement("div");
 
-class Modal extends React.Component<PROPS, STATE> {
+class ModalOverlay extends React.Component<PROPS, STATE> {
   constructor(props: PROPS) {
     super(props);
     this.state = {
@@ -82,38 +83,22 @@ class Modal extends React.Component<PROPS, STATE> {
 
   render() {
     const { onClick, typeModal } = this.props;
-    const isTypeBudget = typeModal === "budget";
+    // const isTypeBudget = typeModal === "budget";
     const { isErrorValidation } = this.state;
 
     return ReactDOM.createPortal(
       <div className="modal">
-        <div className="modal__card">
-          <div className="modal__title">
-            {isTypeBudget ? "Введите бюджет" : null}
-          </div>
-          {isTypeBudget ? (
-            <input
-              placeholder="00000.00"
-              className={
-                isErrorValidation
-                  ? "modal__card-input_error modal__card-input"
-                  : "modal__card-input"
-              }
-              autoFocus
-              onChange={e => this.handleInput(e, typeModal)}
-            />
-          ) : (
-            ""
-          )}
-
-          <div className="modal__card-btns-block">
-            <button onClick={() => onClick(typeModal)}>отмена</button>
-            <button onClick={this.handleOK}>ок</button>
-          </div>
-        </div>
+        <InputCard
+          title={"Введите бюджет"}
+          isErrorValidation={isErrorValidation}
+          typeModal={typeModal}
+          handleInput={this.handleInput}
+          onClick={onClick}
+          handleOK={this.handleOK}
+        />
       </div>,
       ModalDiv
     );
   }
 }
-export { Modal };
+export { ModalOverlay };
