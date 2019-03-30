@@ -80,6 +80,7 @@ export const getWholeBudget = () => {
       .then(res => res.json())
       .then(res => {
         console.log(res);
+
         res.RESPONSE
           ? dispatch(successGetBudget(res.PAYLOAD))
           : dispatch(successGetBudget(undefined));

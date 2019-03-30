@@ -3,6 +3,7 @@ import React from "react";
 
 import { Card } from "../index";
 import { Modal, WholeBudget, Calendar, Spinner } from "../index";
+import style from "./Manager.module.css";
 
 type PROPS = {
   getWholeBudget: Function,
@@ -63,6 +64,12 @@ class Manager extends React.Component<PROPS, STATE> {
       payday_isFetching
     } = this.props;
     const { tempPayDay } = this.state;
+    const overlay = (
+      <div className={style.overlay}>
+        <Spinner />
+      </div>
+    );
+
     return (
       <>
         <Card
@@ -78,13 +85,10 @@ class Manager extends React.Component<PROPS, STATE> {
           />
         </Card>
         <Card headerTitle={"календарь"} icon={"calendar"}>
-          {/* {payday_isFetching ? (
-            <Spinner />
-          ) : ( */}
+          {payday_isFetching ? overlay : ""}
           <Calendar
             handleDayClick={this.handleDayClick}
             handleNewPayDay={this.handleNewPayDay}
-            payday_isFetching={payday_isFetching}
             tempPayDay={tempPayDay}
             payday={payday}
           />

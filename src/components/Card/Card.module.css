@@ -5,6 +5,7 @@
   border-radius: 2px;
   box-shadow: 0px 0px 5px 1px rgb(191, 191, 191);
   padding-bottom: 40px;
+  position: relative;
 }
 .header {
   display: flex;

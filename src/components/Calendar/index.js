@@ -17,20 +17,13 @@ import { Spinner, Icon } from "../index";
 type PROPS = {
   handleDayClick: Function,
   handleNewPayDay: Function,
-  payday_isFetching: boolean,
   payday: string,
   tempPayDay: ?string
 };
 
 class Calendar extends React.Component<PROPS, {}> {
   render() {
-    const {
-      handleDayClick,
-      handleNewPayDay,
-      payday_isFetching,
-      payday,
-      tempPayDay
-    } = this.props;
+    const { handleDayClick, handleNewPayDay, payday, tempPayDay } = this.props;
     const daysToPayday = Date.parse(payday) - Date.now();
 
     const paydayEmptyTitle = <div>Выбирите дату получения зарплаты</div>;
@@ -77,15 +70,11 @@ class Calendar extends React.Component<PROPS, {}> {
           selectedDays={stringToDate(payday)}
         />
         <div className={style.footer}>
-          {payday_isFetching ? (
-            <Spinner />
-          ) : !payday && !tempPayDay ? (
-            paydayEmptyTitle
-          ) : !tempPayDay ? (
-            counterBlock
-          ) : (
-            counterChoose
-          )}
+          {!payday && !tempPayDay
+            ? paydayEmptyTitle
+            : !tempPayDay
+            ? counterBlock
+            : counterChoose}
         </div>
       </>
     );
