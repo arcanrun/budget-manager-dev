@@ -13,6 +13,7 @@ import { PayDay } from "./PayDay";
 import { Modal } from "./Modal";
 import { Spinner } from "./Spinner";
 import { Calendar } from "./Calendar";
+import { Overlay } from "./Overlay";
 export {
   Header,
   Menu,
@@ -27,5 +28,6 @@ export {
   PayDay,
   Modal,
   Spinner,
-  Calendar
+  Calendar,
+  Overlay
 };

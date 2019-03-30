@@ -1,7 +1,7 @@
 //@flow
 import React from "react";
 
-import { Card } from "../index";
+import { Card, Overlay } from "../index";
 import { Modal, WholeBudget, Calendar, Spinner } from "../index";
 import style from "./Manager.module.css";
 
@@ -64,11 +64,7 @@ class Manager extends React.Component<PROPS, STATE> {
       payday_isFetching
     } = this.props;
     const { tempPayDay } = this.state;
-    const overlay = (
-      <div className={style.overlay}>
-        <Spinner />
-      </div>
-    );
+    const overlay = <Overlay />;
 
     return (
       <>
@@ -78,10 +74,10 @@ class Manager extends React.Component<PROPS, STATE> {
           rightIcon={"pencil"}
           onClick={() => onClickToggleModal("budget")}
         >
+          {wholeBudget_isFetching ? overlay : ""}
           <WholeBudget
             onClick={() => onClickToggleModal("budget")}
             wholeBudget={wholeBudget}
-            isFetching={wholeBudget_isFetching}
           />
         </Card>
         <Card headerTitle={"календарь"} icon={"calendar"}>

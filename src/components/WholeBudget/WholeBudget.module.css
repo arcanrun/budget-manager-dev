@@ -10,6 +10,14 @@
 .enter:hover {
   color: #f72d6b;
 }
-.wholeBudget {
+.budgetBlock {
   text-align: center;
+}
+.budget {
+  font-weight: 200;
+  font-size: 35px;
+}
+.volute {
+  font-weight: 300;
+  padding-left: 10px;
 }
