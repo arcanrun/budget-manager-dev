@@ -205,6 +205,27 @@ export const dateToString = date => {
   return "";
 };
 
+// export const msToDays = millisec => {
+//   if (millisec < 0) return 0;
+//   let seconds = (millisec / 1000).toFixed(1);
+
+//   let minutes = (millisec / (1000 * 60)).toFixed(1);
+
+//   let hours = (millisec / (1000 * 60 * 60)).toFixed(1);
+
+//   let days = (millisec / (1000 * 60 * 60 * 24)).toFixed(1);
+
+//   if (seconds < 60) {
+//     return seconds + " Sec";
+//   } else if (minutes < 60) {
+//     return minutes + " Min";
+//   } else if (hours < 24) {
+//     return hours + " Hrs";
+//   } else {
+//     return days;
+//   }
+// };
+
 export const msToDays = millisec => {
   if (millisec < 0) return 0;
   let seconds = (millisec / 1000).toFixed(1);
@@ -213,15 +234,38 @@ export const msToDays = millisec => {
 
   let hours = (millisec / (1000 * 60 * 60)).toFixed(1);
 
-  let days = (millisec / (1000 * 60 * 60 * 24)).toFixed(1);
+  let days = (millisec / (1000 * 60 * 60 * 24)).toFixed(0);
 
-  if (seconds < 60) {
-    return seconds + " Sec";
-  } else if (minutes < 60) {
-    return minutes + " Min";
-  } else if (hours < 24) {
-    return hours + " Hrs";
-  } else {
-    return days;
+  // if (seconds < 60) {
+  //   return seconds + " Sec";
+  // } else if (minutes < 60) {
+  //   return minutes + " Min";
+  // } else if (hours < 24) {
+  //   return hours + " Hrs";
+  // } else {
+  //   return days;
+  // }
+  return days;
+};
+
+export const addSuffix = days => {
+  switch (days) {
+    case "11":
+    case "12":
+    case "13":
+    case "14":
+      return "Дней";
+    default:
+      const number = days % 10;
+      switch (number) {
+        case 1:
+          return "День";
+        case 2:
+        case 3:
+        case 4:
+          return "Дня";
+        default:
+          return "Дней";
+      }
   }
 };

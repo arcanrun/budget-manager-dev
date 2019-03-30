@@ -8,16 +8,59 @@
   padding-bottom: 30px;
 }
 
-.counterFooter {
+.counterBlockFooter {
   font-size: 15px;
   display: flex;
   flex-flow: column;
   align-items: self-end;
   justify-content: center;
 }
+.counterFooter div {
+  display: flex;
+}
 .counter {
   font-weight: bold;
   font-size: 40px;
   padding: 10px;
   color: #110261;
+}
+.chooser {
+}
+.counterBlock {
+  display: flex;
+  padding-left: 10px;
+}
+.highlight {
+  color: #f72d6b;
+  font-weight: bold;
+}
+
+.btnOk {
+  transition: 0.2s;
+  background-color: #0fde8c;
+}
+.btnOk:hover {
+  background-color: #0fde8b83;
+}
+.btnChanel {
+  background-color: #f72d6b;
+}
+.btnChanel:hover {
+  background-color: #f72d6a71;
+}
+
+.btn {
+  border: none;
+  color: #ffffff;
+  padding: 15px;
+  border-radius: 100%;
+  transition: 0.2s;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+}
+
+.days {
+  padding-top: 20px;
+  display: inline-block;
 }

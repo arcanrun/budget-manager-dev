@@ -8,6 +8,8 @@ import History from "../../static/history.svg";
 import Profile from "../../static/profile.svg";
 import Calendar from "../../static/calendar.svg";
 import Pencil from "../../static/pencil.svg";
+import Check from "../../static/check.svg";
+import Cross from "../../static/cross.svg";
 
 type PROPS = {|
   icon: string,
@@ -58,6 +60,26 @@ const Icon = ({ icon, color }: PROPS) => {
           src={Pencil}
           wrapper="span"
           svgClassName="pencil"
+          svgStyle={{ fill: color }}
+        />
+      );
+    case "cross":
+      return (
+        <ReactSVG
+          className="hoverable"
+          src={Cross}
+          wrapper="span"
+          svgClassName="cross"
+          svgStyle={{ fill: color }}
+        />
+      );
+    case "check":
+      return (
+        <ReactSVG
+          className="hoverable"
+          src={Check}
+          wrapper="span"
+          svgClassName="check"
           svgStyle={{ fill: color }}
         />
       );

@@ -3,7 +3,9 @@
 .profile,
 .history,
 .money-bag-icon,
-.pencil {
+.pencil,
+.cross,
+.check {
   width: 20px;
   height: 20px;
   transition: 0.2s;
