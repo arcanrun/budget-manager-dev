@@ -26,5 +26,6 @@ export {
   ActiveLink,
   PayDay,
   Modal,
-  Spinner
+  Spinner,
+  Calendar
 };

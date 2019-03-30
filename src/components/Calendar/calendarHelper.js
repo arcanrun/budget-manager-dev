@@ -193,9 +193,16 @@ export const stringToDate = string => {
   return date;
 };
 
+// zeroPad(5, 2) => "05"
 export const dateToString = date => {
-  let str = date;
-  return str;
+  if (date) {
+    const year = date.getFullYear();
+    const month = zeroPad(date.getMonth() + 1, 2);
+    const day = zeroPad(date.getDate(), 2);
+    return `${day}.${month}.${year}`;
+  }
+
+  return "";
 };
 
 export const msToDays = millisec => {
@@ -215,6 +222,6 @@ export const msToDays = millisec => {
   } else if (hours < 24) {
     return hours + " Hrs";
   } else {
-    return days + " Days";
+    return days;
   }
 };

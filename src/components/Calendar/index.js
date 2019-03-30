@@ -5,6 +5,7 @@ import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
 
 import "./style.css";
+import style from "./Calendar.module.css";
 import { stringToDate, dateToString, msToDays } from "./calendarHelper";
 import { Spinner } from "../index";
 
@@ -13,7 +14,7 @@ type PROPS = {
   handleNewPayDay: Function,
   payday_isFetching: boolean,
   payday: string,
-  tempPayDay: string
+  tempPayDay: ?string
 };
 
 class Calendar extends React.Component<PROPS, {}> {
@@ -25,6 +26,31 @@ class Calendar extends React.Component<PROPS, {}> {
       payday,
       tempPayDay
     } = this.props;
+    const paydayEmptyTitle = <div>Выбирите дату получения зарплаты</div>;
+    const counterBlock = (
+      <div className={style.counterBlock}>
+        <div className={style.counter}>
+          {msToDays(Date.parse(payday) - Date.now())}
+        </div>
+        <div className={style.counterFooter}>
+          <div>Дней</div>
+          <div>до зарплаты</div>
+        </div>
+      </div>
+    );
+    const counterChoose = (
+      <div>
+        Дата получения зарплаты
+        <br />
+        <b>{dateToString(tempPayDay)}</b>
+        <div className="pickle__control-btns" onClick={handleNewPayDay}>
+          <button data-btn-type="ok">ok</button>
+          {"    "}
+          <button data-btn-type="chanel">cancel</button>
+        </div>
+      </div>
+    );
+
     return (
       <>
         <DayPicker
@@ -33,27 +59,15 @@ class Calendar extends React.Component<PROPS, {}> {
           onDayClick={handleDayClick}
           selectedDays={stringToDate(payday)}
         />
-        <div className="pickle__footer">
+        <div className={style.footer}>
           {payday_isFetching ? (
             <Spinner />
           ) : !payday && !tempPayDay ? (
-            "Выбирите дату получения зарплаты"
+            paydayEmptyTitle
           ) : !tempPayDay ? (
-            <div className="pickle__counter">
-              <span>{msToDays(Date.parse(payday) - Date.now())}</span>
-              <span>Дней до зарплаты</span>
-            </div>
+            counterBlock
           ) : (
-            <div>
-              Дата получения зарплаты
-              <br />
-              <b>{tempPayDay.toLocaleDateString()}</b>
-              <div className="pickle__control-btns" onClick={handleNewPayDay}>
-                <button data-btn-type="ok">ok</button>
-                {"    "}
-                <button data-btn-type="chanel">cancel</button>
-              </div>
-            </div>
+            counterChoose
           )}
         </div>
       </>

@@ -1,14 +1,23 @@
-.datePicker {
-  position: absolute;
-  left: 0;
-  z-index: 1;
-  background: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  width: 100%;
+.footer {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 200;
+  margin: auto;
+  max-width: 300px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
-.datePickerWrapper {
-  position: relative;
-  flex-direction: row;
-  padding-bottom: 1em;
-  width: 100%;
+
+.counterFooter {
+  font-size: 15px;
+  display: flex;
+  flex-flow: column;
+  align-items: self-end;
+  justify-content: center;
+}
+.counter {
+  font-weight: bold;
+  font-size: 40px;
+  padding: 10px;
+  color: #110261;
 }

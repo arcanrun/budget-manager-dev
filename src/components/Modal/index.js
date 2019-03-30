@@ -9,7 +9,6 @@ import "./style.css";
 import { PayDay } from "../PayDay";
 import { isDate } from "../Calendar/calendarHelper";
 import DPStyle from "../Calendar/Calendar.module.css";
-import "../Calendar/calndarRedefined.css";
 
 type PROPS = {
   onClick: Function,

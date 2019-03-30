@@ -1,9 +1,8 @@
 //@flow
 import React from "react";
 
-import { Card, Spinner } from "../index";
-import { PayDay, Modal, WholeBudget } from "../index";
-import { Calendar } from "../Calendar";
+import { Card } from "../index";
+import { Modal, WholeBudget, Calendar, Spinner } from "../index";
 
 type PROPS = {
   getWholeBudget: Function,
@@ -54,11 +53,6 @@ class Manager extends React.Component<PROPS, STATE> {
     }
   };
   render() {
-    const birthdayStyle = `.DayPicker-Day--highlighted {
-      background-color: orange;
-      color: white;
-    }`;
-    const highlighted = {};
     const {
       modalIsVisible,
       onClickToggleModal,
@@ -84,6 +78,9 @@ class Manager extends React.Component<PROPS, STATE> {
           />
         </Card>
         <Card headerTitle={"календарь"} icon={"calendar"}>
+          {/* {payday_isFetching ? (
+            <Spinner />
+          ) : ( */}
           <Calendar
             handleDayClick={this.handleDayClick}
             handleNewPayDay={this.handleNewPayDay}

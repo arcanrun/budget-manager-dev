@@ -1,3 +1,11 @@
+.DayPicker {
+  width: 100%;
+}
+.DayPicker-Footer {
+  padding-top: 0.5em;
+  text-align: center;
+}
+
 .DayPicker-Caption > div {
   font-weight: 500;
   font-size: 1.15em;
@@ -65,14 +73,4 @@
   color: #ffffff;
   font-weight: 700;
   background-color: #0fde8c;
-}
-
-.pickle__footer {
-  text-align: center;
-  font-size: 25px;
-  font-weight: 200;
-  margin: auto;
-  max-width: 300px;
-  padding-top: 30px;
-  padding-bottom: 30px;
 }
