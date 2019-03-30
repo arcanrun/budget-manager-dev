@@ -17,22 +17,26 @@ type PROPS = {
   handleDayClick: Function,
   handleNewPayDay: Function,
   payday: string,
-  tempPayDay: ?string
+  tempPayDay: ?string,
+  daysToPayday: ?string
 };
 
 class Calendar extends React.Component<PROPS, {}> {
   render() {
-    const { handleDayClick, handleNewPayDay, payday, tempPayDay } = this.props;
-    const daysToPayday = Date.parse(payday) - Date.now();
+    const {
+      handleDayClick,
+      handleNewPayDay,
+      payday,
+      tempPayDay,
+      daysToPayday
+    } = this.props;
 
     const paydayEmptyTitle = <div>Выбирите дату получения зарплаты</div>;
     const counterBlock = (
       <div className={style.counterBlock}>
-        <div className={style.counter}>{msToDays(daysToPayday)}</div>
+        <div className={style.counter}>{daysToPayday}</div>
         <div className={style.counterBlockFooter}>
-          <div className={style.highlight}>
-            {addSuffix(msToDays(daysToPayday))}
-          </div>
+          <div className={style.highlight}>{addSuffix(daysToPayday)}</div>
           <div>до зарплаты</div>
         </div>
       </div>

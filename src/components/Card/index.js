@@ -8,8 +8,8 @@ import { Icon } from "../Icon";
 
 type PROPS = {
   children: React.Node,
-  headerTitle: string,
-  icon: string,
+  headerTitle?: string,
+  icon?: string,
   rightIcon?: string,
   onClick?: Function
 };
@@ -18,7 +18,7 @@ const Card = ({ children, headerTitle, icon, rightIcon, onClick }: PROPS) => (
   <div className={style.card}>
     <div className={style.header}>
       <div>
-        <Icon icon={icon} color="#B3B3B3" />
+        <Icon icon={icon || ""} color="#B3B3B3" />
         <span className={style.title}>{headerTitle}</span>
       </div>
       <div className={style.options} onClick={onClick}>

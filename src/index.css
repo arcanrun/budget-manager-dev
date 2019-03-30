@@ -8,6 +8,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #eaeff2;
 }
+#root {
+  padding-bottom: 50px;
+}
 #modal {
   position: relative;
   z-index: 1000;

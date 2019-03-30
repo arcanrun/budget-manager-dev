@@ -16,7 +16,9 @@ type PROPS = {
   payday: string,
   wholeBudget_isFetching: boolean,
   payday_isFetching: boolean,
-  modalIsVisible: boolean
+  modalIsVisible: boolean,
+  daysToPayday: string,
+  common: number
 };
 
 type STATE = {
@@ -30,6 +32,8 @@ class Manager extends React.Component<PROPS, STATE> {
   componentDidMount() {
     if (!this.props.wholeBudget) this.props.getWholeBudget();
     if (!this.props.payday) this.props.getPayDay();
+
+    this.calculation();
   }
   handleDayClick = (day: string, { selected }: { selected: boolean }) => {
     this.setState({
@@ -51,6 +55,13 @@ class Manager extends React.Component<PROPS, STATE> {
         console.log("btnType hmm...");
     }
   };
+  calculation = () => {
+    const budget = parseFloat(this.props.wholeBudget);
+    const common = budget * 0.5;
+    const fun = +budget * 0.3;
+    const invest = +budget * 0.2;
+    console.log(common, fun, invest);
+  };
   render() {
     const {
       modalIsVisible,
@@ -59,11 +70,13 @@ class Manager extends React.Component<PROPS, STATE> {
       wholeBudget,
       payday,
       wholeBudget_isFetching,
-      payday_isFetching
+      payday_isFetching,
+      daysToPayday,
+      common
     } = this.props;
     const { tempPayDay } = this.state;
     const overlay = <Overlay />;
-    const budgetCard = (
+    const wholeBudgetCard = (
       <Card
         headerTitle={"общий бюджет"}
         icon={"money-bag"}
@@ -85,6 +98,7 @@ class Manager extends React.Component<PROPS, STATE> {
           handleNewPayDay={this.handleNewPayDay}
           tempPayDay={tempPayDay}
           payday={payday}
+          daysToPayday={daysToPayday}
         />
       </Card>
     );
@@ -95,11 +109,29 @@ class Manager extends React.Component<PROPS, STATE> {
         {...this.props}
       />
     );
+    const dailyCommon = (common / +daysToPayday).toFixed(2);
+    const budgetCard50 = (
+      <Card>
+        <h1>50</h1>
+        <div>
+          <div>{common}</div>
+          <div>
+            {" "}
+            на сегодня: {dailyCommon} / <b>{dailyCommon}</b>
+          </div>
+          <div>
+            <button onClick={() => onClickToggleModal("plus")}>+</button>
+            <button onClick={() => onClickToggleModal("minus")}>-</button>
+          </div>
+        </div>
+      </Card>
+    );
     return (
       <>
-        {budgetCard}
+        {wholeBudgetCard}
         {calendarCard}
         {!modalIsVisible || modalOverlay}
+        {budgetCard50}
       </>
     );
   }

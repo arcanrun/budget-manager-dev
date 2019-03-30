@@ -13,6 +13,8 @@ import {
   GET_PAYDAY_REQUEST,
   GET_PAYDAY_SUCCESS
 } from "../constants";
+import { msToDays } from "../components/Calendar/calendarHelper";
+
 type UserState = {
   vk_id: number,
   avatar: string,
@@ -21,6 +23,7 @@ type UserState = {
   history?: Array<any>,
   wholeBudget?: Object,
   pay_day?: Object,
+  daysToPayday: ?number,
   calc?: {
     "50"?: number,
     "30"?: number,
@@ -48,6 +51,7 @@ export const initialState: UserState = {
     error: false,
     error_message: undefined
   },
+  daysToPayday: undefined,
   calc: {
     "50": undefined,
     "30": undefined,
@@ -77,6 +81,12 @@ export function user(state: UserState = initialState, action: Object) {
           ...state.wholeBudget,
           isFetching: action.payload.isFetching,
           budget: action.payload.budget
+        },
+        calc: {
+          ...state.calc,
+          "50": parseFloat(action.payload.budget) * 0.5,
+          "30": parseFloat(action.payload.budget) * 0.3,
+          "20": parseFloat(action.payload.budget) * 0.2
         }
       };
 
@@ -101,7 +111,8 @@ export function user(state: UserState = initialState, action: Object) {
           ...state.pay_day,
           isFetching: action.payload.isFetching,
           pay_day: action.payload.payday
-        }
+        },
+        daysToPayday: msToDays(Date.parse(action.payload.payday) - Date.now())
       };
     case ADD_PAYDAY_FAILURE:
     case GET_PAYDAY_FAILURE:

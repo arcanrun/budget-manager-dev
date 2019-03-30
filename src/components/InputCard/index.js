@@ -8,13 +8,11 @@ type PROPS = {
   onClick: Function,
   handleInput: Function,
   handleOK: Function,
-  title: string,
   isErrorValidation: boolean,
   typeModal: string
 };
 
 const InputCard = ({
-  title,
   isErrorValidation,
   typeModal,
   handleInput,
@@ -23,7 +21,11 @@ const InputCard = ({
 }: PROPS) => {
   return (
     <div className={style.card}>
-      <div className={style.title}>{title}</div>
+      <div className={style.title}>
+        {typeModal === "budget" ? "Введите бюджет" : ""}
+        {typeModal === "minus" ? "Расходы" : ""}
+        {typeModal === "plus" ? "Доходы" : ""}
+      </div>
       <input
         placeholder="00000.00"
         className={

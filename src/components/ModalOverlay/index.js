@@ -87,7 +87,6 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     const { isErrorValidation } = this.state;
     const budgetInputCard = (
       <InputCard
-        title={"Введите бюджет"}
         isErrorValidation={isErrorValidation}
         typeModal={typeModal}
         handleInput={this.handleInput}
