@@ -4,6 +4,7 @@ import { user, initialState } from "./user";
 import { successPayDay, successGetPayDay } from "../actions/paydayActions";
 import { successGetBudget } from "../actions/getBudgetActions";
 import { successAddWholeBudget } from "../actions/addBudgetActions";
+import { caclcToDayCOMMON } from "../actions/calcActions";
 
 describe("REDUCERS TESTING", () => {
   it("should return initial state", () => {
@@ -32,7 +33,7 @@ describe("REDUCERS TESTING", () => {
     const action = successPayDay(enteredDate);
     initialStateForTesting.pay_day.isFetching = false;
     initialStateForTesting.pay_day.pay_day = enteredDate;
-    initialStateForTesting.daysToPayday = "138";
+    initialStateForTesting.daysToPayday = "137";
     expect(user(initialState, action)).toEqual(initialStateForTesting);
   });
 
@@ -54,7 +55,15 @@ describe("REDUCERS TESTING", () => {
     const action = successGetPayDay(enteredDate);
     initialStateForTesting.pay_day.isFetching = false;
     initialStateForTesting.pay_day.pay_day = enteredDate;
-    initialStateForTesting.daysToPayday = "138";
+    initialStateForTesting.daysToPayday = "137";
+
+    expect(user(initialState, action)).toEqual(initialStateForTesting);
+  });
+  it("should retrun state with common costs for today", () => {
+    const initialStateForTesting = deepcopy(initialState);
+    const action = caclcToDayCOMMON(1500);
+    initialStateForTesting.calc.M50.temp = 1500;
+    initialStateForTesting.calc.M50.value = 1500;
 
     expect(user(initialState, action)).toEqual(initialStateForTesting);
   });

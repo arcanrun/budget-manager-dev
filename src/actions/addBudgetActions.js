@@ -19,7 +19,7 @@ export const successAddWholeBudget = (budget: number) => ({
     isFetching: false
   }
 });
-const failuretAddWholeBudget = message => ({
+export const failuretAddWholeBudget = (message: string) => ({
   type: ADD_BUDGET_FAILURE,
   error: {
     isFetching: false,
@@ -28,12 +28,16 @@ const failuretAddWholeBudget = message => ({
   }
 });
 
-export const addWholeBudget = (budget: number) => {
+export const addWholeBudget = (
+  budget: number,
+  operation: string,
+  daysToPayday: number
+) => {
   return (dispatch: Function) => {
     dispatch(requestAddWholeBudget());
     fetch(API.ADD_BUDGET, {
       method: "POST",
-      body: JSON.stringify({ vk_id: "123456", budget })
+      body: JSON.stringify({ vk_id: "123456", budget, operation, daysToPayday })
     })
       .then(res => res.json())
       .then(res => {

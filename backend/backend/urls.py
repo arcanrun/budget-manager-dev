@@ -24,4 +24,6 @@ urlpatterns = [
     path('add-payday/', views.add_payday),
     path('get-budget/', views.get_budget),
     path('get-payday/', views.get_payday),
+    path('max-cost-to-day/', views.max_cost_to_day),
+    path('max-cost-to-day-calc/', views.max_cost_to_day_calc),
 ]

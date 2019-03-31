@@ -24,13 +24,7 @@ type UserState = {
   wholeBudget?: Object,
   pay_day?: Object,
   daysToPayday: ?number,
-  calc?: {
-    "50"?: number,
-    "30"?: number,
-    "20"?: number,
-    M50?: number,
-    M30?: number
-  }
+  calc?: Object
 };
 
 export const initialState: UserState = {
@@ -56,7 +50,10 @@ export const initialState: UserState = {
     "50": undefined,
     "30": undefined,
     "20": undefined,
-    M50: undefined,
+    M50: {
+      temp: undefined,
+      value: undefined
+    },
     M30: undefined
   }
 };
@@ -117,6 +114,42 @@ export function user(state: UserState = initialState, action: Object) {
     case ADD_PAYDAY_FAILURE:
     case GET_PAYDAY_FAILURE:
       return { ...state, pay_day: action.payload };
+
+    case "CALC_TODAY_COMMON":
+      const money = action.payload.money;
+      return {
+        ...state,
+        calc: {
+          ...state.calc,
+          M50: {
+            ...state.calc.M50,
+            value: money,
+            temp: money
+          }
+        }
+      };
+    case "MINUS_TODAY_COMMON":
+      return {
+        ...state,
+        calc: {
+          ...state.calc,
+          M50: {
+            ...state.calc.M50,
+            temp: +state.calc.M50.temp - action.payload.money
+          }
+        }
+      };
+    case "PLUS_TODAY_COMMON":
+      return {
+        ...state,
+        calc: {
+          ...state.calc,
+          M50: {
+            ...state.calc.M50,
+            temp: +state.calc.M50.temp + +action.payload.money
+          }
+        }
+      };
     default:
       return state;
   }

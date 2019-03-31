@@ -23,11 +23,11 @@ const InputCard = ({
     <div className={style.card}>
       <div className={style.title}>
         {typeModal === "budget" ? "Введите бюджет" : ""}
-        {typeModal === "minus" ? "Расходы" : ""}
-        {typeModal === "plus" ? "Доходы" : ""}
+        {typeModal.includes("minus") ? "Расходы" : ""}
+        {typeModal.includes("plus") ? "Доходы" : ""}
       </div>
       <input
-        placeholder="00000.00"
+        placeholder="0000.00"
         className={
           isErrorValidation
             ? [style.cardInputError, style.cardInput].join(" ")

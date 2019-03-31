@@ -15,6 +15,7 @@ import { Spinner } from "./Spinner";
 import { Calendar } from "./Calendar";
 import { Overlay } from "./Overlay";
 import { InputCard } from "./InputCard";
+import { PartBudget } from "./PartBudget";
 export {
   Header,
   Menu,
@@ -31,5 +32,6 @@ export {
   Spinner,
   Calendar,
   Overlay,
-  InputCard
+  InputCard,
+  PartBudget
 };

@@ -8,9 +8,14 @@ import { InputCard } from "../index";
 
 type PROPS = {
   onClick: Function,
-  typeModal: string,
   addWholeBudget: Function,
-  addPayDay: Function
+  addPayDay: Function,
+  plusToDayCOMMON: Function,
+  minusToDayCOMMON: Function,
+  caclcToDayCOMMON: Function,
+  typeModal: string,
+  common: number,
+  daysToPayday: string
 };
 
 type STATE = {
@@ -35,6 +40,8 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
 
     switch (typeModal) {
       case "budget":
+      case "common_minus":
+      case "common_plus":
         if (val && !isNaN(val)) {
           return true;
         } else if (isNaN(val)) {
@@ -51,16 +58,29 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
   handleOK = () => {
     const inputVal = this.state.inputValue;
     const { typeModal } = this.props;
-
+    const daysToPayday = this.props.daysToPayday || "";
     if (this.validate(typeModal)) {
       this.props.onClick(typeModal);
       switch (typeModal) {
         case "budget":
-          this.props.addWholeBudget(inputVal);
+          const type = daysToPayday ? "change" : "add";
+          console.log(type);
+          this.props.addWholeBudget(inputVal, type, daysToPayday);
+
           break;
         case "payday":
           this.props.addPayDay(inputVal);
           break;
+
+        case "common_minus":
+          this.props.addWholeBudget(inputVal, "-", daysToPayday);
+          this.props.minusToDayCOMMON(inputVal, "123456", "common", "-");
+          break;
+        case "common_plus":
+          this.props.addWholeBudget(inputVal, "+", daysToPayday);
+          this.props.plusToDayCOMMON(inputVal);
+          break;
+
         default:
           console.log("MISSING DISPATCHER FOR TYPE:", typeModal);
           break;
