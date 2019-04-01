@@ -10,7 +10,7 @@ import {
   getWholeBudget,
   getPayDay,
   calcToDayCosts,
-
+  getAllCosts
 } from "../actions/";
 
 const mapStateToProps = state => ({
@@ -21,7 +21,7 @@ const mapStateToProps = state => ({
   wholeBudget_isFetching: state.user.wholeBudget.isFetching,
   payday_isFetching: state.user.pay_day.isFetching,
   daysToPayday: state.user.daysToPayday,
- 
+
   vk_id: state.user.vk_id
 });
 
@@ -33,6 +33,7 @@ export const ManagerContainer = connect(
     addPayDay,
     getWholeBudget,
     getPayDay,
-    calcToDayCosts
+    calcToDayCosts,
+    getAllCosts
   }
 )(Manager);

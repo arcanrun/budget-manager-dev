@@ -1,2 +1,0 @@
-export const CALC_TODAY_COMMON = "CALC_TODAY_COMMON";
-export const CALC_TODAY_FUN = "CALC_TODAY_FUN";

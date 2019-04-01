@@ -47,7 +47,7 @@ class PartBudget extends React.Component<PROPS, STATE> {
     })
       .then(res => res.json())
       .then(res => {
-        console.log("11111", res);
+        console.log("PartBudget:", res);
         this.setState({ money: res.money, temp: res.temp });
         return res;
       })

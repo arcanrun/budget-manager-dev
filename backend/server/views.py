@@ -7,8 +7,15 @@ from .models import Vkuser
 
 import json
 
-maxForTodayPattern = json.dumps({"daysToPayday": "",
-                                 "money": "", "temp": "", "budget": ""})
+costsPattern = json.dumps({"value": "",
+                           "maxToday":
+                           {
+                               "value": "",
+                               "temp": "",
+                           },
+                           "budget": "",
+                           "daysToPayday": ""
+                           })
 
 
 def add_budget(request):
@@ -34,7 +41,7 @@ def add_budget(request):
                 return JsonResponse(response)
 
         user = Vkuser(id_vk=vk_id, budget=budget,
-                      max_for_today_common=maxForTodayPattern, max_for_today_fun=maxForTodayPattern)
+                      common=costsPattern, fun=costsPattern, invest=costsPattern)
         user.save()
 
         response['RESPONSE'] = 'ADDED_SUCCESS'
@@ -50,15 +57,15 @@ def add_budget(request):
                 Vkuser.objects.filter(id_vk=vk_id).update(
                     budget=budget)
 
-                maxCommonObject = json.loads(field.max_for_today_common)
+                maxCommonObject = json.loads(field.common)
                 maxCommonObject["daysToPayday"] = daysToPayday
-                maxCommonObject["money"] = round((
+                maxCommonObject["maxToday"]["value"] = round((
                     float(budget) * 0.5) / int(daysToPayday), 2)
-                maxCommonObject["temp"] = maxCommonObject["money"]
+                maxCommonObject["maxToday"]["temp"] = maxCommonObject["maxToday"]["value"]
                 maxCommonObject['budget'] = budget
                 maxCommonObjectJSON = json.dumps(maxCommonObject)
                 Vkuser.objects.filter(id_vk=vk_id).update(
-                    max_for_today_common=maxCommonObjectJSON)
+                    common=maxCommonObjectJSON)
 
                 response['RESPONSE'] = 'UPDATED_SUCCESS'
                 response['PAYLOAD'] = budget
@@ -148,7 +155,7 @@ def add_payday(request):
             return JsonResponse(response)
 
     user = Vkuser(id_vk=vk_id,
-                  pay_day=pay_day, max_for_today_common=maxForTodayPattern, max_for_today_fun=maxForTodayPattern)
+                  pay_day=pay_day, common=costsPattern, fun=costsPattern, invest=costsPattern)
     user.save()
 
     response['RESPONSE'] = 'ADDED_SUCCESS'
@@ -179,6 +186,8 @@ def get_payday(request):
     print('[add_budget:RESPONSE]-->', response)
     return JsonResponse(response)
 
+# get all calc
+
 
 def max_cost_to_day(request):
     req = json.loads(str(request.body, encoding='utf-8'))
@@ -192,16 +201,16 @@ def max_cost_to_day(request):
     all_users = Vkuser.objects.all()
     for field in all_users:
         if (vk_id == field.id_vk):
-            maxCommonObject = json.loads(field.max_for_today_common)
+            maxCommonObject = json.loads(field.common)
             if (not maxCommonObject["daysToPayday"] == daysToPayday):
                 maxCommonObject["daysToPayday"] = daysToPayday
-                maxCommonObject["money"] = round((
+                maxCommonObject['maxToday']["value"] = round((
                     float(budget) * 0.5) / int(daysToPayday), 2)
-                maxCommonObject["temp"] = maxCommonObject["money"]
+                maxCommonObject['maxToday']["temp"] = maxCommonObject['maxToday']["value"]
                 maxCommonObject['budget'] = budget
                 maxCommonObjectJSON = json.dumps(maxCommonObject)
                 Vkuser.objects.filter(id_vk=vk_id).update(
-                    max_for_today_common=maxCommonObjectJSON)
+                    common=maxCommonObjectJSON)
             # pay_day = field.pay_day
             # budget = float(field.budget)
             break
@@ -210,6 +219,8 @@ def max_cost_to_day(request):
 
     print('====>', maxCommonObject)
     return JsonResponse(maxCommonObject)
+
+# make operation
 
 
 def max_cost_to_day_calc(request):
@@ -227,19 +238,19 @@ def max_cost_to_day_calc(request):
     if typeCost == 'common':
         for field in all_users:
             if (vk_id == field.id_vk):
-                maxCommonObject = json.loads(field.max_for_today_common)
+                maxCommonObject = json.loads(field.common)
                 if (operation == '-'):
-                    maxCommonObject["temp"] = round(maxCommonObject["temp"] -
-                                                    float(money), 2)
+                    maxCommonObject['maxToday']["temp"] = round(maxCommonObject['maxToday']["temp"] -
+                                                                float(money), 2)
                     maxCommonObjectJSON = json.dumps(maxCommonObject)
                     Vkuser.objects.filter(id_vk=vk_id).update(
-                        max_for_today_common=maxCommonObjectJSON)
+                        common=maxCommonObjectJSON)
                 if (operation == '+'):
-                    maxCommonObject["temp"] = round(maxCommonObject["temp"] +
-                                                    float(money), 2)
+                    maxCommonObject['maxToday']["temp"] = round(maxCommonObject['maxToday']["temp"] +
+                                                                float(money), 2)
                     maxCommonObjectJSON = json.dumps(maxCommonObject)
                     Vkuser.objects.filter(id_vk=vk_id).update(
-                        max_for_today_common=maxCommonObjectJSON)
+                        common=maxCommonObjectJSON)
 
                 break
 
@@ -250,3 +261,23 @@ def max_cost_to_day_calc(request):
     elif typeCost == 'fun':
         maxCommonObject = 'EMPTY'
         return JsonResponse(maxCommonObject)
+
+
+def get_costs_all(request):
+    req = json.loads(str(request.body, encoding='utf-8'))
+    print('[add_budget:RECIVED]-->', req)
+    response = {'RESPONSE': 'ERROR', 'PAYLOAD': {
+        'common:': '', 'fun': '', 'invest': ''}}
+    vk_id = str(req['vk_id'])
+
+    all_users = Vkuser.objects.all()
+    for field in all_users:
+        if (vk_id == field.id_vk):
+            response['PAYLOAD']['common'] = json.loads(field.common)
+            response['PAYLOAD']['fun'] = json.loads(field.fun)
+            response['PAYLOAD']['invest'] = json.loads(field.invest)
+            response['RESPONSE'] = 'SUCCES_FETCHED'
+            return JsonResponse(response)
+            break
+
+    return JsonResponse(response)

@@ -1,5 +1,5 @@
 //@flow
-import { CALC_TODAY_COMMON, CALC_TODAY_FUN } from "../constants/calcTypes";
+import { CALC_TODAY_COMMON, CALC_TODAY_FUN } from "../constants/costsTypes";
 
 export const calcToDayCosts = (
   money: string,
@@ -24,7 +24,7 @@ export const calcToDayCosts = (
     })
       .then(res => res.json)
       .then(res => {
-        console.log(res);
+        console.log("", res);
         dispatch({
           type: "CALC_TODAY_COSTS_SUCCESS",
           payload: res.temp

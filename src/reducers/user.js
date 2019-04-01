@@ -11,7 +11,10 @@ import {
   GET_BUDGET_FAILURE,
   GET_PAYDAY_FAILURE,
   GET_PAYDAY_REQUEST,
-  GET_PAYDAY_SUCCESS
+  GET_PAYDAY_SUCCESS,
+  GET_ALL_COSTS_FAILURE,
+  GET_ALL_COSTS_SUCCESS,
+  GET_ALL_COSTS_REQUEST
 } from "../constants";
 import { msToDays } from "../components/Calendar/calendarHelper";
 
@@ -24,7 +27,7 @@ type UserState = {
   wholeBudget?: Object,
   pay_day?: Object,
   daysToPayday: ?number,
-  calc?: Object
+  calc?: any
 };
 
 export const initialState: UserState = {
@@ -46,7 +49,32 @@ export const initialState: UserState = {
     error_message: undefined
   },
   daysToPayday: undefined,
- 
+  calc: {
+    calcIsFetching: false,
+    error: false,
+    error_message: undefined,
+    common: {
+      value: undefined,
+      maxToday: {
+        value: undefined,
+        temp: undefined
+      }
+    },
+    fun: {
+      value: undefined,
+      maxToday: {
+        value: undefined,
+        temp: undefined
+      }
+    },
+    invest: {
+      value: undefined,
+      maxToday: {
+        value: undefined,
+        temp: undefined
+      }
+    }
+  }
 };
 
 export function user(state: UserState = initialState, action: Object) {
@@ -69,8 +97,7 @@ export function user(state: UserState = initialState, action: Object) {
           ...state.wholeBudget,
           isFetching: action.payload.isFetching,
           budget: action.payload.budget
-        },
-       
+        }
       };
 
     case ADD_BUDGET_FAILURE:
@@ -101,7 +128,64 @@ export function user(state: UserState = initialState, action: Object) {
     case GET_PAYDAY_FAILURE:
       return { ...state, pay_day: action.payload };
 
-    
+    case GET_ALL_COSTS_REQUEST:
+      return {
+        ...state,
+        calc: {
+          ...state.calc,
+          isFetching: true,
+          error: false,
+          error_message: undefined
+        }
+      };
+    case GET_ALL_COSTS_FAILURE:
+      return {
+        ...state,
+        calc: {
+          ...state.calc,
+          isFetching: false,
+          error: true,
+          error_message: action.error.message
+        }
+      };
+    case GET_ALL_COSTS_SUCCESS:
+      return {
+        ...state,
+        calc: {
+          ...state.calc,
+          isFetching: false,
+          error: false,
+          error_message: undefined,
+          common: {
+            ...state.calc.common,
+            value: action.payload.costs.common.value,
+            maxToday: {
+              ...state.calc.common.maxToday,
+              value: action.payload.costs.common.maxToday.value,
+              temp: action.payload.costs.common.maxToday.temp
+            }
+          },
+          fun: {
+            ...state.calc.fun,
+            value: action.payload.costs.fun.value,
+            maxToday: {
+              ...state.calc.fun.maxToday,
+              value: action.payload.costs.fun.maxToday.value,
+              temp: action.payload.costs.fun.maxToday.temp
+            }
+          },
+          invest: {
+            ...state.calc.invest,
+            value: action.payload.costs.invest.value,
+            maxToday: {
+              ...state.calc.invest.maxToday,
+              value: action.payload.costs.invest.maxToday.value,
+              temp: action.payload.costs.invest.maxToday.temp
+            }
+          }
+        }
+      };
+
     default:
       return state;
   }

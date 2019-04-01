@@ -4,6 +4,7 @@ import React from "react";
 import { Card, Overlay } from "../index";
 import { ModalOverlay, WholeBudget, Calendar, PartBudget } from "../index";
 import style from "./Manager.module.css";
+import { getAllCosts } from "../../actions";
 
 type PROPS = {
   getWholeBudget: Function,
@@ -12,6 +13,7 @@ type PROPS = {
   addPayDay: Function,
   getPayDay: Function,
   calcToDayCosts: Function,
+  getAllCosts: Function,
   typeModal: string,
   wholeBudget: number,
   payday: string,
@@ -44,16 +46,11 @@ class Manager extends React.Component<PROPS, STATE> {
   }
 
   componentDidUpdate(prevProps: Object, prevState: Object) {
-    if (
-      prevProps.wholeBudget !== this.props.wholeBudget ||
-      prevProps.payday !== this.props.payday
-    ) {
-      if (this.props.wholeBudget && this.props.payday)
-        console.log(
-          "[[][][][][][][]]",
-          this.props.payday,
-          this.props.wholeBudget
-        );
+    const budget = this.props.wholeBudget;
+    const payday = this.props.payday;
+    const vk_id = this.props.vk_id;
+    if (prevProps.wholeBudget !== budget || prevProps.payday !== payday) {
+      if (budget && payday && vk_id) this.props.getAllCosts(vk_id);
     }
   }
 
