@@ -1,29 +1,16 @@
 //@flow
 import { CALC_TODAY_COMMON, CALC_TODAY_FUN } from "../constants/calcTypes";
 
-export const caclcToDayCOMMON = (money: number) => ({
-  type: CALC_TODAY_COMMON,
-  payload: {
-    money
-  }
-});
-
-export const plusToDayCOMMON = (money: string) => ({
-  type: "PLUS_TODAY_COMMON",
-  payload: {
-    money
-  }
-});
-
-export const minusToDayCOMMON = (
+export const calcToDayCosts = (
   money: string,
   vk_id: string,
   type: string,
-  operation: string
+  operation: string,
+  budget: number
 ) => {
   return (dispatch: any) => {
     dispatch({
-      type: "CALC_TODAY_COMMON_REQUEST"
+      type: "CALC_TODAY_COSTS_REQUEST"
     });
     fetch("http://127.0.0.1:8000/max-cost-to-day-calc/", {
       method: "POST",
@@ -31,14 +18,15 @@ export const minusToDayCOMMON = (
         vk_id,
         money,
         type,
-        operation
+        operation,
+        budget
       })
     })
       .then(res => res.json)
       .then(res => {
         console.log(res);
         dispatch({
-          type: "CALC_TODAY_COMMON_SUCCESS",
+          type: "CALC_TODAY_COSTS_SUCCESS",
           payload: res.temp
         });
         return res;
@@ -46,7 +34,7 @@ export const minusToDayCOMMON = (
       .catch(err => {
         console.log(Error(err));
         dispatch({
-          type: "CALC_TODAY_COMMON_ERROR"
+          type: "CALC_TODAY_COSTS_ERROR"
         });
       });
   };

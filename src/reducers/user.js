@@ -46,16 +46,7 @@ export const initialState: UserState = {
     error_message: undefined
   },
   daysToPayday: undefined,
-  calc: {
-    "50": undefined,
-    "30": undefined,
-    "20": undefined,
-    M50: {
-      temp: undefined,
-      value: undefined
-    },
-    M30: undefined
-  }
+ 
 };
 
 export function user(state: UserState = initialState, action: Object) {
@@ -79,12 +70,7 @@ export function user(state: UserState = initialState, action: Object) {
           isFetching: action.payload.isFetching,
           budget: action.payload.budget
         },
-        calc: {
-          ...state.calc,
-          "50": parseFloat(action.payload.budget) * 0.5,
-          "30": parseFloat(action.payload.budget) * 0.3,
-          "20": parseFloat(action.payload.budget) * 0.2
-        }
+       
       };
 
     case ADD_BUDGET_FAILURE:
@@ -115,41 +101,7 @@ export function user(state: UserState = initialState, action: Object) {
     case GET_PAYDAY_FAILURE:
       return { ...state, pay_day: action.payload };
 
-    case "CALC_TODAY_COMMON":
-      const money = action.payload.money;
-      return {
-        ...state,
-        calc: {
-          ...state.calc,
-          M50: {
-            ...state.calc.M50,
-            value: money,
-            temp: money
-          }
-        }
-      };
-    case "MINUS_TODAY_COMMON":
-      return {
-        ...state,
-        calc: {
-          ...state.calc,
-          M50: {
-            ...state.calc.M50,
-            temp: +state.calc.M50.temp - action.payload.money
-          }
-        }
-      };
-    case "PLUS_TODAY_COMMON":
-      return {
-        ...state,
-        calc: {
-          ...state.calc,
-          M50: {
-            ...state.calc.M50,
-            temp: +state.calc.M50.temp + +action.payload.money
-          }
-        }
-      };
+    
     default:
       return state;
   }

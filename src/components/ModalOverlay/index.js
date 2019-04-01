@@ -5,17 +5,16 @@ import ReactDOM from "react-dom";
 
 import "./style.css";
 import { InputCard } from "../index";
+import { WholeBudget } from "../WholeBudget";
 
 type PROPS = {
   onClick: Function,
   addWholeBudget: Function,
   addPayDay: Function,
-  plusToDayCOMMON: Function,
-  minusToDayCOMMON: Function,
-  caclcToDayCOMMON: Function,
+  calcToDayCosts: Function,
   typeModal: string,
-  common: number,
-  daysToPayday: string
+  daysToPayday: string,
+  wholeBudget: number
 };
 
 type STATE = {
@@ -58,12 +57,14 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
   handleOK = () => {
     const inputVal = this.state.inputValue;
     const { typeModal } = this.props;
-    const daysToPayday = this.props.daysToPayday || "";
+    const daysToPayday = this.props.daysToPayday;
+    const wholeBudget = this.props.wholeBudget;
+
     if (this.validate(typeModal)) {
       this.props.onClick(typeModal);
       switch (typeModal) {
         case "budget":
-          const type = daysToPayday ? "change" : "add";
+          const type = wholeBudget ? "change" : "add";
           console.log(type);
           this.props.addWholeBudget(inputVal, type, daysToPayday);
 
@@ -74,11 +75,18 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
 
         case "common_minus":
           this.props.addWholeBudget(inputVal, "-", daysToPayday);
-          this.props.minusToDayCOMMON(inputVal, "123456", "common", "-");
+          console.log(this.props.wholeBudget);
+          this.props.calcToDayCosts(
+            inputVal,
+            "123456",
+            "common",
+            "-",
+            this.props.wholeBudget
+          );
           break;
         case "common_plus":
           this.props.addWholeBudget(inputVal, "+", daysToPayday);
-          this.props.plusToDayCOMMON(inputVal);
+          this.props.calcToDayCosts(inputVal, "123456", "common", "+");
           break;
 
         default:

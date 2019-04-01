@@ -7,6 +7,9 @@ from .models import Vkuser
 
 import json
 
+maxForTodayPattern = json.dumps({"daysToPayday": "",
+                                 "money": "", "temp": "", "budget": ""})
+
 
 def add_budget(request):
     req = json.loads(str(request.body, encoding='utf-8'))
@@ -16,12 +19,12 @@ def add_budget(request):
     vk_id = str(req['vk_id'])
     budget = str(req['budget'])
     operation = str(req['operation'])
-    daysToPayday = int(req['daysToPayday'])
+    daysToPayday = req['daysToPayday']
     all_users = Vkuser.objects.all()
 
     if operation == 'add':
         for field in all_users:
-            if (vk_id == field.id_vk):
+            if (vk_id == str(field.id_vk)):
                 Vkuser.objects.filter(id_vk=vk_id).update(
                     budget=budget)
 
@@ -30,15 +33,15 @@ def add_budget(request):
                 print('[add_budget:RESPONSE]-->', response)
                 return JsonResponse(response)
 
-            user = Vkuser(id_vk=vk_id,
-                          budget=budget)
-            user.save()
+        user = Vkuser(id_vk=vk_id, budget=budget,
+                      max_for_today_common=maxForTodayPattern, max_for_today_fun=maxForTodayPattern)
+        user.save()
 
-            response['RESPONSE'] = 'ADDED_SUCCESS'
-            response['PAYLOAD'] = budget
-            print('[add_budget:RESPONSE]-->', response)
+        response['RESPONSE'] = 'ADDED_SUCCESS'
+        response['PAYLOAD'] = budget
+        print('[add_budget:RESPONSE]-->', response)
 
-            return JsonResponse(response)
+        return JsonResponse(response)
 
     if operation == 'change':
         maxCommonObject = 'EMPTY'
@@ -62,15 +65,15 @@ def add_budget(request):
                 print('[add_budget:RESPONSE]-->', response)
                 return JsonResponse(response)
 
-            user = Vkuser(id_vk=vk_id,
-                          budget=budget)
-            user.save()
+        user = Vkuser(id_vk=vk_id,
+                      budget=budget)
+        user.save()
 
-            response['RESPONSE'] = 'ADDED_SUCCESS'
-            response['PAYLOAD'] = budget
-            print('[add_budget:RESPONSE]-->', response)
+        response['RESPONSE'] = 'ADDED_SUCCESS'
+        response['PAYLOAD'] = budget
+        print('[add_budget:RESPONSE]-->', response)
 
-            return JsonResponse(response)
+        return JsonResponse(response)
     elif operation == '+':
         for field in all_users:
             if (vk_id == field.id_vk):
@@ -145,7 +148,7 @@ def add_payday(request):
             return JsonResponse(response)
 
     user = Vkuser(id_vk=vk_id,
-                  pay_day=pay_day)
+                  pay_day=pay_day, max_for_today_common=maxForTodayPattern, max_for_today_fun=maxForTodayPattern)
     user.save()
 
     response['RESPONSE'] = 'ADDED_SUCCESS'
@@ -217,24 +220,33 @@ def max_cost_to_day_calc(request):
     money = req['money']
     typeCost = req['type']
     operation = req['operation']
-
+    budget = req['budget']
     maxCommonObject = 'EMPTY'
     all_users = Vkuser.objects.all()
 
-    for field in all_users:
-        if (vk_id == field.id_vk):
-            maxCommonObject = json.loads(field.max_for_today_common)
-            if (operation == '-'):
-                maxCommonObject["temp"] = round(maxCommonObject["temp"] -
-                                                float(money), 2)
-                maxCommonObjectJSON = json.dumps(maxCommonObject)
-                Vkuser.objects.filter(id_vk=vk_id).update(
-                    max_for_today_common=maxCommonObjectJSON)
-            # pay_day = field.pay_day
-            # budget = float(field.budget)
-            break
+    if typeCost == 'common':
+        for field in all_users:
+            if (vk_id == field.id_vk):
+                maxCommonObject = json.loads(field.max_for_today_common)
+                if (operation == '-'):
+                    maxCommonObject["temp"] = round(maxCommonObject["temp"] -
+                                                    float(money), 2)
+                    maxCommonObjectJSON = json.dumps(maxCommonObject)
+                    Vkuser.objects.filter(id_vk=vk_id).update(
+                        max_for_today_common=maxCommonObjectJSON)
+                if (operation == '+'):
+                    maxCommonObject["temp"] = round(maxCommonObject["temp"] +
+                                                    float(money), 2)
+                    maxCommonObjectJSON = json.dumps(maxCommonObject)
+                    Vkuser.objects.filter(id_vk=vk_id).update(
+                        max_for_today_common=maxCommonObjectJSON)
 
-    # money=(budget*0.5) / (pay_day - today)
+                break
 
-    print('====>', maxCommonObject)
-    return JsonResponse(maxCommonObject)
+        # money=(budget*0.5) / (pay_day - today)
+
+        print('====>', maxCommonObject)
+        return JsonResponse(maxCommonObject)
+    elif typeCost == 'fun':
+        maxCommonObject = 'EMPTY'
+        return JsonResponse(maxCommonObject)

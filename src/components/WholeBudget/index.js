@@ -10,12 +10,12 @@ type PROPS = {
 };
 const WholeBudget = ({ wholeBudget, onClick }: PROPS) => (
   <div className={style.budgetBlock}>
-    {(
+    {wholeBudget ? (
       <div className={style.budget}>
         {wholeBudget}
         <b className={style.volute}>₽</b>
       </div>
-    ) || (
+    ) : (
       <span className={style.enter} onClick={onClick}>
         Введите ваш текущий бюджет
       </span>

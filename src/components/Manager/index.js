@@ -4,7 +4,6 @@ import React from "react";
 import { Card, Overlay } from "../index";
 import { ModalOverlay, WholeBudget, Calendar, PartBudget } from "../index";
 import style from "./Manager.module.css";
-import { minusToDayCOMMON, plusToDayCOMMON } from "../../actions";
 
 type PROPS = {
   getWholeBudget: Function,
@@ -12,9 +11,7 @@ type PROPS = {
   addWholeBudget: Function,
   addPayDay: Function,
   getPayDay: Function,
-  caclcToDayCOMMON: Function,
-  minusToDayCOMMON: Function,
-  plusToDayCOMMON: Function,
+  calcToDayCosts: Function,
   typeModal: string,
   wholeBudget: number,
   payday: string,
@@ -22,8 +19,6 @@ type PROPS = {
   payday_isFetching: boolean,
   modalIsVisible: boolean,
   daysToPayday: string,
-  common: number,
-  M50: Object,
   vk_id: number
 };
 
@@ -43,7 +38,25 @@ class Manager extends React.Component<PROPS, STATE> {
     if (!wholeBudget) this.props.getWholeBudget();
     if (!payday) this.props.getPayDay();
     // this.calculation();
+    wholeBudget
+      ? console.log("********", wholeBudget)
+      : console.log("*******", "EMPTY");
   }
+
+  componentDidUpdate(prevProps: Object, prevState: Object) {
+    if (
+      prevProps.wholeBudget !== this.props.wholeBudget ||
+      prevProps.payday !== this.props.payday
+    ) {
+      if (this.props.wholeBudget && this.props.payday)
+        console.log(
+          "[[][][][][][][]]",
+          this.props.payday,
+          this.props.wholeBudget
+        );
+    }
+  }
+
   handleDayClick = (day: string, { selected }: { selected: boolean }) => {
     this.setState({
       tempPayDay: selected ? undefined : day
@@ -64,19 +77,7 @@ class Manager extends React.Component<PROPS, STATE> {
         console.log("btnType hmm...");
     }
   };
-  calculation = () => {
-    const wholeBudget = this.props.wholeBudget;
-    const payday = this.props.payday;
 
-    if (wholeBudget && payday) {
-      const commonForToday = this.props.common / +this.props.daysToPayday;
-
-      console.log(commonForToday);
-      this.props.caclcToDayCOMMON(commonForToday);
-    } else {
-      console.log("NOPE!");
-    }
-  };
   render() {
     const {
       modalIsVisible,
@@ -87,9 +88,7 @@ class Manager extends React.Component<PROPS, STATE> {
       wholeBudget_isFetching,
       payday_isFetching,
       daysToPayday,
-      common,
-      caclcToDayCOMMON,
-      M50,
+      calcToDayCosts,
       vk_id
     } = this.props;
     const { tempPayDay } = this.state;
@@ -130,12 +129,20 @@ class Manager extends React.Component<PROPS, STATE> {
     const budgetCard50 = (
       <Card>
         <PartBudget
-          caclcToDay={caclcToDayCOMMON}
           onClickToggleModal={onClickToggleModal}
-          common={common}
           daysToPayday={daysToPayday}
           typeModal={"common"}
-          todaysCosts={M50}
+          wholeBudget={wholeBudget}
+          vk_id={vk_id}
+        />
+      </Card>
+    );
+    const budgetCard30 = (
+      <Card>
+        <PartBudget
+          onClickToggleModal={onClickToggleModal}
+          daysToPayday={daysToPayday}
+          typeModal={"fun"}
           wholeBudget={wholeBudget}
           vk_id={vk_id}
         />
@@ -146,6 +153,7 @@ class Manager extends React.Component<PROPS, STATE> {
         {wholeBudgetCard}
         {calendarCard}
         {wholeBudget && payday ? budgetCard50 : ""}
+        {wholeBudget && payday ? budgetCard30 : ""}
         {!modalIsVisible || modalOverlay}
       </>
     );
