@@ -34,15 +34,13 @@ class Manager extends React.Component<PROPS, STATE> {
   };
 
   componentDidMount() {
-    const wholeBudget = this.props.wholeBudget;
+    const budget = this.props.wholeBudget;
     const payday = this.props.payday;
+    const vk_id = this.props.vk_id;
 
-    if (!wholeBudget) this.props.getWholeBudget();
+    if (!budget) this.props.getWholeBudget();
     if (!payday) this.props.getPayDay();
-    // this.calculation();
-    wholeBudget
-      ? console.log("********", wholeBudget)
-      : console.log("*******", "EMPTY");
+    if (budget && payday && vk_id) this.props.getAllCosts(vk_id);
   }
 
   componentDidUpdate(prevProps: Object, prevState: Object) {
