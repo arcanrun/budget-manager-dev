@@ -64,7 +64,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
       this.props.onClick(typeModal);
       switch (typeModal) {
         case "budget":
-          const type = wholeBudget ? "change" : "add";
+          const type = "change";
           console.log(type);
           this.props.addWholeBudget(inputVal, type, daysToPayday);
 

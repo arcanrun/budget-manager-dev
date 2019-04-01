@@ -145,7 +145,7 @@ class Manager extends React.Component<PROPS, STATE> {
     );
     return (
       <>
-        {wholeBudgetCard}
+        {payday ? wholeBudgetCard : ""}
         {calendarCard}
         {wholeBudget && payday ? budgetCard50 : ""}
         {wholeBudget && payday ? budgetCard30 : ""}
