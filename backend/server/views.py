@@ -30,7 +30,6 @@ def add_budget(request):
     all_users = Vkuser.objects.all()
 
     if operation == 'change':
-        maxCommonObject = 'EMPTY'
         for field in all_users:
             if (vk_id == field.id_vk):
                 Vkuser.objects.filter(id_vk=vk_id).update(
@@ -187,65 +186,11 @@ def get_payday(request):
     print('[add_budget:RESPONSE]-->', response)
     return JsonResponse(response)
 
-# get all calc
-
-
-def max_cost_to_day(request):
-    req = json.loads(str(request.body, encoding='utf-8'))
-    print('[add_budget:RECIVED]-->', req)
-    response = {'RESPONSE': 'ERROR', 'PAYLOAD': ''}
-    vk_id = str(req['vk_id'])
-    budget = req['budget']
-    typeCost = req['type']
-    daysToPayday = int(req['daysToPayday'])
-    
-
-    all_users = Vkuser.objects.all()
-    for field in all_users:
-        if (vk_id == field.id_vk):
-            commonObject = json.loads(field.common)
-            funObject = json.loads(field.common)
-            investObject = json.loads(field.common)
-            
-            if (commonObject["daysToPayday"] != daysToPayday):
-                commonObject["daysToPayday"] = daysToPayday
-                funObject["daysToPayday"] = daysToPayday
-                investObject["daysToPayday"] = daysToPayday
-
-                commonObject['maxToday']["value"] = round((
-                    float(budget) * 0.5) / int(daysToPayday), 2)
-                commonObject['maxToday']["temp"] = commonObject['maxToday']["value"]
-                commonObject['budget'] = budget
-                commonObjectJSON = json.dumps(commonObject)
-                
-                funObject['maxToday']["value"] = round((
-                    float(budget) * 0.3) / int(daysToPayday), 2)
-                funObject['maxToday']["temp"] = funObject['maxToday']["value"]
-                funObject['budget'] = budget
-                funObjectJSON = json.dumps(funObject)
-
-                investObject['maxToday']["value"] = round((
-                    float(budget) * 0.3) / int(daysToPayday), 2)
-                investObject['maxToday']["temp"] = investObject['maxToday']["value"]
-                investObject['budget'] = budget
-                investObjectJSON = json.dumps(investObject)
-
-
-                Vkuser.objects.filter(id_vk=vk_id).update(
-                    common=commonObjectJSON, fun = funObjectJSON , invest = investObjectJSON)
-            # pay_day = field.pay_day
-            # budget = float(field.budget)
-            break
-
-    # money=(budget*0.5) / (pay_day - today)
-
-    print('====>', maxCommonObject)
-    return JsonResponse(maxCommonObject)
 
 # make operation
 
 
-def max_cost_to_day_calc(request):
+def temp_today_cost(request):
     req = json.loads(str(request.body, encoding='utf-8'))
     print('[add_budget:RECIVED]-->', req)
     response = {'RESPONSE': 'ERROR', 'PAYLOAD': ''}
@@ -262,8 +207,9 @@ def max_cost_to_day_calc(request):
             if (vk_id == field.id_vk):
                 maxCommonObject = json.loads(field.common)
                 if (operation == '-'):
-                    maxCommonObject['maxToday']["temp"] = round(maxCommonObject['maxToday']["temp"] -
-                                                                float(money), 2)
+                    newBudget = float(field.budget) - float(budget)
+                    maxCommonObject['maxToday']['temp'] = round(
+                        maxCommonObject['maxToday']['temp'] - float(money), 2)
                     maxCommonObjectJSON = json.dumps(maxCommonObject)
                     Vkuser.objects.filter(id_vk=vk_id).update(
                         common=maxCommonObjectJSON)
@@ -298,11 +244,10 @@ def get_costs_all(request):
     for field in all_users:
         if (vk_id == field.id_vk):
 
-
             commonObject = json.loads(field.common)
             funObject = json.loads(field.common)
             investObject = json.loads(field.common)
-            
+
             if (commonObject["daysToPayday"] != daysToPayday):
                 commonObject["daysToPayday"] = daysToPayday
                 funObject["daysToPayday"] = daysToPayday
@@ -313,7 +258,7 @@ def get_costs_all(request):
                 commonObject['maxToday']["temp"] = commonObject['maxToday']["value"]
                 commonObject['budget'] = budget
                 commonObjectJSON = json.dumps(commonObject)
-                
+
                 funObject['maxToday']["value"] = round((
                     float(budget) * 0.3) / int(daysToPayday), 2)
                 funObject['maxToday']["temp"] = funObject['maxToday']["value"]
@@ -326,11 +271,8 @@ def get_costs_all(request):
                 investObject['budget'] = budget
                 investObjectJSON = json.dumps(investObject)
 
-
                 Vkuser.objects.filter(id_vk=vk_id).update(
-                    common=commonObjectJSON, fun = funObjectJSON , invest = investObjectJSON)
-
-
+                    common=commonObjectJSON, fun=funObjectJSON, invest=investObjectJSON)
 
             response['PAYLOAD']['common'] = json.loads(field.common)
             response['PAYLOAD']['fun'] = json.loads(field.fun)

@@ -85,7 +85,13 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
           break;
         case "common_plus":
           this.props.addWholeBudget(inputVal, "+", daysToPayday);
-          this.props.calcToDayCosts(inputVal, "123456", "common", "+");
+          this.props.calcToDayCosts(
+            inputVal,
+            "123456",
+            "common",
+            "+",
+            this.props.wholeBudget
+          );
           break;
 
         default:

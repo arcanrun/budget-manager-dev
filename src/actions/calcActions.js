@@ -12,7 +12,7 @@ export const calcToDayCosts = (
     dispatch({
       type: "CALC_TODAY_COSTS_REQUEST"
     });
-    fetch("http://127.0.0.1:8000/max-cost-to-day-calc/", {
+    fetch("http://127.0.0.1:8000/temp-today-cost/", {
       method: "POST",
       body: JSON.stringify({
         vk_id,

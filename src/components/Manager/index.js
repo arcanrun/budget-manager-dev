@@ -21,7 +21,8 @@ type PROPS = {
   payday_isFetching: boolean,
   modalIsVisible: boolean,
   daysToPayday: string,
-  vk_id: number
+  vk_id: number,
+  costs: Object
 };
 
 type STATE = {
@@ -88,7 +89,8 @@ class Manager extends React.Component<PROPS, STATE> {
       payday_isFetching,
       daysToPayday,
       calcToDayCosts,
-      vk_id
+      vk_id,
+      costs
     } = this.props;
     const { tempPayDay } = this.state;
     const overlay = <Overlay />;
@@ -125,35 +127,44 @@ class Manager extends React.Component<PROPS, STATE> {
         {...this.props}
       />
     );
-    const budgetCard50 = (
+    const budgetCardCommon = (
       <Card>
         <PartBudget
           onClickToggleModal={onClickToggleModal}
-          daysToPayday={daysToPayday}
           typeModal={"common"}
-          wholeBudget={wholeBudget}
-          vk_id={vk_id}
-          {...this.props}
+          costs={costs}
+          budget={wholeBudget}
         />
       </Card>
     );
-    const budgetCard30 = (
+    const budgetCardFun = (
       <Card>
         <PartBudget
           onClickToggleModal={onClickToggleModal}
-          daysToPayday={daysToPayday}
           typeModal={"fun"}
-          wholeBudget={wholeBudget}
-          vk_id={vk_id}
+          costs={costs}
+          budget={wholeBudget}
         />
       </Card>
     );
+    const budgetCardInvest = (
+      <Card>
+        <PartBudget
+          onClickToggleModal={onClickToggleModal}
+          typeModal={"invest"}
+          costs={costs}
+          budget={wholeBudget}
+        />
+      </Card>
+    );
+
     return (
       <>
         {payday ? wholeBudgetCard : ""}
         {calendarCard}
-        {wholeBudget && payday ? budgetCard50 : ""}
-        {wholeBudget && payday ? budgetCard30 : ""}
+        {wholeBudget && payday ? budgetCardCommon : ""}
+        {wholeBudget && payday ? budgetCardFun : ""}
+        {wholeBudget && payday ? budgetCardInvest : ""}
         {!modalIsVisible || modalOverlay}
       </>
     );

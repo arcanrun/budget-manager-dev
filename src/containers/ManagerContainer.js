@@ -21,7 +21,7 @@ const mapStateToProps = state => ({
   wholeBudget_isFetching: state.user.wholeBudget.isFetching,
   payday_isFetching: state.user.pay_day.isFetching,
   daysToPayday: state.user.daysToPayday,
-
+  costs: state.user.calc,
   vk_id: state.user.vk_id
 });
 

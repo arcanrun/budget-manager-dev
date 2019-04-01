@@ -25,6 +25,5 @@ urlpatterns = [
     path('get-budget/', views.get_budget),
     path('get-payday/', views.get_payday),
     path('get-costs-all/', views.get_costs_all),
-    path('max-cost-to-day/', views.max_cost_to_day),
-    path('max-cost-to-day-calc/', views.max_cost_to_day_calc),
+    path('temp-today-cost/', views.temp_today_cost),
 ]
