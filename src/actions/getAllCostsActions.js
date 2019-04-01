@@ -28,13 +28,19 @@ export const failuretGetAllCosts = (message: string) => ({
   }
 });
 
-export const getAllCosts = (vk_id: number) => {
+export const getAllCosts = (
+  vk_id: number,
+  daysToPayday: number,
+  budget: string
+) => {
   return (dispatch: Function) => {
     dispatch(requestGetAllCosts());
     fetch(API.GET_ALL_COSTS, {
       method: "POST",
       body: JSON.stringify({
-        vk_id
+        vk_id,
+        daysToPayday,
+        budget
       })
     })
       .then(res => res.json())

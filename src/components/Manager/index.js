@@ -37,18 +37,22 @@ class Manager extends React.Component<PROPS, STATE> {
     const budget = this.props.wholeBudget;
     const payday = this.props.payday;
     const vk_id = this.props.vk_id;
+    const daysToPayday = this.props.daysToPayday;
 
     if (!budget) this.props.getWholeBudget();
     if (!payday) this.props.getPayDay();
-    if (budget && payday && vk_id) this.props.getAllCosts(vk_id);
+    if (budget && payday && vk_id) this.props.getAllCosts(vk_id, daysToPayday);
   }
 
   componentDidUpdate(prevProps: Object, prevState: Object) {
     const budget = this.props.wholeBudget;
     const payday = this.props.payday;
     const vk_id = this.props.vk_id;
+    const daysToPayday = this.props.daysToPayday;
+
     if (prevProps.wholeBudget !== budget || prevProps.payday !== payday) {
-      if (budget && payday && vk_id) this.props.getAllCosts(vk_id);
+      if (budget && payday && vk_id)
+        this.props.getAllCosts(vk_id, daysToPayday, budget);
     }
   }
 
@@ -129,6 +133,7 @@ class Manager extends React.Component<PROPS, STATE> {
           typeModal={"common"}
           wholeBudget={wholeBudget}
           vk_id={vk_id}
+          {...this.props}
         />
       </Card>
     );

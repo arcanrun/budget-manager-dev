@@ -41,7 +41,7 @@ class PartBudget extends React.Component<PROPS, STATE> {
       type: "common",
       daysToPayday: this.props.daysToPayday
     };
-    fetch("http://127.0.0.1:8000/max-cost-to-day/", {
+    fetch("http://127.0.0.1:8000/max-cost-to-day/2", {
       method: "POST",
       body: JSON.stringify(data)
     })
