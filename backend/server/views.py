@@ -49,7 +49,7 @@ def make_calculations(field_common, filed_fun, file_invest, daysToPayday, budget
 def add_budget(request):
     req = json.loads(str(request.body, encoding='utf-8'))
 
-    response = {'RESPONSE': 'ERROR', 'PAYLOAD': ''}
+    response = {'RESPONSE': 'ERROR', 'PAYLOAD': {}}
 
     vk_id = str(req['vk_id'])
     budget = float(req['budget'])
@@ -65,7 +65,7 @@ def add_budget(request):
                     budget=budget)
 
                 response['RESPONSE'] = 'NEW_BUDGET_ADDED'
-                response['PAYLOAD'] = budget
+                response['PAYLOAD']['budget'] = budget
                 print('[add_budget:RESPONSE]-->', response)
                 return JsonResponse(response)
 
@@ -77,14 +77,21 @@ def add_budget(request):
 
                 resArr = make_calculations(
                     field.common, field.fun, field.invest, field.days_to_payday, budget)
-
-                response['RESPONSE'] = 'UPDATED_SUCCESS'
-                response['PAYLOAD'] = budget
-                response['TEST'] = resArr
-                print('[change_budget:RESPONSE]-->', response)
-
                 Vkuser.objects.filter(id_vk=vk_id).update(
                     budget=budget, common=resArr[0], fun=resArr[1], invest=resArr[2])
+                break
+        updated_all_users = Vkuser.objects.all()
+        for field in updated_all_users:
+            if (vk_id == field.id_vk):
+                response['PAYLOAD']['common'] = json.loads(field.common)
+                response['PAYLOAD']['fun'] = json.loads(field.fun)
+                response['PAYLOAD']['invest'] = json.loads(field.invest)
+                response['PAYLOAD']['budget'] = field.budget
+                response['PAYLOAD']['pay_day'] = field.pay_day
+                response['PAYLOAD']['days_to_payday'] = field.days_to_payday
+                response['RESPONSE'] = 'SUCCES_FETCHED'
+                response['TEST'] = resArr
+                print('[change_budget:RESPONSE]-->', response)
 
                 return JsonResponse(response)
 
@@ -169,13 +176,22 @@ def add_payday(request):
             resArr = make_calculations(
                 field.common, field.fun, field.invest, days_to_payday, budget)
 
-            response['RESPONSE'] = 'UPDATED_SUCCESS'
-            response['PAYLOAD']['pay_day'] = pay_day
-            response['PAYLOAD']['days_to_payday'] = days_to_payday
-            response['TEST'] = resArr
-            print('[add_payday:RESPONSE]-->', response)
             Vkuser.objects.filter(id_vk=vk_id).update(
                 pay_day=pay_day, days_to_payday=days_to_payday, common=resArr[0], fun=resArr[1], invest=resArr[2])
+            break
+    updated_all_users = Vkuser.objects.all()
+    for field in updated_all_users:
+        if (vk_id == field.id_vk):
+            response['PAYLOAD']['common'] = json.loads(field.common)
+            response['PAYLOAD']['fun'] = json.loads(field.fun)
+            response['PAYLOAD']['invest'] = json.loads(field.invest)
+            response['PAYLOAD']['budget'] = field.budget
+            response['PAYLOAD']['pay_day'] = field.pay_day
+            response['PAYLOAD']['days_to_payday'] = field.days_to_payday
+            response['RESPONSE'] = 'SUCCES_FETCHED'
+            response['TEST'] = resArr
+            print('[add_payday:RESPONSE]-->', response)
+
             return JsonResponse(response)
 
     user = Vkuser(id_vk=vk_id,

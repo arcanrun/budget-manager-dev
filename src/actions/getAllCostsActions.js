@@ -12,10 +12,10 @@ const requestGetAllCosts = () => ({
     isFetching: true
   }
 });
-export const successGetAllCosts = (costs: number) => ({
+export const successGetAllCosts = (payload: Object) => ({
   type: GET_ALL_COSTS_SUCCESS,
   payload: {
-    costs,
+    payload,
     isFetching: false
   }
 });

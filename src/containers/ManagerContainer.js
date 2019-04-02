@@ -20,8 +20,9 @@ const mapStateToProps = state => ({
   payday: state.user.calc.pay_day,
   isFetching_calc: state.user.calc.isFetching,
   daysToPayday: state.user.calc.daysToPayday,
-  costs: state.user.calc,
-  vk_id: state.user.vk_id
+  calc: state.user.calc,
+  vk_id: state.user.vk_id,
+  common: state.user.calc.common
 });
 
 export const ManagerContainer = connect(

@@ -11,7 +11,8 @@ import {
   GET_PAYDAY_SUCCESS,
   GET_ALL_COSTS_FAILURE,
   GET_ALL_COSTS_SUCCESS,
-  GET_ALL_COSTS_REQUEST
+  GET_ALL_COSTS_REQUEST,
+  GET_BUDGET_SUCCESS
 } from "../constants";
 import { msToDays } from "../components/Calendar/calendarHelper";
 
@@ -71,16 +72,6 @@ export function user(state: UserState = initialState, action: Object) {
         }
       };
 
-    case ADD_BUDGET_SUCCESS:
-      return {
-        ...state,
-        calc: {
-          ...state.calc,
-          budget: action.payload.budget,
-          isFetching: action.payload.isFetching
-        }
-      };
-
     case ADD_BUDGET_FAILURE:
       return {
         ...state,
@@ -95,16 +86,7 @@ export function user(state: UserState = initialState, action: Object) {
           isFetching: action.payload.isFetching
         }
       };
-    case ADD_PAYDAY_SUCCESS:
-      return {
-        ...state,
-        calc: {
-          ...state.calc,
-          pay_day: action.payload.payload.pay_day,
-          daysToPayday: action.payload.payload.days_to_payday,
-          isFetching: action.payload.isFetching
-        }
-      };
+
     case ADD_PAYDAY_FAILURE:
       return { ...state, calc: { ...state.calc, error: true } };
 
@@ -130,14 +112,16 @@ export function user(state: UserState = initialState, action: Object) {
         }
       };
     case GET_ALL_COSTS_SUCCESS:
+    case ADD_PAYDAY_SUCCESS:
+    case ADD_BUDGET_SUCCESS:
       return {
         ...state,
 
         calc: {
           ...state.calc,
-          budget: action.payload.costs.budget,
-          pay_day: action.payload.costs.pay_day,
-          daysToPayday: action.payload.costs.days_to_payday,
+          budget: action.payload.payload.budget,
+          pay_day: action.payload.payload.pay_day,
+          daysToPayday: action.payload.payload.days_to_payday,
           isFetching: false,
           error: false,
           error_message: undefined,
@@ -145,24 +129,24 @@ export function user(state: UserState = initialState, action: Object) {
             ...state.calc.common,
             maxToday: {
               ...state.calc.common.maxToday,
-              value: action.payload.costs.common.maxToday,
-              temp: action.payload.costs.common.temp
+              value: action.payload.payload.common.maxToday,
+              temp: action.payload.payload.common.temp
             }
           },
           fun: {
             ...state.calc.fun,
             maxToday: {
               ...state.calc.fun.maxToday,
-              value: action.payload.costs.fun.maxToday,
-              temp: action.payload.costs.fun.temp
+              value: action.payload.payload.fun.maxToday,
+              temp: action.payload.payload.fun.temp
             }
           },
           invest: {
             ...state.calc.invest,
             maxToday: {
               ...state.calc.invest.maxToday,
-              value: action.payload.costs.invest.maxToday,
-              temp: action.payload.costs.invest.temp
+              value: action.payload.payload.invest.maxToday,
+              temp: action.payload.payload.invest.temp
             }
           }
         }

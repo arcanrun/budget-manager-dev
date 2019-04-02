@@ -12,10 +12,10 @@ const requestAddWholeBudget = () => ({
     isFetching: true
   }
 });
-export const successAddWholeBudget = (budget: number) => ({
+export const successAddWholeBudget = (payload: Object) => ({
   type: ADD_BUDGET_SUCCESS,
   payload: {
-    budget,
+    payload,
     isFetching: false
   }
 });
@@ -41,7 +41,8 @@ export const addWholeBudget = (
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        console.log("[addBudget] dispatcner: ", res);
+
         dispatch(successAddWholeBudget(res.PAYLOAD));
         return res;
       })

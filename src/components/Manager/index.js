@@ -23,7 +23,8 @@ type PROPS = {
   modalIsVisible: boolean,
   daysToPayday: string,
   vk_id: number,
-  costs: Object
+  calc: Object,
+  common: Object
 };
 
 type STATE = {
@@ -49,7 +50,7 @@ class Manager extends React.Component<PROPS, STATE> {
   }
 
   // componentDidUpdate(prevProps: Object, prevState: Object) {
-  //   const budget = this.props.wholeBudget;
+  //   const budget = this.props.budget;
   //   const payday = this.props.payday;
   //   const vk_id = this.props.vk_id;
   //   const daysToPayday = this.props.daysToPayday;
@@ -95,10 +96,8 @@ class Manager extends React.Component<PROPS, STATE> {
       budget,
       payday,
       isFetching_calc,
-      payday_isFetching,
       daysToPayday,
-
-      costs
+      calc
     } = this.props;
     const { tempPayDay } = this.state;
     const overlay = <Overlay />;
@@ -152,7 +151,7 @@ class Manager extends React.Component<PROPS, STATE> {
         <PartBudget
           onClickToggleModal={onClickToggleModal}
           typeModal={"common"}
-          costs={costs}
+          costs={calc}
           budget={budget}
         />
       </Card>
@@ -162,7 +161,7 @@ class Manager extends React.Component<PROPS, STATE> {
         <PartBudget
           onClickToggleModal={onClickToggleModal}
           typeModal={"fun"}
-          costs={costs}
+          costs={calc}
           budget={budget}
         />
       </Card>
@@ -172,7 +171,7 @@ class Manager extends React.Component<PROPS, STATE> {
         <PartBudget
           onClickToggleModal={onClickToggleModal}
           typeModal={"invest"}
-          costs={costs}
+          costs={calc}
           budget={budget}
         />
       </Card>
