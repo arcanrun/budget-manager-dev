@@ -3,7 +3,7 @@ import { getWholeBudget } from "./getBudgetActions";
 import { addWholeBudget } from "./addBudgetActions";
 import { toggleModal } from "./modalActions";
 import { addPayDay, getPayDay } from "./paydayActions";
-import { calcToDayCosts } from "./calcActions";
+import { calcTempCosts } from "./calcActions";
 import { getAllCosts } from "./getAllCostsActions";
 export {
   addWholeBudget,
@@ -11,6 +11,6 @@ export {
   addPayDay,
   getWholeBudget,
   getPayDay,
-  calcToDayCosts,
+  calcTempCosts,
   getAllCosts
 };

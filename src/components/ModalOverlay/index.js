@@ -11,11 +11,11 @@ type PROPS = {
   onClick: Function,
   addWholeBudget: Function,
   addPayDay: Function,
-  calcToDayCosts: Function,
+  calcTempCosts: Function,
   typeModal: string,
   daysToPayday: string,
   budget: number,
-  vk_id: string
+  vk_id: number
 };
 
 type STATE = {
@@ -77,7 +77,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
           break;
 
         case "common_minus":
-          this.props.calcToDayCosts(
+          this.props.calcTempCosts(
             inputVal,
             this.props.vk_id,
             "common",
@@ -86,7 +86,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
           );
           break;
         case "common_plus":
-          this.props.calcToDayCosts(
+          this.props.calcTempCosts(
             inputVal,
             this.props.vk_id,
             "common",
@@ -95,7 +95,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
           );
           break;
         case "fun_minus":
-          this.props.calcToDayCosts(
+          this.props.calcTempCosts(
             inputVal,
             this.props.vk_id,
             "fun",
@@ -104,7 +104,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
           );
           break;
         case "fun_plus":
-          this.props.calcToDayCosts(
+          this.props.calcTempCosts(
             inputVal,
             this.props.vk_id,
             "fun",

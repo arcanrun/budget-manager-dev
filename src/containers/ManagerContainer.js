@@ -9,7 +9,7 @@ import {
   addPayDay,
   getWholeBudget,
   getPayDay,
-  calcToDayCosts,
+  calcTempCosts,
   getAllCosts
 } from "../actions/";
 
@@ -33,7 +33,7 @@ export const ManagerContainer = connect(
     addPayDay,
     getWholeBudget,
     getPayDay,
-    calcToDayCosts,
+    calcTempCosts,
     getAllCosts
   }
 )(Manager);

@@ -13,7 +13,7 @@ type PROPS = {
   addWholeBudget: Function,
   addPayDay: Function,
   getPayDay: Function,
-  calcToDayCosts: Function,
+  calcTempCosts: Function,
   getAllCosts: Function,
   typeModal: string,
   budget: number,
