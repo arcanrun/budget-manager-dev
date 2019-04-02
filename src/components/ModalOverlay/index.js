@@ -44,6 +44,8 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
       case "common_plus":
       case "fun_minus":
       case "fun_plus":
+      case "invest_minus":
+      case "invest_plus":
         if (val && !isNaN(val)) {
           return true;
         } else if (isNaN(val)) {
@@ -108,6 +110,24 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
             inputVal,
             this.props.vk_id,
             "fun",
+            "+",
+            this.props.budget
+          );
+          break;
+        case "invest_minus":
+          this.props.calcTempCosts(
+            inputVal,
+            this.props.vk_id,
+            "invest",
+            "-",
+            this.props.budget
+          );
+          break;
+        case "invest_plus":
+          this.props.calcTempCosts(
+            inputVal,
+            this.props.vk_id,
+            "invest",
             "+",
             this.props.budget
           );

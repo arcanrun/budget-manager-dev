@@ -47,9 +47,9 @@ export const calcTempCosts = (
         operation
       })
     })
-      .then(res => res.json)
+      .then(res => res.json())
       .then(res => {
-        console.log("", res);
+        console.log("[calcTempCosts]", res);
         dispatch(calcTempCostsSuccess(res.PAYLOAD));
         return res;
       })

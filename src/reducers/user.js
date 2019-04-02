@@ -6,13 +6,12 @@ import {
   ADD_PAYDAY_FAILURE,
   ADD_PAYDAY_SUCCESS,
   ADD_PAYDAY_REQUEST,
-  GET_PAYDAY_FAILURE,
-  GET_PAYDAY_REQUEST,
-  GET_PAYDAY_SUCCESS,
   GET_ALL_COSTS_FAILURE,
   GET_ALL_COSTS_SUCCESS,
   GET_ALL_COSTS_REQUEST,
-  GET_BUDGET_SUCCESS
+  CALC_TODAY_COSTS_REQUEST,
+  CALC_TODAY_COSTS_SUCCESS,
+  CALC_TODAY_COSTS_FAILURE
 } from "../constants";
 import { msToDays } from "../components/Calendar/calendarHelper";
 
@@ -102,6 +101,7 @@ export function user(state: UserState = initialState, action: Object) {
         }
       };
     case GET_ALL_COSTS_FAILURE:
+    case CALC_TODAY_COSTS_FAILURE:
       return {
         ...state,
         calc: {
@@ -114,6 +114,7 @@ export function user(state: UserState = initialState, action: Object) {
     case GET_ALL_COSTS_SUCCESS:
     case ADD_PAYDAY_SUCCESS:
     case ADD_BUDGET_SUCCESS:
+    case CALC_TODAY_COSTS_SUCCESS:
       return {
         ...state,
 
@@ -151,6 +152,8 @@ export function user(state: UserState = initialState, action: Object) {
           }
         }
       };
+    case CALC_TODAY_COSTS_REQUEST:
+      return { ...state, calc: { ...state.calc, isFetching: true } };
 
     default:
       return state;

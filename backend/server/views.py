@@ -184,19 +184,27 @@ def temp_today_cost(request):
 
     newTemp = ''
     newBudget = ''
+    costsObject = {}
     all_users = Vkuser.objects.all()
     for field in all_users:
         if (vk_id == field.id_vk):
+
+            costsObject["common"] = json.loads(field.common)
+            costsObject["fun"] = json.loads(field.fun)
+            costsObject["invest"] = json.loads(field.invest)
+
             if operation == '+':
-                newTemp = field[typeCost]['temp'] + value
-                newBudget = field.budget + value
+                newBudget = float(field.budget) + value
+                costsObject[typeCost]['temp'] = costsObject[typeCost]['temp'] + value
             if operation == '-':
-                newTemp = field[typeCost]['temp'] - value
-                newBudget = field.budget - value
+                newBudget = float(field.budget) - value
+                costsObject[typeCost]['temp'] = costsObject[typeCost]['temp'] - value
 
-            print(newBudget, newTemp)
-
-            response = get_updated_data(vk_id)
+            Vkuser.objects.filter(id_vk=vk_id).update(
+                budget=newBudget, common=json.dumps(costsObject["common"]), fun=json.dumps(costsObject["fun"]), invest=json.dumps(costsObject["invest"]))
             break
+
+    response = get_updated_data(vk_id)
+    print('[temp_today_cost:RESPONSE]-->', response)
 
     return JsonResponse(response)
