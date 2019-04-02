@@ -14,7 +14,8 @@ type PROPS = {
   calcToDayCosts: Function,
   typeModal: string,
   daysToPayday: string,
-  budget: number
+  budget: number,
+  vk_id: string
 };
 
 type STATE = {
@@ -41,6 +42,8 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
       case "budget":
       case "common_minus":
       case "common_plus":
+      case "fun_minus":
+      case "fun_plus":
         if (val && !isNaN(val)) {
           return true;
         } else if (isNaN(val)) {
@@ -74,23 +77,39 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
           break;
 
         case "common_minus":
-          this.props.addWholeBudget(inputVal, "-", daysToPayday);
           this.props.calcToDayCosts(
             inputVal,
-            "123456",
+            this.props.vk_id,
             "common",
             "-",
-            this.props.wholeBudget
+            this.props.budget
           );
           break;
         case "common_plus":
-          this.props.addWholeBudget(inputVal, "+", daysToPayday);
           this.props.calcToDayCosts(
             inputVal,
-            "123456",
+            this.props.vk_id,
             "common",
             "+",
-            this.props.wholeBudget
+            this.props.budget
+          );
+          break;
+        case "fun_minus":
+          this.props.calcToDayCosts(
+            inputVal,
+            this.props.vk_id,
+            "fun",
+            "-",
+            this.props.budget
+          );
+          break;
+        case "fun_plus":
+          this.props.calcToDayCosts(
+            inputVal,
+            this.props.vk_id,
+            "fun",
+            "+",
+            this.props.budget
           );
           break;
 
