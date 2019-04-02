@@ -174,7 +174,29 @@ def log_in(request):
 
 
 def temp_today_cost(request):
-    response = {'WAIT': ''}
     req = json.loads(str(request.body, encoding='utf-8'))
     print('[temp_today_cost:RECIVED]-->', req)
+
+    vk_id = str(req['vk_id'])
+    typeCost = req['type']
+    value = float(req['value'])
+    operation = req['operation']
+
+    newTemp = ''
+    newBudget = ''
+    all_users = Vkuser.objects.all()
+    for field in all_users:
+        if (vk_id == field.id_vk):
+            if operation == '+':
+                newTemp = field[typeCost]['temp'] + value
+                newBudget = field.budget + value
+            if operation == '-':
+                newTemp = field[typeCost]['temp'] - value
+                newBudget = field.budget - value
+
+            print(newBudget, newTemp)
+
+            response = get_updated_data(vk_id)
+            break
+
     return JsonResponse(response)
