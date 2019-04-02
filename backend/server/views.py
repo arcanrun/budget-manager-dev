@@ -46,6 +46,8 @@ def make_calculations(field_common, filed_fun, file_invest, daysToPayday, budget
     return [commonObjectJSON, funObjectJSON, investObjectJSON]
 
 
+
+
 def add_budget(request):
     req = json.loads(str(request.body, encoding='utf-8'))
 
@@ -63,6 +65,13 @@ def add_budget(request):
             if (vk_id == field.id_vk):
                 Vkuser.objects.filter(id_vk=vk_id).update(
                     budget=budget)
+
+                response['PAYLOAD']['common'] = json.loads(field.common)
+                response['PAYLOAD']['fun'] = json.loads(field.fun)
+                response['PAYLOAD']['invest'] = json.loads(field.invest)
+                response['PAYLOAD']['budget'] = field.budget
+                response['PAYLOAD']['pay_day'] = field.pay_day
+                response['PAYLOAD']['days_to_payday'] = field.days_to_payday
 
                 response['RESPONSE'] = 'NEW_BUDGET_ADDED'
                 response['PAYLOAD']['budget'] = budget
