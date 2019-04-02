@@ -42,7 +42,6 @@ class Manager extends React.Component<PROPS, STATE> {
 
     if (!budget) this.props.getWholeBudget();
     if (!payday) this.props.getPayDay();
-    if (budget && payday && vk_id) this.props.getAllCosts(vk_id, daysToPayday);
   }
 
   componentDidUpdate(prevProps: Object, prevState: Object) {
@@ -51,7 +50,10 @@ class Manager extends React.Component<PROPS, STATE> {
     const vk_id = this.props.vk_id;
     const daysToPayday = this.props.daysToPayday;
 
-    if (prevProps.wholeBudget !== budget || prevProps.payday !== payday) {
+    if (
+      prevProps.wholeBudget !== budget ||
+      prevProps.daysToPayday !== daysToPayday
+    ) {
       if (budget && payday && vk_id)
         this.props.getAllCosts(vk_id, daysToPayday, budget);
     }
