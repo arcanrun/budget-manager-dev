@@ -172,54 +172,9 @@ def log_in(request):
         print('[log_in:RESPONSE]-->', response)
         return JsonResponse(response)
 
-# def get_costs_all(request):
-#     req = json.loads(str(request.body, encoding='utf-8'))
-#     print('[add_budget:RECIVED]-->', req)
-#     response = {'RESPONSE': 'ERROR', 'PAYLOAD': {
-#         'common:': '', 'fun': '', 'invest': ''}}
-#     vk_id = str(req['vk_id'])
-#     daysToPayday = int(req['daysToPayday'])
-#     budget = req['budget']
 
-#     all_users = Vkuser.objects.all()
-#     for field in all_users:
-#         if (vk_id == field.id_vk):
-
-#             commonObject = json.loads(field.common)
-#             funObject = json.loads(field.common)
-#             investObject = json.loads(field.common)
-
-#             if (commonObject["daysToPayday"] != daysToPayday):
-#                 commonObject["daysToPayday"] = daysToPayday
-#                 funObject["daysToPayday"] = daysToPayday
-#                 investObject["daysToPayday"] = daysToPayday
-
-#                 commonObject['maxToday']["value"] = round((
-#                     float(budget) * 0.5) / int(daysToPayday), 2)
-#                 commonObject['maxToday']["temp"] = commonObject['maxToday']["value"]
-#                 commonObject['budget'] = budget
-#                 commonObjectJSON = json.dumps(commonObject)
-
-#                 funObject['maxToday']["value"] = round((
-#                     float(budget) * 0.3) / int(daysToPayday), 2)
-#                 funObject['maxToday']["temp"] = funObject['maxToday']["value"]
-#                 funObject['budget'] = budget
-#                 funObjectJSON = json.dumps(funObject)
-
-#                 investObject['maxToday']["value"] = round((
-#                     float(budget) * 0.3) / int(daysToPayday), 2)
-#                 investObject['maxToday']["temp"] = investObject['maxToday']["value"]
-#                 investObject['budget'] = budget
-#                 investObjectJSON = json.dumps(investObject)
-
-#                 Vkuser.objects.filter(id_vk=vk_id).update(
-#                     common=commonObjectJSON, fun=funObjectJSON, invest=investObjectJSON)
-
-#             response['PAYLOAD']['common'] = json.loads(field.common)
-#             response['PAYLOAD']['fun'] = json.loads(field.fun)
-#             response['PAYLOAD']['invest'] = json.loads(field.invest)
-#             response['RESPONSE'] = 'SUCCES_FETCHED'
-#             return JsonResponse(response)
-#             break
-
-#     return JsonResponse(response)
+def temp_today_cost(request):
+    response = {'WAIT': ''}
+    req = json.loads(str(request.body, encoding='utf-8'))
+    print('[temp_today_cost:RECIVED]-->', req)
+    return JsonResponse(response)

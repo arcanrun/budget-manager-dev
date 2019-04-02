@@ -41,6 +41,7 @@ class Manager extends React.Component<PROPS, STATE> {
     const payday = this.props.payday;
     const vk_id = this.props.vk_id;
     const daysToPayday = this.props.daysToPayday;
+
     fetch("http://127.0.0.1:8000/log-in/", {
       method: "POST",
       body: JSON.stringify({ vk_id: "123456" })
