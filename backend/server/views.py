@@ -23,6 +23,41 @@ costsPattern = json.dumps({
 })
 
 
+def make_calculations(field_common, filed_fun, file_invest, daysToPayday, budget):
+
+    commonObject = json.loads(field_common)
+    funObject = json.loads(filed_fun)
+    investObject = json.loads(file_invest)
+
+    commonObject["daysToPayday"] = daysToPayday
+    funObject["daysToPayday"] = daysToPayday
+    investObject["daysToPayday"] = daysToPayday
+
+    commonObject['value'] = float(budget) * 0.5
+    funObject['value'] = float(budget) * 0.3
+    investObject['value'] = float(budget) * 0.2
+
+    commonObject["maxToday"]["value"] = round((
+        float(budget) * 0.5) / int(daysToPayday), 2)
+    funObject["maxToday"]["value"] = round((
+        float(budget) * 0.3) / int(daysToPayday), 2)
+    investObject["maxToday"]["value"] = round((
+        float(budget) * 0.2) / int(daysToPayday), 2)
+
+    commonObject["maxToday"]["temp"] = commonObject["maxToday"]["value"]
+    funObject["maxToday"]["temp"] = funObject["maxToday"]["value"]
+    investObject["maxToday"]["temp"] = investObject["maxToday"]["value"]
+
+    commonObject['budget'] = budget
+    funObject['budget'] = budget
+    investObject['budget'] = budget
+
+    commonObjectJSON = json.dumps(commonObject)
+    funObjectJSON = json.dumps(funObject)
+    investObjectJSON = json.dumps(investObject)
+    return [commonObjectJSON, funObjectJSON, investObjectJSON]
+
+
 def add_budget(request):
     req = json.loads(str(request.body, encoding='utf-8'))
 

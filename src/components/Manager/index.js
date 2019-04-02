@@ -109,7 +109,7 @@ class Manager extends React.Component<PROPS, STATE> {
         rightIcon={"pencil"}
         onClick={() => onClickToggleModal("budget")}
       >
-        {isFetching_calc ? overlay : ""}
+        {/* {isFetching_calc ? overlay : ""} */}
         <WholeBudget
           onClick={() => onClickToggleModal("budget")}
           wholeBudget={budget}
@@ -121,7 +121,7 @@ class Manager extends React.Component<PROPS, STATE> {
         icon={"money-bag"}
         onClick={() => onClickToggleModal("budget")}
       >
-        {isFetching_calc ? overlay : ""}
+        {/* {isFetching_calc ? overlay : ""} */}
         <WholeBudget
           onClick={() => onClickToggleModal("budget")}
           wholeBudget={budget}
@@ -130,7 +130,7 @@ class Manager extends React.Component<PROPS, STATE> {
     );
     const calendarCard = (
       <Card headerTitle={"календарь"} icon={"calendar"}>
-        {payday_isFetching ? overlay : ""}
+        {/* {isFetching_calc ? overlay : ""} */}
         <Calendar
           handleDayClick={this.handleDayClick}
           handleNewPayDay={this.handleNewPayDay}
@@ -180,6 +180,7 @@ class Manager extends React.Component<PROPS, STATE> {
 
     return (
       <>
+        {isFetching_calc ? overlay : ""}
         {wholeBudgetCard}
         {budget ? calendarCard : ""}
         {budget && payday ? budgetCardCommon : ""}

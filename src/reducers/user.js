@@ -21,7 +21,7 @@ type UserState = {
   name: string,
   sure_name: string,
   history?: Array<any>,
-
+  isFetching_pyaday: boolean, // temp solutions...
   calc?: any
 };
 
@@ -30,6 +30,7 @@ export const initialState: UserState = {
   avatar: "",
   name: "Pavel",
   sure_name: "Durov",
+  isFetching_pyaday: false,
   history: [],
   calc: {
     pay_day: undefined,
