@@ -26,4 +26,5 @@ urlpatterns = [
     path('get-payday/', views.get_payday),
     path('get-costs-all/', views.get_costs_all),
     path('temp-today-cost/', views.temp_today_cost),
+    path('log-in/', views.log_in),
 ]

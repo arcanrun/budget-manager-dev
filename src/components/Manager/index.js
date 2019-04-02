@@ -15,9 +15,9 @@ type PROPS = {
   calcToDayCosts: Function,
   getAllCosts: Function,
   typeModal: string,
-  wholeBudget: number,
+  budget: number,
   payday: string,
-  wholeBudget_isFetching: boolean,
+  isFetching_calc: boolean,
   payday_isFetching: boolean,
   modalIsVisible: boolean,
   daysToPayday: string,
@@ -35,29 +35,32 @@ class Manager extends React.Component<PROPS, STATE> {
   };
 
   componentDidMount() {
-    const budget = this.props.wholeBudget;
+    const budget = this.props.budget;
     const payday = this.props.payday;
     const vk_id = this.props.vk_id;
     const daysToPayday = this.props.daysToPayday;
+    fetch("http://127.0.0.1:8000/log-in/", {
+      method: "POST",
+      body: JSON.stringify({ vk_id: "123456" })
+    });
 
-    if (!budget) this.props.getWholeBudget();
-    if (!payday) this.props.getPayDay();
+    this.props.getAllCosts(vk_id, daysToPayday, budget);
   }
 
-  componentDidUpdate(prevProps: Object, prevState: Object) {
-    const budget = this.props.wholeBudget;
-    const payday = this.props.payday;
-    const vk_id = this.props.vk_id;
-    const daysToPayday = this.props.daysToPayday;
+  // componentDidUpdate(prevProps: Object, prevState: Object) {
+  //   const budget = this.props.wholeBudget;
+  //   const payday = this.props.payday;
+  //   const vk_id = this.props.vk_id;
+  //   const daysToPayday = this.props.daysToPayday;
 
-    if (
-      prevProps.wholeBudget !== budget ||
-      prevProps.daysToPayday !== daysToPayday
-    ) {
-      if (budget && payday && vk_id)
-        this.props.getAllCosts(vk_id, daysToPayday, budget);
-    }
-  }
+  //   if (
+  //     prevProps.wholeBudget !== budget ||
+  //     prevProps.daysToPayday !== daysToPayday
+  //   ) {
+  //     if (budget && payday && vk_id)
+  //       this.props.getAllCosts(vk_id, daysToPayday, budget);
+  //   }
+  // }
 
   handleDayClick = (day: string, { selected }: { selected: boolean }) => {
     this.setState({
@@ -85,28 +88,39 @@ class Manager extends React.Component<PROPS, STATE> {
       modalIsVisible,
       onClickToggleModal,
       typeModal,
-      wholeBudget,
+      budget,
       payday,
-      wholeBudget_isFetching,
+      isFetching_calc,
       payday_isFetching,
       daysToPayday,
-      calcToDayCosts,
-      vk_id,
+
       costs
     } = this.props;
     const { tempPayDay } = this.state;
     const overlay = <Overlay />;
-    const wholeBudgetCard = (
+    const wholeBudgetCard = daysToPayday ? (
       <Card
         headerTitle={"общий бюджет"}
         icon={"money-bag"}
         rightIcon={"pencil"}
         onClick={() => onClickToggleModal("budget")}
       >
-        {wholeBudget_isFetching ? overlay : ""}
+        {isFetching_calc ? overlay : ""}
         <WholeBudget
           onClick={() => onClickToggleModal("budget")}
-          wholeBudget={wholeBudget}
+          wholeBudget={budget}
+        />
+      </Card>
+    ) : (
+      <Card
+        headerTitle={"общий бюджет"}
+        icon={"money-bag"}
+        onClick={() => onClickToggleModal("budget")}
+      >
+        {isFetching_calc ? overlay : ""}
+        <WholeBudget
+          onClick={() => onClickToggleModal("budget")}
+          wholeBudget={budget}
         />
       </Card>
     );
@@ -135,7 +149,7 @@ class Manager extends React.Component<PROPS, STATE> {
           onClickToggleModal={onClickToggleModal}
           typeModal={"common"}
           costs={costs}
-          budget={wholeBudget}
+          budget={budget}
         />
       </Card>
     );
@@ -145,7 +159,7 @@ class Manager extends React.Component<PROPS, STATE> {
           onClickToggleModal={onClickToggleModal}
           typeModal={"fun"}
           costs={costs}
-          budget={wholeBudget}
+          budget={budget}
         />
       </Card>
     );
@@ -155,18 +169,18 @@ class Manager extends React.Component<PROPS, STATE> {
           onClickToggleModal={onClickToggleModal}
           typeModal={"invest"}
           costs={costs}
-          budget={wholeBudget}
+          budget={budget}
         />
       </Card>
     );
 
     return (
       <>
-        {payday ? wholeBudgetCard : ""}
-        {calendarCard}
-        {wholeBudget && payday ? budgetCardCommon : ""}
-        {wholeBudget && payday ? budgetCardFun : ""}
-        {wholeBudget && payday ? budgetCardInvest : ""}
+        {wholeBudgetCard}
+        {budget ? calendarCard : ""}
+        {budget && payday ? budgetCardCommon : ""}
+        {budget && payday ? budgetCardFun : ""}
+        {budget && payday ? budgetCardInvest : ""}
         {!modalIsVisible || modalOverlay}
       </>
     );

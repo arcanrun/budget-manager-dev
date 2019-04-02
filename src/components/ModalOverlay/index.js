@@ -14,7 +14,7 @@ type PROPS = {
   calcToDayCosts: Function,
   typeModal: string,
   daysToPayday: string,
-  wholeBudget: number
+  budget: number
 };
 
 type STATE = {
@@ -58,13 +58,13 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     const inputVal = this.state.inputValue;
     const { typeModal } = this.props;
     const daysToPayday = this.props.daysToPayday;
-    const wholeBudget = this.props.wholeBudget;
+    const budget = this.props.budget;
 
     if (this.validate(typeModal)) {
       this.props.onClick(typeModal);
       switch (typeModal) {
         case "budget":
-          const type = "change";
+          const type = daysToPayday ? "change" : "add";
           console.log(type);
           this.props.addWholeBudget(inputVal, type, daysToPayday);
 
