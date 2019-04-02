@@ -69,62 +69,34 @@ def add_budget(request):
                 print('[add_budget:RESPONSE]-->', response)
                 return JsonResponse(response)
 
-    # if operation == 'change':
-    #     print('[change_budget:RECIVED]-->', req)
-    #     daysToPayday = req['daysToPayday']
-    #     for field in all_users:
-    #         if (vk_id == field.id_vk):
-    #             Vkuser.objects.filter(id_vk=vk_id).update(
-    #                 budget=budget)
+    if operation == 'change':
+        print('[change_budget:RECIVED]-->', req)
+        daysToPayday = req['daysToPayday']
+        for field in all_users:
+            if (vk_id == field.id_vk):
 
-    #             commonObject = json.loads(field.common)
-    #             funObject = json.loads(field.fun)
-    #             investObject = json.loads(field.invest)
+                resArr = make_calculations(
+                    field.common, field.fun, field.invest, field.days_to_payday, budget)
 
-    #             commonObject["daysToPayday"] = daysToPayday
-    #             funObject["daysToPayday"] = daysToPayday
-    #             investObject["daysToPayday"] = daysToPayday
+                response['RESPONSE'] = 'UPDATED_SUCCESS'
+                response['PAYLOAD'] = budget
+                response['TEST'] = resArr
+                print('[change_budget:RESPONSE]-->', response)
 
-    #             commonObject['value'] = float(budget) * 0.5
-    #             funObject['value'] = float(budget) * 0.3
-    #             investObject['value'] = float(budget) * 0.2
+                Vkuser.objects.filter(id_vk=vk_id).update(
+                    budget=budget, common=resArr[0], fun=resArr[1], invest=resArr[2])
 
-    #             commonObject["maxToday"]["value"] = round((
-    #                 float(budget) * 0.5) / int(daysToPayday), 2)
-    #             funObject["maxToday"]["value"] = round((
-    #                 float(budget) * 0.3) / int(daysToPayday), 2)
-    #             investObject["maxToday"]["value"] = round((
-    #                 float(budget) * 0.2) / int(daysToPayday), 2)
+                return JsonResponse(response)
 
-    #             commonObject["maxToday"]["temp"] = commonObject["maxToday"]["value"]
-    #             funObject["maxToday"]["temp"] = funObject["maxToday"]["value"]
-    #             investObject["maxToday"]["temp"] = investObject["maxToday"]["value"]
+        user = Vkuser(id_vk=vk_id,
+                      budget=budget)
+        user.save()
 
-    #             commonObject['budget'] = budget
-    #             funObject['budget'] = budget
-    #             investObject['budget'] = budget
+        response['RESPONSE'] = 'ADDED_SUCCESS'
+        response['PAYLOAD'] = budget
+        print('[add_budget:RESPONSE]-->', response)
 
-    #             commonObjectJSON = json.dumps(commonObject)
-    #             funObjectJSON = json.dumps(funObject)
-    #             investObjectJSON = json.dumps(investObject)
-
-    #             Vkuser.objects.filter(id_vk=vk_id).update(
-    #                 common=commonObjectJSON, fun=funObjectJSON, invest=investObjectJSON)
-
-    #             response['RESPONSE'] = 'UPDATED_SUCCESS'
-    #             response['PAYLOAD'] = budget
-    #             print('[change_budget:RESPONSE]-->', response)
-    #             return JsonResponse(response)
-
-    #     user = Vkuser(id_vk=vk_id,
-    #                   budget=budget)
-    #     user.save()
-
-    #     response['RESPONSE'] = 'ADDED_SUCCESS'
-    #     response['PAYLOAD'] = budget
-    #     print('[add_budget:RESPONSE]-->', response)
-
-    #     return JsonResponse(response)
+        return JsonResponse(response)
     # elif operation == '+':
     #     for field in all_users:
     #         if (vk_id == field.id_vk):
