@@ -22,8 +22,6 @@ type UserState = {
   sure_name: string,
   history?: Array<any>,
 
-  pay_day: ?number,
-  daysToPayday: ?number,
   calc?: any
 };
 
@@ -33,9 +31,9 @@ export const initialState: UserState = {
   name: "Pavel",
   sure_name: "Durov",
   history: [],
-  pay_day: undefined,
-  daysToPayday: undefined,
   calc: {
+    pay_day: undefined,
+    daysToPayday: undefined,
     budget: undefined,
     isFetching: false,
     error: false,
@@ -88,35 +86,33 @@ export function user(state: UserState = initialState, action: Object) {
         calc: { ...state.calc, isFetching: false, error: true }
       };
 
-    // case ADD_PAYDAY_REQUEST:
-    // case GET_PAYDAY_REQUEST:
-    //   return {
-    //     ...state,
-    //     pay_day: {
-    //       ...state.pay_day,
-    //       isFetching: action.payload.isFetching
-    //     }
-    //   };
-    // case ADD_PAYDAY_SUCCESS:
-    // case GET_PAYDAY_SUCCESS:
-    //   return {
-    //     ...state,
-    //     pay_day: {
-    //       ...state.pay_day,
-    //       isFetching: action.payload.isFetching,
-    //       pay_day: action.payload.payday
-    //     },
-    //     daysToPayday: msToDays(Date.parse(action.payload.payday) - Date.now())
-    //   };
-    // case ADD_PAYDAY_FAILURE:
-    // case GET_PAYDAY_FAILURE:
-    //   return { ...state, pay_day: action.payload };
+    case ADD_PAYDAY_REQUEST:
+      return {
+        ...state,
+        calc: {
+          ...state.calc,
+          isFetching: action.payload.isFetching
+        }
+      };
+    case ADD_PAYDAY_SUCCESS:
+      return {
+        ...state,
+        calc: {
+          ...state.calc,
+          pay_day: action.payload.payload.pay_day,
+          daysToPayday: action.payload.payload.days_to_payday,
+          isFetching: action.payload.isFetching
+        }
+      };
+    case ADD_PAYDAY_FAILURE:
+      return { ...state, calc: { ...state.calc, error: true } };
 
     case GET_ALL_COSTS_REQUEST:
       return {
         ...state,
         calc: {
           ...state.calc,
+
           isFetching: true,
           error: false,
           error_message: undefined
@@ -139,6 +135,8 @@ export function user(state: UserState = initialState, action: Object) {
         calc: {
           ...state.calc,
           budget: action.payload.costs.budget,
+          pay_day: action.payload.costs.pay_day,
+          daysToPayday: action.payload.costs.days_to_payday,
           isFetching: false,
           error: false,
           error_message: undefined,

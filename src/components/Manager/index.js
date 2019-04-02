@@ -5,6 +5,7 @@ import { Card, Overlay } from "../index";
 import { ModalOverlay, WholeBudget, Calendar, PartBudget } from "../index";
 import style from "./Manager.module.css";
 import { getAllCosts } from "../../actions";
+import { msToDays } from "../Calendar/calendarHelper";
 
 type PROPS = {
   getWholeBudget: Function,
@@ -72,7 +73,10 @@ class Manager extends React.Component<PROPS, STATE> {
     const { tempPayDay } = this.state;
     switch (btnType) {
       case "ok":
-        this.props.addPayDay(tempPayDay);
+        const initial_daysToPayday = msToDays(
+          Date.parse(tempPayDay) - Date.now()
+        );
+        this.props.addPayDay(tempPayDay, initial_daysToPayday);
         this.setState({ tempPayDay: undefined });
         break;
       case "chanel":

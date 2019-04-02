@@ -15,10 +15,10 @@ const requestPayDay = () => ({
     isFetching: true
   }
 });
-export const successPayDay = (payday: string) => ({
+export const successPayDay = (payload: Object) => ({
   type: ADD_PAYDAY_SUCCESS,
   payload: {
-    payday,
+    payload,
     isFetching: false
   }
 });
@@ -31,12 +31,16 @@ const failurePayDay = message => ({
   }
 });
 
-export const addPayDay = (payday: string) => {
+export const addPayDay = (payday: string, daysToPayday: number) => {
   return (dispatch: any) => {
     dispatch(requestPayDay());
     fetch(API.ADD_PAYDAY, {
       method: "POST",
-      body: JSON.stringify({ vk_id: "123456", payday })
+      body: JSON.stringify({
+        vk_id: "123456",
+        payday,
+        days_to_payday: daysToPayday
+      })
     })
       .then(res => res.json())
       .then(res => {

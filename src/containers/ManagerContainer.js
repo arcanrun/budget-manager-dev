@@ -17,9 +17,9 @@ const mapStateToProps = state => ({
   modalIsVisible: state.modal.modalIsVisible,
   typeModal: state.modal.typeModal,
   budget: state.user.calc.budget,
-  payday: state.user.pay_day,
+  payday: state.user.calc.pay_day,
   isFetching_calc: state.user.calc.isFetching,
-  daysToPayday: state.user.daysToPayday,
+  daysToPayday: state.user.calc.daysToPayday,
   costs: state.user.calc,
   vk_id: state.user.vk_id
 });
