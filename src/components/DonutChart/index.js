@@ -24,7 +24,6 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
     tempValueInPercents = (100 * temp) / maxToday;
     colorTemp = color;
   }
-
   return (
     <svg viewBox="0 0 35 35" className={style.donut}>
       <circle
@@ -34,7 +33,20 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
         className={style.circle}
         strokeDasharray={`${tempValueInPercents}, 100`}
         fill={colorTemp}
-      />
+      >
+        {tempValueInPercents <= 10 ? (
+          <animate
+            attributeType="XML"
+            attributeName="fill"
+            from="#F72D6B"
+            to="#ffffff"
+            dur="2s"
+            repeatCount="indefinite"
+          />
+        ) : (
+          ""
+        )}
+      </circle>
       <g className={style.text}>
         <text
           className={style.title}
