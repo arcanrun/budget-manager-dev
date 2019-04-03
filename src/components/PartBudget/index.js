@@ -2,6 +2,7 @@
 import React from "react";
 
 import { DonutChart } from "../index";
+import style from "./PartBudget.module.css";
 
 type PROPS = {
   onClickToggleModal: Function,
@@ -47,11 +48,17 @@ class PartBudget extends React.Component<PROPS, {}> {
           color={color}
         />
 
-        <div>
-          <button onClick={() => onClickToggleModal(`${typeModal}_plus`)}>
+        <div className={style.footer}>
+          <button
+            className={[style.button, style.buttonPlus].join(" ")}
+            onClick={() => onClickToggleModal(`${typeModal}_plus`)}
+          >
             +
           </button>
-          <button onClick={() => onClickToggleModal(`${typeModal}_minus`)}>
+          <button
+            className={[style.button, style.buttonMinus].join(" ")}
+            onClick={() => onClickToggleModal(`${typeModal}_minus`)}
+          >
             -
           </button>
         </div>
