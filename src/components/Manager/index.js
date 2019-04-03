@@ -181,9 +181,11 @@ class Manager extends React.Component<PROPS, STATE> {
         {showPreloader}
         {wholeBudgetCard}
         {budget ? calendarCard : ""}
+
         {budget && payday ? budgetCardCommon : ""}
         {budget && payday ? budgetCardFun : ""}
         {budget && payday ? budgetCardInvest : ""}
+
         {!modalIsVisible || modalOverlay}
       </>
     );
