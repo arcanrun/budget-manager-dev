@@ -29,7 +29,7 @@ class PartBudget extends React.Component<PROPS, {}> {
       costsValue = (budget * 0.3).toFixed(2);
       maxTodayValue = costs.fun.maxToday.value;
       temp = costs.fun.maxToday.temp;
-      color = "#F2EC70";
+      color = "#FFB200";
     } else if (typeModal === "invest") {
       title = "20";
       costsValue = (budget * 0.2).toFixed(2);
@@ -46,21 +46,14 @@ class PartBudget extends React.Component<PROPS, {}> {
           maxToday={+maxTodayValue}
           color={color}
         />
-        <h1>{title}</h1>
+
         <div>
-          <div>{costsValue}</div>
-          <div>
-            {" "}
-            на сегодня: {temp} / <b>{maxTodayValue}</b>
-          </div>
-          <div>
-            <button onClick={() => onClickToggleModal(`${typeModal}_plus`)}>
-              +
-            </button>
-            <button onClick={() => onClickToggleModal(`${typeModal}_minus`)}>
-              -
-            </button>
-          </div>
+          <button onClick={() => onClickToggleModal(`${typeModal}_plus`)}>
+            +
+          </button>
+          <button onClick={() => onClickToggleModal(`${typeModal}_minus`)}>
+            -
+          </button>
         </div>
       </>
     );

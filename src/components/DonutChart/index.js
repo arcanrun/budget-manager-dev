@@ -4,6 +4,7 @@ import ReactSVG from "react-svg";
 
 import DonutSvg from "./donut-chart.svg";
 import style from "./DonutChart.module.css";
+import { cpus } from "os";
 
 type PROPS = {
   color: string,
@@ -14,7 +15,16 @@ type PROPS = {
 };
 
 const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
-  const tempValueInPercents = (100 * temp) / maxToday;
+  let tempValueInPercents = "";
+  let colorTemp = "";
+  if (temp <= 0) {
+    tempValueInPercents = 0;
+    colorTemp = "#F72D6B";
+  } else {
+    tempValueInPercents = (100 * temp) / maxToday;
+    colorTemp = color;
+  }
+
   return (
     <svg viewBox="0 0 35 35" className={style.donut}>
       <circle
@@ -23,7 +33,7 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
         cy="50%"
         className={style.circle}
         strokeDasharray={`${tempValueInPercents}, 100`}
-        fill={color}
+        fill={colorTemp}
       />
       <g className={style.text}>
         <text
