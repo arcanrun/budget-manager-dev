@@ -4,5 +4,6 @@ export const API = {
   ADD_BUDGET: `${ENDPOINT}add-budget/`,
   ADD_PAYDAY: `${ENDPOINT}add-payday/`,
   GET_ALL_COSTS: `${ENDPOINT}get-costs-all/`,
-  TEMP_TODAY_COSTS: `${ENDPOINT}temp-today-cost/`
+  TEMP_TODAY_COSTS: `${ENDPOINT}temp-today-cost/`,
+  GET_HISTORY: `${ENDPOINT}get-history/`
 };

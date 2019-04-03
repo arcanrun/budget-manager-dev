@@ -43,7 +43,10 @@ class Manager extends React.Component<PROPS, STATE> {
     fetch("http://127.0.0.1:8000/log-in/", {
       method: "POST",
       body: JSON.stringify({ vk_id: "123456" })
-    });
+    })
+      .then(res => res.json())
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
 
     this.props.getAllCosts(vk_id, daysToPayday, budget);
   }

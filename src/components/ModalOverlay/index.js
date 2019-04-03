@@ -62,6 +62,8 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     const inputVal = this.state.inputValue;
     const [typeModal, operation] = this.props.typeModal.split("_");
     const daysToPayday = this.props.daysToPayday;
+    const dateNow = new Date();
+    console.log(dateNow);
 
     if (this.validate(this.props.typeModal)) {
       this.props.onClick(this.props.typeModal);
@@ -79,7 +81,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
             this.props.vk_id,
             "common",
             operation,
-            this.props.budget
+            dateNow
           );
           break;
 
@@ -89,7 +91,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
             this.props.vk_id,
             "fun",
             operation,
-            this.props.budget
+            dateNow
           );
           break;
 
@@ -99,7 +101,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
             this.props.vk_id,
             "invest",
             operation,
-            this.props.budget
+            dateNow
           );
           break;
 

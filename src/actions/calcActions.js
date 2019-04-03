@@ -34,7 +34,8 @@ export const calcTempCosts = (
   value: number,
   vk_id: string,
   type: string,
-  operation: string
+  operation: string,
+  date_now: string
 ) => {
   return (dispatch: any) => {
     dispatch(calcTempCostsRequest());
@@ -44,7 +45,8 @@ export const calcTempCosts = (
         vk_id,
         value,
         type,
-        operation
+        operation,
+        date_now
       })
     })
       .then(res => res.json())

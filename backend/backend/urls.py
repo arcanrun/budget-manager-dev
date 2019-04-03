@@ -22,9 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('add-budget/', views.add_budget),
     path('add-payday/', views.add_payday),
-    # path('get-budget/', views.get_budget),
-    # path('get-payday/', views.get_payday),
     path('get-costs-all/', views.get_costs_all),
     path('temp-today-cost/', views.temp_today_cost),
     path('log-in/', views.log_in),
+    path('get-history/', views.get_history),
 ]

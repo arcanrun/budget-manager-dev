@@ -2,54 +2,11 @@ from django.shortcuts import render
 from .models import Vkuser
 from django.http import JsonResponse
 from django.contrib.auth.models import User, Group
-from .models import Vkuser
+from .models import Vkuser, History
 
+from .helpers import get_updated_data, make_calculations, costsPattern, history_saver
 
 import json
-
-costsPattern = json.dumps({
-    "maxToday": "",
-    "temp": ""
-})
-
-
-def get_updated_data(vk_id):
-    response = {'RESPONSE': 'ERROR', 'PAYLOAD': {}}
-    updated_all_users = Vkuser.objects.all()
-    for field in updated_all_users:
-        if (vk_id == field.id_vk):
-            response['PAYLOAD']['common'] = json.loads(field.common)
-            response['PAYLOAD']['fun'] = json.loads(field.fun)
-            response['PAYLOAD']['invest'] = json.loads(field.invest)
-            response['PAYLOAD']['budget'] = field.budget
-            response['PAYLOAD']['pay_day'] = field.pay_day
-            response['PAYLOAD']['days_to_payday'] = field.days_to_payday
-            response['RESPONSE'] = 'SUCCES_FETCHED'
-
-    return response
-
-
-def make_calculations(field_common, filed_fun, file_invest, daysToPayday, budget):
-
-    commonObject = json.loads(field_common)
-    funObject = json.loads(filed_fun)
-    investObject = json.loads(file_invest)
-
-    commonObject["maxToday"] = round((
-        float(budget) * 0.5) / int(daysToPayday), 2)
-    funObject["maxToday"] = round((
-        float(budget) * 0.3) / int(daysToPayday), 2)
-    investObject["maxToday"] = round((
-        float(budget) * 0.2) / int(daysToPayday), 2)
-
-    commonObject["temp"] = commonObject["maxToday"]
-    funObject["temp"] = funObject["maxToday"]
-    investObject["temp"] = investObject["maxToday"]
-
-    commonObjectJSON = json.dumps(commonObject)
-    funObjectJSON = json.dumps(funObject)
-    investObjectJSON = json.dumps(investObject)
-    return [commonObjectJSON, funObjectJSON, investObjectJSON]
 
 
 def add_budget(request):
@@ -163,6 +120,7 @@ def log_in(request):
         user = Vkuser(id_vk=vk_id, common=costsPattern,
                       fun=costsPattern, invest=costsPattern)
         user.save()
+
         response['RESPONSE'] = 'LOGIN_SUCCESS'
         response['PAYLOAD'] = vk_id
         print('[log_in:RESPONSE]-->', response)
@@ -181,8 +139,7 @@ def temp_today_cost(request):
     typeCost = req['type']
     value = round(float(req['value']), 2)
     operation = req['operation']
-
-    newTemp = ''
+    date_now = req['date_now']
     newBudget = ''
     costsObject = {}
     all_users = Vkuser.objects.all()
@@ -201,6 +158,7 @@ def temp_today_cost(request):
                 newBudget = float(field.budget) - value
                 costsObject[typeCost]['temp'] = round(
                     costsObject[typeCost]['temp'] - value, 2)
+            history_saver(field.id_vk, date_now, operation, value, typeCost)
 
             Vkuser.objects.filter(id_vk=vk_id).update(
                 budget=round(newBudget, 2), common=json.dumps(costsObject["common"]), fun=json.dumps(costsObject["fun"]), invest=json.dumps(costsObject["invest"]))
@@ -210,3 +168,7 @@ def temp_today_cost(request):
     print('[temp_today_cost:RESPONSE]-->', response)
 
     return JsonResponse(response)
+
+
+def get_history(request):
+    pass
