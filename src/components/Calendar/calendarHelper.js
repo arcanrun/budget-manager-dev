@@ -228,11 +228,11 @@ export const dateToString = date => {
 
 export const msToDays = millisec => {
   if (millisec < 0) return 0;
-  let seconds = (millisec / 1000).toFixed(1);
+  // let seconds = (millisec / 1000).toFixed(1);
 
-  let minutes = (millisec / (1000 * 60)).toFixed(1);
+  // let minutes = (millisec / (1000 * 60)).toFixed(1);
 
-  let hours = (millisec / (1000 * 60 * 60)).toFixed(1);
+  // let hours = (millisec / (1000 * 60 * 60)).toFixed(1);
 
   let days = (millisec / (1000 * 60 * 60 * 24)).toFixed(0);
 

@@ -5,7 +5,6 @@ import ReactDOM from "react-dom";
 
 import "./style.css";
 import { InputCard } from "../index";
-import { WholeBudget } from "../WholeBudget";
 
 type PROPS = {
   onClick: Function,

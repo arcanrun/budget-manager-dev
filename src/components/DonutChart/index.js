@@ -1,6 +1,5 @@
 //@flow
 import React from "react";
-import ReactSVG from "react-svg";
 
 import style from "./DonutChart.module.css";
 

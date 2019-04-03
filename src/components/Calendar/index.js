@@ -6,12 +6,7 @@ import "react-day-picker/lib/style.css";
 
 import "./style.css";
 import style from "./Calendar.module.css";
-import {
-  stringToDate,
-  dateToString,
-  msToDays,
-  addSuffix
-} from "./calendarHelper";
+import { stringToDate, dateToString, addSuffix } from "./calendarHelper";
 
 type PROPS = {
   handleDayClick: Function,

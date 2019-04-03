@@ -4,7 +4,6 @@ import React from "react";
 import { Card, Overlay } from "../index";
 import { ModalOverlay, WholeBudget, Calendar, PartBudget } from "../index";
 import style from "./Manager.module.css";
-import { getAllCosts } from "../../actions";
 import { msToDays } from "../Calendar/calendarHelper";
 
 type PROPS = {
@@ -38,7 +37,6 @@ class Manager extends React.Component<PROPS, STATE> {
 
   componentDidMount() {
     const budget = this.props.budget;
-    const payday = this.props.payday;
     const vk_id = this.props.vk_id;
     const daysToPayday = this.props.daysToPayday;
 
@@ -76,7 +74,7 @@ class Manager extends React.Component<PROPS, STATE> {
     switch (btnType) {
       case "ok":
         const initial_daysToPayday = msToDays(
-          Date.parse(tempPayDay) - Date.now()
+          Date.parse(tempPayDay || "") - Date.now()
         );
         this.props.addPayDay(tempPayDay, initial_daysToPayday);
         this.setState({ tempPayDay: undefined });

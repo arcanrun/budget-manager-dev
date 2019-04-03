@@ -13,7 +13,6 @@ import {
   CALC_TODAY_COSTS_SUCCESS,
   CALC_TODAY_COSTS_FAILURE
 } from "../constants";
-import { msToDays } from "../components/Calendar/calendarHelper";
 
 type UserState = {
   vk_id: number,
@@ -22,7 +21,26 @@ type UserState = {
   sure_name: string,
   history?: Array<any>,
   isFetching_pyaday: boolean, // temp solutions...
-  calc?: any
+  calc: {
+    common: {
+      maxToday: {
+        value: ?number,
+        temp: ?number
+      }
+    },
+    fun: {
+      maxToday: {
+        value: ?number,
+        temp: ?number
+      }
+    },
+    invest: {
+      maxToday: {
+        value: ?number,
+        temp: ?number
+      }
+    }
+  }
 };
 
 export const initialState: UserState = {
