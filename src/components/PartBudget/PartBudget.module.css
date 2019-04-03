@@ -13,14 +13,22 @@
   opacity: 1;
   transition: 0.2s ease;
 }
-.button:hover {
-  opacity: 0.5;
-}
+
 .buttonPlus {
   color: #0fde8c;
   border: 2px solid #0fde8c;
+  background-color: rgba(0, 0, 0, 0);
+}
+.buttonPlus:hover {
+  color: #ffffff;
+  background-color: #0fde8c;
 }
 .buttonMinus {
   color: #f72d6b;
   border: 2px solid #f72d6b;
+  background-color: rgba(0, 0, 0, 0);
+}
+.buttonMinus:hover {
+  color: #ffffff;
+  background-color: #f72d6b;
 }

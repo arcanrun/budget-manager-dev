@@ -31,7 +31,7 @@ export const calcTempCostsFailure = (message: string) => ({
 });
 
 export const calcTempCosts = (
-  value: string,
+  value: number,
   vk_id: string,
   type: string,
   operation: string

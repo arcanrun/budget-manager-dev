@@ -56,7 +56,7 @@ def add_budget(request):
     req = json.loads(str(request.body, encoding='utf-8'))
 
     vk_id = str(req['vk_id'])
-    budget = float(req['budget'])
+    budget = round(float(req['budget']), 2)
     operation = str(req['operation'])
 
     all_users = Vkuser.objects.all()
@@ -179,7 +179,7 @@ def temp_today_cost(request):
 
     vk_id = str(req['vk_id'])
     typeCost = req['type']
-    value = float(req['value'])
+    value = round(float(req['value']), 2)
     operation = req['operation']
 
     newTemp = ''
@@ -195,13 +195,15 @@ def temp_today_cost(request):
 
             if operation == 'plus':
                 newBudget = float(field.budget) + value
-                costsObject[typeCost]['temp'] = costsObject[typeCost]['temp'] + value
+                costsObject[typeCost]['temp'] = round(
+                    costsObject[typeCost]['temp'] + value, 2)
             if operation == 'minus':
                 newBudget = float(field.budget) - value
-                costsObject[typeCost]['temp'] = costsObject[typeCost]['temp'] - value
+                costsObject[typeCost]['temp'] = round(
+                    costsObject[typeCost]['temp'] - value, 2)
 
             Vkuser.objects.filter(id_vk=vk_id).update(
-                budget=newBudget, common=json.dumps(costsObject["common"]), fun=json.dumps(costsObject["fun"]), invest=json.dumps(costsObject["invest"]))
+                budget=round(newBudget, 2), common=json.dumps(costsObject["common"]), fun=json.dumps(costsObject["fun"]), invest=json.dumps(costsObject["invest"]))
             break
 
     response = get_updated_data(vk_id)
