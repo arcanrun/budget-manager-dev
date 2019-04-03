@@ -128,7 +128,7 @@ class Manager extends React.Component<PROPS, STATE> {
       </Card>
     );
     const calendarCard = (
-      <Card headerTitle={"календарь"} icon={"calendar"}>
+      <Card headerTitle={"календарь"} icon={"calendar-number"}>
         <Calendar
           handleDayClick={this.handleDayClick}
           handleNewPayDay={this.handleNewPayDay}
@@ -146,7 +146,7 @@ class Manager extends React.Component<PROPS, STATE> {
       />
     );
     const budgetCardCommon = (
-      <Card>
+      <Card icon="50%" headerTitle="Общие расходы">
         <PartBudget
           onClickToggleModal={onClickToggleModal}
           typeModal={"common"}
@@ -156,7 +156,7 @@ class Manager extends React.Component<PROPS, STATE> {
       </Card>
     );
     const budgetCardFun = (
-      <Card>
+      <Card icon="30%" headerTitle="Расходы на развлечения">
         <PartBudget
           onClickToggleModal={onClickToggleModal}
           typeModal={"fun"}
@@ -166,7 +166,7 @@ class Manager extends React.Component<PROPS, STATE> {
       </Card>
     );
     const budgetCardInvest = (
-      <Card>
+      <Card icon="20%" headerTitle="Инвестиции">
         <PartBudget
           onClickToggleModal={onClickToggleModal}
           typeModal={"invest"}

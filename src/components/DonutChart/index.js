@@ -2,9 +2,7 @@
 import React from "react";
 import ReactSVG from "react-svg";
 
-import DonutSvg from "./donut-chart.svg";
 import style from "./DonutChart.module.css";
-import { cpus } from "os";
 
 type PROPS = {
   color: string,
@@ -34,7 +32,7 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
         strokeDasharray={`${tempValueInPercents}, 100`}
         fill={colorTemp}
       >
-        {tempValueInPercents <= 10 ? (
+        {tempValueInPercents <= 20 ? (
           <animate
             attributeType="XML"
             attributeName="fill"

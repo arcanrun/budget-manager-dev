@@ -8,8 +8,11 @@
 .check {
   width: 20px;
   height: 20px;
-  transition: 0.2s;
+  transition: 0.2s ease;
 }
 .pencil:hover {
   fill: #f72d6b !important;
+}
+.default-display {
+  font-size: 16px;
 }

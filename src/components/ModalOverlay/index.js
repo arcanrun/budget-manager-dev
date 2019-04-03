@@ -55,18 +55,17 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
         }
 
       default:
-        console.log("typeModal: ¯|_(ツ)_/¯");
+        console.log("typeModal[" + typeModal + "]: ¯|_(ツ)_/¯");
         break;
     }
   };
   handleOK = () => {
     const inputVal = this.state.inputValue;
-    const { typeModal } = this.props;
+    const [typeModal, operation] = this.props.typeModal.split("_");
     const daysToPayday = this.props.daysToPayday;
-    const budget = this.props.budget;
 
-    if (this.validate(typeModal)) {
-      this.props.onClick(typeModal);
+    if (this.validate(this.props.typeModal)) {
+      this.props.onClick(this.props.typeModal);
       switch (typeModal) {
         case "budget":
           const type = daysToPayday ? "change" : "add";
@@ -74,61 +73,33 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
           this.props.addWholeBudget(inputVal, type, daysToPayday);
 
           break;
-        case "payday":
-          this.props.addPayDay(inputVal);
+
+        case "common":
+          this.props.calcTempCosts(
+            inputVal,
+            this.props.vk_id,
+            "common",
+            operation,
+            this.props.budget
+          );
           break;
 
-        case "common_minus":
-          this.props.calcTempCosts(
-            inputVal,
-            this.props.vk_id,
-            "common",
-            "-",
-            this.props.budget
-          );
-          break;
-        case "common_plus":
-          this.props.calcTempCosts(
-            inputVal,
-            this.props.vk_id,
-            "common",
-            "+",
-            this.props.budget
-          );
-          break;
-        case "fun_minus":
+        case "fun":
           this.props.calcTempCosts(
             inputVal,
             this.props.vk_id,
             "fun",
-            "-",
+            operation,
             this.props.budget
           );
           break;
-        case "fun_plus":
-          this.props.calcTempCosts(
-            inputVal,
-            this.props.vk_id,
-            "fun",
-            "+",
-            this.props.budget
-          );
-          break;
-        case "invest_minus":
+
+        case "invest":
           this.props.calcTempCosts(
             inputVal,
             this.props.vk_id,
             "invest",
-            "-",
-            this.props.budget
-          );
-          break;
-        case "invest_plus":
-          this.props.calcTempCosts(
-            inputVal,
-            this.props.vk_id,
-            "invest",
-            "+",
+            operation,
             this.props.budget
           );
           break;
@@ -155,7 +126,6 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
 
   render() {
     const { onClick, typeModal } = this.props;
-    // const isTypeBudget = typeModal === "budget";
     const { isErrorValidation } = this.state;
     const budgetInputCard = (
       <InputCard

@@ -2,7 +2,6 @@
 import * as React from "react";
 
 import style from "./Card.module.css";
-import "../../static/icons.css";
 
 import { Icon } from "../Icon";
 
@@ -17,7 +16,7 @@ type PROPS = {
 const Card = ({ children, headerTitle, icon, rightIcon, onClick }: PROPS) => (
   <div className={style.card}>
     <div className={style.header}>
-      <div>
+      <div className={style.headerLeft}>
         <Icon icon={icon || ""} color="#B3B3B3" />
         <span className={style.title}>{headerTitle}</span>
       </div>

@@ -4,9 +4,11 @@ import ReactSVG from "react-svg";
 
 import "./style.css";
 import MonyeBag from "../../static/money-bag.svg";
+import MonyeBag2 from "../../static/money-bag-2.svg";
 import History from "../../static/history.svg";
 import Profile from "../../static/profile.svg";
 import Calendar from "../../static/calendar.svg";
+import CalendarNumber from "../../static/calendar-number.svg";
 import Pencil from "../../static/pencil.svg";
 import Check from "../../static/check.svg";
 import Cross from "../../static/cross.svg";
@@ -21,6 +23,15 @@ const Icon = ({ icon, color }: PROPS) => {
       return (
         <ReactSVG
           src={MonyeBag}
+          wrapper="span"
+          svgClassName="money-bag-icon"
+          svgStyle={{ fill: color }}
+        />
+      );
+    case "money-bag-2":
+      return (
+        <ReactSVG
+          src={MonyeBag2}
           wrapper="span"
           svgClassName="money-bag-icon"
           svgStyle={{ fill: color }}
@@ -48,6 +59,15 @@ const Icon = ({ icon, color }: PROPS) => {
       return (
         <ReactSVG
           src={Calendar}
+          wrapper="span"
+          svgClassName="calendar"
+          svgStyle={{ fill: color }}
+        />
+      );
+    case "calendar-number":
+      return (
+        <ReactSVG
+          src={CalendarNumber}
           wrapper="span"
           svgClassName="calendar"
           svgStyle={{ fill: color }}
@@ -85,7 +105,7 @@ const Icon = ({ icon, color }: PROPS) => {
       );
 
     default:
-      return <b>{icon}</b>;
+      return <b className="default-display">{icon}</b>;
   }
 };
 

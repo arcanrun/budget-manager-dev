@@ -193,10 +193,10 @@ def temp_today_cost(request):
             costsObject["fun"] = json.loads(field.fun)
             costsObject["invest"] = json.loads(field.invest)
 
-            if operation == '+':
+            if operation == 'plus':
                 newBudget = float(field.budget) + value
                 costsObject[typeCost]['temp'] = costsObject[typeCost]['temp'] + value
-            if operation == '-':
+            if operation == 'minus':
                 newBudget = float(field.budget) - value
                 costsObject[typeCost]['temp'] = costsObject[typeCost]['temp'] - value
 

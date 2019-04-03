@@ -1,7 +1,6 @@
 //@flow
 import React from "react";
 import "./style.css";
-import "../../static/icons.css";
 
 type Props = {
   avatar: string,

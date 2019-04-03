@@ -19,49 +19,72 @@ class PartBudget extends React.Component<PROPS, {}> {
     let temp = "";
     let maxTodayValue = "";
     let color = "";
-    if (typeModal === "common") {
-      title = "50";
-      costsValue = (budget * 0.5).toFixed(2);
-      maxTodayValue = costs.common.maxToday.value;
-      temp = costs.common.maxToday.temp;
-      color = "#3E2AAA";
-    } else if (typeModal === "fun") {
-      title = "30";
-      costsValue = (budget * 0.3).toFixed(2);
-      maxTodayValue = costs.fun.maxToday.value;
-      temp = costs.fun.maxToday.temp;
-      color = "#FFB200";
-    } else if (typeModal === "invest") {
-      title = "20";
-      costsValue = (budget * 0.2).toFixed(2);
-      maxTodayValue = costs.invest.maxToday.value;
-      temp = costs.invest.maxToday.temp;
-      color = "#F95789";
+    switch (typeModal) {
+      case "common":
+        title = "50";
+        costsValue = (budget * 0.5).toFixed(2);
+        maxTodayValue = costs.common.maxToday.value;
+        temp = costs.common.maxToday.temp;
+        color = "#3E2AAA";
+        break;
+      case "fun":
+        title = "30";
+        costsValue = (budget * 0.3).toFixed(2);
+        maxTodayValue = costs.fun.maxToday.value;
+        temp = costs.fun.maxToday.temp;
+        color = "#FFB200";
+        break;
+      case "invest":
+        title = "20";
+        costsValue = (budget * 0.2).toFixed(2);
+        maxTodayValue = costs.invest.maxToday.value;
+        temp = costs.invest.maxToday.temp;
+        color = "#F95789";
+        break;
+      default:
+        title = "SOME ERROR";
+        costsValue = 0;
+        maxTodayValue = 0;
+        temp = 0;
+        color = "#000000";
+        break;
     }
+
+    const plusBtn = (
+      <button
+        className={[style.button, style.buttonPlus].join(" ")}
+        onClick={() => onClickToggleModal(`${typeModal}_plus`)}
+      >
+        +
+      </button>
+    );
+    const minusBtn = (
+      <button
+        className={[style.button, style.buttonMinus].join(" ")}
+        onClick={() => onClickToggleModal(`${typeModal}_minus`)}
+      >
+        -
+      </button>
+    );
+    const footer = (
+      <div className={style.footer}>
+        {plusBtn}
+        {minusBtn}
+      </div>
+    );
+    const chart = (
+      <DonutChart
+        title={title}
+        cost={+costsValue}
+        temp={+temp}
+        maxToday={+maxTodayValue}
+        color={color}
+      />
+    );
     return (
       <>
-        <DonutChart
-          title={title}
-          cost={+costsValue}
-          temp={+temp}
-          maxToday={+maxTodayValue}
-          color={color}
-        />
-
-        <div className={style.footer}>
-          <button
-            className={[style.button, style.buttonPlus].join(" ")}
-            onClick={() => onClickToggleModal(`${typeModal}_plus`)}
-          >
-            +
-          </button>
-          <button
-            className={[style.button, style.buttonMinus].join(" ")}
-            onClick={() => onClickToggleModal(`${typeModal}_minus`)}
-          >
-            -
-          </button>
-        </div>
+        {chart}
+        {footer}
       </>
     );
   }
