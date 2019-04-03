@@ -16,6 +16,7 @@ import { Calendar } from "./Calendar";
 import { Overlay } from "./Overlay";
 import { InputCard } from "./InputCard";
 import { PartBudget } from "./PartBudget";
+import { DonutChart } from "./DonutChart";
 export {
   Header,
   Menu,
@@ -33,5 +34,6 @@ export {
   Calendar,
   Overlay,
   InputCard,
-  PartBudget
+  PartBudget,
+  DonutChart
 };

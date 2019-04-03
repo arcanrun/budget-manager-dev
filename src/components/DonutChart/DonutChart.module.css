@@ -1,0 +1,32 @@
+.circle {
+  /* fill: #110261; */
+  stroke: #0fde8c;
+  stroke-width: 2;
+  transition: 0.2s;
+}
+.text {
+  font-family: Arial;
+  font-size: 5px;
+  fill: #ffffff;
+}
+.title {
+  font-weight: bold;
+  font-size: 6px;
+  opacity: 0.5;
+}
+.cost {
+  font-size: 3px;
+  font-weight: bold;
+}
+
+.footerTitle {
+  font-size: 2px;
+}
+.footerCost {
+  font-weight: bold;
+  font-size: 2px;
+}
+
+.donut {
+  transform: rotate(-90deg);
+}

@@ -37,7 +37,7 @@ export const calcTempCosts = (
   operation: string
 ) => {
   return (dispatch: any) => {
-    dispatch(calcTempCostsRequest);
+    dispatch(calcTempCostsRequest());
     fetch(API.TEMP_TODAY_COSTS, {
       method: "POST",
       body: JSON.stringify({
