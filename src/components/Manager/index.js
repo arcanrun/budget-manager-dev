@@ -48,20 +48,20 @@ class Manager extends React.Component<PROPS, STATE> {
     this.props.getAllCosts(vk_id, daysToPayday, budget);
   }
 
-  // componentDidUpdate(prevProps: Object, prevState: Object) {
-  //   const budget = this.props.budget;
-  //   const payday = this.props.payday;
-  //   const vk_id = this.props.vk_id;
-  //   const daysToPayday = this.props.daysToPayday;
+  componentDidUpdate(prevProps: Object, prevState: Object) {
+    const budget = this.props.budget;
+    const payday = this.props.payday;
+    const vk_id = this.props.vk_id;
+    const daysToPayday = this.props.daysToPayday;
+    const modalIsVisible = this.props.modalIsVisible;
+    const body = document.getElementsByTagName("body")[0];
 
-  //   if (
-  //     prevProps.wholeBudget !== budget ||
-  //     prevProps.daysToPayday !== daysToPayday
-  //   ) {
-  //     if (budget && payday && vk_id)
-  //       this.props.getAllCosts(vk_id, daysToPayday, budget);
-  //   }
-  // }
+    if (prevProps.modalIsVisible !== modalIsVisible) {
+      modalIsVisible
+        ? (body.style.overflow = "hidden")
+        : (body.style.overflow = "auto");
+    }
+  }
 
   handleDayClick = (day: string, { selected }: { selected: boolean }) => {
     this.setState({
@@ -175,7 +175,7 @@ class Manager extends React.Component<PROPS, STATE> {
     );
 
     return (
-      <>
+      <div className={style.manager}>
         {showPreloader}
         {wholeBudgetCard}
         {budget ? calendarCard : ""}
@@ -185,7 +185,7 @@ class Manager extends React.Component<PROPS, STATE> {
         {budget && payday ? budgetCardInvest : ""}
 
         {!modalIsVisible || modalOverlay}
-      </>
+      </div>
     );
   }
 }
