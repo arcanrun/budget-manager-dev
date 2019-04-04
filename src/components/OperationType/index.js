@@ -8,29 +8,22 @@ type PROPS = {
 };
 
 const OperationType = ({ children }: PROPS) => {
-  let sign = "";
+  let typeOper = "";
   switch (children) {
-    case "plus":
-      sign = "+";
+    case "common":
+      typeOper = "50%";
       break;
-    case "minus":
-      sign = "-";
+    case "fun":
+      typeOper = "30%";
+      break;
+    case "invest":
+      typeOper = "20%";
       break;
     default:
-      sign = "?";
+      typeOper = "?";
       break;
   }
-  return (
-    <div
-      className={
-        sign === "+"
-          ? [style.sign, style.signPlus].join(" ")
-          : [style.sign, style.signMinus].join(" ")
-      }
-    >
-      {children}
-    </div>
-  );
+  return <div className={style.type}>{typeOper}</div>;
 };
 
 export { OperationType };

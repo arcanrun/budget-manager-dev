@@ -2,7 +2,7 @@
 import React from "react";
 
 import style from "./History.module.css";
-import { OperationSign, OperationType } from "../index";
+import { OperationSign, OperationType, OperationValue } from "../index";
 
 type PROPS = {
   vk_id: number,
@@ -15,23 +15,25 @@ class History extends React.Component<PROPS, {}> {
     this.props.getHistory(vk_id);
   }
   render() {
-    const { vk_id, history } = this.props;
+    const { history } = this.props;
     console.log(history);
     return (
       <div className={style.container}>
         <div className={style.verticalLine} />
         <div className={style.content}>
           {history.map((item, i) => {
-            const key = Object.keys(item)[0];
+            const day = Object.keys(item)[0];
 
             return (
-              <div key={i} className={style.day}>
-                <div className={style.date}>{key}</div>{" "}
-                {item[key].map((elem, j) => (
+              <div key={i}>
+                <div className={style.day}>{day}</div>
+                {item[day].map((elem, j) => (
                   <div key={j} className={style.operation}>
                     <OperationType>{elem.type_cost}</OperationType>
                     <OperationSign>{elem.operation}</OperationSign>
-                    <div>{elem.value}</div>
+                    <OperationValue sign={elem.operation}>
+                      {elem.value}
+                    </OperationValue>
                   </div>
                 ))}
               </div>
