@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User, Group
 from .models import Vkuser, History
+import datetime
+import calendar
 
 import json
 
@@ -23,6 +25,18 @@ def get_updated_data(vk_id):
             response['RESPONSE'] = 'SUCCES_FETCHED'
 
     return response
+
+
+def next_pay_day(current_pay_day):
+    currentFormated = datetime.datetime.strptime(
+        current_pay_day[:10], '%Y-%m-%d')
+
+    month = currentFormated.month
+    year = currentFormated.year + month // 12
+    month = month % 12 + 1
+    day = min(currentFormated.day, calendar.monthrange(year, month)[1])
+
+    return datetime.datetime(year, month, day)
 
 
 def make_calculations(field_common, filed_fun, file_invest, daysToPayday, budget):

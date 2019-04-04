@@ -5,7 +5,7 @@ from django.contrib.auth.models import User, Group
 from .models import Vkuser, History
 import datetime
 
-from .helpers import get_updated_data, make_calculations, costsPattern, history_saver
+from .helpers import get_updated_data, make_calculations, costsPattern, history_saver, next_pay_day
 
 import json
 
@@ -88,22 +88,31 @@ def get_costs_all(request):
     all_users = Vkuser.objects.all()
     for field in all_users:
         if (vk_id == field.id_vk):
-            daysToPayday_check = (datetime.datetime.strptime(
-                field.pay_day[:10], '%Y-%m-%d') - toDay)
-            daysToPayday_check = daysToPayday_check.days
+            pay_day_formated = field.pay_day[:10]
+            if pay_day_formated != "":  # checker for first time user has been logged in
+                daysToPayday_check = (datetime.datetime.strptime(
+                    pay_day_formated, '%Y-%m-%d') - toDay)
+                daysToPayday_check = daysToPayday_check.days
 
-            if daysToPayday_check != int(field.days_to_payday):
-                if daysToPayday_check <= 0:
-                    daysToPayday_check = 0
-                Vkuser.objects.filter(id_vk=vk_id).update(
-                    days_to_payday=daysToPayday_check)
+                if daysToPayday_check != int(field.days_to_payday):
+                    if daysToPayday_check <= 0:
+                        next_payday = next_pay_day(field.pay_day)
+                        next_daysToPay = next_payday - toDay
+                        next_daysToPay = next_daysToPay.days
+                        print('-------------------', next_daysToPay)
+                        Vkuser.objects.filter(id_vk=vk_id).update(
+                            days_to_payday=next_daysToPay, pay_day=next_payday)
+                        daysToPayday_check = next_daysToPay
+                    else:
+                        Vkuser.objects.filter(id_vk=vk_id).update(
+                            days_to_payday=daysToPayday_check)
 
-                resArr = make_calculations(
-                    field.common, field.fun, field.invest, daysToPayday_check,  field.budget)
+                    resArr = make_calculations(
+                        field.common, field.fun, field.invest, daysToPayday_check,  field.budget)
 
-                Vkuser.objects.filter(id_vk=vk_id).update(
-                    common=resArr[0], fun=resArr[1], invest=resArr[2])
-                break
+                    Vkuser.objects.filter(id_vk=vk_id).update(
+                        common=resArr[0], fun=resArr[1], invest=resArr[2])
+                    break
 
     response = get_updated_data(vk_id)
     print('[get_costs_all:RESPONSE]-->', response)
