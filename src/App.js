@@ -2,8 +2,12 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import { Header, BottomBar, Profile } from "./components";
-import { ManagerContainer, HistoryContainer } from "./containers";
+import { Header, BottomBar } from "./components";
+import {
+  ManagerContainer,
+  HistoryContainer,
+  ProfileContainer
+} from "./containers";
 // import { user } from "./static/user-data";
 
 type PROPS = {
@@ -19,7 +23,7 @@ class App extends React.Component<PROPS> {
         <Switch>
           <Route path="/history" component={HistoryContainer} />
           <Route exact path="/" component={ManagerContainer} />
-          <Route path="/profile" component={Profile} />
+          <Route path="/profile" component={ProfileContainer} />
         </Switch>
 
         <BottomBar />

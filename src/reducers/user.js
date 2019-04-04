@@ -53,9 +53,10 @@ type UserState = {
 
 export const initialState: UserState = {
   vk_id: 123456,
-  avatar: "",
-  name: "Pavel",
-  sure_name: "Durov",
+  avatar:
+    "https://gorod55.ru/attachments/3e7e1b7154482eac483ee39fa4e548027a0fa96a/store/fill/780/440/8f75f05210fc449bf2e1feb6b38b3b33e7c42bbf9b3cd0f7170a2bd3451a/1.jpg",
+  name: "Павел",
+  sure_name: "Дуров",
   isFetching_pyaday: false,
   history: {
     value: [],

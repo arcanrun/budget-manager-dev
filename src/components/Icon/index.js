@@ -12,6 +12,7 @@ import CalendarNumber from "../../static/calendar-number.svg";
 import Pencil from "../../static/pencil.svg";
 import Check from "../../static/check.svg";
 import Cross from "../../static/cross.svg";
+import Settings from "../../static/settings.svg";
 
 type PROPS = {|
   icon: string,
@@ -98,6 +99,16 @@ const Icon = ({ icon, color }: PROPS) => {
         <ReactSVG
           className="hoverable"
           src={Check}
+          wrapper="span"
+          svgClassName="check"
+          svgStyle={{ fill: color }}
+        />
+      );
+    case "settings":
+      return (
+        <ReactSVG
+          className="hoverable"
+          src={Settings}
           wrapper="span"
           svgClassName="check"
           svgStyle={{ fill: color }}

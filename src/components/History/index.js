@@ -28,9 +28,7 @@ class History extends React.Component<PROPS, {}> {
     const { history, isFetching } = this.props;
     const overlay = <Overlay />;
     const verticalLine = <div className={styleHistory.verticalLine} />;
-    const a = {
-      color: "red"
-    };
+
     history.sort(compareDate);
 
     return isFetching ? (
@@ -51,7 +49,6 @@ class History extends React.Component<PROPS, {}> {
               >
                 <div className={styleHistory.day}>{day}</div>
               </Sticky>
-              {/* <div className={styleHistory.day}>{day}</div> */}
               {verticalLine}
 
               {item[day].map((elem, j) => (
