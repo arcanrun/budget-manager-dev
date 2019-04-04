@@ -1,4 +1,7 @@
 .manager {
   padding-left: 10px;
   padding-right: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 }

@@ -1,10 +1,11 @@
 .card {
   max-width: 300px;
+  min-width: 260px;
   margin: auto;
   background-color: #fff;
   padding: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   border-radius: 2px;
   box-shadow: 0px 0px 5px 1px rgb(191, 191, 191);
 
