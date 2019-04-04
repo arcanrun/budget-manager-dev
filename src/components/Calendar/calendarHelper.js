@@ -269,3 +269,10 @@ export const addSuffix = days => {
       }
   }
 };
+
+export const compareDate = (a, b) => {
+  let first = Date.parse(Object.keys(a)[0]);
+  let second = Date.parse(Object.keys(b)[0]);
+  const res = second - first;
+  return res;
+};

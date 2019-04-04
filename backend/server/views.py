@@ -200,6 +200,7 @@ def get_history(request):
             cost_object = {'type_cost': '', 'operation': '', 'value': ''}
 
     for k, v in history_object.items():
+        v.reverse()
         response['PAYLOAD'].append({k: v})
 
     response['RESPONSE'] = 'SUCCESS'

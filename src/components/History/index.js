@@ -1,23 +1,36 @@
 //@flow
 import React from "react";
-
 import style from "./History.module.css";
-import { OperationSign, OperationType, OperationValue } from "../index";
+
+import {
+  OperationSign,
+  OperationType,
+  OperationValue,
+  Overlay
+} from "../index";
+
+import { compareDate } from "../Calendar/calendarHelper";
 
 type PROPS = {
   vk_id: number,
   getHistory: Function,
-  history: Array<Object>
+  history: Array<Object>,
+  isFetching: boolean
 };
+
 class History extends React.Component<PROPS, {}> {
   componentDidMount() {
     const { vk_id } = this.props;
     this.props.getHistory(vk_id);
   }
   render() {
-    const { history } = this.props;
-    console.log(history);
-    return (
+    const { history, isFetching } = this.props;
+    const overlay = <Overlay />;
+
+    history.sort(compareDate);
+    return isFetching ? (
+      overlay
+    ) : (
       <div className={style.container}>
         <div className={style.verticalLine} />
         <div className={style.content}>

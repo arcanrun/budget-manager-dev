@@ -11,6 +11,10 @@
   margin-left: 10px;
   font-weight: bold;
   margin-right: 10px;
+  font-size: 25px;
+}
+.sign div {
+  margin-top: -5px;
 }
 .signMinus {
   background-color: #f72d6b;

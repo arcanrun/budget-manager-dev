@@ -16,7 +16,6 @@ import {
   GET_HISTORY_REQUEST,
   GET_HISTORY_SUCCESS
 } from "../constants";
-import { stat } from "fs";
 
 type UserState = {
   vk_id: number,
@@ -24,6 +23,7 @@ type UserState = {
   name: string,
   sure_name: string,
   history: {
+    isFetching: false,
     value: ?Array<any>,
     error: boolean,
     error_message: ?string
