@@ -17,6 +17,9 @@ import { Overlay } from "./Overlay";
 import { InputCard } from "./InputCard";
 import { PartBudget } from "./PartBudget";
 import { DonutChart } from "./DonutChart";
+import { OperationSign } from "./OperationSign";
+import { OperationType } from "./OperationType";
+import { OperationValue } from "./OperationValue";
 export {
   Header,
   Menu,
@@ -35,5 +38,8 @@ export {
   Overlay,
   InputCard,
   PartBudget,
-  DonutChart
+  DonutChart,
+  OperationSign,
+  OperationType,
+  OperationValue
 };
