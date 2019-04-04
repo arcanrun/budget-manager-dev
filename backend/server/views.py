@@ -171,4 +171,26 @@ def temp_today_cost(request):
 
 
 def get_history(request):
-    pass
+    response = {'RESPONSE': 'ERROR', 'PAYLOAD': []}
+    req = json.loads(str(request.body, encoding='utf-8'))
+    print('[get_history:RECIVED]-->', req)
+    vk_id = str(req['vk_id'])
+
+    history = History.objects.all()
+    history_object = {}
+    cost_object = {'type_cost': '', 'operation': '', 'value': ''}
+
+    for field in history:
+        if (vk_id == field.id_vk):
+
+            history_object[field.date] = []
+            cost_object['type_cost'] = field.type_costs
+            cost_object['value'] = field.value
+            cost_object['operation'] = field.operation
+            history_object[field.date].append(cost_object)
+            response['PAYLOAD'].append(history_object)
+            response['RESPONSE'] = 'SUCCESS'
+
+    print('[get_history:RESPONSE]-->', response)
+
+    return JsonResponse(response)

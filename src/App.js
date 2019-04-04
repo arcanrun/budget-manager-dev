@@ -2,8 +2,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import { Header, BottomBar, History, Profile } from "./components";
-import { ManagerContainer } from "./containers";
+import { Header, BottomBar, Profile } from "./components";
+import { ManagerContainer, HistoryContainer } from "./containers";
 // import { user } from "./static/user-data";
 
 type PROPS = {
@@ -17,7 +17,7 @@ class App extends React.Component<PROPS> {
       <>
         <Header title={"менеджер"} />
         <Switch>
-          <Route path="/history" component={History} />
+          <Route path="/history" component={HistoryContainer} />
           <Route exact path="/" component={ManagerContainer} />
           <Route path="/profile" component={Profile} />
         </Switch>

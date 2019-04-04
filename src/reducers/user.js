@@ -11,15 +11,23 @@ import {
   GET_ALL_COSTS_REQUEST,
   CALC_TODAY_COSTS_REQUEST,
   CALC_TODAY_COSTS_SUCCESS,
-  CALC_TODAY_COSTS_FAILURE
+  CALC_TODAY_COSTS_FAILURE,
+  GET_HISTORY_FAILURE,
+  GET_HISTORY_REQUEST,
+  GET_HISTORY_SUCCESS
 } from "../constants";
+import { stat } from "fs";
 
 type UserState = {
   vk_id: number,
   avatar: string,
   name: string,
   sure_name: string,
-  history?: Array<any>,
+  history: {
+    value: ?Array<any>,
+    error: boolean,
+    error_message: ?string
+  },
   isFetching_pyaday: boolean, // temp solutions...
   calc: {
     common: {
@@ -49,7 +57,12 @@ export const initialState: UserState = {
   name: "Pavel",
   sure_name: "Durov",
   isFetching_pyaday: false,
-  history: [],
+  history: {
+    value: [],
+    isFetching: false,
+    error: false,
+    error_message: undefined
+  },
   calc: {
     pay_day: undefined,
     daysToPayday: undefined,
@@ -172,7 +185,27 @@ export function user(state: UserState = initialState, action: Object) {
       };
     case CALC_TODAY_COSTS_REQUEST:
       return { ...state, calc: { ...state.calc, isFetching: true } };
+    case GET_HISTORY_REQUEST:
+      return {
+        ...state,
+        history: { ...state.history, isFetching: true, error: false }
+      };
+    case GET_HISTORY_SUCCESS:
+      return {
+        ...state,
+        history: {
+          ...state.history,
+          value: action.payload.value,
+          isFetching: false,
+          error: false
+        }
+      };
 
+    case GET_HISTORY_FAILURE:
+      return {
+        ...state,
+        history: { ...state.history, isFetching: false, error: true }
+      };
     default:
       return state;
   }
