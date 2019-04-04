@@ -26,33 +26,33 @@ class History extends React.Component<PROPS, {}> {
   render() {
     const { history, isFetching } = this.props;
     const overlay = <Overlay />;
-
+    const verticalLine = <div className={style.verticalLine} />;
     history.sort(compareDate);
+
     return isFetching ? (
       overlay
     ) : (
       <div className={style.container}>
-        <div className={style.verticalLine} />
-        <div className={style.content}>
-          {history.map((item, i) => {
-            const day = Object.keys(item)[0];
+        {history.map((item, i) => {
+          const day = Object.keys(item)[0];
 
-            return (
-              <div key={i}>
-                <div className={style.day}>{day}</div>
-                {item[day].map((elem, j) => (
-                  <div key={j} className={style.operation}>
-                    <OperationType>{elem.type_cost}</OperationType>
-                    <OperationSign>{elem.operation}</OperationSign>
-                    <OperationValue sign={elem.operation}>
-                      {elem.value}
-                    </OperationValue>
-                  </div>
-                ))}
-              </div>
-            );
-          })}
-        </div>
+          return (
+            <div key={i} className={style.oneDay}>
+              <div className={style.day}>{day}</div>
+              {verticalLine}
+
+              {item[day].map((elem, j) => (
+                <div key={j} className={style.operation}>
+                  <OperationType>{elem.type_cost}</OperationType>
+                  <OperationSign>{elem.operation}</OperationSign>
+                  <OperationValue sign={elem.operation}>
+                    {elem.value}
+                  </OperationValue>
+                </div>
+              ))}
+            </div>
+          );
+        })}
       </div>
     );
   }
