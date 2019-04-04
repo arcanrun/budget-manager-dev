@@ -91,28 +91,22 @@ def get_costs_all(request):
             daysToPayday_check = (datetime.datetime.strptime(
                 field.pay_day[:10], '%Y-%m-%d') - toDay)
             daysToPayday_check = daysToPayday_check.days
-            commonObject = json.loads(field.common)
-            funObject = json.loads(field.fun)
-            investObject = json.loads(field.invest)
 
-            response['PAYLOAD']['common'] = json.loads(field.common)
-            response['PAYLOAD']['fun'] = json.loads(field.fun)
-            response['PAYLOAD']['invest'] = json.loads(field.invest)
-            response['PAYLOAD']['budget'] = field.budget
-            response['PAYLOAD']['pay_day'] = field.pay_day
-
-            if daysToPayday_check <= int(field.days_to_payday):
+            if daysToPayday_check != int(field.days_to_payday):
                 if daysToPayday_check <= 0:
                     daysToPayday_check = 0
-                response['PAYLOAD']['days_to_payday'] = daysToPayday_check
-            else:
-                response['PAYLOAD']['days_to_payday'] = field.days_to_payday
+                Vkuser.objects.filter(id_vk=vk_id).update(
+                    days_to_payday=daysToPayday_check)
 
-            response['RESPONSE'] = 'SUCCES_FETCHED'
-            print('[get_costs_all:RESPONSE]-->', response)
-            return JsonResponse(response)
-            break
+                resArr = make_calculations(
+                    field.common, field.fun, field.invest, daysToPayday_check,  field.budget)
 
+                Vkuser.objects.filter(id_vk=vk_id).update(
+                    common=resArr[0], fun=resArr[1], invest=resArr[2])
+                break
+
+    response = get_updated_data(vk_id)
+    print('[get_costs_all:RESPONSE]-->', response)
     return JsonResponse(response)
 
 
