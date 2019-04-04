@@ -178,18 +178,31 @@ def get_history(request):
 
     history = History.objects.all()
     history_object = {}
+    tempArr = []
     cost_object = {'type_cost': '', 'operation': '', 'value': ''}
 
     for field in history:
         if (vk_id == field.id_vk):
+            if field.date in history_object:
+                cost_object['type_cost'] = field.type_costs
+                cost_object['value'] = field.value
+                cost_object['operation'] = field.operation
 
-            history_object[field.date] = []
-            cost_object['type_cost'] = field.type_costs
-            cost_object['value'] = field.value
-            cost_object['operation'] = field.operation
+            else:
+                history_object[field.date] = []
+
+                cost_object['type_cost'] = field.type_costs
+                cost_object['value'] = field.value
+                cost_object['operation'] = field.operation
+
             history_object[field.date].append(cost_object)
-            response['PAYLOAD'].append(history_object)
-            response['RESPONSE'] = 'SUCCESS'
+
+            cost_object = {'type_cost': '', 'operation': '', 'value': ''}
+
+    for k, v in history_object.items():
+        response['PAYLOAD'].append({k: v})
+
+    response['RESPONSE'] = 'SUCCESS'
 
     print('[get_history:RESPONSE]-->', response)
 

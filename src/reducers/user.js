@@ -195,7 +195,7 @@ export function user(state: UserState = initialState, action: Object) {
         ...state,
         history: {
           ...state.history,
-          value: action.payload.value,
+          value: action.payload.payload,
           isFetching: false,
           error: false
         }

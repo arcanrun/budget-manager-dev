@@ -62,7 +62,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     const inputVal = this.state.inputValue;
     const [typeModal, operation] = this.props.typeModal.split("_");
     const daysToPayday = this.props.daysToPayday;
-    const dateNow = new Date();
+    const dateNow = new Date().toLocaleDateString();
     console.log(dateNow);
 
     if (this.validate(this.props.typeModal)) {

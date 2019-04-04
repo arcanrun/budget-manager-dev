@@ -8,7 +8,8 @@ import { getHistory } from "../actions/index";
 import { History } from "../components/index";
 
 const mapStateToProps = (state: Object) => ({
-  vk_id: state.user.vk_id
+  vk_id: state.user.vk_id,
+  history: state.user.history.value
 });
 
 export const HistoryContainer = connect(
