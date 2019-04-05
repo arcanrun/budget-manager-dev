@@ -14,14 +14,42 @@ class Entrance extends React.Component<{}, {}> {
     return this.state.id ? (
       <Redirect to="/" />
     ) : (
-      <Carousel swiping>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <button onClick={this.changeState}>login</button>
+      <Carousel renderCenterLeftControls={({ previousSlide }) => null}>
+        <div
+          style={{
+            border: "1px solid red",
+            width: "100%",
+            height: "100px",
+            margin: "50px"
+          }}
+        >
+          1
+        </div>
+        <div
+          style={{ border: "1px solid red", width: "100%", height: "100px" }}
+        >
+          2
+        </div>
+        <div
+          style={{ border: "1px solid red", width: "100px", height: "100px" }}
+        >
+          3
+        </div>
+        <div
+          style={{ border: "1px solid red", width: "100px", height: "100px" }}
+        >
+          4
+        </div>
+        <div
+          style={{ border: "1px solid red", width: "100px", height: "100px" }}
+        >
+          5
+        </div>
+        <div
+          style={{ border: "1px solid red", width: "100px", height: "100px" }}
+        >
+          6<button onClick={this.changeState}>login</button>
+        </div>
       </Carousel>
     );
   }
