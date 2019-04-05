@@ -1,56 +1,45 @@
 //@flow
 import React from "react";
-import Carousel from "nuka-carousel";
 import { Redirect } from "react-router-dom";
+import Swiper from "react-id-swiper/lib/ReactIdSwiper.full";
 
+import "swiper/dist/css/swiper.css";
 import style from "./Entrance.module.css";
+import "./costumizedSwiper.css";
 
-class Entrance extends React.Component<{}, {}> {
-  state = { id: undefined };
-  changeState = () => {
-    this.setState({ id: 1 }, () => console.log(this.state));
-  };
+type PROPS = {
+  logIn: Function,
+  vk_id: ?number
+};
+
+class Entrance extends React.Component<PROPS, {}> {
   render() {
-    return this.state.id ? (
+    console.log(this.props);
+    const params = {
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        modifierClass: "customized-swiper-pagination",
+        bulletClass: "customized-swiper-pagination-bullet",
+        bulletActiveClass: "customized-swiper-pagination-bullet-active"
+      },
+      containerClass: "customized-swiper-container"
+    };
+    return this.props.vk_id ? (
       <Redirect to="/" />
     ) : (
-      <Carousel renderCenterLeftControls={({ previousSlide }) => null}>
-        <div
-          style={{
-            border: "1px solid red",
-            width: "100%",
-            height: "100px",
-            margin: "50px"
-          }}
-        >
-          1
-        </div>
-        <div
-          style={{ border: "1px solid red", width: "100%", height: "100px" }}
-        >
-          2
-        </div>
-        <div
-          style={{ border: "1px solid red", width: "100px", height: "100px" }}
-        >
-          3
-        </div>
-        <div
-          style={{ border: "1px solid red", width: "100px", height: "100px" }}
-        >
-          4
-        </div>
-        <div
-          style={{ border: "1px solid red", width: "100px", height: "100px" }}
-        >
-          5
-        </div>
-        <div
-          style={{ border: "1px solid red", width: "100px", height: "100px" }}
-        >
-          6<button onClick={this.changeState}>login</button>
-        </div>
-      </Carousel>
+      <div className={style.entrance}>
+        <Swiper {...params}>
+          <div className={style.test}>1</div>
+          <div className={style.test}>2</div>
+          <div className={style.test}>3</div>
+          <div className={style.test}>4</div>
+          <div className={style.test}>5</div>
+          <div className={style.test}>
+            <button onClick={() => this.props.logIn(123456)}>войти</button>
+          </div>
+        </Swiper>
+      </div>
     );
   }
 }

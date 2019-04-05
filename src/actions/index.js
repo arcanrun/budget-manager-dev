@@ -6,6 +6,7 @@ import { addPayDay, getPayDay } from "./paydayActions";
 import { calcTempCosts } from "./calcActions";
 import { getAllCosts } from "./getAllCostsActions";
 import { getHistory } from "./getHistoryActions";
+import { logIn } from "./loginActions";
 export {
   addWholeBudget,
   toggleModal,
@@ -14,5 +15,6 @@ export {
   getPayDay,
   calcTempCosts,
   getAllCosts,
-  getHistory
+  getHistory,
+  logIn
 };

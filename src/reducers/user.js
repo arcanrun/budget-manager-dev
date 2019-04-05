@@ -14,7 +14,10 @@ import {
   CALC_TODAY_COSTS_FAILURE,
   GET_HISTORY_FAILURE,
   GET_HISTORY_REQUEST,
-  GET_HISTORY_SUCCESS
+  GET_HISTORY_SUCCESS,
+  LOGIN_FAILURE,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS
 } from "../constants";
 
 type UserState = {
@@ -22,6 +25,9 @@ type UserState = {
   avatar: ?string,
   name: ?string,
   sure_name: ?string,
+  isFetching: boolean,
+  error: boolea,
+  error_message: boolean,
   history: {
     isFetching: false,
     value: ?Array<any>,
@@ -52,11 +58,14 @@ type UserState = {
 };
 
 export const initialState: UserState = {
-  vk_id: 123456,
+  vk_id: undefined,
   avatar: undefined,
   name: undefined,
   sure_name: undefined,
   isFetching_pyaday: false,
+  isFetching: false,
+  error: false,
+  error_message: false,
   history: {
     value: [],
     isFetching: false,
@@ -206,6 +215,21 @@ export function user(state: UserState = initialState, action: Object) {
         ...state,
         history: { ...state.history, isFetching: false, error: true }
       };
+    case LOGIN_REQUEST:
+      return {
+        ...state,
+        isFetching: true,
+        error: false
+      };
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: true,
+        error_message: action.payload.message
+      };
+    case LOGIN_SUCCESS:
+      return { ...state, isFetching: false, vk_id: action.payload.vk_id };
     default:
       return state;
   }
