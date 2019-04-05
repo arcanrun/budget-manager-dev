@@ -1,6 +1,6 @@
 //@flow
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import { Header, BottomBar } from "./components";
 import {
@@ -8,25 +8,71 @@ import {
   HistoryContainer,
   ProfileContainer
 } from "./containers";
+import { EntranceContainer } from "./containers/EntranceContainer";
 // import { user } from "./static/user-data";
 
 type PROPS = {
-  onClick: () => mixed,
-  menuIsVisible: boolean
+  vk_id: ?number
 };
+
+{
+  /* return (
+      <Route
+        path="/"
+        render={() => (
+          <>
+            <Redirect to={!vk_id ? "/entrance" : "/"} />
+            <Header title={"менеджер"} />
+            <Switch>
+              <Route path="/history" component={HistoryContainer} />
+              <Route exact path="/" component={ManagerContainer} />
+              <Route path="/profile" component={ProfileContainer} />
+              <Route path="/entrance" component={EntranceContainer} />
+            </Switch>
+            <BottomBar />
+          </>
+        )}
+      />
+    );*/
+}
+
+// return (
+//   <>
+//     <Header title={"менеджер"} />
+//     <Switch>
+//       <Route path="/history" component={HistoryContainer} />
+//       {!vk_id ? (
+//         <Redirect exact to="/entrance" from="/" />
+//       ) : (
+//         <Route exact path="/" component={ManagerContainer} />
+//       )}
+
+//       <Route path="/profile" component={ProfileContainer} />
+//       <Route path="/entrance" component={EntranceContainer} />
+//     </Switch>
+//     <BottomBar />
+//   </>
+// );
 
 class App extends React.Component<PROPS> {
   render() {
+    const { vk_id } = this.props;
+
     return (
       <>
-        <Header title={"менеджер"} />
+        {vk_id && <Header title={"менеджер"} />}
         <Switch>
           <Route path="/history" component={HistoryContainer} />
-          <Route exact path="/" component={ManagerContainer} />
-          <Route path="/profile" component={ProfileContainer} />
-        </Switch>
+          {!vk_id ? (
+            <Redirect exact to="/entrance" from="/" />
+          ) : (
+            <Route exact path="/" component={ManagerContainer} />
+          )}
 
-        <BottomBar />
+          <Route path="/profile" component={ProfileContainer} />
+          <Route path="/entrance" component={EntranceContainer} />
+        </Switch>
+        {vk_id && <BottomBar />}
       </>
     );
   }

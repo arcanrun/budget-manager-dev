@@ -20,6 +20,7 @@ import { DonutChart } from "./DonutChart";
 import { OperationSign } from "./OperationSign";
 import { OperationType } from "./OperationType";
 import { OperationValue } from "./OperationValue";
+import { Entrance } from "./Entrance";
 export {
   Header,
   Menu,
@@ -41,5 +42,6 @@ export {
   DonutChart,
   OperationSign,
   OperationType,
-  OperationValue
+  OperationValue,
+  Entrance
 };

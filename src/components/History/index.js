@@ -2,6 +2,7 @@
 import React from "react";
 import styleHistory from "./History.module.css";
 import Sticky from "react-sticky-el";
+import { Redirect } from "react-router-dom";
 
 import {
   OperationSign,
@@ -25,7 +26,7 @@ class History extends React.Component<PROPS, {}> {
     this.props.getHistory(vk_id);
   }
   render() {
-    const { history, isFetching } = this.props;
+    const { history, isFetching, vk_id } = this.props;
     const overlay = <Overlay />;
     const verticalLine = <div className={styleHistory.verticalLine} />;
 
@@ -33,7 +34,7 @@ class History extends React.Component<PROPS, {}> {
 
     return isFetching ? (
       overlay
-    ) : (
+    ) : vk_id ? (
       <div className={styleHistory.container}>
         {history.map((item, i) => {
           const day = Object.keys(item)[0];
@@ -64,6 +65,8 @@ class History extends React.Component<PROPS, {}> {
           );
         })}
       </div>
+    ) : (
+      <Redirect to="/entrance" />
     );
   }
 }
