@@ -1,0 +1,29 @@
+.entranceItem {
+  padding: 30px;
+}
+.title {
+  font-weight: bold;
+  margin: 20px;
+  text-transform: uppercase;
+}
+.imageBlock {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background-color: #eaeff2;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+}
+.image {
+  z-index: 2;
+}
+.imageBgText {
+  position: absolute;
+  z-index: 1;
+  font-weight: bold;
+  color: #d2d7da;
+  font-size: 120px;
+}

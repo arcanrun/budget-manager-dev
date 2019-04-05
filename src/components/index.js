@@ -21,6 +21,7 @@ import { OperationSign } from "./OperationSign";
 import { OperationType } from "./OperationType";
 import { OperationValue } from "./OperationValue";
 import { Entrance } from "./Entrance";
+import { EntranceItem } from "./EntranceItem";
 export {
   Header,
   Menu,
@@ -43,5 +44,6 @@ export {
   OperationSign,
   OperationType,
   OperationValue,
-  Entrance
+  Entrance,
+  EntranceItem
 };

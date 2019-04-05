@@ -6,6 +6,7 @@ import Swiper from "react-id-swiper/lib/ReactIdSwiper.full";
 import "swiper/dist/css/swiper.css";
 import style from "./Entrance.module.css";
 import "./costumizedSwiper.css";
+import { EntranceItem } from "../index";
 
 type PROPS = {
   logIn: Function,
@@ -14,7 +15,8 @@ type PROPS = {
 
 class Entrance extends React.Component<PROPS, {}> {
   render() {
-    console.log(this.props);
+    const firstScreenText =
+      "Проверьте свой бюджет по умной пропорциональный системе учета финансов. Правило 50/30/20 позволит вам копить деньги и не отказывать себе в удовольствиях. ";
     const params = {
       pagination: {
         el: ".swiper-pagination",
@@ -30,7 +32,14 @@ class Entrance extends React.Component<PROPS, {}> {
     ) : (
       <div className={style.entrance}>
         <Swiper {...params}>
-          <div className={style.test}>1</div>
+          <div className={style.item}>
+            <EntranceItem
+              image={"image"}
+              title={"50/30/20"}
+              text={firstScreenText}
+            />
+          </div>
+
           <div className={style.test}>2</div>
           <div className={style.test}>3</div>
           <div className={style.test}>4</div>
