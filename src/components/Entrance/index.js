@@ -34,7 +34,7 @@ class Entrance extends React.Component<PROPS, {}> {
         <Swiper {...params}>
           <div className={style.item}>
             <EntranceItem
-              image={"image"}
+              image={"budget-logo"}
               title={"50/30/20"}
               text={firstScreenText}
             />

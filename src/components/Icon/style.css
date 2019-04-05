@@ -10,6 +10,10 @@
   height: 20px;
   transition: 0.2s ease;
 }
+.budget-logo {
+  width: 100px;
+  height: 100px;
+}
 .pencil:hover {
   fill: #f72d6b !important;
 }

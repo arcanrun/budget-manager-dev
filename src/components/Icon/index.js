@@ -13,10 +13,11 @@ import Pencil from "../../static/pencil.svg";
 import Check from "../../static/check.svg";
 import Cross from "../../static/cross.svg";
 import Settings from "../../static/settings.svg";
+import BudgetLogo from "../../static/budget-logo.svg";
 
 type PROPS = {|
   icon: string,
-  color: string
+  color?: string
 |};
 const Icon = ({ icon, color }: PROPS) => {
   switch (icon) {
@@ -112,6 +113,15 @@ const Icon = ({ icon, color }: PROPS) => {
           wrapper="span"
           svgClassName="check"
           svgStyle={{ fill: color }}
+        />
+      );
+    case "budget-logo":
+      return (
+        <ReactSVG
+          className="hoverable"
+          src={BudgetLogo}
+          wrapper="span"
+          svgClassName="budget-logo"
         />
       );
 
