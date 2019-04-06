@@ -17,6 +17,15 @@ class Entrance extends React.Component<PROPS, {}> {
   render() {
     const firstScreenText =
       "Проверьте свой бюджет по умной пропорциональный системе учета финансов. Правило 50/30/20 позволит вам копить деньги и не отказывать себе в удовольствиях. ";
+
+    const secondScreenText =
+      "50 % вашего ежемесячного заработка должны уходить на все необходимые траты: аренду или ипотеку, транспорт, продукты, коммунальные услуги и прочие вещи, без которых никуда";
+    const thirdScreenText =
+      "30 % — на развлечения: шоппинг, рестораны, уход за собой и другое. ";
+    const fourthScreenText =
+      "20 % должны уходить на накопления, выплату долгов, инвестиции";
+    const fivthScreen =
+      "50/30/20 поможет распланировать личные денежные средства максимально рационально";
     const params = {
       pagination: {
         el: ".swiper-pagination",
@@ -27,6 +36,7 @@ class Entrance extends React.Component<PROPS, {}> {
       },
       containerClass: "customized-swiper-container"
     };
+    const btnLogin = <button className={style.btn}>войти</button>;
     return this.props.vk_id ? (
       <Redirect to="/" />
     ) : (
@@ -37,15 +47,49 @@ class Entrance extends React.Component<PROPS, {}> {
               image={"budget-logo"}
               title={"50/30/20"}
               text={firstScreenText}
+              imgHeight="140px"
+              imgWidth="140px"
             />
           </div>
-
-          <div className={style.test}>2</div>
-          <div className={style.test}>3</div>
-          <div className={style.test}>4</div>
-          <div className={style.test}>5</div>
-          <div className={style.test}>
-            <button onClick={() => this.props.logIn(123456)}>войти</button>
+          <div className={style.item}>
+            <EntranceItem
+              image={"payment-logo"}
+              title={"ОБЯЗАТЕЛЬНЫЕ НУЖДЫ"}
+              text={secondScreenText}
+              bgText="50"
+              imgHeight="170px"
+              imgWidth="170px"
+            />
+          </div>
+          <div className={style.item}>
+            <EntranceItem
+              image={"fun-logo"}
+              title={"ЖЕЛАНИЯ"}
+              text={thirdScreenText}
+              bgText="30"
+              imgHeight="190px"
+              imgWidth="190px"
+            />
+          </div>
+          <div className={style.item}>
+            <EntranceItem
+              image={"invest-logo"}
+              title={"БУДУЩЕЕ"}
+              text={fourthScreenText}
+              bgText="20"
+              imgHeight="190px"
+              imgWidth="190px"
+            />
+          </div>
+          <div className={style.item}>
+            <EntranceItem
+              image={"protect-logo"}
+              title={""}
+              text={fivthScreen}
+              imgHeight="140px"
+              imgWidth="140px"
+            />
+            {btnLogin}
           </div>
         </Swiper>
       </div>

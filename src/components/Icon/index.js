@@ -14,12 +14,18 @@ import Check from "../../static/check.svg";
 import Cross from "../../static/cross.svg";
 import Settings from "../../static/settings.svg";
 import BudgetLogo from "../../static/budget-logo.svg";
+import PyamentLogo from "../../static/payment-logo.svg";
+import FunLogo from "../../static/fun-logo.svg";
+import InvestLogo from "../../static/invest-logo.svg";
+import ProtectLogo from "../../static/protect-logo.svg";
 
 type PROPS = {|
   icon: string,
-  color?: string
+  color?: string,
+  width?: string,
+  height?: string
 |};
-const Icon = ({ icon, color }: PROPS) => {
+const Icon = ({ icon, color, width, height }: PROPS) => {
   switch (icon) {
     case "money-bag":
       return (
@@ -122,6 +128,47 @@ const Icon = ({ icon, color }: PROPS) => {
           src={BudgetLogo}
           wrapper="span"
           svgClassName="budget-logo"
+          svgStyle={{ width: width, height: height }}
+        />
+      );
+    case "payment-logo":
+      return (
+        <ReactSVG
+          className="hoverable"
+          src={PyamentLogo}
+          wrapper="span"
+          svgClassName="payment-logo"
+          svgStyle={{ width: width, height: height }}
+        />
+      );
+    case "fun-logo":
+      return (
+        <ReactSVG
+          className="hoverable"
+          src={FunLogo}
+          wrapper="span"
+          svgClassName="fun-logo"
+          svgStyle={{ width: width, height: height }}
+        />
+      );
+    case "invest-logo":
+      return (
+        <ReactSVG
+          className="hoverable"
+          src={InvestLogo}
+          wrapper="span"
+          svgClassName="fun-logo"
+          svgStyle={{ width: width, height: height }}
+        />
+      );
+    case "protect-logo":
+      return (
+        <ReactSVG
+          className="hoverable"
+          src={ProtectLogo}
+          wrapper="span"
+          svgClassName="protect-logo"
+          svgStyle={{ width: width, height: height }}
         />
       );
 

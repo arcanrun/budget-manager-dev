@@ -8,15 +8,24 @@ type PROPS = {
   image: string,
   title: string,
   text: string,
-  bgText?: string
+  bgText?: string,
+  imgHeight?: string,
+  imgWidth?: string
 };
 
-export const EntranceItem = ({ image, title, text, bgText }: PROPS) => (
+export const EntranceItem = ({
+  image,
+  title,
+  text,
+  bgText,
+  imgHeight,
+  imgWidth
+}: PROPS) => (
   <div className={style.entranceItem}>
     <div className={style.imageBlock}>
-      <div className={style.imageBgText} />
+      <div className={style.imageBgText}>{bgText}</div>
       <div className={style.image}>
-        <Icon icon={image} />
+        <Icon icon={image} width={imgWidth} height={imgHeight} />
       </div>
     </div>
 

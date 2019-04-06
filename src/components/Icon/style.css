@@ -10,7 +10,10 @@
   height: 20px;
   transition: 0.2s ease;
 }
-.budget-logo {
+.budget-logo,
+.payment-logo,
+.fun-logo,
+.fun-logo {
   width: 100px;
   height: 100px;
 }
