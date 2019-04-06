@@ -9,6 +9,7 @@ type PROPS = {
   makeProfileOperation: Function,
   toggleModal: Function,
   getStatistics: Function,
+  toDayFormated: string,
   modalIsVisible: boolean,
   typeModal: string,
   isFetching: boolean,
@@ -22,8 +23,9 @@ type PROPS = {
 
 class Profile extends React.Component<PROPS, {}> {
   componentDidMount() {
-    const { vk_id } = this.props;
-    this.props.getStatistics(vk_id);
+    const { vk_id, toDayFormated } = this.props;
+
+    this.props.getStatistics(vk_id, toDayFormated);
   }
   render() {
     const {
@@ -61,7 +63,7 @@ class Profile extends React.Component<PROPS, {}> {
     );
 
     const statisticCard = (
-      <Card icon={"pie-chart-logo"} headerTitle={"статистика"}>
+      <Card icon={"pie-chart-logo"} headerTitle={"статистика за текущий месяц"}>
         <div>
           <Tab costs={costs} income={income} />
         </div>

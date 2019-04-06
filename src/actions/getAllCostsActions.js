@@ -12,10 +12,16 @@ const requestGetAllCosts = () => ({
     isFetching: true
   }
 });
-export const successGetAllCosts = (payload: Object) => ({
+export const successGetAllCosts = (
+  payload: Object,
+  toDay: string,
+  toDayFormated: string
+) => ({
   type: GET_ALL_COSTS_SUCCESS,
   payload: {
     payload,
+    toDay,
+    toDayFormated,
     isFetching: false
   }
 });
@@ -31,7 +37,9 @@ export const failuretGetAllCosts = (message: string) => ({
 export const getAllCosts = (
   vk_id: number,
   daysToPayday: number,
-  budget: string
+  budget: string,
+  toDay: string,
+  toDayFormated: string
 ) => {
   return (dispatch: Function) => {
     dispatch(requestGetAllCosts());
@@ -46,7 +54,7 @@ export const getAllCosts = (
       .then(res => res.json())
       .then(res => {
         console.log("[getAllcosts] dispatcner: ", res);
-        dispatch(successGetAllCosts(res.PAYLOAD));
+        dispatch(successGetAllCosts(res.PAYLOAD, toDay, toDayFormated));
         return res;
       })
       .catch(err => dispatch(failuretGetAllCosts(err)));

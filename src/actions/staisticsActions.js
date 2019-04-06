@@ -6,11 +6,12 @@ import {
 } from "../constants";
 import { API } from "../API";
 
-const requestStatistics = (vk_id: number) => ({
+const requestStatistics = (vk_id: number, toDayFormated: string) => ({
   type: STATISTICS_REQUEST,
   payload: {
     isFetching: true,
-    vk_id
+    vk_id,
+    toDayFormated
   }
 });
 export const successStatistics = (payload: Object) => ({
@@ -29,13 +30,14 @@ export const failuretStatistics = (message: string) => ({
   }
 });
 
-export const getStatistics = (vk_id: number) => {
+export const getStatistics = (vk_id: number, toDayFormated: String) => {
   return (dispatch: Function) => {
-    dispatch(requestStatistics(vk_id));
+    dispatch(requestStatistics(vk_id, toDayFormated));
     fetch(API.GET_STATISTICS, {
       method: "POST",
       body: JSON.stringify({
-        vk_id
+        vk_id,
+        toDayFormated
       })
     })
       .then(res => res.json())

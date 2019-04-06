@@ -237,8 +237,11 @@ def profile_manage(request):
 def get_statistics(request):
     response = {'RESPONSE': 'ERROR', 'PAYLOAD': {}}
     req = json.loads(str(request.body, encoding='utf-8'))
-    vk_id = str(req['vk_id'])
     print('[get_statistics:RECIVED]-->', req)
+
+    vk_id = str(req['vk_id'])
+
+    toDayMonth = req['toDayFormated'][3:]
     costs = {
         'total': 0,
         'common': 0,
@@ -254,7 +257,7 @@ def get_statistics(request):
 
     history = History.objects.all()
     for field in history:
-        if (vk_id == field.id_vk):
+        if (vk_id == field.id_vk and field.date[3:] == toDayMonth):
             if field.operation == 'minus':
                 costs['total'] += float(field.value)
                 if field.type_costs == 'common':

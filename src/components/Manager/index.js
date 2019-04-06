@@ -40,6 +40,10 @@ class Manager extends React.Component<PROPS, STATE> {
     const vk_id = this.props.vk_id;
     const daysToPayday = this.props.daysToPayday;
 
+    const toDay = new Date();
+
+    const toDayFormated = toDay.toLocaleString().split(",")[0];
+
     fetch("http://127.0.0.1:8000/log-in/", {
       method: "POST",
       body: JSON.stringify({ vk_id })
@@ -48,14 +52,10 @@ class Manager extends React.Component<PROPS, STATE> {
       .then(res => console.log(res))
       .catch(err => console.log(err));
 
-    this.props.getAllCosts(vk_id, daysToPayday, budget);
+    this.props.getAllCosts(vk_id, daysToPayday, budget, toDay, toDayFormated);
   }
 
   componentDidUpdate(prevProps: Object, prevState: Object) {
-    const budget = this.props.budget;
-    const payday = this.props.payday;
-    const vk_id = this.props.vk_id;
-    const daysToPayday = this.props.daysToPayday;
     const modalIsVisible = this.props.modalIsVisible;
     const body = document.getElementsByTagName("body")[0];
 

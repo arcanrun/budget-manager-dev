@@ -15,45 +15,6 @@ type PROPS = {
   vk_id: ?number
 };
 
-{
-  /* return (
-      <Route
-        path="/"
-        render={() => (
-          <>
-            <Redirect to={!vk_id ? "/entrance" : "/"} />
-            <Header title={"менеджер"} />
-            <Switch>
-              <Route path="/history" component={HistoryContainer} />
-              <Route exact path="/" component={ManagerContainer} />
-              <Route path="/profile" component={ProfileContainer} />
-              <Route path="/entrance" component={EntranceContainer} />
-            </Switch>
-            <BottomBar />
-          </>
-        )}
-      />
-    );*/
-}
-
-// return (
-//   <>
-//     <Header title={"менеджер"} />
-//     <Switch>
-//       <Route path="/history" component={HistoryContainer} />
-//       {!vk_id ? (
-//         <Redirect exact to="/entrance" from="/" />
-//       ) : (
-//         <Route exact path="/" component={ManagerContainer} />
-//       )}
-
-//       <Route path="/profile" component={ProfileContainer} />
-//       <Route path="/entrance" component={EntranceContainer} />
-//     </Switch>
-//     <BottomBar />
-//   </>
-// );
-
 class App extends React.Component<PROPS> {
   render() {
     const { vk_id } = this.props;

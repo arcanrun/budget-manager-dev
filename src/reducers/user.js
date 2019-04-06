@@ -59,6 +59,8 @@ type UserState = {
   },
   isFetching_pyaday: boolean, // temp solutions...
   calc: {
+    toDay: ?string,
+    toDayFormated: ?string,
     common: {
       maxToday: {
         value: ?number,
@@ -81,7 +83,7 @@ type UserState = {
 };
 
 export const initialState: UserState = {
-  vk_id: 7777,
+  vk_id: 2,
   avatar:
     "https://static.mk.ru/upload/entities/2018/06/07/articles/detailPicture/95/72/ce/d7/58bcc7d521cd08692d9364476a060077.jpg",
   name: "Pavel",
@@ -97,6 +99,8 @@ export const initialState: UserState = {
     error_message: undefined
   },
   calc: {
+    toDay: undefined,
+    toDayFormated: undefined,
     pay_day: undefined,
     daysToPayday: undefined,
     budget: undefined,
@@ -193,6 +197,45 @@ export function user(state: UserState = initialState, action: Object) {
         }
       };
     case GET_ALL_COSTS_SUCCESS:
+      return {
+        ...state,
+
+        calc: {
+          ...state.calc,
+          toDay: action.payload.toDay,
+          toDayFormated: action.payload.toDayFormated,
+          budget: action.payload.payload.budget,
+          pay_day: action.payload.payload.pay_day,
+          daysToPayday: action.payload.payload.days_to_payday,
+          isFetching: false,
+          error: false,
+          error_message: undefined,
+          common: {
+            ...state.calc.common,
+            maxToday: {
+              ...state.calc.common.maxToday,
+              value: action.payload.payload.common.maxToday,
+              temp: action.payload.payload.common.temp
+            }
+          },
+          fun: {
+            ...state.calc.fun,
+            maxToday: {
+              ...state.calc.fun.maxToday,
+              value: action.payload.payload.fun.maxToday,
+              temp: action.payload.payload.fun.temp
+            }
+          },
+          invest: {
+            ...state.calc.invest,
+            maxToday: {
+              ...state.calc.invest.maxToday,
+              value: action.payload.payload.invest.maxToday,
+              temp: action.payload.payload.invest.temp
+            }
+          }
+        }
+      };
     case ADD_PAYDAY_SUCCESS:
     case ADD_BUDGET_SUCCESS:
     case CALC_TODAY_COSTS_SUCCESS:
