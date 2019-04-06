@@ -8,7 +8,8 @@ import {
   OperationSign,
   OperationType,
   OperationValue,
-  Overlay
+  Overlay,
+  Icon
 } from "../index";
 
 import { compareDate } from "../Calendar/calendarHelper";
@@ -36,8 +37,11 @@ class History extends React.Component<PROPS, {}> {
       overlay
     ) : vk_id ? (
       history.length === 0 ? (
-        <div className={styleHistory.container}>
-          <div className={styleHistory.empty}>В истории пока ничего нет</div>
+        <div className={styleHistory.empty}>
+          <div className={styleHistory.emptyTitle}>
+            В истории пока ничего нет
+          </div>
+          <Icon icon="hieroglyph" />
         </div>
       ) : (
         <div className={styleHistory.container}>

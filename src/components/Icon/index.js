@@ -18,6 +18,7 @@ import PyamentLogo from "../../static/payment-logo.svg";
 import FunLogo from "../../static/fun-logo.svg";
 import InvestLogo from "../../static/invest-logo.svg";
 import ProtectLogo from "../../static/protect-logo.svg";
+import Hieroglyph from "../../static/hieroglyph.svg";
 
 type PROPS = {|
   icon: string,
@@ -168,6 +169,16 @@ const Icon = ({ icon, color, width, height }: PROPS) => {
           src={ProtectLogo}
           wrapper="span"
           svgClassName="protect-logo"
+          svgStyle={{ width: width, height: height }}
+        />
+      );
+    case "hieroglyph":
+      return (
+        <ReactSVG
+          className="hoverable"
+          src={Hieroglyph}
+          wrapper="span"
+          svgClassName="hieroglyph"
           svgStyle={{ width: width, height: height }}
         />
       );
