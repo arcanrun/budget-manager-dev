@@ -26,7 +26,7 @@ type UserState = {
   name: ?string,
   sure_name: ?string,
   isFetching: boolean,
-  error: boolea,
+  error: boolean,
   error_message: boolean,
   history: {
     isFetching: false,
@@ -58,7 +58,7 @@ type UserState = {
 };
 
 export const initialState: UserState = {
-  vk_id: undefined,
+  vk_id: 99999,
   avatar: undefined,
   name: undefined,
   sure_name: undefined,

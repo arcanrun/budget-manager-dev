@@ -50,3 +50,7 @@
   justify-content: space-between;
   margin-top: 60px;
 }
+.empty {
+  text-transform: uppercase;
+  font-weight: 100;
+}

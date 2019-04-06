@@ -36,7 +36,11 @@ class Entrance extends React.Component<PROPS, {}> {
       },
       containerClass: "customized-swiper-container"
     };
-    const btnLogin = <button className={style.btn}>войти</button>;
+    const btnLogin = (
+      <button onClick={() => this.props.logIn(123456)} className={style.btn}>
+        войти
+      </button>
+    );
     return this.props.vk_id ? (
       <Redirect to="/" />
     ) : (

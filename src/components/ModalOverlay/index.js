@@ -59,6 +59,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     }
   };
   handleOK = () => {
+    const { vk_id } = this.props;
     const inputVal = this.state.inputValue;
     const [typeModal, operation] = this.props.typeModal.split("_");
     const daysToPayday = this.props.daysToPayday;
@@ -71,7 +72,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
         case "budget":
           const type = daysToPayday ? "change" : "add";
           console.log(type);
-          this.props.addWholeBudget(inputVal, type, daysToPayday);
+          this.props.addWholeBudget(vk_id, inputVal, type, daysToPayday);
 
           break;
 

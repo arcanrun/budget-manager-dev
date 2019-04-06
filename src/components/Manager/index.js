@@ -42,7 +42,7 @@ class Manager extends React.Component<PROPS, STATE> {
 
     fetch("http://127.0.0.1:8000/log-in/", {
       method: "POST",
-      body: JSON.stringify({ vk_id: "123456" })
+      body: JSON.stringify({ vk_id })
     })
       .then(res => res.json())
       .then(res => console.log(res))
@@ -72,6 +72,7 @@ class Manager extends React.Component<PROPS, STATE> {
     });
   };
   handleNewPayDay = (e: any) => {
+    const { vk_id } = this.props;
     const btnType = e.target.dataset.btnType;
     const { tempPayDay } = this.state;
     switch (btnType) {
@@ -79,7 +80,7 @@ class Manager extends React.Component<PROPS, STATE> {
         const initial_daysToPayday = msToDays(
           Date.parse(tempPayDay || "") - Date.now()
         );
-        this.props.addPayDay(tempPayDay, initial_daysToPayday);
+        this.props.addPayDay(vk_id, tempPayDay, initial_daysToPayday);
         this.setState({ tempPayDay: undefined });
         break;
       case "chanel":
