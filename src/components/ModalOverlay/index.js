@@ -7,6 +7,7 @@ import "./style.css";
 import { InputCard } from "../index";
 
 type PROPS = {
+  makeProfileOperation: Function,
   onClick: Function,
   addWholeBudget: Function,
   addPayDay: Function,
@@ -52,6 +53,8 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
         } else {
           return false;
         }
+      case "profile_delete":
+        return true;
 
       default:
         console.log("typeModal[" + typeModal + "]: ¯|_(ツ)_/¯");
@@ -105,9 +108,17 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
             dateNow
           );
           break;
+        case "profile":
+          this.props.makeProfileOperation(vk_id, operation);
+          break;
 
         default:
-          console.log("MISSING DISPATCHER FOR TYPE:", typeModal);
+          console.log(
+            "MISSING DISPATCHER FOR TYPE:",
+            typeModal,
+            "AND OPERATION:",
+            operation
+          );
           break;
       }
     } else {
@@ -129,6 +140,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
   render() {
     const { onClick, typeModal } = this.props;
     const { isErrorValidation } = this.state;
+
     const budgetInputCard = (
       <InputCard
         isErrorValidation={isErrorValidation}
@@ -138,6 +150,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
         handleOK={this.handleOK}
       />
     );
+
     return ReactDOM.createPortal(
       <div className="modal">{budgetInputCard}</div>,
       ModalDiv

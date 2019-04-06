@@ -26,4 +26,5 @@ urlpatterns = [
     path('temp-today-cost/', views.temp_today_cost),
     path('log-in/', views.log_in),
     path('get-history/', views.get_history),
+    path('profile-manage/', views.profile_manage),
 ]

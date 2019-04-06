@@ -17,7 +17,10 @@ import {
   GET_HISTORY_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_REQUEST,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  PROFILE_OPERATION_FAILURE,
+  PROFILE_OPERATION_REQUEST,
+  PROFILE_OPERATION_SUCCESS
 } from "../constants";
 
 type UserState = {
@@ -59,9 +62,10 @@ type UserState = {
 
 export const initialState: UserState = {
   vk_id: 7777,
-  avatar: undefined,
-  name: undefined,
-  sure_name: undefined,
+  avatar:
+    "https://static.mk.ru/upload/entities/2018/06/07/articles/detailPicture/95/72/ce/d7/58bcc7d521cd08692d9364476a060077.jpg",
+  name: "Pavel",
+  sure_name: "Durov",
   isFetching_pyaday: false,
   isFetching: false,
   error: false,
@@ -216,12 +220,14 @@ export function user(state: UserState = initialState, action: Object) {
         history: { ...state.history, isFetching: false, error: true }
       };
     case LOGIN_REQUEST:
+    case PROFILE_OPERATION_REQUEST:
       return {
         ...state,
         isFetching: true,
         error: false
       };
     case LOGIN_FAILURE:
+    case PROFILE_OPERATION_FAILURE:
       return {
         ...state,
         isFetching: false,
@@ -230,6 +236,19 @@ export function user(state: UserState = initialState, action: Object) {
       };
     case LOGIN_SUCCESS:
       return { ...state, isFetching: false, vk_id: action.payload.vk_id };
+    case PROFILE_OPERATION_SUCCESS:
+      let res = "";
+      if (action.payload.payload === "DELETE_USER_SUCCESS") {
+        res = undefined;
+      }
+      return {
+        ...state,
+        isFetching: false,
+        vk_id: res,
+        name: res,
+        sure_name: res,
+        avatar: res
+      };
     default:
       return state;
   }
