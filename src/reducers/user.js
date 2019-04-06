@@ -20,7 +20,10 @@ import {
   LOGIN_SUCCESS,
   PROFILE_OPERATION_FAILURE,
   PROFILE_OPERATION_REQUEST,
-  PROFILE_OPERATION_SUCCESS
+  PROFILE_OPERATION_SUCCESS,
+  STATISTICS_FAILURE,
+  STATISTICS_SUCCESS,
+  STATISTICS_REQUEST
 } from "../constants";
 
 type UserState = {
@@ -36,6 +39,23 @@ type UserState = {
     value: ?Array<any>,
     error: boolean,
     error_message: ?string
+  },
+  statistics: {
+    isFetching: boolean,
+    error: boolean,
+    error_message: ?string,
+    costs: {
+      total: ?number,
+      common: ?number,
+      fun: ?number,
+      invest: ?number
+    },
+    income: {
+      total: ?number,
+      common: ?number,
+      fun: ?number,
+      invest: ?number
+    }
   },
   isFetching_pyaday: boolean, // temp solutions...
   calc: {
@@ -100,6 +120,23 @@ export const initialState: UserState = {
         value: undefined,
         temp: undefined
       }
+    }
+  },
+  statistics: {
+    isFetching: false,
+    error: true,
+    error_message: undefined,
+    costs: {
+      total: undefined,
+      common: undefined,
+      fun: undefined,
+      invest: undefined
+    },
+    income: {
+      total: undefined,
+      common: undefined,
+      fun: undefined,
+      invest: undefined
     }
   }
 };
@@ -249,6 +286,46 @@ export function user(state: UserState = initialState, action: Object) {
         sure_name: res,
         avatar: res
       };
+    case STATISTICS_REQUEST:
+      return {
+        ...state,
+        statistics: { ...state.statistics, isFetching: true, error: false }
+      };
+    case STATISTICS_FAILURE:
+      return {
+        ...state,
+        statistics: {
+          ...state.statistics,
+          isFetching: false,
+          error: true,
+          error_message: action.payload
+        }
+      };
+    case STATISTICS_SUCCESS:
+      return {
+        ...state,
+        statistics: {
+          ...state.statistics,
+          isFetching: false,
+          error_message: false,
+          error: false,
+          costs: {
+            ...state.statistics.costs,
+            total: action.payload.payload.total,
+            common: action.payload.payload.common,
+            fun: action.payload.payload.fun,
+            invest: action.payload.payload.invest
+          },
+          income: {
+            ...state.statistics.costs,
+            total: action.payload.payload.total,
+            common: action.payload.payload.common,
+            fun: action.payload.payload.fun,
+            invest: action.payload.payload.invest
+          }
+        }
+      };
+
     default:
       return state;
   }

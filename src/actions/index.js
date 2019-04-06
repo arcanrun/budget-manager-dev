@@ -8,6 +8,7 @@ import { getAllCosts } from "./getAllCostsActions";
 import { getHistory } from "./getHistoryActions";
 import { logIn } from "./loginActions";
 import { makeProfileOperation } from "./profileOperationsAction";
+import { getStatistics } from "./staisticsActions";
 export {
   addWholeBudget,
   toggleModal,
@@ -18,5 +19,6 @@ export {
   getAllCosts,
   getHistory,
   logIn,
-  makeProfileOperation
+  makeProfileOperation,
+  getStatistics
 };

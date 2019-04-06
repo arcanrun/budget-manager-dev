@@ -232,3 +232,11 @@ def profile_manage(request):
                     'PAYLOAD': 'DELETE_USER_SUCCESS'}
     print('[profile_manage:RESPONSE]-->', response)
     return JsonResponse(response)
+
+
+def get_statistics(request):
+    response = {'RESPONSE': 'ERROR', 'PAYLOAD': 'ERROR'}
+    req = json.loads(str(request.body, encoding='utf-8'))
+    print('[get_statistics:RECIVED]-->', req)
+    print('[get_statistics:RESPONSE]-->', response)
+    return JsonResponse(response)
