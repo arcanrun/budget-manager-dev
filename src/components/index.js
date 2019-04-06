@@ -23,6 +23,7 @@ import { OperationValue } from "./OperationValue";
 import { Entrance } from "./Entrance";
 import { EntranceItem } from "./EntranceItem";
 import { Button } from "./Button";
+import { Tab } from "./Tab";
 export {
   Header,
   Menu,
@@ -47,5 +48,6 @@ export {
   OperationValue,
   Entrance,
   EntranceItem,
-  Button
+  Button,
+  Tab
 };

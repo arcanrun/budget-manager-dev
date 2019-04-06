@@ -12,7 +12,9 @@ const mapStateToProps = state => ({
   name: state.user.name,
   sure_name: state.user.sure_name,
   avatar: state.user.avatar,
-  isFetching: state.user.statistics.isFetching
+  isFetching: state.user.statistics.isFetching,
+  costs: state.user.statistics.costs,
+  income: state.user.statistics.income
 });
 export const ProfileContainer = connect(
   mapStateToProps,

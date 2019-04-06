@@ -19,6 +19,7 @@ import FunLogo from "../../static/fun-logo.svg";
 import InvestLogo from "../../static/invest-logo.svg";
 import ProtectLogo from "../../static/protect-logo.svg";
 import Hieroglyph from "../../static/hieroglyph.svg";
+import PieChartLogo from "../../static/pie-chart-logo.svg";
 
 type PROPS = {|
   icon: string,
@@ -129,7 +130,7 @@ const Icon = ({ icon, color, width, height }: PROPS) => {
           src={BudgetLogo}
           wrapper="span"
           svgClassName="budget-logo"
-          svgStyle={{ width: width, height: height }}
+          svgStyle={{ width: width, height: height, fill: color }}
         />
       );
     case "payment-logo":
@@ -139,7 +140,7 @@ const Icon = ({ icon, color, width, height }: PROPS) => {
           src={PyamentLogo}
           wrapper="span"
           svgClassName="payment-logo"
-          svgStyle={{ width: width, height: height }}
+          svgStyle={{ width: width, height: height, fill: color }}
         />
       );
     case "fun-logo":
@@ -149,7 +150,7 @@ const Icon = ({ icon, color, width, height }: PROPS) => {
           src={FunLogo}
           wrapper="span"
           svgClassName="fun-logo"
-          svgStyle={{ width: width, height: height }}
+          svgStyle={{ width: width, height: height, fill: color }}
         />
       );
     case "invest-logo":
@@ -159,7 +160,7 @@ const Icon = ({ icon, color, width, height }: PROPS) => {
           src={InvestLogo}
           wrapper="span"
           svgClassName="fun-logo"
-          svgStyle={{ width: width, height: height }}
+          svgStyle={{ width: width, height: height, fill: color }}
         />
       );
     case "protect-logo":
@@ -169,7 +170,7 @@ const Icon = ({ icon, color, width, height }: PROPS) => {
           src={ProtectLogo}
           wrapper="span"
           svgClassName="protect-logo"
-          svgStyle={{ width: width, height: height }}
+          svgStyle={{ width: width, height: height, fill: color }}
         />
       );
     case "hieroglyph":
@@ -179,7 +180,17 @@ const Icon = ({ icon, color, width, height }: PROPS) => {
           src={Hieroglyph}
           wrapper="span"
           svgClassName="hieroglyph"
-          svgStyle={{ width: width, height: height }}
+          svgStyle={{ width: width, height: height, fill: color }}
+        />
+      );
+    case "pie-chart-logo":
+      return (
+        <ReactSVG
+          className="hoverable"
+          src={PieChartLogo}
+          wrapper="span"
+          svgClassName="pie-chart-logo"
+          svgStyle={{ width: width, height: height, fill: color }}
         />
       );
 

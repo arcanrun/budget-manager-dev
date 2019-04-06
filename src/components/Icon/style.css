@@ -5,7 +5,8 @@
 .money-bag-icon,
 .pencil,
 .cross,
-.check {
+.check,
+.pie-chart-logo {
   width: 20px;
   height: 20px;
   transition: 0.2s ease;

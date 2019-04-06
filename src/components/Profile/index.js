@@ -3,7 +3,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 
 import style from "./Profile.module.css";
-import { Card, Button, ModalOverlay, Overlay } from "../index";
+import { Card, Button, ModalOverlay, Overlay, Tab } from "../index";
 
 type PROPS = {
   makeProfileOperation: Function,
@@ -15,7 +15,9 @@ type PROPS = {
   name: string,
   sure_name: string,
   avatar: string,
-  vk_id: number
+  vk_id: number,
+  costs: Object,
+  income: Object
 };
 
 class Profile extends React.Component<PROPS, {}> {
@@ -33,7 +35,9 @@ class Profile extends React.Component<PROPS, {}> {
       avatar,
       modalIsVisible,
       typeModal,
-      isFetching
+      isFetching,
+      costs,
+      income
     } = this.props;
     const overlay = <Overlay />;
     const showPreloader = isFetching ? overlay : "";
@@ -57,8 +61,10 @@ class Profile extends React.Component<PROPS, {}> {
     );
 
     const statisticCard = (
-      <Card icon={""} headerTitle={"статистика"}>
-        <div>статистика</div>
+      <Card icon={"pie-chart-logo"} headerTitle={"статистика"}>
+        <div>
+          <Tab costs={costs} income={income} />
+        </div>
       </Card>
     );
     const settingsCard = (
