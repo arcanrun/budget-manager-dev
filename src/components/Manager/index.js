@@ -66,9 +66,17 @@ class Manager extends React.Component<PROPS, STATE> {
   }
 
   handleDayClick = (day: string, { selected }: { selected: boolean }) => {
-    this.setState({
-      tempPayDay: selected ? undefined : day
-    });
+    let toDay = new Date();
+    toDay = toDay.toLocaleDateString();
+    const toDayMs = Date.parse(toDay);
+    const tempPayDay = day.toLocaleDateString();
+    const tempPayDayMs = Date.parse(tempPayDay);
+
+    if (tempPayDay > toDay) {
+      this.setState({
+        tempPayDay: selected ? undefined : day
+      });
+    }
   };
   handleNewPayDay = (e: any) => {
     const { vk_id } = this.props;
@@ -79,6 +87,7 @@ class Manager extends React.Component<PROPS, STATE> {
         const initial_daysToPayday = msToDays(
           Date.parse(tempPayDay || "") - Date.now()
         );
+
         this.props.addPayDay(vk_id, tempPayDay, initial_daysToPayday);
         this.setState({ tempPayDay: undefined });
         break;
