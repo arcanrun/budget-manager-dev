@@ -311,17 +311,17 @@ export function user(state: UserState = initialState, action: Object) {
           error: false,
           costs: {
             ...state.statistics.costs,
-            total: action.payload.payload.total,
-            common: action.payload.payload.common,
-            fun: action.payload.payload.fun,
-            invest: action.payload.payload.invest
+            total: action.payload.payload.costs.total,
+            common: action.payload.payload.costs.common,
+            fun: action.payload.payload.costs.fun,
+            invest: action.payload.payload.costs.invest
           },
           income: {
-            ...state.statistics.costs,
-            total: action.payload.payload.total,
-            common: action.payload.payload.common,
-            fun: action.payload.payload.fun,
-            invest: action.payload.payload.invest
+            ...state.statistics.income,
+            total: action.payload.payload.income.total,
+            common: action.payload.payload.income.common,
+            fun: action.payload.payload.income.fun,
+            invest: action.payload.payload.income.invest
           }
         }
       };
