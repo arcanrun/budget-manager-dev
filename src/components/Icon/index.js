@@ -25,9 +25,10 @@ type PROPS = {|
   icon: string,
   color?: string,
   width?: string,
-  height?: string
+  height?: string,
+  fontSize?: string
 |};
-const Icon = ({ icon, color, width, height }: PROPS) => {
+const Icon = ({ icon, color, width, height, fontSize }: PROPS) => {
   switch (icon) {
     case "money-bag":
       return (
@@ -195,7 +196,11 @@ const Icon = ({ icon, color, width, height }: PROPS) => {
       );
 
     default:
-      return <b className="default-display">{icon}</b>;
+      return (
+        <b className="default-display" style={{ fontSize: fontSize }}>
+          {icon}
+        </b>
+      );
   }
 };
 
