@@ -11,7 +11,8 @@ import {
   getPayDay,
   calcTempCosts,
   getAllCosts,
-  makeProfileOperation
+  makeProfileOperation,
+  logIn
 } from "../actions/";
 
 const mapStateToProps = state => ({
@@ -36,6 +37,7 @@ export const ManagerContainer = connect(
     getPayDay,
     calcTempCosts,
     getAllCosts,
-    makeProfileOperation
+    makeProfileOperation,
+    logIn
   }
 )(Manager);

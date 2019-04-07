@@ -313,8 +313,18 @@ export function user(state: UserState = initialState, action: Object) {
         error: true,
         error_message: action.payload.message
       };
+    case "SIGNUP_SUCCESS":
     case LOGIN_SUCCESS:
-      return { ...state, isFetching: false, vk_id: action.payload.vk_id };
+      console.log("======>", action.payload);
+      return {
+        ...state,
+        isFetching: false,
+        vk_id: action.payload.vk_id,
+        name: action.payload.name,
+        sure_name: action.payload.sure_name,
+        avatar: action.payload.avatar
+      };
+
     case PROFILE_OPERATION_SUCCESS:
       let res = "";
       if (action.payload.payload === "DELETE_USER_SUCCESS") {

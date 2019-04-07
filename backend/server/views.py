@@ -124,26 +124,58 @@ def log_in(request):
     print('[log_in:RECIVED]-->', req)
 
     vk_id = str(req['vk_id'])
-    response = {'RESPONSE': 'LOGIN_ERROR', 'PAYLOAD': vk_id
+    name = str(req['name'])
+    sure_name = str(req['sure_name'])
+    avatar = str(req['avatar'])
+
+    response = {'RESPONSE': 'LOGIN_ERROR', 'PAYLOAD': {}
                 }
-    try:
-        all_users = Vkuser.objects.all()
-        for field in all_users:
-            if (vk_id == field.id_vk):
-                response['RESPONSE'] = 'ALREADY_HERE'
-                return JsonResponse(response)
-        user = Vkuser(id_vk=vk_id, common=costsPattern,
-                      fun=costsPattern, invest=costsPattern)
-        user.save()
 
-        response['RESPONSE'] = 'LOGIN_SUCCESS'
-        response['PAYLOAD'] = vk_id
-        print('[log_in:RESPONSE]-->', response)
+    all_users = Vkuser.objects.all()
+    for field in all_users:
+        if (vk_id == field.id_vk):
+            response['RESPONSE'] = 'ALREADY_HERE'
+            response['PAYLOAD']['vk_id'] = field.id_vk
+            response['PAYLOAD']['name'] = name
+            response['PAYLOAD']['sure_name'] = sure_name
+            response['PAYLOAD']['avatar'] = avatar
 
-        return JsonResponse(response)
-    except:
-        print('[log_in:RESPONSE]-->', response)
-        return JsonResponse(response)
+            print('[log_in:RESPONSE]-->', response)
+            return JsonResponse(response)
+
+    # user = Vkuser(id_vk=vk_id, common=costsPattern,
+    #               fun=costsPattern, invest=costsPattern)
+    # user.save()
+
+    print('[log_in:RESPONSE]-->', response)
+
+    return JsonResponse(response)
+
+
+def sign_up(request):
+    req = json.loads(str(request.body, encoding='utf-8'))
+    response = {'RESPONSE': 'SIGN_UP_ERROR', 'PAYLOAD': False
+                }
+
+    vk_id = str(req['vk_id'])
+    name = str(req['name'])
+    sure_name = str(req['sure_name'])
+    avatar = str(req['avatar'])
+
+    print('[sign_up:RECIVED]-->', req)
+    user = Vkuser(id_vk=vk_id, common=costsPattern,
+                  fun=costsPattern, invest=costsPattern)
+    user.save()
+
+    response['RESPONSE'] = 'SIGN_UP_SUCCESS'
+    response['PAYLOAD'] = {}
+    response['PAYLOAD']['vk_id'] = vk_id
+    response['PAYLOAD']['name'] = name
+    response['PAYLOAD']['sure_name'] = sure_name
+    response['PAYLOAD']['avatar'] = avatar
+
+    print('[sign_up:RESPONSE]-->', response)
+    return JsonResponse(response)
 
 
 def temp_today_cost(request):

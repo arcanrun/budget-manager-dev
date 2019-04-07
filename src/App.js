@@ -1,27 +1,37 @@
 //@flow
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+import connect from "@vkontakte/vkui-connect-promise";
 
-import { Header, BottomBar } from "./components";
+import { Header, BottomBar, Overlay } from "./components";
 import {
   ManagerContainer,
   HistoryContainer,
   ProfileContainer
 } from "./containers";
-import { EntranceContainer } from "./containers/EntranceContainer";
+import EntranceContainer from "./containers/EntranceContainer";
 // import { user } from "./static/user-data";
 
 type PROPS = {
-  vk_id: ?number
+  logIn: Function,
+  vk_id: ?number,
+  isFetching: boolean
+  // isLogedIn?: boolean
 };
 
-class App extends React.Component<PROPS> {
+class App extends React.Component<PROPS, {}> {
+  componentDidMount() {
+    this.props.logIn();
+  }
   render() {
-    const { vk_id } = this.props;
-
+    const { vk_id, isFetching } = this.props;
     return (
       <>
-        {vk_id && <Header title={"менеджер"} />}
+        {isFetching ? (
+          <Overlay isTransparent={false} />
+        ) : (
+          vk_id && <Header title={"менеджер"} />
+        )}
         <Switch>
           <Route path="/history" component={HistoryContainer} />
           {!vk_id ? (

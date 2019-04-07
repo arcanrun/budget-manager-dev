@@ -1,21 +1,18 @@
 //@flow
 import connect from "@vkontakte/vkui-connect-promise";
 
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "../constants";
-import { API } from "../API";
-
-const requestLogIn = () => ({
-  type: LOGIN_REQUEST,
+const requestSignUp = () => ({
+  type: "SIGNUP_REQUEST",
   payload: {
     isFetching: true
   }
 });
-export const successLogIn = (res: Object) => ({
-  type: LOGIN_SUCCESS,
+export const successSignUp = (res: Object) => ({
+  type: "SIGNUP_SUCCESS",
   payload: res
 });
-export const failureLogIn = (res: Object) => ({
-  type: LOGIN_FAILURE,
+export const failureSignUp = (res: Object) => ({
+  type: "SIGNUP_FAILURE",
   error: {
     isFetching: false,
     error: true,
@@ -23,9 +20,9 @@ export const failureLogIn = (res: Object) => ({
   }
 });
 
-export const logIn = () => {
+export const signUp = () => {
   return (dispatch: Function) => {
-    dispatch(requestLogIn());
+    dispatch(requestSignUp());
     let vkRes = {
       errors: false,
       error_message: undefined,
@@ -51,20 +48,14 @@ export const logIn = () => {
         vkRes.avatar = res.data.photo_200;
         vkRes.errors = false;
         vkRes.error_message = undefined;
-        fetch("http://127.0.0.1:8000/log-in/", {
+        fetch("http://127.0.0.1:8000/sign-up/", {
           method: "POST",
           body: JSON.stringify(vkRes)
         })
           .then(res => res.json())
           .then(res => {
             console.log(res);
-            let response = res.RESPONSE;
-            if (response === "LOGIN_ERROR") {
-              dispatch(failureLogIn(response));
-            } else {
-              dispatch(successLogIn(res.PAYLOAD));
-            }
-
+            dispatch(successSignUp(res.PAYLOAD));
             return res;
           })
           .catch(err => console.log(err));
@@ -72,22 +63,7 @@ export const logIn = () => {
       .catch(err => {
         vkRes.errors = true;
         vkRes.error_message = err;
-        dispatch(failureLogIn(vkRes));
+        dispatch(failureSignUp(vkRes));
       });
-    //   .catch(err => console.log(Error(err)));
-    // connect
-    //   .send("VKWebAppGetEmail", {})
-    //   .then(res => {
-    //     console.log(res);
-    //     vkRes.email = res.data.email;
-    //     vkRes.errors = false;
-    //     vkRes.error_message = undefined;
-    //     return res;
-    //   })
-    //   .catch(err => console.log(Error(err)));
-
-    // !vkRes.errors
-    //   ? dispatch(successLogIn(vkRes))
-    //   : dispatch(failureLogIn(vkRes));
   };
 };

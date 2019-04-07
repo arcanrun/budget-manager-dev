@@ -14,6 +14,7 @@ type PROPS = {
   getPayDay: Function,
   calcTempCosts: Function,
   getAllCosts: Function,
+  logIn: Function,
   typeModal: string,
   budget: number,
   payday: string,
@@ -43,13 +44,7 @@ class Manager extends React.Component<PROPS, STATE> {
     const toDay = new Date();
     const toDayFormated = toDay.toLocaleString().split(",")[0];
 
-    fetch("http://127.0.0.1:8000/log-in/", {
-      method: "POST",
-      body: JSON.stringify({ vk_id })
-    })
-      .then(res => res.json())
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    // this.props.logIn();
 
     this.props.getAllCosts(vk_id, daysToPayday, budget, toDay, toDayFormated);
   }

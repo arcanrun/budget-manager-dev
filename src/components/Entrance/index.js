@@ -9,7 +9,7 @@ import "./costumizedSwiper.css";
 import { EntranceItem } from "../index";
 
 type PROPS = {
-  logIn: Function,
+  signUp: Function,
   vk_id: ?number
 };
 
@@ -37,7 +37,7 @@ class Entrance extends React.Component<PROPS, {}> {
       containerClass: "customized-swiper-container"
     };
     const btnLogin = (
-      <button onClick={() => this.props.logIn()} className={style.btn}>
+      <button onClick={this.props.signUp} className={style.btn}>
         войти
       </button>
     );

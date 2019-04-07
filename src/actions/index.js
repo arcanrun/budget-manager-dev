@@ -7,6 +7,7 @@ import { calcTempCosts } from "./calcActions";
 import { getAllCosts } from "./getAllCostsActions";
 import { getHistory } from "./getHistoryActions";
 import { logIn } from "./loginActions";
+import { signUp } from "./signUpActions";
 import { makeProfileOperation } from "./profileOperationsAction";
 import { getStatistics } from "./staisticsActions";
 export {
@@ -20,5 +21,6 @@ export {
   getHistory,
   logIn,
   makeProfileOperation,
-  getStatistics
+  getStatistics,
+  signUp
 };
