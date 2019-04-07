@@ -18,7 +18,7 @@ export const Header = ({ title }: PROPS) => (
       }}
     />
     <Route
-      path="/"
+      path="/budget-manager"
       exact
       children={({ match }) => {
         return <p className="header__title">{match ? "менеджер" : ""}</p>;

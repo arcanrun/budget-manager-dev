@@ -29,18 +29,15 @@ class App extends React.Component<PROPS, {}> {
       <>
         {isFetching ? <Overlay /> : vk_id && <Header title={"менеджер"} />}
         <Switch>
-          <Route path="/budget-manager/history" component={HistoryContainer} />
+          <Route path="/history" component={HistoryContainer} />
           {!vk_id ? (
-            <Redirect exact to="/budget-manager/entrance" from="/" />
+            <Redirect exact to="/" from="/budget-manager" />
           ) : (
-            <Route exact path="budget-manager/" component={ManagerContainer} />
+            <Route exact path="/budget-manager" component={ManagerContainer} />
           )}
 
-          <Route path="/budget-manager/profile" component={ProfileContainer} />
-          <Route
-            path="/budget-manager/entrance"
-            component={EntranceContainer}
-          />
+          <Route path="/profile" component={ProfileContainer} />
+          <Route path="/" component={EntranceContainer} />
         </Switch>
         {vk_id && <BottomBar />}
       </>
