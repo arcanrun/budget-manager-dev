@@ -83,11 +83,10 @@ type UserState = {
 };
 
 export const initialState: UserState = {
-  vk_id: 2,
-  avatar:
-    "https://static.mk.ru/upload/entities/2018/06/07/articles/detailPicture/95/72/ce/d7/58bcc7d521cd08692d9364476a060077.jpg",
-  name: "Pavel",
-  sure_name: "Durov",
+  vk_id: undefined,
+  avatar: undefined,
+  name: undefined,
+  sure_name: undefined,
   isFetching_pyaday: false,
   isFetching: false,
   error: false,

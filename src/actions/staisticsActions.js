@@ -30,7 +30,7 @@ export const failuretStatistics = (message: string) => ({
   }
 });
 
-export const getStatistics = (vk_id: number, toDayFormated: String) => {
+export const getStatistics = (vk_id: number, toDayFormated: string) => {
   return (dispatch: Function) => {
     dispatch(requestStatistics(vk_id, toDayFormated));
     fetch(API.GET_STATISTICS, {

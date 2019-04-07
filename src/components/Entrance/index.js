@@ -37,7 +37,7 @@ class Entrance extends React.Component<PROPS, {}> {
       containerClass: "customized-swiper-container"
     };
     const btnLogin = (
-      <button onClick={() => this.props.logIn(123456)} className={style.btn}>
+      <button onClick={() => this.props.logIn()} className={style.btn}>
         войти
       </button>
     );

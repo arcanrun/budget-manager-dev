@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@vkontakte/vkui-connect-promise": "^0.1.19",
     "deepcopy": "^2.0.0",
     "flow-bin": "^0.95.1",
     "node-sass": "^4.11.0",
