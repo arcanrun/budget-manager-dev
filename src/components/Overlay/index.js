@@ -10,7 +10,9 @@ type PROPS = {
 
 const Overlay = ({ isTransparent }: PROPS) =>
   isTransparent ? (
-    <div className={style.overlay} />
+    <div className={style.overlay}>
+      <Spinner />
+    </div>
   ) : (
     <div className={style.overlay} style={{ backgroundColor: "#EAEFF2" }}>
       <Spinner />
