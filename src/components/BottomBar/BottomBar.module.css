@@ -1,5 +1,5 @@
-.bottom-bar {
-  box-shadow: 0px 12px 10px 10px rgb(191, 191, 191);
+.bottomBar {
+  box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.17);
   position: fixed;
   bottom: 0;
   display: flex;
@@ -35,5 +35,5 @@
   bottom: 0;
 }
 .bottom-bar__item .active span {
-  color: red;
+  color: #f72d6b;
 }
