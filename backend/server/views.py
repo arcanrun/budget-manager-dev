@@ -3,6 +3,7 @@ from .models import Vkuser
 from django.http import JsonResponse
 from django.contrib.auth.models import User, Group
 from .models import Vkuser, History
+import datetime
 
 from .helpers import get_updated_data, make_calculations, costsPattern, history_saver
 
@@ -81,11 +82,15 @@ def get_costs_all(request):
     response = {'RESPONSE': 'ERROR', 'PAYLOAD': {
     }}
     vk_id = str(req['vk_id'])
+    toDay = datetime.datetime.strptime(req['toDay'][:10], '%Y-%m-%d')
+    daysToPayday_check = 0
 
     all_users = Vkuser.objects.all()
     for field in all_users:
         if (vk_id == field.id_vk):
-
+            daysToPayday_check = (datetime.datetime.strptime(
+                field.pay_day[:10], '%Y-%m-%d') - toDay)
+            daysToPayday_check = daysToPayday_check.days
             commonObject = json.loads(field.common)
             funObject = json.loads(field.fun)
             investObject = json.loads(field.invest)
@@ -95,7 +100,14 @@ def get_costs_all(request):
             response['PAYLOAD']['invest'] = json.loads(field.invest)
             response['PAYLOAD']['budget'] = field.budget
             response['PAYLOAD']['pay_day'] = field.pay_day
-            response['PAYLOAD']['days_to_payday'] = field.days_to_payday
+
+            if daysToPayday_check <= int(field.days_to_payday):
+                if daysToPayday_check <= 0:
+                    daysToPayday_check = 0
+                response['PAYLOAD']['days_to_payday'] = daysToPayday_check
+            else:
+                response['PAYLOAD']['days_to_payday'] = field.days_to_payday
+
             response['RESPONSE'] = 'SUCCES_FETCHED'
             print('[get_costs_all:RESPONSE]-->', response)
             return JsonResponse(response)

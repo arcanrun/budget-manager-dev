@@ -41,7 +41,6 @@ class Manager extends React.Component<PROPS, STATE> {
     const daysToPayday = this.props.daysToPayday;
 
     const toDay = new Date();
-
     const toDayFormated = toDay.toLocaleString().split(",")[0];
 
     fetch("http://127.0.0.1:8000/log-in/", {

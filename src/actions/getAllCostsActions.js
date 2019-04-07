@@ -48,7 +48,8 @@ export const getAllCosts = (
       body: JSON.stringify({
         vk_id,
         daysToPayday,
-        budget
+        budget,
+        toDay
       })
     })
       .then(res => res.json())
