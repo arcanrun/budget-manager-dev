@@ -51,7 +51,7 @@ export const logIn = () => {
         vkRes.avatar = res.data.photo_200;
         vkRes.errors = false;
         vkRes.error_message = undefined;
-        fetch("http://127.0.0.1:8000/log-in/", {
+        fetch(API.LOG_IN, {
           method: "POST",
           body: JSON.stringify(vkRes)
         })

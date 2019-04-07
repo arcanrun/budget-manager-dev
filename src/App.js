@@ -26,11 +26,7 @@ class App extends React.Component<PROPS, {}> {
     const { vk_id, isFetching } = this.props;
     return (
       <>
-        {isFetching ? (
-          <Overlay isTransparent={false} />
-        ) : (
-          vk_id && <Header title={"менеджер"} />
-        )}
+        {isFetching ? <Overlay /> : vk_id && <Header title={"менеджер"} />}
         <Switch>
           <Route path="/history" component={HistoryContainer} />
           {!vk_id ? (

@@ -60,7 +60,7 @@ class Manager extends React.Component<PROPS, STATE> {
     }
   }
 
-  handleDayClick = (day: string, { selected }: { selected: boolean }) => {
+  handleDayClick = (day: any, { selected }: { selected: boolean }) => {
     let toDay = new Date();
     toDay = toDay.toLocaleDateString();
     const toDayMs = Date.parse(toDay);
@@ -106,7 +106,7 @@ class Manager extends React.Component<PROPS, STATE> {
       calc
     } = this.props;
     const { tempPayDay } = this.state;
-    const overlay = <Overlay />;
+    const overlay = <Overlay isTransparent={true} />;
     const showPreloader = isFetching_calc ? overlay : "";
     const wholeBudgetCard = daysToPayday ? (
       <Card
@@ -147,6 +147,7 @@ class Manager extends React.Component<PROPS, STATE> {
       <ModalOverlay
         onClick={onClickToggleModal}
         typeModal={typeModal}
+        makeProfileOperation={""}
         {...this.props}
       />
     );

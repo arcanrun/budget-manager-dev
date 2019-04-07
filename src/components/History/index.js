@@ -28,7 +28,7 @@ class History extends React.Component<PROPS, {}> {
   }
   render() {
     const { history, isFetching, vk_id } = this.props;
-    const overlay = <Overlay />;
+    const overlay = <Overlay isTransparent={true} />;
     const verticalLine = <div className={styleHistory.verticalLine} />;
 
     history.sort(compareDate);

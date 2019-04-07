@@ -7,5 +7,7 @@ export const API = {
   TEMP_TODAY_COSTS: `${ENDPOINT}temp-today-cost/`,
   GET_HISTORY: `${ENDPOINT}get-history/`,
   PROFILE_MANAGE: `${ENDPOINT}profile-manage/`,
-  GET_STATISTICS: `${ENDPOINT}get-statistics/`
+  GET_STATISTICS: `${ENDPOINT}get-statistics/`,
+  SIGN_UP: `${ENDPOINT}sign-up/`,
+  LOG_IN: `${ENDPOINT}log-in/`
 };

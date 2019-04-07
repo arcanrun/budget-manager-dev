@@ -1,18 +1,21 @@
 //@flow
 import connect from "@vkontakte/vkui-connect-promise";
 
+import { SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "../constants";
+import { API } from "../API";
+
 const requestSignUp = () => ({
-  type: "SIGNUP_REQUEST",
+  type: SIGNUP_REQUEST,
   payload: {
     isFetching: true
   }
 });
 export const successSignUp = (res: Object) => ({
-  type: "SIGNUP_SUCCESS",
+  type: SIGNUP_SUCCESS,
   payload: res
 });
 export const failureSignUp = (res: Object) => ({
-  type: "SIGNUP_FAILURE",
+  type: SIGNUP_FAILURE,
   error: {
     isFetching: false,
     error: true,
@@ -51,7 +54,7 @@ export const signUp = () => {
         vkRes.avatar = res.data.photo_200;
         vkRes.errors = false;
         vkRes.error_message = undefined;
-        fetch("http://127.0.0.1:8000/sign-up/", {
+        fetch(API.SIGN_UP, {
           method: "POST",
           body: JSON.stringify(vkRes)
         })

@@ -43,7 +43,7 @@ class Profile extends React.Component<PROPS, {}> {
       income,
       registerDate
     } = this.props;
-    const overlay = <Overlay />;
+    const overlay = <Overlay isTransparent={true} />;
     const showPreloader = isFetching ? overlay : "";
     const commonSettingsCard = (
       <Card icon={"profile"} headerTitle="Общая информация">
