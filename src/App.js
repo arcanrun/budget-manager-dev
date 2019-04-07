@@ -33,7 +33,7 @@ class App extends React.Component<PROPS, {}> {
           {!vk_id ? (
             <Redirect exact to="/budget-manager/entrance" from="/" />
           ) : (
-            <Route exact path="/budget-manager/" component={ManagerContainer} />
+            <Route exact path="budget-manager/" component={ManagerContainer} />
           )}
 
           <Route path="/budget-manager/profile" component={ProfileContainer} />
