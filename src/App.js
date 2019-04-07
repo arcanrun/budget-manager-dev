@@ -16,7 +16,6 @@ type PROPS = {
   logIn: Function,
   vk_id: ?number,
   isFetching: boolean
-  // isLogedIn?: boolean
 };
 
 class App extends React.Component<PROPS, {}> {

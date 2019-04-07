@@ -311,8 +311,9 @@ export function user(state: UserState = initialState, action: Object) {
         ...state,
         isFetching: false,
         error: true,
-        error_message: action.payload.message
+        error_message: action.error.message
       };
+
     case "SIGNUP_SUCCESS":
     case LOGIN_SUCCESS:
       console.log("======>", action.payload);

@@ -14,12 +14,12 @@ export const successLogIn = (res: Object) => ({
   type: LOGIN_SUCCESS,
   payload: res
 });
-export const failureLogIn = (res: Object) => ({
+export const failureLogIn = (msg: string) => ({
   type: LOGIN_FAILURE,
   error: {
     isFetching: false,
     error: true,
-    message: res.error_message
+    message: msg
   }
 });
 
