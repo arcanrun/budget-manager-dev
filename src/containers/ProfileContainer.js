@@ -15,7 +15,8 @@ const mapStateToProps = state => ({
   isFetching: state.user.statistics.isFetching,
   costs: state.user.statistics.costs,
   income: state.user.statistics.income,
-  toDayFormated: state.user.calc.toDayFormated
+  toDayFormated: state.user.calc.toDayFormated,
+  registerDate: state.user.register_date
 });
 export const ProfileContainer = connect(
   mapStateToProps,

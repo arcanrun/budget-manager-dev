@@ -34,6 +34,7 @@ type UserState = {
   isFetching: boolean,
   error: boolean,
   error_message: boolean,
+  register_date: ?string,
   history: {
     isFetching: false,
     value: ?Array<any>,
@@ -57,7 +58,6 @@ type UserState = {
       invest: ?number
     }
   },
-  isFetching_pyaday: boolean, // temp solutions...
   calc: {
     toDay: ?string,
     toDayFormated: ?string,
@@ -87,10 +87,10 @@ export const initialState: UserState = {
   avatar: undefined,
   name: undefined,
   sure_name: undefined,
-  isFetching_pyaday: false,
   isFetching: false,
   error: false,
   error_message: false,
+  register_date: undefined,
   history: {
     value: [],
     isFetching: false,
@@ -198,9 +198,10 @@ export function user(state: UserState = initialState, action: Object) {
     case GET_ALL_COSTS_SUCCESS:
       return {
         ...state,
-
+        register_date: action.payload.payload.register_date,
         calc: {
           ...state.calc,
+
           toDay: action.payload.toDay,
           toDayFormated: action.payload.toDayFormated,
           budget: action.payload.payload.budget,

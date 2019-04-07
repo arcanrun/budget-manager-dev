@@ -72,7 +72,7 @@ export const logIn = () => {
       .catch(err => {
         vkRes.errors = true;
         vkRes.error_message = err;
-        dispatch(failureLogIn(vkRes));
+        dispatch(failureLogIn(vkRes.error_message));
       });
     //   .catch(err => console.log(Error(err)));
     // connect

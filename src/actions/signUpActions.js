@@ -23,6 +23,8 @@ export const failureSignUp = (res: Object) => ({
 export const signUp = () => {
   return (dispatch: Function) => {
     dispatch(requestSignUp());
+    let toDay = new Date();
+    toDay = toDay.toLocaleDateString();
     let vkRes = {
       errors: false,
       error_message: undefined,
@@ -30,7 +32,8 @@ export const signUp = () => {
       name: undefined,
       sure_name: undefined,
       avatar: undefined,
-      email: undefined
+      email: undefined,
+      toDay
     };
 
     connect

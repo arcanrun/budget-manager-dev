@@ -17,6 +17,7 @@ type PROPS = {
   sure_name: string,
   avatar: string,
   vk_id: number,
+  registerDate: number,
   costs: Object,
   income: Object
 };
@@ -39,7 +40,8 @@ class Profile extends React.Component<PROPS, {}> {
       typeModal,
       isFetching,
       costs,
-      income
+      income,
+      registerDate
     } = this.props;
     const overlay = <Overlay />;
     const showPreloader = isFetching ? overlay : "";
@@ -55,7 +57,7 @@ class Profile extends React.Component<PROPS, {}> {
               <span> {sure_name}</span>
             </div>
             <div className={style.subFooter}>
-              c <b>12.12.2019</b> управляет своим бюджетом
+              c <b>{registerDate}</b> управляет своим бюджетом
             </div>
           </div>
         </div>

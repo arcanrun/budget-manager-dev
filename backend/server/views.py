@@ -161,10 +161,11 @@ def sign_up(request):
     name = str(req['name'])
     sure_name = str(req['sure_name'])
     avatar = str(req['avatar'])
+    register_date = req['toDay']
 
     print('[sign_up:RECIVED]-->', req)
     user = Vkuser(id_vk=vk_id, common=costsPattern,
-                  fun=costsPattern, invest=costsPattern)
+                  fun=costsPattern, invest=costsPattern, register_date=register_date)
     user.save()
 
     response['RESPONSE'] = 'SIGN_UP_SUCCESS'
