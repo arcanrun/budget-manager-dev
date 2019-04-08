@@ -42,8 +42,9 @@ class Entrance extends React.Component<PROPS, {}> {
       </button>
     );
     return this.props.vk_id ? (
-      <Redirect to="/budget-manager" />
+      <Redirect to="/" />
     ) : (
+      // <Redirect to="/budget-manager" />
       <div className={style.entrance}>
         <Swiper {...params}>
           <div className={style.item}>

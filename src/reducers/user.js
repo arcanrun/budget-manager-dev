@@ -62,18 +62,21 @@ type UserState = {
     toDay: ?string,
     toDayFormated: ?string,
     common: {
+      value: ?number,
       maxToday: {
         value: ?number,
         temp: ?number
       }
     },
     fun: {
+      value: ?number,
       maxToday: {
         value: ?number,
         temp: ?number
       }
     },
     invest: {
+      value: ?number,
       maxToday: {
         value: ?number,
         temp: ?number
@@ -83,7 +86,7 @@ type UserState = {
 };
 
 export const initialState: UserState = {
-  vk_id: undefined,
+  vk_id: 123456,
   avatar: undefined,
   name: undefined,
   sure_name: undefined,
@@ -107,18 +110,21 @@ export const initialState: UserState = {
     error: false,
     error_message: undefined,
     common: {
+      value: undefined,
       maxToday: {
         value: undefined,
         temp: undefined
       }
     },
     fun: {
+      value: undefined,
       maxToday: {
         value: undefined,
         temp: undefined
       }
     },
     invest: {
+      value: undefined,
       maxToday: {
         value: undefined,
         temp: undefined
@@ -212,6 +218,7 @@ export function user(state: UserState = initialState, action: Object) {
           error_message: undefined,
           common: {
             ...state.calc.common,
+            value: action.payload.payload.common.value,
             maxToday: {
               ...state.calc.common.maxToday,
               value: action.payload.payload.common.maxToday,
@@ -220,6 +227,7 @@ export function user(state: UserState = initialState, action: Object) {
           },
           fun: {
             ...state.calc.fun,
+            value: action.payload.payload.fun.value,
             maxToday: {
               ...state.calc.fun.maxToday,
               value: action.payload.payload.fun.maxToday,
@@ -228,6 +236,7 @@ export function user(state: UserState = initialState, action: Object) {
           },
           invest: {
             ...state.calc.invest,
+            value: action.payload.payload.invest.value,
             maxToday: {
               ...state.calc.invest.maxToday,
               value: action.payload.payload.invest.maxToday,
@@ -252,6 +261,7 @@ export function user(state: UserState = initialState, action: Object) {
           error_message: undefined,
           common: {
             ...state.calc.common,
+            value: action.payload.payload.common.value,
             maxToday: {
               ...state.calc.common.maxToday,
               value: action.payload.payload.common.maxToday,
@@ -260,6 +270,7 @@ export function user(state: UserState = initialState, action: Object) {
           },
           fun: {
             ...state.calc.fun,
+            value: action.payload.payload.fun.value,
             maxToday: {
               ...state.calc.fun.maxToday,
               value: action.payload.payload.fun.maxToday,
@@ -268,6 +279,7 @@ export function user(state: UserState = initialState, action: Object) {
           },
           invest: {
             ...state.calc.invest,
+            value: action.payload.payload.invest.value,
             maxToday: {
               ...state.calc.invest.maxToday,
               value: action.payload.payload.invest.maxToday,

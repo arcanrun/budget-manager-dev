@@ -14,6 +14,7 @@ type PROPS = {
 class PartBudget extends React.Component<PROPS, {}> {
   render() {
     const { costs, onClickToggleModal, typeModal, budget } = this.props;
+    console.log(costs.common);
     let title = "";
     let costsValue = "";
     let temp = "";
@@ -22,21 +23,21 @@ class PartBudget extends React.Component<PROPS, {}> {
     switch (typeModal) {
       case "common":
         title = "50";
-        costsValue = (budget * 0.5).toFixed(2);
+        costsValue = costs.common.value;
         maxTodayValue = costs.common.maxToday.value;
         temp = costs.common.maxToday.temp;
         color = "#3E2AAA";
         break;
       case "fun":
         title = "30";
-        costsValue = (budget * 0.3).toFixed(2);
+        costsValue = costs.fun.value;
         maxTodayValue = costs.fun.maxToday.value;
         temp = costs.fun.maxToday.temp;
         color = "#FFB200";
         break;
       case "invest":
         title = "20";
-        costsValue = (budget * 0.2).toFixed(2);
+        costsValue = costs.invest.value;
         maxTodayValue = costs.invest.maxToday.value;
         temp = costs.invest.maxToday.temp;
         color = "#F95789";
@@ -75,7 +76,7 @@ class PartBudget extends React.Component<PROPS, {}> {
     const chart = (
       <DonutChart
         title={title}
-        cost={+costsValue}
+        cost={costsValue}
         temp={+temp}
         maxToday={+maxTodayValue}
         color={color}
