@@ -32,15 +32,17 @@ class Overlay extends React.Component<PROPS, STATE> {
   render() {
     const { isTransparent } = this.props;
     return isTransparent ? (
-      <CSSTransition in={this.state.in} timeout={500} classNames={"page"}>
+      <CSSTransition in={this.state.in} timeout={2000} classNames={"overlay"}>
         <div className={style.overlay}>
           <Spinner />
         </div>
       </CSSTransition>
     ) : (
-      <div className={style.overlay} style={{ backgroundColor: "#EAEFF2" }}>
-        <Spinner />
-      </div>
+      <CSSTransition in={this.state.in} timeout={2000} classNames={"overlay"}>
+        <div className={style.overlay} style={{ backgroundColor: "#EAEFF2" }}>
+          <Spinner />
+        </div>
+      </CSSTransition>
     );
   }
 }

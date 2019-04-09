@@ -1,9 +1,11 @@
 //@flow
 import React from "react";
 import { Redirect } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
 
 import style from "./Profile.module.css";
 import { Card, Button, ModalOverlay, Overlay, Tab } from "../index";
+import "./animations.css";
 
 type PROPS = {
   makeProfileOperation: Function,
@@ -22,12 +24,24 @@ type PROPS = {
   income: Object
 };
 
-class Profile extends React.Component<PROPS, {}> {
+type STATE = {
+  in: boolean
+};
+
+class Profile extends React.Component<PROPS, STATE> {
+  state = {
+    in: false
+  };
   componentDidMount() {
     const { vk_id, toDayFormated } = this.props;
 
     this.props.getStatistics(vk_id, toDayFormated);
+    this.toggleAnimation();
   }
+
+  toggleAnimation = () => {
+    this.setState({ in: !this.state.in });
+  };
   render() {
     const {
       makeProfileOperation,
@@ -99,13 +113,15 @@ class Profile extends React.Component<PROPS, {}> {
         {!vk_id ? (
           <Redirect to="/" />
         ) : (
-          <div className={style.profile}>
-            {showPreloader}
-            {commonSettingsCard}
-            {statisticCard}
-            {settingsCard}
-            {!modalIsVisible || modalOverlay}
-          </div>
+          <CSSTransition in={this.state.in} timeout={500} classNames={"page"}>
+            <div className={style.profile}>
+              {showPreloader}
+              {commonSettingsCard}
+              {statisticCard}
+              {settingsCard}
+              {!modalIsVisible || modalOverlay}
+            </div>
+          </CSSTransition>
         )}
       </>
     );

@@ -33,17 +33,19 @@ class History extends React.Component<PROPS, STATE> {
   };
 
   componentDidMount() {
+    const ins = this.state.in;
+    console.log("---->", ins);
     const { vk_id } = this.props;
     this.props.getHistory(vk_id);
     this.toggleAnimation();
-  }
-
-  componentWillUnmount() {
-    this.toggleAnimation();
+    console.log("---->", ins);
   }
 
   toggleAnimation = () => {
-    this.setState({ in: !this.state.in });
+    const ins = this.state.in;
+    this.setState({ in: !this.state.in }, () =>
+      console.log("---->", this.state.in)
+    );
   };
 
   render() {
@@ -57,12 +59,14 @@ class History extends React.Component<PROPS, STATE> {
       overlay
     ) : vk_id ? (
       history.length === 0 ? (
-        <div className={styleHistory.empty}>
-          <div className={styleHistory.emptyTitle}>
-            В истории пока ничего нет
+        <CSSTransition in={this.state.in} timeout={500} classNames={"page"}>
+          <div className={styleHistory.empty}>
+            <div className={styleHistory.emptyTitle}>
+              В истории пока ничего нет
+            </div>
+            <Icon icon="hieroglyph" />
           </div>
-          <Icon icon="hieroglyph" />
-        </div>
+        </CSSTransition>
       ) : (
         <CSSTransition in={this.state.in} classNames={"page"} timeout={500}>
           <div className={styleHistory.container}>

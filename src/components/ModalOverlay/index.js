@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 
 import "./style.css";
 import { InputCard } from "../index";
-import { CSSTransition } from "react-transition-group";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 type PROPS = {
   makeProfileOperation: Function,
@@ -21,7 +21,8 @@ type PROPS = {
 
 type STATE = {
   inputValue: ?string,
-  isErrorValidation: boolean
+  isErrorValidation: boolean,
+  in: boolean
 };
 
 const ModalDiv =
@@ -37,8 +38,14 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     };
   }
   componentDidMount() {
-    this.setState({ in: true });
+    this.toggleAnimation();
   }
+  componentWillUnmount() {
+    this.toggleAnimation();
+  }
+  toggleAnimation = () => {
+    this.setState({ in: !this.state.in });
+  };
   validate = (typeModal: string) => {
     const val = this.state.inputValue;
 
@@ -80,7 +87,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
           const type = daysToPayday ? "change" : "add";
           console.log(type);
           this.props.addWholeBudget(vk_id, inputVal, type, daysToPayday);
-
+          this.toggleAnimation();
           break;
 
         case "common":
@@ -91,6 +98,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
             operation,
             dateNow
           );
+          this.toggleAnimation();
           break;
 
         case "fun":
@@ -101,6 +109,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
             operation,
             dateNow
           );
+          this.toggleAnimation();
           break;
 
         case "invest":
@@ -111,9 +120,11 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
             operation,
             dateNow
           );
+          this.toggleAnimation();
           break;
         case "profile":
           this.props.makeProfileOperation(vk_id, operation);
+          this.toggleAnimation();
           break;
 
         default:
@@ -128,7 +139,6 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     } else {
       this.setState({ isErrorValidation: true });
     }
-    this.setState({ in: false });
   };
 
   handleInput = (e: any, typeModal: string) => {
@@ -157,17 +167,15 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     );
 
     return ReactDOM.createPortal(
-      <div className="modal">
-        <CSSTransition
-          in={this.state.in}
-          timeout={1500}
-          classNames="alert"
-          mountOnEnter
-          unmountOnExit
-        >
-          {budgetInputCard}
-        </CSSTransition>
-      </div>,
+      <CSSTransition
+        in={this.state.in}
+        timeout={500}
+        classNames="modal_overlay"
+        mountOnEnter
+        unmountOnExit
+      >
+        <div className="modal">{budgetInputCard}</div>
+      </CSSTransition>,
       ModalDiv
     );
   }
