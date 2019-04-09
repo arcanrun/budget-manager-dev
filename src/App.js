@@ -27,9 +27,10 @@ class App extends React.Component<PROPS, {}> {
     console.log("---------->", this.props);
     return (
       <>
+        {/* {vk_id && <Header title={"менеджер"} />} */}
+        <Overlay isFetching={isFetching} />
         {vk_id && <Header title={"менеджер"} />}
-        {/* {isFetching ? <Overlay isFetching={isFetching} />: vk_id && <Header title={"менеджер"} />} */}
-        <Switch>
+        {/* <Switch>
           <Route path="/history" component={HistoryContainer} />
           {!vk_id ? (
             <Redirect exact to="/entrance" from="/" />
@@ -39,8 +40,8 @@ class App extends React.Component<PROPS, {}> {
 
           <Route path="/profile" component={ProfileContainer} />
           <Route path="/entrance" component={EntranceContainer} />
-        </Switch>
-        {/* <Switch>
+        </Switch> */}
+        <Switch>
           <Route path="/history" component={HistoryContainer} />
           {!vk_id ? (
             <Redirect exact to="/" from="/budget-manager" />
@@ -50,7 +51,7 @@ class App extends React.Component<PROPS, {}> {
 
           <Route path="/profile" component={ProfileContainer} />
           <Route path="/" component={EntranceContainer} />
-        </Switch> */}
+        </Switch>
         {vk_id && <BottomBar />}
       </>
     );
