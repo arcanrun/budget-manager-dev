@@ -86,7 +86,7 @@ type UserState = {
 };
 
 export const initialState: UserState = {
-  vk_id: undefined,
+  vk_id: 65122543,
   avatar: undefined,
   name: undefined,
   sure_name: undefined,

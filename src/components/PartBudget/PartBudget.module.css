@@ -18,7 +18,7 @@
 .buttonPlus {
   color: #0fde8c;
 
-  background: url(/static/media/plus.13260cf0.svg) no-repeat;
+  background: url("../../static/plus.svg") no-repeat;
   background-color: #0fde8c;
   background-size: 15px 15px;
   background-position: center;
