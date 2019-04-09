@@ -17,20 +17,20 @@ export const Header = ({ title }: PROPS) => (
         return <p className="header__title">{match ? "профиль" : ""}</p>;
       }}
     />
-    <Route
+    {/* <Route
       path="/"
       exact
       children={({ match }) => {
         return <p className="header__title">{match ? "менеджер" : ""}</p>;
       }}
-    />
-    {/* <Route
+    /> */}
+    <Route
       path="/budget-manager"
       exact
       children={({ match }) => {
         return <p className="header__title">{match ? "менеджер" : ""}</p>;
       }}
-    /> */}
+    />
     <Route
       path="/history"
       exact

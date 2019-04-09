@@ -104,7 +104,7 @@ class Calendar extends React.Component<PROPS, {}> {
           firstDayOfWeek={FIRST_DAY_OF_WEEK["ru"]}
           labels={LABELS["ru"]}
           showOutsideDays
-          todayButton={<div style={{ color: "#0fde8c" }}>сегодня</div>}
+          todayButton={"сегодня"}
           onDayClick={handleDayClick}
           selectedDays={stringToDate(payday)}
         />
