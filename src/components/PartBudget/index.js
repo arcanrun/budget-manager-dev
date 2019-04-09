@@ -56,7 +56,7 @@ class PartBudget extends React.Component<PROPS, {}> {
         className={[style.button, style.buttonPlus].join(" ")}
         onClick={() => onClickToggleModal(`${typeModal}_plus`)}
       >
-        +
+    
       </button>
     );
     const minusBtn = (
@@ -64,7 +64,7 @@ class PartBudget extends React.Component<PROPS, {}> {
         className={[style.button, style.buttonMinus].join(" ")}
         onClick={() => onClickToggleModal(`${typeModal}_minus`)}
       >
-        -
+       
       </button>
     );
     const footer = (
