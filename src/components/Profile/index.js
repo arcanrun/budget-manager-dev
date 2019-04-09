@@ -57,8 +57,8 @@ class Profile extends React.Component<PROPS, STATE> {
       income,
       registerDate
     } = this.props;
-    const overlay = <Overlay isTransparent={true} />;
-    const showPreloader = isFetching ? overlay : "";
+    // const overlay = <Overlay isTransparent={true} />;
+    // const showPreloader = isFetching ? overlay : "";
     const commonSettingsCard = (
       <Card icon={"profile"} headerTitle="Общая информация">
         <div className={style.user}>
@@ -115,7 +115,7 @@ class Profile extends React.Component<PROPS, STATE> {
         ) : (
           <CSSTransition in={this.state.in} timeout={500} classNames={"page"}>
             <div className={style.profile}>
-              {showPreloader}
+              <Overlay isTransparent={true} isFetching={isFetching} />
               {commonSettingsCard}
               {statisticCard}
               {settingsCard}

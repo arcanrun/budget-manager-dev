@@ -50,13 +50,13 @@ class History extends React.Component<PROPS, STATE> {
 
   render() {
     const { history, isFetching, vk_id } = this.props;
-    const overlay = <Overlay isTransparent={true} />;
+    // const overlay = <Overlay isTransparent={true} />;
     const verticalLine = <div className={styleHistory.verticalLine} />;
 
     history.sort(compareDate);
 
     return isFetching ? (
-      overlay
+      <Overlay isTransparent={true} isFetching={isFetching} />
     ) : vk_id ? (
       history.length === 0 ? (
         <CSSTransition in={this.state.in} timeout={500} classNames={"page"}>

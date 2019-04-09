@@ -45,7 +45,13 @@ class Overlay extends React.Component<PROPS, STATE> {
         </div>
       </CSSTransition>
     ) : (
-      <CSSTransition in={this.state.in} timeout={2000} classNames={"overlay"}>
+      <CSSTransition
+        in={this.props.isFetching}
+        timeout={2000}
+        classNames={"overlay"}
+        mountOnEnter
+        unmountOnExit
+      >
         <div className={style.overlay} style={{ backgroundColor: "#EAEFF2" }}>
           <Spinner />
         </div>

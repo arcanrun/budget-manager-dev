@@ -117,10 +117,7 @@ class Manager extends React.Component<PROPS, STATE> {
       calc
     } = this.props;
     const { tempPayDay } = this.state;
-    const overlay = (
-      <Overlay isTransparent={true} isFetching={isFetching_calc} />
-    );
-    const showPreloader = isFetching_calc ? overlay : "";
+
     const wholeBudgetCard = daysToPayday ? (
       <Card
         headerTitle={"общий бюджет"}
