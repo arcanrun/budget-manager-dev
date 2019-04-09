@@ -5,6 +5,7 @@ import { CSSTransition } from "react-transition-group";
 
 import style from "./InputCard.module.css";
 import "./animations.css";
+import "./animate.css";
 
 type PROPS = {
   onClick: Function,
@@ -93,7 +94,7 @@ class InputCard extends React.Component<PROPS, STATE> {
       <CSSTransition
         in={this.state.in}
         timeout={1500}
-        classNames={"alert"}
+        classNames={"alert_input"}
         mountOnEnter
         unmountOnExit
       >

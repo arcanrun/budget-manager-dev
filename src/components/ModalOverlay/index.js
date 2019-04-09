@@ -171,7 +171,6 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
         in={this.state.in}
         timeout={500}
         classNames="modal_overlay"
-        mountOnEnter
         unmountOnExit
       >
         <div className="modal">{budgetInputCard}</div>
