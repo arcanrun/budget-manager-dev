@@ -1,10 +1,12 @@
 //@flow
 import React from "react";
+import { CSSTransition } from "react-transition-group";
 
 import { Card, Overlay } from "../index";
 import { ModalOverlay, WholeBudget, Calendar, PartBudget } from "../index";
 import style from "./Manager.module.css";
 import { msToDays } from "../Calendar/calendarHelper";
+import "./animations.css";
 
 type PROPS = {
   getWholeBudget: Function,
@@ -28,12 +30,14 @@ type PROPS = {
 };
 
 type STATE = {
-  tempPayDay: ?string
+  tempPayDay: ?string,
+  in: boolean
 };
 
 class Manager extends React.Component<PROPS, STATE> {
   state = {
-    tempPayDay: undefined
+    tempPayDay: undefined,
+    in: false
   };
 
   componentDidMount() {
@@ -47,8 +51,15 @@ class Manager extends React.Component<PROPS, STATE> {
     // this.props.logIn();
 
     this.props.getAllCosts(vk_id, daysToPayday, budget, toDay, toDayFormated);
+    this.toggleAnimation();
   }
+  toggleAnimation = () => {
+    this.setState({ in: !this.state.in });
+  };
 
+  componentWillUnmount() {
+    this.toggleAnimation();
+  }
   componentDidUpdate(prevProps: Object, prevState: Object) {
     const modalIsVisible = this.props.modalIsVisible;
     const body = document.getElementsByTagName("body")[0];
@@ -183,17 +194,18 @@ class Manager extends React.Component<PROPS, STATE> {
     );
 
     return (
-      <div className={style.manager}>
-        {showPreloader}
-        {wholeBudgetCard}
-        {budget ? calendarCard : ""}
+      <CSSTransition in={this.state.in} timeout={500} classNames={"page"}>
+        <div className={style.manager}>
+          {showPreloader}
+          {wholeBudgetCard}
 
-        {budget && payday ? budgetCardCommon : ""}
-        {budget && payday ? budgetCardFun : ""}
-        {budget && payday ? budgetCardInvest : ""}
-
-        {!modalIsVisible || modalOverlay}
-      </div>
+          {budget ? calendarCard : ""}
+          {budget && payday ? budgetCardCommon : ""}
+          {budget && payday ? budgetCardFun : ""}
+          {budget && payday ? budgetCardInvest : ""}
+          {!modalIsVisible || modalOverlay}
+        </div>
+      </CSSTransition>
     );
   }
 }

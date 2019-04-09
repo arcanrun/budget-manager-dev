@@ -30,3 +30,7 @@
 .donut {
   transform: rotate(-90deg);
 }
+.donutContainer {
+  max-width: 250px;
+  margin: auto;
+}

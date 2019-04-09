@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 
 import "./style.css";
 import { InputCard } from "../index";
+import { CSSTransition } from "react-transition-group";
 
 type PROPS = {
   makeProfileOperation: Function,
@@ -31,10 +32,13 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     super(props);
     this.state = {
       inputValue: null,
-      isErrorValidation: false
+      isErrorValidation: false,
+      in: false
     };
   }
-
+  componentDidMount() {
+    this.setState({ in: true });
+  }
   validate = (typeModal: string) => {
     const val = this.state.inputValue;
 
@@ -124,6 +128,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     } else {
       this.setState({ isErrorValidation: true });
     }
+    this.setState({ in: false });
   };
 
   handleInput = (e: any, typeModal: string) => {
@@ -152,7 +157,17 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     );
 
     return ReactDOM.createPortal(
-      <div className="modal">{budgetInputCard}</div>,
+      <div className="modal">
+        <CSSTransition
+          in={this.state.in}
+          timeout={1500}
+          classNames="alert"
+          mountOnEnter
+          unmountOnExit
+        >
+          {budgetInputCard}
+        </CSSTransition>
+      </div>,
       ModalDiv
     );
   }

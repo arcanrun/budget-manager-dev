@@ -18,6 +18,7 @@
     "react-scripts": "2.1.8",
     "react-sticky-el": "^1.0.20",
     "react-svg": "^8.0.1",
+    "react-transition-group": "^2.9.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "swiper": "^4.5.0"
