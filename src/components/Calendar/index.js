@@ -15,6 +15,45 @@ type PROPS = {
   tempPayDay: ?string,
   daysToPayday: ?string
 };
+const WEEKDAYS_SHORT = {
+  ru: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]
+};
+const MONTHS = {
+  ru: [
+    "Январь",
+    "Февраль",
+    "Март",
+    "Апрель",
+    "Май",
+    "Июнь",
+    "Июль",
+    "Август",
+    "Сентябрь",
+    "Октябрь",
+    "Ноябрь",
+    "Декабрь"
+  ]
+};
+
+const WEEKDAYS_LONG = {
+  ru: [
+    "Воскресенье",
+    "Понедельник",
+    "Вторник",
+    "Среда",
+    "Четверг",
+    "Пятница",
+    "Суббота"
+  ]
+};
+
+const FIRST_DAY_OF_WEEK = {
+  ru: 1
+};
+// Translate aria-labels
+const LABELS = {
+  ru: { nextMonth: "следующий месяц", previousMonth: "предыдущий месяц" }
+};
 
 class Calendar extends React.Component<PROPS, {}> {
   render() {
@@ -58,6 +97,12 @@ class Calendar extends React.Component<PROPS, {}> {
     return (
       <>
         <DayPicker
+          locale={"ru"}
+          months={MONTHS["ru"]}
+          weekdaysLong={WEEKDAYS_LONG["ru"]}
+          weekdaysShort={WEEKDAYS_SHORT["ru"]}
+          firstDayOfWeek={FIRST_DAY_OF_WEEK["ru"]}
+          labels={LABELS["ru"]}
           showOutsideDays
           todayButton="Сегодня"
           onDayClick={handleDayClick}
