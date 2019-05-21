@@ -10,6 +10,9 @@
   font-size: 15px;
   opacity: 1;
   transition: 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .redBtn {
@@ -24,5 +27,33 @@
 .redBtn:active {
   font-weight: normal;
   background-color: #f72d6b;
+  color: #fff;
+}
+.greenBtn {
+  font-weight: bold;
+  border: 3px solid #0fde8c;
+  color: #0fde8c;
+}
+.greenBtn:hover {
+  background-color: #0fde8c;
+  color: #fff;
+}
+.greenBtn:active {
+  font-weight: normal;
+  background-color: #0fde8c;
+  color: #fff;
+}
+.blueBtn {
+  font-weight: bold;
+  border: 3px solid #5140b3;
+  color: #0fde8c;
+}
+.blueBtn:hover {
+  background-color: #5140b3;
+  color: #fff;
+}
+.blueBtn:active {
+  font-weight: normal;
+  background-color: #5140b3;
   color: #fff;
 }

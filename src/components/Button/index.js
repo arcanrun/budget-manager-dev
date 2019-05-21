@@ -8,7 +8,7 @@ type PROPS = {
   onClick: Function,
   text: string,
   btnColor: string,
-  size: string
+  size?: string
 };
 
 export const Button = ({ text, btnColor, size, onClick }: PROPS) => {
@@ -25,12 +25,17 @@ export const Button = ({ text, btnColor, size, onClick }: PROPS) => {
       width = "30%";
       break;
     default:
-      width = "20%";
       break;
   }
   switch (btnColor) {
     case "red":
       btnStyle = style.redBtn;
+      break;
+    case "green":
+      btnStyle = style.greenBtn;
+      break;
+    case "blue":
+      btnStyle = style.blueBtn;
       break;
     default:
       btnStyle = style.defautlBtn;

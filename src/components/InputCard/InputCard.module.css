@@ -9,15 +9,15 @@
   max-width: 300px;
 }
 .cardBtnsBlock {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+  /* display: flex;
+  justify-content: center; */
+  width: 94%;
   position: absolute;
   bottom: 0;
-  margin-left: -20px;
+  margin-left: -10px;
   margin-bottom: 20px;
 }
-.cardBtnsBlock button {
+/* .cardBtnsBlock button {
   outline: 0;
   cursor: pointer;
   text-transform: uppercase;
@@ -39,7 +39,7 @@
 }
 .cardBtnsBlock button:nth-child(2) {
   background: #0fde8c;
-}
+} */
 .title {
   color: #8e8d8d;
   padding-bottom: 15px;

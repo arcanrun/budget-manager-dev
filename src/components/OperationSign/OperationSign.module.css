@@ -17,8 +17,16 @@
   margin-top: -5px;
 }
 .signMinus {
+  color: #f72d6b;
+  background: url("../../static/minus.svg") no-repeat;
   background-color: #f72d6b;
+  background-size: 13px 13px;
+  background-position: center;
 }
 .signPlus {
+  color: #0fde8c;
+  background: url("../../static/plus.svg") no-repeat;
   background-color: #0fde8c;
+  background-size: 15px 15px;
+  background-position: center;
 }

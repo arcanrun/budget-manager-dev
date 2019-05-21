@@ -21,6 +21,7 @@ import ProtectLogo from "../../static/protect-logo.svg";
 import Hieroglyph from "../../static/hieroglyph.svg";
 import PieChartLogo from "../../static/pie-chart-logo.svg";
 import Clock from "../../static/clock.svg";
+import Transfer from "../../static/transfer.svg";
 
 type PROPS = {|
   icon: string,
@@ -202,6 +203,16 @@ const Icon = ({ icon, color, width, height, fontSize }: PROPS) => {
           src={Clock}
           wrapper="span"
           svgClassName="clock"
+          svgStyle={{ width: width, height: height, fill: color }}
+        />
+      );
+    case "transfer":
+      return (
+        <ReactSVG
+          className="hoverable"
+          src={Transfer}
+          wrapper="span"
+          svgClassName="transfer hoverable"
           svgStyle={{ width: width, height: height, fill: color }}
         />
       );

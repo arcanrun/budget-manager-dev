@@ -6,7 +6,8 @@
 .pencil,
 .cross,
 .check,
-.pie-chart-logo {
+.pie-chart-logo,
+.transfer {
   width: 25px;
   height: 25px;
   transition: 0.2s ease;

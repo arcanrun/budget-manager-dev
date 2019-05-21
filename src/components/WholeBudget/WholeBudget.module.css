@@ -12,7 +12,6 @@
 }
 .budgetBlock {
   text-align: center;
-  padding-bottom: 20px;
 }
 .budget {
   font-weight: 200;
@@ -21,4 +20,7 @@
 .volute {
   font-weight: 300;
   padding-left: 10px;
+}
+.footer {
+  margin-top: 60px;
 }

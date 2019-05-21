@@ -1,7 +1,10 @@
-.footer {
+/* .footer {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
+} */
+.footer {
+  margin-top: 50px;
 }
 .button {
   border: 0;

@@ -6,6 +6,7 @@ import { CSSTransition } from "react-transition-group";
 import style from "./InputCard.module.css";
 import "./animations.css";
 import "./animate.css";
+import { Button, ButtonGroup } from "../index";
 
 type PROPS = {
   onClick: Function,
@@ -42,6 +43,38 @@ class InputCard extends React.Component<PROPS, STATE> {
       onClick,
       handleOK
     } = this.props;
+    let inputType = "text";
+
+    const btnBlock = (
+      <div className={style.cardBtnsBlock}>
+        <button onClick={() => onClick(typeModal)}>отмена</button>
+        <button onClick={handleOK}>ок</button>
+      </div>
+    );
+    const btnBlock2 = (
+      <div className={style.cardBtnsBlock}>
+        <ButtonGroup>
+          <Button
+            btnColor="red"
+            onClick={() => onClick(typeModal)}
+            text="отмена"
+          />
+          <Button btnColor="green" onClick={handleOK} text="ок" />
+        </ButtonGroup>
+      </div>
+    );
+    let isInputRequired = false;
+    switch (true) {
+      case typeModal.includes("minus"):
+      case typeModal.includes("plus"):
+      case typeModal === "budget":
+        isInputRequired = true;
+        inputType = "number";
+        break;
+      default:
+        isInputRequired = false;
+        break;
+    }
     const input = (
       <input
         placeholder="0000.00"
@@ -52,25 +85,9 @@ class InputCard extends React.Component<PROPS, STATE> {
         }
         autoFocus
         onChange={e => handleInput(e, typeModal)}
+        type={inputType}
       />
     );
-    const btnBlock = (
-      <div className={style.cardBtnsBlock}>
-        <button onClick={() => onClick(typeModal)}>отмена</button>
-        <button onClick={handleOK}>ок</button>
-      </div>
-    );
-    let isInputRequired = false;
-    switch (true) {
-      case typeModal.includes("minus"):
-      case typeModal.includes("plus"):
-      case typeModal === "budget":
-        isInputRequired = true;
-        break;
-      default:
-        isInputRequired = false;
-        break;
-    }
 
     let text = "EMPTY";
     switch (true) {
@@ -101,7 +118,7 @@ class InputCard extends React.Component<PROPS, STATE> {
         <div className={style.card}>
           {title}
           {isInputRequired ? input : text}
-          {btnBlock}
+          {btnBlock2}
         </div>
       </CSSTransition>
     );

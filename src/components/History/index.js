@@ -27,6 +27,8 @@ type STATE = {
   in: boolean
 };
 
+function SortByDate(a, b) {}
+
 class History extends React.Component<PROPS, STATE> {
   state = {
     in: false
@@ -50,6 +52,7 @@ class History extends React.Component<PROPS, STATE> {
 
   render() {
     const { history, isFetching, vk_id } = this.props;
+
     // const overlay = <Overlay isTransparent={true} />;
     const verticalLine = <div className={styleHistory.verticalLine} />;
 

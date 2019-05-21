@@ -24,6 +24,8 @@ import { Entrance } from "./Entrance";
 import { EntranceItem } from "./EntranceItem";
 import { Button } from "./Button";
 import { Tab } from "./Tab";
+import { ButtonGroup } from "./ButtonGroup";
+
 export {
   Header,
   Menu,
@@ -49,5 +51,6 @@ export {
   Entrance,
   EntranceItem,
   Button,
-  Tab
+  Tab,
+  ButtonGroup
 };

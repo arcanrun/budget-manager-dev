@@ -1,0 +1,27 @@
+.contianer {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+}
+.contianer button {
+  border-radius: 0;
+  width: 100%;
+  border: 2px solid #110261;
+  color: #110261;
+  flex: 3;
+  padding: 0;
+  height: 40px;
+}
+.contianer button:not(:first-child):not(:last-child) {
+  font-size: 25px;
+}
+
+.contianer button:first-child {
+  margin-right: -1px;
+  border-radius: 7px 0px 0px 7px;
+}
+.contianer button:last-child {
+  border-radius: 0px 7px 7px 0px;
+  margin-left: -1px;
+}

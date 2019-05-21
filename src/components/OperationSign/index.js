@@ -27,9 +27,7 @@ const OperationSign = ({ children }: PROPS) => {
           ? [style.sign, style.signPlus].join(" ")
           : [style.sign, style.signMinus].join(" ")
       }
-    >
-      <div>{sign}</div>
-    </div>
+    />
   );
 };
 
