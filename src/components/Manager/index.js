@@ -73,12 +73,20 @@ class Manager extends React.Component<PROPS, STATE> {
 
   handleDayClick = (day: any, { selected }: { selected: boolean }) => {
     let toDay = new Date();
-    toDay = toDay.toLocaleDateString();
+    const toDayDate = toDay.toLocaleDateString();
+    const toDayTempPayDayDate = day.toLocaleDateString();
+    toDay = Date.parse(toDay);
     const toDayMs = Date.parse(toDay);
-    const tempPayDay = day.toLocaleDateString();
+    const tempPayDay = Date.parse(day);
     const tempPayDayMs = Date.parse(tempPayDay);
-
-    if (tempPayDay > toDay) {
+    console.log(
+      "%c DayClick:  ",
+      "background: aqua; color: white",
+      tempPayDay,
+      toDay,
+      tempPayDay > toDay
+    );
+    if (tempPayDay > toDay && toDayDate !== toDayTempPayDayDate) {
       this.setState({
         tempPayDay: selected ? undefined : day
       });
