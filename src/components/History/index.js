@@ -59,18 +59,19 @@ class History extends React.Component<PROPS, STATE> {
       history.length === 0 ? (
         <>
           <Overlay isTransparent={true} isFetching={isFetching} />
-
           <CSSTransition in={this.state.in} timeout={500} classNames={"page"}>
             <div className={styleHistory.empty}>
               <div className={styleHistory.emptyTitle}>
                 В истории пока ничего нет
               </div>
-              <Icon icon="hieroglyph" />
+              <Icon icon="clock" color="#909090" />
             </div>
           </CSSTransition>
         </>
       ) : (
         <>
+          <div className={styleHistory.background} />
+
           <Overlay isTransparent={true} isFetching={isFetching} />
           <CSSTransition in={this.state.in} classNames={"page"} timeout={500}>
             <div className={styleHistory.container}>
@@ -83,7 +84,8 @@ class History extends React.Component<PROPS, STATE> {
                       boundaryElement={styleHistory.oneDay}
                       topOffset={-60}
                       stickyStyle={{
-                        marginTop: "60px"
+                        marginTop: "60px",
+                        zIndex: 4
                       }}
                     >
                       <div className={styleHistory.day}>{day}</div>

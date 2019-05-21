@@ -18,6 +18,7 @@
   margin-bottom: 20px;
 }
 .cardBtnsBlock button {
+  outline: 0;
   cursor: pointer;
   text-transform: uppercase;
   border: 0px;

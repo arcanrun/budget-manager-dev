@@ -5,6 +5,7 @@
   height: 40px;
 }
 .navBtn {
+  outline: 0;
   cursor: pointer;
   transition: 0.2s ease;
   transform: translate(0%);

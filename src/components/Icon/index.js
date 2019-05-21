@@ -20,6 +20,7 @@ import InvestLogo from "../../static/invest-logo.svg";
 import ProtectLogo from "../../static/protect-logo.svg";
 import Hieroglyph from "../../static/hieroglyph.svg";
 import PieChartLogo from "../../static/pie-chart-logo.svg";
+import Clock from "../../static/clock.svg";
 
 type PROPS = {|
   icon: string,
@@ -191,6 +192,16 @@ const Icon = ({ icon, color, width, height, fontSize }: PROPS) => {
           src={PieChartLogo}
           wrapper="span"
           svgClassName="pie-chart-logo"
+          svgStyle={{ width: width, height: height, fill: color }}
+        />
+      );
+    case "clock":
+      return (
+        <ReactSVG
+          className="hoverable"
+          src={Clock}
+          wrapper="span"
+          svgClassName="clock"
           svgStyle={{ width: width, height: height, fill: color }}
         />
       );

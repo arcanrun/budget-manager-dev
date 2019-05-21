@@ -15,7 +15,8 @@
 .payment-logo,
 .fun-logo,
 .fun-logo,
-.hieroglyph {
+.hieroglyph,
+.clock {
   width: 100px;
   height: 100px;
 }
