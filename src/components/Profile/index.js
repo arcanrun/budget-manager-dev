@@ -89,7 +89,7 @@ class Profile extends React.Component<PROPS, STATE> {
       <Card icon={"settings"} headerTitle="настройки">
         <Button
           text={"удалить профиль"}
-          btnColor={"#F72D6B"}
+          btnColor={"red"}
           size={"L"}
           onClick={() => toggleModal("profile_delete")}
         />

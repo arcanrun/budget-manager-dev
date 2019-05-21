@@ -13,6 +13,7 @@ type PROPS = {
 
 export const Button = ({ text, btnColor, size, onClick }: PROPS) => {
   let width = "";
+  let btnStyle = "";
   switch (size) {
     case "L":
       width = "100%";
@@ -25,12 +26,24 @@ export const Button = ({ text, btnColor, size, onClick }: PROPS) => {
       break;
     default:
       width = "20%";
+      break;
   }
+  switch (btnColor) {
+    case "red":
+      btnStyle = style.redBtn;
+      break;
+    default:
+      btnStyle = style.defautlBtn;
+      break;
+  }
+  console.log("----->", btnStyle);
   return (
     <button
       onClick={onClick}
-      className={style.button}
-      style={{ background: btnColor, width: width }}
+      className={[btnStyle, style.button].join(" ")}
+      style={{
+        width: width
+      }}
     >
       {text}
     </button>
