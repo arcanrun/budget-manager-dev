@@ -41,7 +41,6 @@ export const Button = ({ text, btnColor, size, onClick }: PROPS) => {
       btnStyle = style.defautlBtn;
       break;
   }
-  console.log("----->", btnStyle);
   return (
     <button
       onClick={onClick}

@@ -134,7 +134,8 @@ class Manager extends React.Component<PROPS, STATE> {
         onClick={() => onClickToggleModal("budget")}
       >
         <WholeBudget
-          onClick={() => onClickToggleModal("budget")}
+          onClickToggleModal={onClickToggleModal}
+          typeModal={"budget"}
           wholeBudget={budget}
         />
       </Card>
@@ -145,7 +146,8 @@ class Manager extends React.Component<PROPS, STATE> {
         onClick={() => onClickToggleModal("budget")}
       >
         <WholeBudget
-          onClick={() => onClickToggleModal("budget")}
+          onClickToggleModal={onClickToggleModal}
+          typeModal={"budget"}
           wholeBudget={budget}
         />
       </Card>

@@ -13,6 +13,7 @@ type PROPS = {
   addWholeBudget: Function,
   addPayDay: Function,
   calcTempCosts: Function,
+  calcBudget: Function,
   typeModal: string,
   daysToPayday: string,
   budget: number,
@@ -57,6 +58,8 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
       case "fun_plus":
       case "invest_minus":
       case "invest_plus":
+      case "budget_plus":
+      case "budget_minus":
         if (val && !isNaN(val)) {
           return true;
         } else if (isNaN(val)) {
@@ -78,14 +81,23 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     const [typeModal, operation] = this.props.typeModal.split("_");
     const daysToPayday = this.props.daysToPayday;
     const dateNow = new Date().toLocaleDateString();
-    console.log(dateNow);
 
     if (this.validate(this.props.typeModal)) {
       this.props.onClick(this.props.typeModal);
       switch (typeModal) {
         case "budget":
+          if (operation) {
+            this.props.calcBudget(
+              inputVal,
+              this.props.vk_id,
+              typeModal,
+              operation,
+              dateNow
+            );
+            break;
+          }
           const type = daysToPayday ? "change" : "add";
-          console.log(type);
+          console.log("handleOK[ModalOverlay]:", operation);
           this.props.addWholeBudget(vk_id, inputVal, type, daysToPayday);
           this.toggleAnimation();
           break;

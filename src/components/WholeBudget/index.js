@@ -6,10 +6,11 @@ import style from "./WholeBudget.module.css";
 import { Button, ButtonGroup } from "../index";
 
 type PROPS = {
-  wholeBudget: ?number,
-  onClick: Function
+  onClickToggleModal: Function,
+  typeModal: string,
+  wholeBudget: ?number
 };
-const WholeBudget = ({ wholeBudget, onClick }: PROPS) => (
+const WholeBudget = ({ wholeBudget, onClickToggleModal, typeModal }: PROPS) => (
   <div className={style.budgetBlock}>
     {wholeBudget ? (
       <>
@@ -19,13 +20,24 @@ const WholeBudget = ({ wholeBudget, onClick }: PROPS) => (
         </div>
         <div className={style.footer}>
           <ButtonGroup>
-            <Button btnColor="green" onClick="" text="+" />
-            <Button btnColor="red" onClick="" text="-" />
+            <Button
+              btnColor="green"
+              onClick={() => onClickToggleModal(`${typeModal}_plus`)}
+              text="+"
+            />
+            <Button
+              btnColor="red"
+              onClick={() => onClickToggleModal(`${typeModal}_minus`)}
+              text="-"
+            />
           </ButtonGroup>
         </div>
       </>
     ) : (
-      <span className={style.enter} onClick={onClick}>
+      <span
+        className={style.enter}
+        onClick={() => onClickToggleModal(typeModal)}
+      >
         Введите ваш текущий бюджет
       </span>
     )}

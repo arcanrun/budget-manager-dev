@@ -12,7 +12,8 @@ import {
   calcTempCosts,
   getAllCosts,
   makeProfileOperation,
-  logIn
+  logIn,
+  calcBudget
 } from "../actions/";
 
 const mapStateToProps = state => ({
@@ -38,6 +39,7 @@ export const ManagerContainer = connect(
     calcTempCosts,
     getAllCosts,
     makeProfileOperation,
-    logIn
+    logIn,
+    calcBudget
   }
 )(Manager);

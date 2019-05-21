@@ -10,6 +10,8 @@ import { logIn } from "./loginActions";
 import { signUp } from "./signUpActions";
 import { makeProfileOperation } from "./profileOperationsAction";
 import { getStatistics } from "./staisticsActions";
+import { calcBudget } from "./calcBudgetActions";
+
 export {
   addWholeBudget,
   toggleModal,
@@ -22,5 +24,6 @@ export {
   logIn,
   makeProfileOperation,
   getStatistics,
-  signUp
+  signUp,
+  calcBudget
 };

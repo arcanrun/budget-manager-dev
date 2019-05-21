@@ -23,7 +23,10 @@ import {
   PROFILE_OPERATION_SUCCESS,
   STATISTICS_FAILURE,
   STATISTICS_SUCCESS,
-  STATISTICS_REQUEST
+  STATISTICS_REQUEST,
+  CALC_BUDGET_FAILURE,
+  CALC_BUDGET_REQUEST,
+  CALC_BUDGET_SUCCESS
 } from "../constants";
 
 type UserState = {
@@ -86,7 +89,8 @@ type UserState = {
 };
 
 export const initialState: UserState = {
-  vk_id: 65122543,
+  // vk_id: 65122543,
+  vk_id: undefined,
   avatar: undefined,
   name: undefined,
   sure_name: undefined,
@@ -152,6 +156,7 @@ export const initialState: UserState = {
 
 export function user(state: UserState = initialState, action: Object) {
   switch (action.type) {
+    case CALC_BUDGET_REQUEST:
     case ADD_BUDGET_REQUEST:
       return {
         ...state,
@@ -160,7 +165,7 @@ export function user(state: UserState = initialState, action: Object) {
           isFetching: action.payload.isFetching
         }
       };
-
+    case CALC_BUDGET_FAILURE:
     case ADD_BUDGET_FAILURE:
       return {
         ...state,
@@ -245,6 +250,7 @@ export function user(state: UserState = initialState, action: Object) {
           }
         }
       };
+    case CALC_BUDGET_SUCCESS:
     case ADD_PAYDAY_SUCCESS:
     case ADD_BUDGET_SUCCESS:
     case CALC_TODAY_COSTS_SUCCESS:

@@ -2,6 +2,7 @@
 import React from "react";
 
 import style from "./OperationType.module.css";
+import { Icon } from "../index";
 
 type PROPS = {
   children: string
@@ -18,6 +19,9 @@ const OperationType = ({ children }: PROPS) => {
       break;
     case "invest":
       typeOper = "20%";
+      break;
+    case "budget":
+      typeOper = <Icon color="#200a9c" icon="money-bag-2" />;
       break;
     default:
       typeOper = "?";
