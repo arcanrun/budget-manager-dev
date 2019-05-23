@@ -21,7 +21,7 @@ const Card = ({ children, headerTitle, icon, rightIcon, onClick }: PROPS) => (
         <span className={style.title}>{headerTitle}</span>
       </div>
       <div className={style.options} onClick={onClick}>
-        {rightIcon && <Icon icon={rightIcon} color="#B3B3B3" />}
+        {rightIcon && <Icon icon={rightIcon} />}
       </div>
     </div>
     {children}

@@ -7,7 +7,8 @@
 .cross,
 .check,
 .pie-chart-logo,
-.transfer {
+.transfer,
+.vector {
   width: 25px;
   height: 25px;
   transition: 0.2s ease;
@@ -27,9 +28,7 @@
   width: 100px;
   height: 100px;
 }
-.pencil:hover {
-  fill: #f72d6b !important;
-}
+
 .default-display {
   font-size: 16px;
 }

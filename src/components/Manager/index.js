@@ -172,7 +172,12 @@ class Manager extends React.Component<PROPS, STATE> {
       />
     );
     const budgetCardCommon = (
-      <Card icon="50%" headerTitle="Общие расходы">
+      <Card
+        icon="50%"
+        headerTitle="Общие расходы"
+        rightIcon={"vector"}
+        onClick={() => onClickToggleModal("common_transfer")}
+      >
         <PartBudget
           onClickToggleModal={onClickToggleModal}
           typeModal={"common"}
@@ -182,7 +187,12 @@ class Manager extends React.Component<PROPS, STATE> {
       </Card>
     );
     const budgetCardFun = (
-      <Card icon="30%" headerTitle="Расходы на развлечения">
+      <Card
+        icon="30%"
+        headerTitle="Расходы на развлечения"
+        rightIcon={"vector"}
+        onClick={() => onClickToggleModal("common_transfer")}
+      >
         <PartBudget
           onClickToggleModal={onClickToggleModal}
           typeModal={"fun"}
@@ -192,7 +202,12 @@ class Manager extends React.Component<PROPS, STATE> {
       </Card>
     );
     const budgetCardInvest = (
-      <Card icon="20%" headerTitle="Инвестиции">
+      <Card
+        icon="20%"
+        headerTitle="Инвестиции"
+        rightIcon={"vector"}
+        onClick={() => onClickToggleModal("common_transfer")}
+      >
         <PartBudget
           onClickToggleModal={onClickToggleModal}
           typeModal={"invest"}

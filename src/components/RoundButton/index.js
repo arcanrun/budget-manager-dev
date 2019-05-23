@@ -16,12 +16,12 @@ export const RoundButton = ({ text, onClick }: PROPS) => {
   switch (text) {
     case "plus":
       icon = "plus";
-      color = "#0fde8c";
+      color = "#200a9c";
       type = style.greenBtn;
       break;
     case "minus":
       icon = "minus";
-      color = "#f72d6b";
+      color = "#200a9c";
       type = style.redBtn;
       break;
     default:

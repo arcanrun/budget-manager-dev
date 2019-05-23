@@ -6,6 +6,7 @@
   font-weight: 200;
   transition: 0.3s;
   cursor: pointer;
+  padding-bottom: 60px;
 }
 .enter:hover {
   color: #f72d6b;

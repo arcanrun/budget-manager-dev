@@ -24,6 +24,7 @@ import Clock from "../../static/clock.svg";
 import Transfer from "../../static/transfer.svg";
 import Plus from "../../static/plus.svg";
 import Minus from "../../static/minus.svg";
+import Vector from "../../static/vector.svg";
 
 type PROPS = {|
   icon: string,
@@ -235,6 +236,16 @@ const Icon = ({ icon, color, width, height, fontSize }: PROPS) => {
           src={Minus}
           wrapper="span"
           svgClassName="minus"
+          svgStyle={{ width: width, height: height, fill: color }}
+        />
+      );
+    case "vector":
+      return (
+        <ReactSVG
+          className="vector"
+          src={Vector}
+          wrapper="span"
+          svgClassName="vector"
           svgStyle={{ width: width, height: height, fill: color }}
         />
       );

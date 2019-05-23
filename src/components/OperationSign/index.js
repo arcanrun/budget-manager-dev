@@ -2,6 +2,7 @@
 import React from "react";
 
 import style from "./OperationSign.module.css";
+import { Icon } from "../index";
 
 type PROPS = {
   children: string
@@ -27,7 +28,9 @@ const OperationSign = ({ children }: PROPS) => {
           ? [style.sign, style.signPlus].join(" ")
           : [style.sign, style.signMinus].join(" ")
       }
-    />
+    >
+      <Icon icon={children} color="#fff" />
+    </div>
   );
 };
 

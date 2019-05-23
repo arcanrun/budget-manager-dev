@@ -12,7 +12,7 @@
 .header {
   display: flex;
   justify-content: space-between;
-  color: #b3b3b3;
+  color: #868686;
   margin: 0px;
   font-size: 10px;
   align-items: center;
@@ -26,7 +26,10 @@
 .title {
   padding-left: 10px;
 }
-.options span span svg:hover {
+.options > span > span > svg {
   cursor: pointer;
+  fill: #868686;
+}
+.options:hover > span > span > svg {
   fill: #f72d6b;
 }
