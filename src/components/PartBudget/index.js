@@ -1,7 +1,7 @@
 //@flow
 import React from "react";
 
-import { DonutChart, ButtonGroup, Button } from "../index";
+import { DonutChart, ButtonGroup, Button, RoundButton } from "../index";
 import style from "./PartBudget.module.css";
 
 type PROPS = {
@@ -77,13 +77,29 @@ class PartBudget extends React.Component<PROPS, {}> {
             onClick={() => onClickToggleModal(`${typeModal}_plus`)}
             text="+"
           />
-          <Button btnColor="blue" onClick="" text="⇄" />
+          <Button
+            btnColor="blue"
+            onClick={() => onClickToggleModal(`${typeModal}_transfer`)}
+            text="⇄"
+          />
           <Button
             btnColor="red"
             onClick={() => onClickToggleModal(`${typeModal}_minus`)}
             text="-"
           />
         </ButtonGroup>
+      </div>
+    );
+    const footer3 = (
+      <div className={style.footer}>
+        <RoundButton
+          text="plus"
+          onClick={() => onClickToggleModal(`${typeModal}_plus`)}
+        />
+        <RoundButton
+          text="minus"
+          onClick={() => onClickToggleModal(`${typeModal}_minus`)}
+        />
       </div>
     );
     const chart = (
@@ -98,7 +114,7 @@ class PartBudget extends React.Component<PROPS, {}> {
     return (
       <>
         {chart}
-        {footer2}
+        {footer3}
       </>
     );
   }

@@ -22,6 +22,8 @@ import Hieroglyph from "../../static/hieroglyph.svg";
 import PieChartLogo from "../../static/pie-chart-logo.svg";
 import Clock from "../../static/clock.svg";
 import Transfer from "../../static/transfer.svg";
+import Plus from "../../static/plus.svg";
+import Minus from "../../static/minus.svg";
 
 type PROPS = {|
   icon: string,
@@ -213,6 +215,26 @@ const Icon = ({ icon, color, width, height, fontSize }: PROPS) => {
           src={Transfer}
           wrapper="span"
           svgClassName="transfer hoverable"
+          svgStyle={{ width: width, height: height, fill: color }}
+        />
+      );
+    case "plus":
+      return (
+        <ReactSVG
+          className="plus"
+          src={Plus}
+          wrapper="span"
+          svgClassName="plus"
+          svgStyle={{ width: width, height: height, fill: color }}
+        />
+      );
+    case "minus":
+      return (
+        <ReactSVG
+          className="minus"
+          src={Minus}
+          wrapper="span"
+          svgClassName="minus"
           svgStyle={{ width: width, height: height, fill: color }}
         />
       );

@@ -64,12 +64,18 @@ class InputCard extends React.Component<PROPS, STATE> {
       </div>
     );
     let isInputRequired = false;
+    let transferingCategory = "";
     switch (true) {
       case typeModal.includes("minus"):
       case typeModal.includes("plus"):
       case typeModal === "budget":
         isInputRequired = true;
         inputType = "number";
+        break;
+      case typeModal.includes("transfer"):
+        isInputRequired = true;
+        inputType = "number";
+        transferingCategory = typeModal.split("_")[0];
         break;
       default:
         isInputRequired = false;
@@ -105,6 +111,7 @@ class InputCard extends React.Component<PROPS, STATE> {
         {typeModal.includes("minus") ? "Расходы" : ""}
         {typeModal.includes("plus") ? "Доходы" : ""}
         {typeModal.includes("profile_delete") ? "Удалить профиль" : ""}
+        {typeModal.includes("transfer") ? "Перевеод" : ""}
       </div>
     );
     return (

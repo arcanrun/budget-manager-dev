@@ -12,6 +12,12 @@
   height: 25px;
   transition: 0.2s ease;
 }
+.plus,
+.minus {
+  width: 15px;
+  height: 15px;
+  transition: 0.2s ease;
+}
 .budget-logo,
 .payment-logo,
 .fun-logo,

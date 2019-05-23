@@ -25,6 +25,7 @@ import { EntranceItem } from "./EntranceItem";
 import { Button } from "./Button";
 import { Tab } from "./Tab";
 import { ButtonGroup } from "./ButtonGroup";
+import { RoundButton } from "./RoundButton";
 
 export {
   Header,
@@ -52,5 +53,6 @@ export {
   EntranceItem,
   Button,
   Tab,
-  ButtonGroup
+  ButtonGroup,
+  RoundButton
 };

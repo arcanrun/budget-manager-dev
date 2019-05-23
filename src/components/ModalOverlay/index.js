@@ -60,6 +60,9 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
       case "invest_plus":
       case "budget_plus":
       case "budget_minus":
+      case "common_transfer":
+      case "fun_transfer":
+      case "invest_transfer":
         if (val && !isNaN(val)) {
           return true;
         } else if (isNaN(val)) {

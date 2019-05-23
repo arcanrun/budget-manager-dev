@@ -3,7 +3,7 @@
 import React from "react";
 
 import style from "./WholeBudget.module.css";
-import { Button, ButtonGroup } from "../index";
+import { Button, ButtonGroup, RoundButton } from "../index";
 
 type PROPS = {
   onClickToggleModal: Function,
@@ -19,18 +19,14 @@ const WholeBudget = ({ wholeBudget, onClickToggleModal, typeModal }: PROPS) => (
           <b className={style.volute}>₽</b>
         </div>
         <div className={style.footer}>
-          <ButtonGroup>
-            <Button
-              btnColor="green"
-              onClick={() => onClickToggleModal(`${typeModal}_plus`)}
-              text="+"
-            />
-            <Button
-              btnColor="red"
-              onClick={() => onClickToggleModal(`${typeModal}_minus`)}
-              text="-"
-            />
-          </ButtonGroup>
+          <RoundButton
+            text="plus"
+            onClick={() => onClickToggleModal(`${typeModal}_plus`)}
+          />
+          <RoundButton
+            text="minus"
+            onClick={() => onClickToggleModal(`${typeModal}_minus`)}
+          />
         </div>
       </>
     ) : (

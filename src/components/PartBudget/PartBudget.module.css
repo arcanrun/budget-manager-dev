@@ -1,11 +1,11 @@
-/* .footer {
+.footer {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
-} */
-.footer {
-  margin-top: 50px;
+  justify-content: space-between;
 }
+/* .footer {
+  margin-top: 50px;
+} */
 .button {
   border: 0;
   cursor: pointer;
@@ -21,7 +21,6 @@
 
 .buttonPlus {
   color: #0fde8c;
-
   background: url("../../static/plus.svg") no-repeat;
   background-color: #0fde8c;
   background-size: 15px 15px;

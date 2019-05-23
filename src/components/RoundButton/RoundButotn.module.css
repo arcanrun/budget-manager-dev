@@ -1,0 +1,36 @@
+.container {
+  width: 30px;
+  height: 30px;
+  transition: 0.2s;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.greenBtn {
+  /* border: 3px solid #0fde8c; */
+  border: 2px solid #200a9c;
+}
+.greenBtn:hover {
+  background-color: #0fde8c;
+}
+.greenBtn:hover > span > span > svg {
+  fill: #fff !important;
+}
+.greenBtn:active {
+  opacity: 0.5;
+}
+.redBtn {
+  border: 2px solid #200a9c;
+  /* border: 3px solid #f72d6b; */
+}
+.redBtn:hover {
+  background-color: #f72d6b;
+}
+.redBtn:hover > span > span > svg {
+  fill: #fff !important;
+}
+.redBtn:active {
+  opacity: 0.5;
+}
