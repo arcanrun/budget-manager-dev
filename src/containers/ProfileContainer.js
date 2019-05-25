@@ -16,7 +16,8 @@ const mapStateToProps = state => ({
   costs: state.user.statistics.costs,
   income: state.user.statistics.income,
   toDayFormated: state.user.calc.toDayFormated,
-  registerDate: state.user.register_date
+  registerDate: state.user.register_date,
+  calc: state.user.calc
 });
 export const ProfileContainer = connect(
   mapStateToProps,

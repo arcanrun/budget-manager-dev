@@ -12,8 +12,10 @@ type PROPS = {
   onClick: Function,
   handleInput: Function,
   handleOK: Function,
+  handleTransferState: Function,
   isErrorValidation: boolean,
-  typeModal: string
+  typeModal: string,
+  calc: Object
 };
 
 type STATE = {
@@ -36,7 +38,8 @@ class InputCard extends React.Component<PROPS, STATE> {
     this.setState({ in: !this.state.in });
   };
   handleTransferCateogry = (e: any) => {
-    console.log("------>", e.target.value);
+    const transferTo = e.target.dataset.transfer;
+    this.props.handleTransferState(transferTo);
   };
   render() {
     const {
@@ -46,6 +49,10 @@ class InputCard extends React.Component<PROPS, STATE> {
       onClick,
       handleOK
     } = this.props;
+    const common = this.props.calc.common.value;
+    const fun = this.props.calc.fun.value;
+    const invest = this.props.calc.invest.value;
+
     let inputType = "text";
 
     const btnBlock = (
@@ -84,6 +91,20 @@ class InputCard extends React.Component<PROPS, STATE> {
         isInputRequired = false;
         break;
     }
+    let placeHolder = "0000.00";
+    switch (transferingCategory) {
+      case "common":
+        placeHolder = common;
+        break;
+      case "fun":
+        placeHolder = fun;
+        break;
+      case "invest":
+        placeHolder = invest;
+        break;
+      default:
+        break;
+    }
     let text = "EMPTY";
     switch (true) {
       case typeModal.includes("profile_delete"):
@@ -96,7 +117,7 @@ class InputCard extends React.Component<PROPS, STATE> {
 
     const input = (
       <input
-        placeholder="0000.00"
+        placeholder={placeHolder}
         className={
           isErrorValidation
             ? [style.cardInputError, style.cardInput].join(" ")
@@ -137,7 +158,12 @@ class InputCard extends React.Component<PROPS, STATE> {
           {isTransferCommonDisabled ? (
             ""
           ) : (
-            <input type="radio" name="transfer" />
+            <input
+              data-transfer="common"
+              type="radio"
+              name="transfer"
+              onChange={this.handleTransferCateogry}
+            />
           )}
           <div className={style.fakeRadio} />
         </div>
@@ -150,7 +176,16 @@ class InputCard extends React.Component<PROPS, STATE> {
           }
         >
           <div className={style.transferTitle}>30%</div>
-          {isTransferFunDisabled ? "" : <input type="radio" name="transfer" />}
+          {isTransferFunDisabled ? (
+            ""
+          ) : (
+            <input
+              data-transfer="fun"
+              type="radio"
+              name="transfer"
+              onChange={this.handleTransferCateogry}
+            />
+          )}
           <div className={style.fakeRadio} />
         </div>
 
@@ -165,7 +200,12 @@ class InputCard extends React.Component<PROPS, STATE> {
           {isTransferInvestDisabled ? (
             ""
           ) : (
-            <input type="radio" name="transfer" />
+            <input
+              data-transfer="invest"
+              type="radio"
+              name="transfer"
+              onChange={this.handleTransferCateogry}
+            />
           )}
           <div className={style.fakeRadio} />
         </div>

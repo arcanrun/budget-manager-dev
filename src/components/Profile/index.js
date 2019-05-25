@@ -21,7 +21,8 @@ type PROPS = {
   vk_id: number,
   registerDate: number,
   costs: Object,
-  income: Object
+  income: Object,
+  calc: Object
 };
 
 type STATE = {
@@ -55,7 +56,8 @@ class Profile extends React.Component<PROPS, STATE> {
       isFetching,
       costs,
       income,
-      registerDate
+      registerDate,
+      calc
     } = this.props;
     // const overlay = <Overlay isTransparent={true} />;
     // const showPreloader = isFetching ? overlay : "";
@@ -106,6 +108,8 @@ class Profile extends React.Component<PROPS, STATE> {
         addPayDay={""}
         addWholeBudget={""}
         daysToPayday={""}
+        calc={calc}
+        calcBudget={""}
       />
     );
     return (

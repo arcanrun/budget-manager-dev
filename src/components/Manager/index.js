@@ -17,6 +17,7 @@ type PROPS = {
   calcTempCosts: Function,
   getAllCosts: Function,
   logIn: Function,
+  calcBudget: Function,
   typeModal: string,
   budget: number,
   payday: string,
@@ -122,7 +123,8 @@ class Manager extends React.Component<PROPS, STATE> {
       payday,
       isFetching_calc,
       daysToPayday,
-      calc
+      calc,
+      calcBudget
     } = this.props;
     const { tempPayDay } = this.state;
 
@@ -167,7 +169,9 @@ class Manager extends React.Component<PROPS, STATE> {
       <ModalOverlay
         onClick={onClickToggleModal}
         typeModal={typeModal}
+        calcBudget={calcBudget}
         makeProfileOperation={""}
+        calc={calc}
         {...this.props}
       />
     );

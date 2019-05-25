@@ -17,13 +17,16 @@ type PROPS = {
   typeModal: string,
   daysToPayday: string,
   budget: number,
-  vk_id: number
+  vk_id: number,
+  calc: Object
 };
 
 type STATE = {
   inputValue: ?string,
   isErrorValidation: boolean,
-  in: boolean
+  in: boolean,
+  isSetTransfer: boolean,
+  transferTo: ?string
 };
 
 const ModalDiv =
@@ -35,7 +38,9 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     this.state = {
       inputValue: null,
       isErrorValidation: false,
-      in: false
+      in: false,
+      isSetTransfer: false,
+      transferTo: undefined
     };
   }
   componentDidMount() {
@@ -47,8 +52,15 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
   toggleAnimation = () => {
     this.setState({ in: !this.state.in });
   };
+  handleTransferState = (transferTo: string) => {
+    const { isSetTransfer } = this.state;
+    this.setState({ isSetTransfer: !isSetTransfer, transferTo });
+  };
   validate = (typeModal: string) => {
     const val = this.state.inputValue;
+    const common = this.props.calc.common.value;
+    const fun = this.props.calc.fun.value;
+    const invest = this.props.calc.invest.value;
 
     switch (typeModal) {
       case "budget":
@@ -60,10 +72,31 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
       case "invest_plus":
       case "budget_plus":
       case "budget_minus":
-      case "common_transfer":
-      case "fun_transfer":
-      case "invest_transfer":
         if (val && !isNaN(val)) {
+          return true;
+        } else if (isNaN(val)) {
+          return false;
+        } else {
+          return false;
+        }
+      case "common_transfer":
+        if (val && !isNaN(val) && +val <= common) {
+          return true;
+        } else if (isNaN(val)) {
+          return false;
+        } else {
+          return false;
+        }
+      case "fun_transfer":
+        if (val && !isNaN(val) && +val <= fun) {
+          return true;
+        } else if (isNaN(val)) {
+          return false;
+        } else {
+          return false;
+        }
+      case "invest_transfer":
+        if (val && !isNaN(val) && +val <= invest) {
           return true;
         } else if (isNaN(val)) {
           return false;
@@ -80,18 +113,23 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
   };
   handleOK = () => {
     const { vk_id } = this.props;
-    const inputVal = this.state.inputValue;
+    const { inputValue, isSetTransfer } = this.state;
     const [typeModal, operation] = this.props.typeModal.split("_");
     const daysToPayday = this.props.daysToPayday;
     const dateNow = new Date().toLocaleDateString();
 
-    if (this.validate(this.props.typeModal)) {
+    const validateMethod =
+      operation === "transfer"
+        ? this.validate(this.props.typeModal) && isSetTransfer
+        : this.validate(this.props.typeModal);
+
+    if (validateMethod) {
       this.props.onClick(this.props.typeModal);
       switch (typeModal) {
         case "budget":
           if (operation) {
             this.props.calcBudget(
-              inputVal,
+              inputValue,
               this.props.vk_id,
               typeModal,
               operation,
@@ -101,39 +139,48 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
           }
           const type = daysToPayday ? "change" : "add";
           console.log("handleOK[ModalOverlay]:", operation);
-          this.props.addWholeBudget(vk_id, inputVal, type, daysToPayday);
+          this.props.addWholeBudget(vk_id, inputValue, type, daysToPayday);
           this.toggleAnimation();
           break;
 
         case "common":
           this.props.calcTempCosts(
-            inputVal,
+            inputValue,
             this.props.vk_id,
             "common",
             operation,
-            dateNow
+            dateNow,
+            this.state.transferTo
           );
           this.toggleAnimation();
           break;
 
         case "fun":
           this.props.calcTempCosts(
-            inputVal,
+            inputValue,
             this.props.vk_id,
             "fun",
             operation,
-            dateNow
+            dateNow,
+            this.state.transferTo
           );
           this.toggleAnimation();
           break;
 
         case "invest":
+          // if (operation === "transfer") {
+          //   if (!isSetTransfer) {
+          //     this.setState({ isErrorValidation: true });
+          //     break;
+          //   }
+          // }
           this.props.calcTempCosts(
-            inputVal,
+            inputValue,
             this.props.vk_id,
             "invest",
             operation,
-            dateNow
+            dateNow,
+            this.state.transferTo
           );
           this.toggleAnimation();
           break;
@@ -158,6 +205,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
 
   handleInput = (e: any, typeModal: string) => {
     const input = e.target;
+    console.log("---s", this.validate(typeModal));
     this.setState({ inputValue: input.value }, () => {
       if (this.validate(typeModal)) {
         this.setState({ isErrorValidation: false });
@@ -168,7 +216,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
   };
 
   render() {
-    const { onClick, typeModal } = this.props;
+    const { onClick, typeModal, calc } = this.props;
     const { isErrorValidation } = this.state;
 
     const budgetInputCard = (
@@ -178,6 +226,8 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
         handleInput={this.handleInput}
         onClick={onClick}
         handleOK={this.handleOK}
+        handleTransferState={this.handleTransferState}
+        calc={calc}
       />
     );
 
