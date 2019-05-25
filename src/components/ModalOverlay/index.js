@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 
 import "./style.css";
 import { InputCard } from "../index";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 
 type PROPS = {
   makeProfileOperation: Function,

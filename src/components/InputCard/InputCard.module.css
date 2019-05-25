@@ -59,3 +59,54 @@
 .cardInputError {
   background: #ffb0b0;
 }
+
+.transfer {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.transferItem {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+.transferItem input {
+  outline: 0;
+  opacity: 0;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  position: absolute;
+}
+.transferItemDisabled .fakeRadio {
+  border: 2px solid #8b9898;
+}
+.transferTitle {
+  color: #8b9898;
+  font-size: 13px;
+  padding: 5px 0 0 0;
+}
+.transferItem input:checked ~ .fakeRadio {
+  background-color: #0fde8c;
+}
+.transferItem input:hover ~ .fakeRadio {
+  background-color: #eaeff2;
+}
+.transferItem input:hover ~ .fakeRadio {
+  background-color: #eaeff2;
+}
+.transferItem input:checked:hover ~ .fakeRadio {
+  background-color: #15ffa1;
+}
+.fakeRadio {
+  transition: 0.2s;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid #200a9c;
+}

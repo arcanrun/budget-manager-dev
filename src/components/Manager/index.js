@@ -191,7 +191,7 @@ class Manager extends React.Component<PROPS, STATE> {
         icon="30%"
         headerTitle="Расходы на развлечения"
         rightIcon={"vector"}
-        onClick={() => onClickToggleModal("common_transfer")}
+        onClick={() => onClickToggleModal("fun_transfer")}
       >
         <PartBudget
           onClickToggleModal={onClickToggleModal}
@@ -206,7 +206,7 @@ class Manager extends React.Component<PROPS, STATE> {
         icon="20%"
         headerTitle="Инвестиции"
         rightIcon={"vector"}
-        onClick={() => onClickToggleModal("common_transfer")}
+        onClick={() => onClickToggleModal("invest_transfer")}
       >
         <PartBudget
           onClickToggleModal={onClickToggleModal}

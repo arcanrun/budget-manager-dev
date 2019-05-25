@@ -35,6 +35,9 @@ class InputCard extends React.Component<PROPS, STATE> {
   toggleAnimation = () => {
     this.setState({ in: !this.state.in });
   };
+  handleTransferCateogry = (e: any) => {
+    console.log("------>", e.target.value);
+  };
   render() {
     const {
       isErrorValidation,
@@ -111,9 +114,51 @@ class InputCard extends React.Component<PROPS, STATE> {
         {typeModal.includes("minus") ? "Расходы" : ""}
         {typeModal.includes("plus") ? "Доходы" : ""}
         {typeModal.includes("profile_delete") ? "Удалить профиль" : ""}
-        {typeModal.includes("transfer") ? "Перевеод" : ""}
+        {typeModal.includes("transfer") ? "Перевеод в другую категорию" : ""}
       </div>
     );
+    const isTransferBlock = typeModal.includes("transfer") ? true : false;
+    const isTransferDisabled = false;
+    const transferBlock = (
+      <div className={style.transfer}>
+        <div
+          className={
+            isTransferDisabled
+              ? [style.transferItem, style.transferItemDisabled].join(" ")
+              : style.transferItem
+          }
+        >
+          <div className={style.transferTitle}>50%</div>
+          {isTransferDisabled ? "" : <input type="radio" name="transfer" />}
+          <div className={style.fakeRadio} />
+        </div>
+
+        <div
+          className={
+            isTransferDisabled
+              ? [style.transferItem, style.transferItemDisabled].join(" ")
+              : style.transferItem
+          }
+        >
+          <div className={style.transferTitle}>30%</div>
+          {isTransferDisabled ? "" : <input type="radio" name="transfer" />}
+          <div className={style.fakeRadio} />
+        </div>
+
+        <div
+          className={
+            isTransferDisabled
+              ? [style.transferItem, style.transferItemDisabled].join(" ")
+              : style.transferItem
+          }
+        >
+          <div className={style.transferTitle}>20%</div>
+          {isTransferDisabled ? "" : <input type="radio" name="transfer" />}
+          <div className={style.fakeRadio} />
+        </div>
+      </div>
+    );
+
     return (
       <CSSTransition
         in={this.state.in}
@@ -125,6 +170,7 @@ class InputCard extends React.Component<PROPS, STATE> {
         <div className={style.card}>
           {title}
           {isInputRequired ? input : text}
+          {isTransferBlock ? transferBlock : ""}
           {btnBlock2}
         </div>
       </CSSTransition>
