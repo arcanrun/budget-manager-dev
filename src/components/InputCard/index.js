@@ -84,6 +84,16 @@ class InputCard extends React.Component<PROPS, STATE> {
         isInputRequired = false;
         break;
     }
+    let text = "EMPTY";
+    switch (true) {
+      case typeModal.includes("profile_delete"):
+        text = "Вы действительно хотите удалить профиль?";
+        break;
+      default:
+        text = "NOT MATCHING";
+        break;
+    }
+
     const input = (
       <input
         placeholder="0000.00"
@@ -98,16 +108,6 @@ class InputCard extends React.Component<PROPS, STATE> {
       />
     );
 
-    let text = "EMPTY";
-    switch (true) {
-      case typeModal.includes("profile_delete"):
-        text = "Вы действительно хотите удалить профиль?";
-        break;
-      default:
-        text = "NOT MATCHING";
-        break;
-    }
-
     const title = (
       <div className={style.title}>
         {typeModal === "budget" ? "Введите бюджет" : ""}
@@ -118,42 +118,55 @@ class InputCard extends React.Component<PROPS, STATE> {
       </div>
     );
     const isTransferBlock = typeModal.includes("transfer") ? true : false;
-    const isTransferDisabled = false;
+    const isTransferCommonDisabled =
+      transferingCategory === "common" ? true : false;
+    const isTransferFunDisabled = transferingCategory === "fun" ? true : false;
+    const isTransferInvestDisabled =
+      transferingCategory === "invest" ? true : false;
+
     const transferBlock = (
       <div className={style.transfer}>
         <div
           className={
-            isTransferDisabled
+            isTransferCommonDisabled
               ? [style.transferItem, style.transferItemDisabled].join(" ")
               : style.transferItem
           }
         >
           <div className={style.transferTitle}>50%</div>
-          {isTransferDisabled ? "" : <input type="radio" name="transfer" />}
+          {isTransferCommonDisabled ? (
+            ""
+          ) : (
+            <input type="radio" name="transfer" />
+          )}
           <div className={style.fakeRadio} />
         </div>
 
         <div
           className={
-            isTransferDisabled
+            isTransferFunDisabled
               ? [style.transferItem, style.transferItemDisabled].join(" ")
               : style.transferItem
           }
         >
           <div className={style.transferTitle}>30%</div>
-          {isTransferDisabled ? "" : <input type="radio" name="transfer" />}
+          {isTransferFunDisabled ? "" : <input type="radio" name="transfer" />}
           <div className={style.fakeRadio} />
         </div>
 
         <div
           className={
-            isTransferDisabled
+            isTransferInvestDisabled
               ? [style.transferItem, style.transferItemDisabled].join(" ")
               : style.transferItem
           }
         >
           <div className={style.transferTitle}>20%</div>
-          {isTransferDisabled ? "" : <input type="radio" name="transfer" />}
+          {isTransferInvestDisabled ? (
+            ""
+          ) : (
+            <input type="radio" name="transfer" />
+          )}
           <div className={style.fakeRadio} />
         </div>
       </div>
