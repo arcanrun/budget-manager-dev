@@ -168,12 +168,6 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
           break;
 
         case "invest":
-          // if (operation === "transfer") {
-          //   if (!isSetTransfer) {
-          //     this.setState({ isErrorValidation: true });
-          //     break;
-          //   }
-          // }
           this.props.calcTempCosts(
             inputValue,
             this.props.vk_id,
