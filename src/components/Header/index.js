@@ -4,39 +4,29 @@ import { Route } from "react-router-dom";
 
 import "./style.css";
 
-type PROPS = {
-  title: string
-};
-
-export const Header = ({ title }: PROPS) => (
-  <header className="header">
+export const Header = () => (
+  <>
     <Route
       path="/profile"
       exact
       children={({ match }) => {
-        return <p className="header__title">{match ? "профиль" : ""}</p>;
+        return match ? <span class="header__title">профиль</span> : "";
       }}
     />
-    {/* <Route
-      path="/"
-      exact
-      children={({ match }) => {
-        return <p className="header__title">{match ? "менеджер" : ""}</p>;
-      }}
-    /> */}
+
     <Route
       path="/budget-manager"
       exact
       children={({ match }) => {
-        return <p className="header__title">{match ? "менеджер" : ""}</p>;
+        return match ? <span class="header__title">менеджер</span> : "";
       }}
     />
     <Route
       path="/history"
       exact
       children={({ match }) => {
-        return <p className="header__title">{match ? "история" : ""}</p>;
+        return match ? <span class="header__title">история</span> : "";
       }}
     />
-  </header>
+  </>
 );

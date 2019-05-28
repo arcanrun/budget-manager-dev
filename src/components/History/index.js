@@ -85,9 +85,9 @@ class History extends React.Component<PROPS, STATE> {
                   <div key={i} className={styleHistory.oneDay}>
                     <Sticky
                       boundaryElement={styleHistory.oneDay}
-                      topOffset={-60}
+                      topOffset={-45}
                       stickyStyle={{
-                        marginTop: "60px",
+                        marginTop: "45px",
                         zIndex: 4
                       }}
                     >
