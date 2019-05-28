@@ -31,7 +31,7 @@ export const RoundButton = ({ text, onClick }: PROPS) => {
   }
   return (
     <div className={[style.container, type].join(" ")} onClick={onClick}>
-      <Icon icon={icon} color={color} />
+      <Icon icon={icon} color={color} width={"15px"} height={"15px"} />
     </div>
   );
 };

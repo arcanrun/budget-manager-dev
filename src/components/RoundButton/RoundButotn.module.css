@@ -1,7 +1,7 @@
 .container {
   width: 30px;
   height: 30px;
-  transition: 0.2s;
+  transition: 0.01s;
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -15,7 +15,7 @@
 .greenBtn:hover {
   background-color: #0fde8c;
 }
-.greenBtn:hover > span > span > svg {
+.greenBtn:hover > div > div > svg {
   fill: #fff !important;
 }
 .greenBtn:active {
@@ -28,7 +28,7 @@
 .redBtn:hover {
   background-color: #f72d6b;
 }
-.redBtn:hover > span > span > svg {
+.redBtn:hover > div > div > svg {
   fill: #fff !important;
 }
 .redBtn:active {

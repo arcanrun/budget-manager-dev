@@ -120,7 +120,7 @@ class InputCard extends React.Component<PROPS, STATE> {
         {typeModal.includes("minus") ? "Расходы" : ""}
         {typeModal.includes("plus") ? "Доходы" : ""}
         {typeModal.includes("profile_delete") ? "Удалить профиль" : ""}
-        {typeModal.includes("transfer") ? "Перевеод в другую категорию" : ""}
+        {typeModal.includes("transfer") ? "Перевод в другую категорию" : ""}
       </div>
     );
     const input = (

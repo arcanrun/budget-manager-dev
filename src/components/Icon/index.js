@@ -212,9 +212,9 @@ const Icon = ({ icon, color, width, height, fontSize }: PROPS) => {
     case "transfer":
       return (
         <ReactSVG
-          className="hoverable"
+          className="transfer"
           src={Transfer}
-          wrapper="span"
+          wrapper="div"
           svgClassName="transfer hoverable"
           svgStyle={{ width: width, height: height, fill: color }}
         />
@@ -224,7 +224,7 @@ const Icon = ({ icon, color, width, height, fontSize }: PROPS) => {
         <ReactSVG
           className="plus"
           src={Plus}
-          wrapper="span"
+          wrapper="div"
           svgClassName="plus"
           svgStyle={{ width: width, height: height, fill: color }}
         />
@@ -234,7 +234,7 @@ const Icon = ({ icon, color, width, height, fontSize }: PROPS) => {
         <ReactSVG
           className="minus"
           src={Minus}
-          wrapper="span"
+          wrapper="div"
           svgClassName="minus"
           svgStyle={{ width: width, height: height, fill: color }}
         />
