@@ -15,7 +15,8 @@ type PROPS = {
   handleTransferState: Function,
   isErrorValidation: boolean,
   typeModal: string,
-  calc: Object
+  calc: Object,
+  transferTo: string
 };
 
 type STATE = {
@@ -23,9 +24,13 @@ type STATE = {
 };
 
 class InputCard extends React.Component<PROPS, STATE> {
-  state = {
-    in: false
-  };
+  constructor(props: Object) {
+    super(props);
+
+    this.state = {
+      in: false
+    };
+  }
 
   componentDidMount() {
     this.toggleAnimation();
@@ -47,7 +52,8 @@ class InputCard extends React.Component<PROPS, STATE> {
       typeModal,
       handleInput,
       onClick,
-      handleOK
+      handleOK,
+      transferTo
     } = this.props;
     const common = this.props.calc.common.value;
     const fun = this.props.calc.fun.value;
@@ -56,12 +62,6 @@ class InputCard extends React.Component<PROPS, STATE> {
     let inputType = "text";
 
     const btnBlock = (
-      <div className={style.cardBtnsBlock}>
-        <button onClick={() => onClick(typeModal)}>отмена</button>
-        <button onClick={handleOK}>ок</button>
-      </div>
-    );
-    const btnBlock2 = (
       <div className={style.cardBtnsBlock}>
         <ButtonGroup>
           <Button
@@ -114,21 +114,6 @@ class InputCard extends React.Component<PROPS, STATE> {
         text = "NOT MATCHING";
         break;
     }
-
-    const input = (
-      <input
-        placeholder={placeHolder}
-        className={
-          isErrorValidation
-            ? [style.cardInputError, style.cardInput].join(" ")
-            : style.cardInput
-        }
-        autoFocus
-        onChange={e => handleInput(e, typeModal)}
-        type={inputType}
-      />
-    );
-
     const title = (
       <div className={style.title}>
         {typeModal === "budget" ? "Введите бюджет" : ""}
@@ -138,6 +123,23 @@ class InputCard extends React.Component<PROPS, STATE> {
         {typeModal.includes("transfer") ? "Перевеод в другую категорию" : ""}
       </div>
     );
+    const input = (
+      <div className={style.inputContainer}>
+        {title}
+        <input
+          placeholder={placeHolder}
+          className={
+            isErrorValidation
+              ? [style.cardInputError, style.cardInput].join(" ")
+              : style.cardInput
+          }
+          autoFocus
+          onChange={e => handleInput(e, typeModal)}
+          type={inputType}
+        />
+      </div>
+    );
+
     const isTransferBlock = typeModal.includes("transfer") ? true : false;
     const isTransferCommonDisabled =
       transferingCategory === "common" ? true : false;
@@ -163,6 +165,7 @@ class InputCard extends React.Component<PROPS, STATE> {
               type="radio"
               name="transfer"
               onChange={this.handleTransferCateogry}
+              checked={transferTo === "common" ? true : false}
             />
           )}
           <div className={style.fakeRadio} />
@@ -205,13 +208,13 @@ class InputCard extends React.Component<PROPS, STATE> {
               type="radio"
               name="transfer"
               onChange={this.handleTransferCateogry}
+              checked={transferTo === "invest" ? true : false}
             />
           )}
           <div className={style.fakeRadio} />
         </div>
       </div>
     );
-
     return (
       <CSSTransition
         in={this.state.in}
@@ -221,10 +224,9 @@ class InputCard extends React.Component<PROPS, STATE> {
         unmountOnExit
       >
         <div className={style.card}>
-          {title}
           {isInputRequired ? input : text}
           {isTransferBlock ? transferBlock : ""}
-          {btnBlock2}
+          {btnBlock}
         </div>
       </CSSTransition>
     );

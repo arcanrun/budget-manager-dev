@@ -31,8 +31,8 @@ class App extends React.Component<PROPS, {}> {
       <>
         {/* {vk_id && <Header title={"менеджер"} />}  <Header title={"менеджер"} />*/}
         <Overlay isFetching={isFetching} />
-        <View>
-          <Panel>
+        <View id="mainView" activePanel="mainPanel">
+          <Panel id="mainPanel">
             {vk_id && (
               <PanelHeader>
                 <Header />

@@ -35,12 +35,20 @@ const ModalDiv =
 class ModalOverlay extends React.Component<PROPS, STATE> {
   constructor(props: PROPS) {
     super(props);
+    const { typeModal } = this.props;
+    let transferTo = "common";
+    let isSetTransfer = false;
+    if (typeModal.includes("transfer")) {
+      const to = typeModal.split("_")[0];
+      if (to === "common") transferTo = "invest";
+      isSetTransfer = true;
+    }
     this.state = {
       inputValue: null,
       isErrorValidation: false,
       in: false,
-      isSetTransfer: false,
-      transferTo: undefined
+      isSetTransfer,
+      transferTo
     };
   }
   componentDidMount() {
@@ -54,7 +62,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
   };
   handleTransferState = (transferTo: string) => {
     const { isSetTransfer } = this.state;
-    this.setState({ isSetTransfer: !isSetTransfer, transferTo });
+    this.setState({ isSetTransfer: true, transferTo });
   };
   validate = (typeModal: string) => {
     const val = this.state.inputValue;
@@ -112,6 +120,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     }
   };
   handleOK = () => {
+    console.log("------->", this.state.transferTo);
     const { vk_id } = this.props;
     const { inputValue, isSetTransfer } = this.state;
     const [typeModal, operation] = this.props.typeModal.split("_");
@@ -211,7 +220,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
 
   render() {
     const { onClick, typeModal, calc } = this.props;
-    const { isErrorValidation } = this.state;
+    const { isErrorValidation, transferTo } = this.state;
 
     const budgetInputCard = (
       <InputCard
@@ -221,6 +230,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
         onClick={onClick}
         handleOK={this.handleOK}
         handleTransferState={this.handleTransferState}
+        transferTo={transferTo}
         calc={calc}
       />
     );
