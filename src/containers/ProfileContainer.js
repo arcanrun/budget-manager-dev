@@ -3,7 +3,12 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { Profile } from "../components/index";
-import { toggleModal, makeProfileOperation, getStatistics } from "../actions/";
+import {
+  toggleModal,
+  makeProfileOperation,
+  getStatistics,
+  getHistory
+} from "../actions/";
 
 const mapStateToProps = state => ({
   modalIsVisible: state.modal.modalIsVisible,
@@ -17,9 +22,10 @@ const mapStateToProps = state => ({
   income: state.user.statistics.income,
   toDayFormated: state.user.calc.toDayFormated,
   registerDate: state.user.register_date,
-  calc: state.user.calc
+  calc: state.user.calc,
+  history: state.user.history.value
 });
 export const ProfileContainer = connect(
   mapStateToProps,
-  { toggleModal, makeProfileOperation, getStatistics }
+  { toggleModal, makeProfileOperation, getStatistics, getHistory }
 )(Profile);

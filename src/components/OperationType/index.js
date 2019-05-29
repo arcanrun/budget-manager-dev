@@ -21,7 +21,7 @@ const OperationType = ({ children }: PROPS) => {
       typeOper = "20%";
       break;
     case "budget":
-      typeOper = <Icon color="#200a9c" icon="money-bag-2" />;
+      typeOper = <Icon color="#5281b9" icon="money-bag-2" />;
       break;
     default:
       typeOper = "?";

@@ -11,6 +11,8 @@ type PROPS = {
   makeProfileOperation: Function,
   toggleModal: Function,
   getStatistics: Function,
+  getHistory: Function,
+  history: Array<any>,
   toDayFormated: string,
   modalIsVisible: boolean,
   typeModal: string,
@@ -37,6 +39,7 @@ class Profile extends React.Component<PROPS, STATE> {
     const { vk_id, toDayFormated } = this.props;
 
     this.props.getStatistics(vk_id, toDayFormated);
+    this.props.getHistory(vk_id);
     this.toggleAnimation();
   }
 
@@ -57,7 +60,8 @@ class Profile extends React.Component<PROPS, STATE> {
       costs,
       income,
       registerDate,
-      calc
+      calc,
+      history
     } = this.props;
     // const overlay = <Overlay isTransparent={true} />;
     // const showPreloader = isFetching ? overlay : "";
@@ -83,7 +87,7 @@ class Profile extends React.Component<PROPS, STATE> {
     const statisticCard = (
       <Card icon={"pie-chart-logo"} headerTitle={"статистика за текущий месяц"}>
         <div>
-          <Tab costs={costs} income={income} />
+          <Tab costs={costs} income={income} history={history} />
         </div>
       </Card>
     );

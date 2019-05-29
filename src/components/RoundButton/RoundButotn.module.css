@@ -10,7 +10,7 @@
 }
 .greenBtn {
   /* border: 3px solid #0fde8c; */
-  border: 2px solid #200a9c;
+  border: 2px solid #5281b9;
 }
 .greenBtn:hover {
   background-color: #0fde8c;
@@ -22,7 +22,7 @@
   opacity: 0.5;
 }
 .redBtn {
-  border: 2px solid #200a9c;
+  border: 2px solid #5281b9;
   /* border: 3px solid #f72d6b; */
 }
 .redBtn:hover {

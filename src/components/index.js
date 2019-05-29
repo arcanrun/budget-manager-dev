@@ -26,6 +26,7 @@ import { Button } from "./Button";
 import { Tab } from "./Tab";
 import { ButtonGroup } from "./ButtonGroup";
 import { RoundButton } from "./RoundButton";
+import { LineChart } from "./LineChart";
 
 export {
   Header,
@@ -54,5 +55,6 @@ export {
   Button,
   Tab,
   ButtonGroup,
-  RoundButton
+  RoundButton,
+  LineChart
 };

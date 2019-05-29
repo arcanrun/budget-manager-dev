@@ -9,7 +9,7 @@
 .DayPicker-Caption > div {
   font-weight: 500;
   font-size: 1.15em;
-  color: #110261;
+  color: #224b7a;
   text-align: center;
 }
 .DayPicker-NavButton {
@@ -26,6 +26,7 @@
   background-repeat: no-repeat;
   color: #8b9898;
   cursor: pointer;
+  outline: 0;
 }
 .DayPicker-NavButton--prev {
   margin-right: 1.5em;
@@ -40,6 +41,7 @@
   user-select: none;
   max-width: 260px;
   margin: auto;
+  outline: 0;
 }
 .DayPicker-Day {
   display: table-cell;

@@ -16,7 +16,7 @@ const ActiveLink = ({ to, icon }: PROPS) => (
     exact
     children={({ match }) => (
       <Link to={to} className="bottom-bar__item">
-        <Icon icon={icon} color={match ? "#F72D6B" : "#200A9E"} />
+        <Icon icon={icon} color={match ? "#F72D6B" : "#9AA2B0"} />
         {match ? <div /> : ""}
       </Link>
     )}

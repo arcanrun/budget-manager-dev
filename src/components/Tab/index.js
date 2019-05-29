@@ -2,11 +2,12 @@
 import React from "react";
 
 import style from "./Tab.module.css";
-import { Icon } from "../index";
+import { Icon, LineChart } from "../index";
 
 type PROPS = {
   costs: Object,
-  income: Object
+  income: Object,
+  history: Array<any>
 };
 type STATE = {
   switcher: boolean
@@ -21,7 +22,7 @@ export class Tab extends React.Component<PROPS, STATE> {
   };
   render() {
     const { switcher } = this.state;
-    const { income, costs } = this.props;
+    const { income, costs, history } = this.props;
     return (
       <div>
         <div className={style.nav} onClick={this.handleSwtich}>
@@ -132,6 +133,7 @@ export class Tab extends React.Component<PROPS, STATE> {
             </div>
           )}
         </div>
+        <LineChart switcher={switcher} history={history} />
       </div>
     );
   }
