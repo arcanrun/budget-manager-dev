@@ -2,15 +2,15 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
 
-import "./style.css";
+import style from "./Header.module.css";
 
 export const Header = () => (
-  <>
+  <div className={style.header}>
     <Route
       path="/profile"
       exact
       children={({ match }) => {
-        return match ? <span className="header__title">профиль</span> : "";
+        return match ? <span className={style.headerTitle}>профиль</span> : "";
       }}
     />
 
@@ -18,15 +18,15 @@ export const Header = () => (
       path="/budget-manager"
       exact
       children={({ match }) => {
-        return match ? <span className="header__title">менеджер</span> : "";
+        return match ? <span className={style.headerTitle}>менеджер</span> : "";
       }}
     />
     <Route
       path="/history"
       exact
       children={({ match }) => {
-        return match ? <span className="header__title">история</span> : "";
+        return match ? <span className={style.headerTitle}>история</span> : "";
       }}
     />
-  </>
+  </div>
 );

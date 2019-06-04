@@ -2,8 +2,6 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import connect from "@vkontakte/vkui-connect-promise";
-import { View, Panel, PanelHeader } from "@vkontakte/vkui";
-import "@vkontakte/vkui/dist/vkui.css";
 
 import { Header, BottomBar, Overlay } from "./components";
 import {
@@ -29,16 +27,10 @@ class App extends React.Component<PROPS, {}> {
     console.log("---------->", this.props);
     return (
       <>
-        {/* {vk_id && <Header title={"менеджер"} />}  <Header title={"менеджер"} />*/}
         <Overlay isFetching={isFetching} />
-        <View id="mainView" activePanel="mainPanel">
-          <Panel id="mainPanel">
-            {vk_id && (
-              <PanelHeader>
-                <Header />
-              </PanelHeader>
-            )}
-            {/* <Switch>
+
+        {vk_id && <Header />}
+        {/* <Switch>
           <Route path="/history" component={HistoryContainer} />
           {!vk_id ? (
             <Redirect exact to="/entrance" from="/" />
@@ -50,24 +42,18 @@ class App extends React.Component<PROPS, {}> {
           <Route path="/entrance" component={EntranceContainer} />
         </Switch> */}
 
-            <Switch>
-              <Route path="/history" component={HistoryContainer} />
-              {!vk_id ? (
-                <Redirect exact to="/" from="/budget-manager" />
-              ) : (
-                <Route
-                  exact
-                  path="/budget-manager"
-                  component={ManagerContainer}
-                />
-              )}
+        <Switch>
+          <Route path="/history" component={HistoryContainer} />
+          {!vk_id ? (
+            <Redirect exact to="/" from="/budget-manager" />
+          ) : (
+            <Route exact path="/budget-manager" component={ManagerContainer} />
+          )}
 
-              <Route path="/profile" component={ProfileContainer} />
-              <Route path="/" component={EntranceContainer} />
-            </Switch>
-            {vk_id && <BottomBar />}
-          </Panel>
-        </View>
+          <Route path="/profile" component={ProfileContainer} />
+          <Route path="/" component={EntranceContainer} />
+        </Switch>
+        {vk_id && <BottomBar />}
       </>
     );
   }

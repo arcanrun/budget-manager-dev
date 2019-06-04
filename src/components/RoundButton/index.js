@@ -30,8 +30,6 @@ export const RoundButton = ({ text, onClick }: PROPS) => {
       break;
   }
   return (
-    <div className={[style.container, type].join(" ")} onClick={onClick}>
-      <Icon icon={icon} color={color} width={"15px"} height={"15px"} />
-    </div>
+    <div className={[style.container, type].join(" ")} onClick={onClick} />
   );
 };

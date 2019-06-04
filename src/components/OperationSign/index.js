@@ -25,11 +25,7 @@ const OperationSign = ({ children }: PROPS) => {
       classType = [style.sign, style.signTransfer].join(" ");
       break;
   }
-  return (
-    <div className={classType}>
-      <Icon icon={children} color="#fff" />
-    </div>
-  );
+  return <div className={classType} />;
 };
 
 export { OperationSign };

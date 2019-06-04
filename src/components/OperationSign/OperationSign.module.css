@@ -14,14 +14,23 @@
 }
 
 .signMinus {
+  background: url(../../static/minus.svg) no-repeat;
+  background-position: center;
+  background-size: 12px 12px;
   color: #f72d6b;
   background-color: #f72d6b;
 }
 .signPlus {
+  background: url(../../static/plus.svg) no-repeat;
+  background-position: center;
+  background-size: 14px 14px;
   color: #0fde8c;
   background-color: #0fde8c;
 }
 .signTransfer {
+  background: url(../../static/transfer_white.svg) no-repeat;
+  background-position: center;
+  background-size: 20px 20px;
   color: #5281b9;
   background-color: #5281b9;
 }
