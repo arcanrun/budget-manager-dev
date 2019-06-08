@@ -10,25 +10,23 @@ type PROPS = {
 
 const OperationSign = ({ children }: PROPS) => {
   let sign = "";
+  let classType = "";
   switch (children) {
     case "plus":
-      sign = "+";
+      classType = [style.sign, style.signPlus].join(" ");
       break;
     case "minus":
-      sign = "-";
+      classType = [style.sign, style.signMinus].join(" ");
+      break;
+    case "transfer":
+      classType = [style.sign, style.signTransfer].join(" ");
       break;
     default:
-      sign = "?";
+      classType = [style.sign, style.signTransfer].join(" ");
       break;
   }
   return (
-    <div
-      className={
-        sign === "+"
-          ? [style.sign, style.signPlus].join(" ")
-          : [style.sign, style.signMinus].join(" ")
-      }
-    >
+    <div className={classType}>
       <Icon icon={children} color="#fff" />
     </div>
   );
