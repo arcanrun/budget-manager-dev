@@ -1,6 +1,7 @@
 //@flow
 import React from "react";
 import { CSSTransition } from "react-transition-group";
+import Joyride from "react-joyride";
 
 import { Card, Overlay } from "../index";
 import { ModalOverlay, WholeBudget, Calendar, PartBudget } from "../index";
@@ -27,7 +28,8 @@ type PROPS = {
   daysToPayday: string,
   vk_id: number,
   calc: Object,
-  common: Object
+  common: Object,
+  steps: Array<any>
 };
 
 type STATE = {
@@ -38,7 +40,61 @@ type STATE = {
 class Manager extends React.Component<PROPS, STATE> {
   state = {
     tempPayDay: undefined,
-    in: false
+    in: false,
+    steps: [
+      {
+        target: ".first-step",
+        title: "Общий бюджет",
+        content: "Здесь отображаются все ваши накопления",
+        disableBeacon: true,
+        placement: "auto",
+        isFixed: true
+      },
+      {
+        target: ".pencil",
+        title: "Общий бюджет",
+        content: "Здесь вы можете изменить сумму вашего бюджета.",
+        disableBeacon: true,
+        placement: "auto",
+        isFixed: true
+      },
+      {
+        target: ".third-step",
+        title: "Общий бюджет",
+        content:
+          "Управляйте сбережениями в зависимотси от доходов или расходов.",
+        disableBeacon: true,
+        placement: "auto",
+        isFixed: true
+      },
+      {
+        target: ".DayPicker",
+        title: "Календарь",
+        content:
+          "Календарь отображает количество дней до зарплаты. Нажмите на день, чтобы изменить дату получения зарплаты.",
+        disableBeacon: true,
+        placement: "auto",
+        isFixed: true
+      },
+      {
+        target: ".fifth-step",
+        title: "50/30/20",
+        content:
+          "Приложение разделяет весь ваш бюджет на 50%(общие расходы), 30%(развлечения), 20%(инвестиции). Диаграмма показывает остаток средств по то или иной категории, а также желаемую сумму средств доступную на сегодняшний день.",
+        disableBeacon: true,
+        placement: "auto",
+        isFixed: true
+      },
+      {
+        target: ".vector",
+        title: "50/30/20",
+        content:
+          "Вы также можете переводить средства из одной категории в другую.",
+        disableBeacon: true,
+        placement: "auto",
+        isFixed: true
+      }
+    ]
   };
 
   componentDidMount() {
@@ -126,7 +182,7 @@ class Manager extends React.Component<PROPS, STATE> {
       calc,
       calcBudget
     } = this.props;
-    const { tempPayDay } = this.state;
+    const { tempPayDay, steps } = this.state;
 
     const wholeBudgetCard = daysToPayday ? (
       <Card
@@ -220,6 +276,28 @@ class Manager extends React.Component<PROPS, STATE> {
         />
       </Card>
     );
+    const guide = (
+      <Joyride
+        steps={steps}
+        continuous
+        disableOverlayClose
+        locale={{
+          back: "Назад",
+          close: "Закрыть",
+          last: "Конец",
+          next: "Далее",
+          skip: "Я все знаю!"
+        }}
+        showProgress
+        showSkipButton
+        scrollToFirstStep
+        styles={{
+          options: {
+            primaryColor: "#5281b9"
+          }
+        }}
+      />
+    );
 
     return (
       <CSSTransition
@@ -230,6 +308,7 @@ class Manager extends React.Component<PROPS, STATE> {
       >
         <div className={style.manager}>
           <Overlay isTransparent={true} isFetching={isFetching_calc} />
+
           {wholeBudgetCard}
 
           {budget ? calendarCard : ""}
@@ -237,6 +316,7 @@ class Manager extends React.Component<PROPS, STATE> {
           {budget && payday ? budgetCardFun : ""}
           {budget && payday ? budgetCardInvest : ""}
           {!modalIsVisible || modalOverlay}
+          {guide}
         </div>
       </CSSTransition>
     );

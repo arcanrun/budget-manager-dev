@@ -14,10 +14,11 @@ const WholeBudget = ({ wholeBudget, onClickToggleModal, typeModal }: PROPS) => (
   <div className={style.budgetBlock}>
     {wholeBudget ? (
       <>
-        <div className={style.budget}>
+        <div className={[style.budget, "first-step"].join(" ")}>
           {wholeBudget}
           <b className={style.volute}>₽</b>
         </div>
+
         <div className={style.footer}>
           <RoundButton
             text="plus"

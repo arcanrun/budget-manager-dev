@@ -5,7 +5,7 @@ import { Route } from "react-router-dom";
 import style from "./Header.module.css";
 
 export const Header = () => (
-  <div className={style.header}>
+  <>
     <Route
       path="/profile"
       exact
@@ -28,5 +28,5 @@ export const Header = () => (
         return match ? <span className={style.headerTitle}>история</span> : "";
       }}
     />
-  </div>
+  </>
 );

@@ -1,8 +1,6 @@
 //@flow
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import connect from "@vkontakte/vkui-connect-promise";
-
 import { Header, BottomBar, Overlay } from "./components";
 import {
   ManagerContainer,
@@ -10,7 +8,8 @@ import {
   ProfileContainer
 } from "./containers";
 import EntranceContainer from "./containers/EntranceContainer";
-// import { user } from "./static/user-data";
+import { Root, View, Panel, PanelHeader } from "@vkontakte/vkui";
+import "@vkontakte/vkui/dist/vkui.css";
 
 type PROPS = {
   logIn: Function,
@@ -24,36 +23,37 @@ class App extends React.Component<PROPS, {}> {
   }
   render() {
     const { vk_id, isFetching } = this.props;
-    console.log("---------->", this.props);
     return (
       <>
-        <Overlay isFetching={isFetching} />
+        <Overlay isFetching={false} />
+        <Root activeView="main_view">
+          <View activePanel="main_panel" id="main_view">
+            <Panel id="main_panel">
+              {vk_id && (
+                <PanelHeader>
+                  <Header />
+                </PanelHeader>
+              )}
 
-        {vk_id && <Header />}
-        {/* <Switch>
-          <Route path="/history" component={HistoryContainer} />
-          {!vk_id ? (
-            <Redirect exact to="/entrance" from="/" />
-          ) : (
-            <Route exact path="/" component={ManagerContainer} />
-          )}
+              <Switch>
+                <Route path="/history" component={HistoryContainer} />
+                {!vk_id ? (
+                  <Redirect exact to="/" from="/budget-manager" />
+                ) : (
+                  <Route
+                    exact
+                    path="/budget-manager"
+                    component={ManagerContainer}
+                  />
+                )}
 
-          <Route path="/profile" component={ProfileContainer} />
-          <Route path="/entrance" component={EntranceContainer} />
-        </Switch> */}
-
-        <Switch>
-          <Route path="/history" component={HistoryContainer} />
-          {!vk_id ? (
-            <Redirect exact to="/" from="/budget-manager" />
-          ) : (
-            <Route exact path="/budget-manager" component={ManagerContainer} />
-          )}
-
-          <Route path="/profile" component={ProfileContainer} />
-          <Route path="/" component={EntranceContainer} />
-        </Switch>
-        {vk_id && <BottomBar />}
+                <Route path="/profile" component={ProfileContainer} />
+                <Route path="/" component={EntranceContainer} />
+              </Switch>
+              {vk_id && <BottomBar />}
+            </Panel>
+          </View>
+        </Root>
       </>
     );
   }

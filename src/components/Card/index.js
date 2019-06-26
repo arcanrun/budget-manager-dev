@@ -20,7 +20,10 @@ const Card = ({ children, headerTitle, icon, rightIcon, onClick }: PROPS) => (
         <Icon icon={icon || ""} color="#B3B3B3" />
         <span className={style.title}>{headerTitle}</span>
       </div>
-      <div className={style.options} onClick={onClick}>
+      <div
+        className={[style.options, "second-step"].join(" ")}
+        onClick={onClick}
+      >
         {rightIcon && <Icon icon={rightIcon} />}
       </div>
     </div>

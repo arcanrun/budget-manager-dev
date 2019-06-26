@@ -22,7 +22,7 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
     colorTemp = color;
   }
   return (
-    <div className={style.donutContainer}>
+    <div className={[style.donutContainer, "fifth-step"].join(" ")}>
       <svg viewBox="0 0 35 35" className={style.donut}>
         <circle
           r="15.91549430918952"

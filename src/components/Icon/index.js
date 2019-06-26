@@ -92,7 +92,7 @@ const Icon = ({ icon, color, width, height, fontSize }: PROPS) => {
     case "pencil":
       return (
         <ReactSVG
-          className="hoverable"
+          className="pencil"
           src={Pencil}
           wrapper="span"
           svgClassName="pencil"

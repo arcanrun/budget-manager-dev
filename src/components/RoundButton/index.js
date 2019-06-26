@@ -30,6 +30,9 @@ export const RoundButton = ({ text, onClick }: PROPS) => {
       break;
   }
   return (
-    <div className={[style.container, type].join(" ")} onClick={onClick} />
+    <div
+      className={[style.container, type, "third-step"].join(" ")}
+      onClick={onClick}
+    />
   );
 };
