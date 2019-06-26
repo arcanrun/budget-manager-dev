@@ -13,7 +13,8 @@ import {
   getAllCosts,
   makeProfileOperation,
   logIn,
-  calcBudget
+  calcBudget,
+  stopGuide
 } from "../actions/";
 
 const mapStateToProps = state => ({
@@ -25,7 +26,8 @@ const mapStateToProps = state => ({
   daysToPayday: state.user.calc.daysToPayday,
   calc: state.user.calc,
   vk_id: state.user.vk_id,
-  common: state.user.calc.common
+  common: state.user.calc.common,
+  is_first_time: state.user.is_first_time
 });
 
 export const ManagerContainer = connect(
@@ -40,6 +42,7 @@ export const ManagerContainer = connect(
     getAllCosts,
     makeProfileOperation,
     logIn,
-    calcBudget
+    calcBudget,
+    stopGuide
   }
 )(Manager);

@@ -51,7 +51,12 @@ import {
   STATISTICS_REQUEST
 } from "./statisticsTypes";
 
-import { SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./signUpTypes";
+import {
+  SIGNUP_FAILURE,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  SIGNUP_STOP_GUIDE
+} from "./signUpTypes";
 
 export {
   TOGGLE_MODAL,
@@ -90,5 +95,6 @@ export {
   SIGNUP_SUCCESS,
   CALC_BUDGET_FAILURE,
   CALC_BUDGET_REQUEST,
-  CALC_BUDGET_SUCCESS
+  CALC_BUDGET_SUCCESS,
+  SIGNUP_STOP_GUIDE
 };

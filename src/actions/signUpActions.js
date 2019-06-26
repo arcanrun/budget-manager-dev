@@ -1,8 +1,17 @@
 //@flow
 import connect from "@vkontakte/vkui-connect-promise";
 
-import { SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "../constants";
+import {
+  SIGNUP_FAILURE,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  SIGNUP_STOP_GUIDE
+} from "../constants";
 import { API } from "../API";
+
+export const stopGuide = () => ({
+  type: SIGNUP_STOP_GUIDE
+});
 
 const requestSignUp = () => ({
   type: SIGNUP_REQUEST,
@@ -73,3 +82,12 @@ export const signUp = () => {
       });
   };
 };
+
+// export const signUp = () => {
+//   return dispatch =>
+//     dispatch(
+//       successSignUp({
+//         vk_id: 65122543
+//       })
+//     );
+// };

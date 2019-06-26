@@ -8,6 +8,7 @@ import { ModalOverlay, WholeBudget, Calendar, PartBudget } from "../index";
 import style from "./Manager.module.css";
 import { msToDays } from "../Calendar/calendarHelper";
 import "./animations.css";
+import { stopGuide } from "../../actions";
 
 type PROPS = {
   getWholeBudget: Function,
@@ -19,6 +20,7 @@ type PROPS = {
   getAllCosts: Function,
   logIn: Function,
   calcBudget: Function,
+  stopGuide: Function,
   typeModal: string,
   budget: number,
   payday: string,
@@ -29,73 +31,77 @@ type PROPS = {
   vk_id: number,
   calc: Object,
   common: Object,
-  steps: Array<any>
+  is_first_time: boolean
 };
 
 type STATE = {
   tempPayDay: ?string,
-  in: boolean
+  in: boolean,
+  steps: Array<any>
 };
 
 class Manager extends React.Component<PROPS, STATE> {
-  state = {
-    tempPayDay: undefined,
-    in: false,
-    steps: [
-      {
-        target: ".first-step",
-        title: "Общий бюджет",
-        content: "Здесь отображаются все ваши накопления",
-        disableBeacon: true,
-        placement: "auto",
-        isFixed: true
-      },
-      {
-        target: ".pencil",
-        title: "Общий бюджет",
-        content: "Здесь вы можете изменить сумму вашего бюджета.",
-        disableBeacon: true,
-        placement: "auto",
-        isFixed: true
-      },
-      {
-        target: ".third-step",
-        title: "Общий бюджет",
-        content:
-          "Управляйте сбережениями в зависимотси от доходов или расходов.",
-        disableBeacon: true,
-        placement: "auto",
-        isFixed: true
-      },
-      {
-        target: ".DayPicker",
-        title: "Календарь",
-        content:
-          "Календарь отображает количество дней до зарплаты. Нажмите на день, чтобы изменить дату получения зарплаты.",
-        disableBeacon: true,
-        placement: "auto",
-        isFixed: true
-      },
-      {
-        target: ".fifth-step",
-        title: "50/30/20",
-        content:
-          "Приложение разделяет весь ваш бюджет на 50%(общие расходы), 30%(развлечения), 20%(инвестиции). Диаграмма показывает остаток средств по то или иной категории, а также желаемую сумму средств доступную на сегодняшний день.",
-        disableBeacon: true,
-        placement: "auto",
-        isFixed: true
-      },
-      {
-        target: ".vector",
-        title: "50/30/20",
-        content:
-          "Вы также можете переводить средства из одной категории в другую.",
-        disableBeacon: true,
-        placement: "auto",
-        isFixed: true
-      }
-    ]
-  };
+  constructor(props: Object) {
+    super(props);
+    this.state = {
+      tempPayDay: undefined,
+      in: false,
+      steps: [
+        {
+          target: ".first-step",
+          title: "Общий бюджет",
+          content: "Здесь отображаются все ваши накопления",
+          disableBeacon: true,
+          placement: "auto",
+          isFixed: true
+        },
+        {
+          target: ".pencil",
+          title: "Общий бюджет",
+          content: "Здесь вы можете изменить сумму вашего бюджета.",
+          disableBeacon: true,
+          placement: "auto",
+          isFixed: true
+        },
+        {
+          target: ".third-step",
+          title: "Общий бюджет",
+          content:
+            "Управляйте сбережениями в зависимотси от доходов или расходов.",
+          disableBeacon: true,
+          placement: "auto",
+          isFixed: true
+        },
+        {
+          target: ".DayPicker",
+          title: "Календарь",
+          content:
+            "Календарь отображает количество дней до зарплаты. Нажмите на день, чтобы изменить дату получения зарплаты.",
+          disableBeacon: true,
+          placement: "auto",
+          isFixed: true
+        },
+        {
+          target: ".fifth-step",
+          title: "50/30/20",
+          content:
+            "Приложение разделяет весь ваш бюджет на 50%(общие расходы), 30%(развлечения), 20%(инвестиции). Диаграмма показывает остаток средств по то или иной категории, а также желательную сумму средств доступную на сегодняшний день.",
+          disableBeacon: true,
+          placement: "auto",
+          isFixed: true
+        },
+        {
+          target: ".vector",
+          title: "50/30/20",
+          content:
+            "Вы также можете переводить средства из одной категории в другую.",
+          disableBeacon: true,
+          placement: "auto",
+          isFixed: true
+        }
+      ]
+    };
+  }
 
   componentDidMount() {
     const budget = this.props.budget;
@@ -169,7 +175,12 @@ class Manager extends React.Component<PROPS, STATE> {
         console.log("btnType hmm...");
     }
   };
-
+  handleTour = (data: any) => {
+    const { action } = data;
+    if (action === "reset") {
+      this.props.stopGuide();
+    }
+  };
   render() {
     const {
       modalIsVisible,
@@ -180,7 +191,8 @@ class Manager extends React.Component<PROPS, STATE> {
       isFetching_calc,
       daysToPayday,
       calc,
-      calcBudget
+      calcBudget,
+      is_first_time
     } = this.props;
     const { tempPayDay, steps } = this.state;
 
@@ -278,6 +290,7 @@ class Manager extends React.Component<PROPS, STATE> {
     );
     const guide = (
       <Joyride
+        callback={this.handleTour}
         steps={steps}
         continuous
         disableOverlayClose
@@ -286,14 +299,15 @@ class Manager extends React.Component<PROPS, STATE> {
           close: "Закрыть",
           last: "Конец",
           next: "Далее",
-          skip: "Я все знаю!"
+          skip: "Пропустить"
         }}
         showProgress
         showSkipButton
         scrollToFirstStep
         styles={{
           options: {
-            primaryColor: "#5281b9"
+            primaryColor: "#5281b9",
+            zIndex: 1
           }
         }}
       />
@@ -316,7 +330,7 @@ class Manager extends React.Component<PROPS, STATE> {
           {budget && payday ? budgetCardFun : ""}
           {budget && payday ? budgetCardInvest : ""}
           {!modalIsVisible || modalOverlay}
-          {guide}
+          {is_first_time ? (budget && payday ? guide : "") : ""}
         </div>
       </CSSTransition>
     );

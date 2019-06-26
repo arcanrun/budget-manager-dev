@@ -26,10 +26,13 @@ import {
   STATISTICS_REQUEST,
   CALC_BUDGET_FAILURE,
   CALC_BUDGET_REQUEST,
-  CALC_BUDGET_SUCCESS
+  CALC_BUDGET_SUCCESS,
+  SIGNUP_STOP_GUIDE,
+  SIGNUP_SUCCESS
 } from "../constants";
 
 type UserState = {
+  is_first_time: boolean,
   vk_id: ?number,
   avatar: ?string,
   name: ?string,
@@ -89,8 +92,9 @@ type UserState = {
 };
 
 export const initialState: UserState = {
-  vk_id: 65122543,
-  // vk_id: undefined,
+  is_first_time: false,
+  // vk_id: 65122543,
+  vk_id: undefined,
   avatar: undefined,
   name: undefined,
   sure_name: undefined,
@@ -156,6 +160,8 @@ export const initialState: UserState = {
 
 export function user(state: UserState = initialState, action: Object) {
   switch (action.type) {
+    case SIGNUP_STOP_GUIDE:
+      return { ...state, is_first_time: false };
     case CALC_BUDGET_REQUEST:
     case ADD_BUDGET_REQUEST:
       return {
@@ -333,16 +339,25 @@ export function user(state: UserState = initialState, action: Object) {
         error_message: action.error.message
       };
 
-    case "SIGNUP_SUCCESS":
-    case LOGIN_SUCCESS:
-      console.log("======>", action.payload);
+    case SIGNUP_SUCCESS:
       return {
         ...state,
         isFetching: false,
         vk_id: action.payload.vk_id,
         name: action.payload.name,
         sure_name: action.payload.sure_name,
-        avatar: action.payload.avatar
+        avatar: action.payload.avatar,
+        is_first_time: true
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        vk_id: action.payload.vk_id,
+        name: action.payload.name,
+        sure_name: action.payload.sure_name,
+        avatar: action.payload.avatar,
+        is_first_time: false
       };
 
     case PROFILE_OPERATION_SUCCESS:

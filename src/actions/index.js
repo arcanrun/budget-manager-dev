@@ -7,7 +7,7 @@ import { calcTempCosts } from "./calcActions";
 import { getAllCosts } from "./getAllCostsActions";
 import { getHistory } from "./getHistoryActions";
 import { logIn } from "./loginActions";
-import { signUp } from "./signUpActions";
+import { signUp, stopGuide } from "./signUpActions";
 import { makeProfileOperation } from "./profileOperationsAction";
 import { getStatistics } from "./staisticsActions";
 import { calcBudget } from "./calcBudgetActions";
@@ -25,5 +25,6 @@ export {
   makeProfileOperation,
   getStatistics,
   signUp,
-  calcBudget
+  calcBudget,
+  stopGuide
 };
