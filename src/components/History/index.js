@@ -78,19 +78,23 @@ class History extends React.Component<PROPS, STATE> {
 
           <Overlay isTransparent={true} isFetching={isFetching} />
           <CSSTransition in={this.state.in} classNames={"page"} timeout={500}>
-            <div className={styleHistory.container}>
+            <div className={[styleHistory.container, "scrollArea"].join(" ")}>
               {history.map((item, i) => {
                 const day = Object.keys(item)[0];
-
                 return (
-                  <div key={i} className={styleHistory.oneDay}>
+                  <div
+                    key={i}
+                    className={[styleHistory.oneDay, "boundry"].join(" ")}
+                  >
                     <Sticky
-                      boundaryElement={styleHistory.oneDay}
+                      boundaryElement={".boundry"}
                       topOffset={-57}
                       stickyStyle={{
                         marginTop: "57px",
                         zIndex: 4
                       }}
+                      style={{ position: "relative" }}
+                      hideOnBoundaryHit={false}
                     >
                       <div className={styleHistory.day}>{day}</div>
                     </Sticky>
