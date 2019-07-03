@@ -64,10 +64,11 @@ class History extends React.Component<PROPS, STATE> {
           <Overlay isTransparent={true} isFetching={isFetching} />
           <CSSTransition in={this.state.in} timeout={500} classNames={"page"}>
             <div className={styleHistory.empty}>
+              <Icon icon="clock" color="#909090" />
+
               <div className={styleHistory.emptyTitle}>
                 В истории пока ничего нет
               </div>
-              <Icon icon="clock" color="#909090" />
             </div>
           </CSSTransition>
         </>
