@@ -67,7 +67,7 @@ class Manager extends React.Component<PROPS, STATE> {
           target: ".third-step",
           title: "Общий бюджет",
           content:
-            "Управляйте сбережениями в зависимотси от доходов или расходов.",
+            "Управляйте сбережениями в зависимости от доходов или расходов.",
           disableBeacon: true,
           placement: "auto",
           isFixed: true
