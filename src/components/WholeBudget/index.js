@@ -31,12 +31,16 @@ const WholeBudget = ({ wholeBudget, onClickToggleModal, typeModal }: PROPS) => (
         </div>
       </>
     ) : (
-      <span
-        className={style.enter}
-        onClick={() => onClickToggleModal(typeModal)}
-      >
-        Введите ваш текущий бюджет
-      </span>
+      <div className={style.enter}>
+        <div className={style.enterItem}>
+          Для начала введите бюджет, которым обладаете на данный момент.
+        </div>
+        <Button
+          btnColor="red"
+          onClick={() => onClickToggleModal(typeModal)}
+          text="Введите ваш текущий бюджет"
+        />
+      </div>
     )}
   </div>
 );

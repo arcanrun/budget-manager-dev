@@ -92,13 +92,13 @@ type UserState = {
 };
 
 export const initialState: UserState = {
-  is_first_time: false,
+  is_first_time: true,
   // vk_id: 65122543,
   vk_id: undefined,
   avatar: undefined,
   name: undefined,
   sure_name: undefined,
-  isFetching: false,
+  isFetching: true,
   error: false,
   error_message: false,
   register_date: undefined,

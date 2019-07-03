@@ -210,6 +210,9 @@ class Manager extends React.Component<PROPS, STATE> {
         />
       </Card>
     ) : (
+      ""
+    );
+    const isFirstTimeWholeBudget = (
       <Card
         headerTitle={"общий бюджет"}
         icon={"money-bag"}
@@ -314,25 +317,26 @@ class Manager extends React.Component<PROPS, STATE> {
     );
 
     return (
-      <CSSTransition
-        in={this.state.in}
-        timeout={500}
-        classNames={"page"}
-        unmountOnExit
-      >
-        <div className={style.manager}>
-          <Overlay isTransparent={true} isFetching={isFetching_calc} />
+      <>
+        <Overlay isTransparent={true} isFetching={isFetching_calc} />
 
-          {wholeBudgetCard}
-
-          {budget ? calendarCard : ""}
-          {budget && payday ? budgetCardCommon : ""}
-          {budget && payday ? budgetCardFun : ""}
-          {budget && payday ? budgetCardInvest : ""}
-          {!modalIsVisible || modalOverlay}
-          {is_first_time ? (budget && payday ? guide : "") : ""}
-        </div>
-      </CSSTransition>
+        <CSSTransition
+          in={this.state.in}
+          timeout={500}
+          classNames={"page"}
+          unmountOnExit
+        >
+          <div className={style.manager}>
+            {is_first_time ? isFirstTimeWholeBudget : wholeBudgetCard}
+            {budget ? calendarCard : ""}
+            {budget && payday ? budgetCardCommon : ""}
+            {budget && payday ? budgetCardFun : ""}
+            {budget && payday ? budgetCardInvest : ""}
+            {!modalIsVisible || modalOverlay}
+            {is_first_time ? (budget && payday ? guide : "") : ""}
+          </div>
+        </CSSTransition>
+      </>
     );
   }
 }
