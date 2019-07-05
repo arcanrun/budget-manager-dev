@@ -50,7 +50,7 @@ class Manager extends React.Component<PROPS, STATE> {
         {
           target: ".first-step",
           title: "Общий бюджет",
-          content: "Здесь отображаются все ваши накопления",
+          content: "Здесь отображаются все ваши накопления.",
           disableBeacon: true,
           placement: "auto",
           isFixed: true
@@ -194,7 +194,6 @@ class Manager extends React.Component<PROPS, STATE> {
         onClick={() => onClickToggleModal("budget")}
       >
         <WholeBudget
-          isFirstTime={is_first_time}
           onClickToggleModal={onClickToggleModal}
           typeModal={"budget"}
           wholeBudget={budget}
@@ -202,20 +201,6 @@ class Manager extends React.Component<PROPS, STATE> {
         />
       </Card>
     );
-    // const isFirstTimeWholeBudget = (
-    //   <Card
-    //     isFirstTime={is_first_time}
-    //     headerTitle={"общий бюджет"}
-    //     icon={"money-bag"}
-    //     onClick={() => onClickToggleModal("budget")}
-    //   >
-    //     <WholeBudget
-    //       onClickToggleModal={onClickToggleModal}
-    //       typeModal={"budget"}
-    //       wholeBudget={budget}
-    //     />
-    //   </Card>
-    // );
 
     const calendarCard = (
       <Card headerTitle={"календарь"} icon={"calendar-number"}>
@@ -319,18 +304,13 @@ class Manager extends React.Component<PROPS, STATE> {
           unmountOnExit
         >
           <div className={style.manager}>
-            {/** is_first_time
-              ? isFirstTimeWholeBudget
-              : daysToPayday
-              ? wholeBudgetCard
-              : ""*/}
             {wholeBudgetCard}
             {budget ? calendarCard : ""}
             {budget && payday ? budgetCardCommon : ""}
             {budget && payday ? budgetCardFun : ""}
             {budget && payday ? budgetCardInvest : ""}
             {!modalIsVisible || modalOverlay}
-            {is_first_time ? (budget && payday ? guide : "") : ""}
+            {!is_first_time ? (budget && payday ? guide : "") : ""}
           </div>
         </CSSTransition>
       </>

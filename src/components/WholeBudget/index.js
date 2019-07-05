@@ -3,20 +3,18 @@
 import React from "react";
 
 import style from "./WholeBudget.module.css";
-import { Button, ButtonGroup, RoundButton } from "../index";
+import { Button, RoundButton } from "../index";
 
 type PROPS = {
   onClickToggleModal: Function,
   typeModal: string,
   wholeBudget: ?number,
-  isFirstTime: boolean,
   daysToPayday: ?string
 };
 const WholeBudget = ({
   wholeBudget,
   onClickToggleModal,
   typeModal,
-  isFirstTime,
   daysToPayday
 }: PROPS) => {
   const footer = daysToPayday ? (

@@ -121,15 +121,18 @@ class Profile extends React.Component<PROPS, STATE> {
         {!vk_id ? (
           <Redirect to="/" />
         ) : (
-          <CSSTransition in={this.state.in} timeout={500} classNames={"page"}>
-            <div className={style.profile}>
-              <Overlay isTransparent={true} isFetching={isFetching} />
-              {commonSettingsCard}
-              {statisticCard}
-              {settingsCard}
-              {!modalIsVisible || modalOverlay}
-            </div>
-          </CSSTransition>
+          <>
+            <Overlay isTransparent={true} isFetching={isFetching} />
+
+            <CSSTransition in={this.state.in} timeout={300} classNames={"page"}>
+              <div className={style.profile}>
+                {commonSettingsCard}
+                {statisticCard}
+                {settingsCard}
+                {!modalIsVisible || modalOverlay}
+              </div>
+            </CSSTransition>
+          </>
         )}
       </>
     );

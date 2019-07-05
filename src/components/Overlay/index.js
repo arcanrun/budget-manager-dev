@@ -35,7 +35,7 @@ class Overlay extends React.Component<PROPS, STATE> {
     return isTransparent ? (
       <CSSTransition
         in={this.props.isFetching}
-        timeout={2000}
+        timeout={100}
         classNames={"overlay"}
         mountOnEnter
         unmountOnExit
@@ -47,7 +47,7 @@ class Overlay extends React.Component<PROPS, STATE> {
     ) : (
       <CSSTransition
         in={this.props.isFetching}
-        timeout={2000}
+        timeout={100}
         classNames={"overlay"}
         mountOnEnter
         unmountOnExit
