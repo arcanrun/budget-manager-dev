@@ -42,6 +42,16 @@ class Profile extends React.Component<PROPS, STATE> {
     this.props.getHistory(vk_id);
     this.toggleAnimation();
   }
+  componentDidUpdate(prevProps: Object, prevState: Object) {
+    const modalIsVisible = this.props.modalIsVisible;
+    const body = document.getElementsByTagName("body")[0];
+
+    if (prevProps.modalIsVisible !== modalIsVisible) {
+      modalIsVisible
+        ? (body.style.overflow = "hidden")
+        : (body.style.overflow = "auto");
+    }
+  }
 
   toggleAnimation = () => {
     this.setState({ in: !this.state.in });

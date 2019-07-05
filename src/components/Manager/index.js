@@ -310,7 +310,7 @@ class Manager extends React.Component<PROPS, STATE> {
             {budget && payday ? budgetCardFun : ""}
             {budget && payday ? budgetCardInvest : ""}
             {!modalIsVisible || modalOverlay}
-            {!is_first_time ? (budget && payday ? guide : "") : ""}
+            {is_first_time ? (budget && payday ? guide : "") : ""}
           </div>
         </CSSTransition>
       </>
