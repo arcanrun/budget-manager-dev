@@ -56,6 +56,11 @@ const LABELS = {
 };
 
 class Calendar extends React.Component<PROPS, {}> {
+  handleToDayBtn = () => {
+    const { handleDayClick } = this.props;
+    const toDay = new Date();
+    handleDayClick(toDay);
+  };
   render() {
     const {
       handleDayClick,
@@ -105,6 +110,7 @@ class Calendar extends React.Component<PROPS, {}> {
           labels={LABELS["ru"]}
           showOutsideDays
           todayButton={"сегодня"}
+          onTodayButtonClick={this.handleToDayBtn}
           onDayClick={handleDayClick}
           selectedDays={stringToDate(payday)}
         />

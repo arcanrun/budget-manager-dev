@@ -134,24 +134,13 @@ class Manager extends React.Component<PROPS, STATE> {
     }
   }
 
-  handleDayClick = (day: any, { selected }: { selected: boolean }) => {
+  handleDayClick = (day: any) => {
     let toDay = new Date();
-    const toDayDate = toDay.toLocaleDateString();
-    const toDayTempPayDayDate = day.toLocaleDateString();
-    toDay = Date.parse(toDay);
-    const toDayMs = Date.parse(toDay);
-    const tempPayDay = Date.parse(day);
-    const tempPayDayMs = Date.parse(tempPayDay);
-    console.log(
-      "%c DayClick:  ",
-      "background: aqua; color: white",
-      tempPayDay,
-      toDay,
-      tempPayDay > toDay
-    );
-    if (tempPayDay > toDay && toDayDate !== toDayTempPayDayDate) {
+    toDay = Date.parse(toDay.toDateString());
+    const selectedDay = Date.parse(day.toDateString());
+    if (selectedDay >= toDay) {
       this.setState({
-        tempPayDay: selected ? undefined : day
+        tempPayDay: day
       });
     }
   };
@@ -194,37 +183,40 @@ class Manager extends React.Component<PROPS, STATE> {
       calcBudget,
       is_first_time
     } = this.props;
+    console.log("--------->", daysToPayday);
     const { tempPayDay, steps } = this.state;
 
-    const wholeBudgetCard = daysToPayday ? (
+    const wholeBudgetCard = (
       <Card
         headerTitle={"общий бюджет"}
         icon={"money-bag"}
-        rightIcon={"pencil"}
+        rightIcon={budget ? "pencil" : ""}
         onClick={() => onClickToggleModal("budget")}
       >
         <WholeBudget
+          isFirstTime={is_first_time}
           onClickToggleModal={onClickToggleModal}
           typeModal={"budget"}
           wholeBudget={budget}
-        />
-      </Card>
-    ) : (
-      ""
-    );
-    const isFirstTimeWholeBudget = (
-      <Card
-        headerTitle={"общий бюджет"}
-        icon={"money-bag"}
-        onClick={() => onClickToggleModal("budget")}
-      >
-        <WholeBudget
-          onClickToggleModal={onClickToggleModal}
-          typeModal={"budget"}
-          wholeBudget={budget}
+          daysToPayday={daysToPayday}
         />
       </Card>
     );
+    // const isFirstTimeWholeBudget = (
+    //   <Card
+    //     isFirstTime={is_first_time}
+    //     headerTitle={"общий бюджет"}
+    //     icon={"money-bag"}
+    //     onClick={() => onClickToggleModal("budget")}
+    //   >
+    //     <WholeBudget
+    //       onClickToggleModal={onClickToggleModal}
+    //       typeModal={"budget"}
+    //       wholeBudget={budget}
+    //     />
+    //   </Card>
+    // );
+
     const calendarCard = (
       <Card headerTitle={"календарь"} icon={"calendar-number"}>
         <Calendar
@@ -327,7 +319,12 @@ class Manager extends React.Component<PROPS, STATE> {
           unmountOnExit
         >
           <div className={style.manager}>
-            {is_first_time ? isFirstTimeWholeBudget : wholeBudgetCard}
+            {/** is_first_time
+              ? isFirstTimeWholeBudget
+              : daysToPayday
+              ? wholeBudgetCard
+              : ""*/}
+            {wholeBudgetCard}
             {budget ? calendarCard : ""}
             {budget && payday ? budgetCardCommon : ""}
             {budget && payday ? budgetCardFun : ""}

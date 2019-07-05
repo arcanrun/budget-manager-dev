@@ -13,19 +13,20 @@
   padding: 0px 0px 30px 0px;
 }
 .budgetBlock {
-  padding-top: 40px;
+  padding: 40px 0 0 0;
+
   text-align: center;
 }
 .budget {
   font-weight: 200;
   font-size: 35px;
+  margin: 0 0 40px 0;
 }
 .volute {
   font-weight: 300;
   padding-left: 10px;
 }
 .footer {
-  margin-top: 40px;
   display: flex;
   flex-flow: row;
   justify-content: space-between;

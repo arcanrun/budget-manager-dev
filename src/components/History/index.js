@@ -91,10 +91,12 @@ class History extends React.Component<PROPS, STATE> {
                       topOffset={-57}
                       stickyStyle={{
                         marginTop: "57px",
-                        zIndex: 4
+                        zIndex: 4,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "272px"
                       }}
-                      style={{ position: "relative" }}
-                      hideOnBoundaryHit={false}
                     >
                       <div className={styleHistory.day}>{day}</div>
                     </Sticky>

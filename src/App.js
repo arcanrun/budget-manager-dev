@@ -25,7 +25,7 @@ class App extends React.Component<PROPS, {}> {
     const { vk_id, isFetching } = this.props;
     return (
       <>
-        <Overlay isFetching={isFetching} />
+        <Overlay isFetching={false} />
 
         <View activePanel="main_panel" id="main_view">
           <Panel id="main_panel">
