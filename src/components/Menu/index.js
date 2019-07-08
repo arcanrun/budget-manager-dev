@@ -20,6 +20,7 @@ export const Menu = ({ avatar, onClick, menuIsVisible }: Props) => (
       }}
       onClick={onClick}
     />
+
     <div className="menu__user-block">
       <img src={avatar} alt="avatar" />
       <h2 className="menu__user-name">Павел дуров</h2>

@@ -70,7 +70,7 @@ class Calendar extends React.Component<PROPS, {}> {
       daysToPayday
     } = this.props;
 
-    const paydayEmptyTitle = <div>Выбирите дату получения зарплаты</div>;
+    const paydayEmptyTitle = <div>Выберите дату получения зарплаты</div>;
     const counterBlock = (
       <div className={style.counterBlock}>
         <div className={style.counter}>{daysToPayday}</div>

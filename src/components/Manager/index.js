@@ -287,7 +287,8 @@ class Manager extends React.Component<PROPS, STATE> {
         styles={{
           options: {
             primaryColor: "#5281b9",
-            zIndex: 1
+            zIndex: 1,
+            outline: 0
           }
         }}
       />
