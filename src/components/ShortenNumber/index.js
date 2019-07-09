@@ -31,6 +31,7 @@ function cutNumber(number) {
     res = res.slice(0, res.indexOf("."));
     return `${res}...`;
   }
+
   return notFullNumber + "...";
 }
 
@@ -55,14 +56,14 @@ export const ShortenNumber = ({
     title: true
   };
   if (alternative) {
-    if (+children > 1e10) {
+    if (+children > 1e10 || +children < -1e10) {
       return cutNumber(children);
     } else {
       return children;
     }
   }
 
-  if (+children > 1e18 && easterEgg) {
+  if ((+children > 1e18 || +children < -1e18) && easterEgg) {
     const randNumber = getRandomInt(1, 4);
     return <Icon icon={`rich_${randNumber}`} classes={easterEggSize} />;
   } else if (+children > 1e18 && !easterEgg) {
