@@ -25,15 +25,20 @@ import Transfer from "../../static/transfer.svg";
 import Plus from "../../static/plus.svg";
 import Minus from "../../static/minus.svg";
 import Vector from "../../static/vector.svg";
+import Rich_1 from "../../static/rich_1.svg";
+import Rich_2 from "../../static/rich_2.svg";
+import Rich_3 from "../../static/rich_3.svg";
+import Rich_4 from "../../static/rich_4.svg";
 
 type PROPS = {|
   icon: string,
   color?: string,
   width?: string,
   height?: string,
-  fontSize?: string
+  fontSize?: string,
+  classes?: string
 |};
-const Icon = ({ icon, color, width, height, fontSize }: PROPS) => {
+const Icon = ({ icon, color, width, height, fontSize, classes }: PROPS) => {
   switch (icon) {
     case "money-bag":
       return (
@@ -246,6 +251,46 @@ const Icon = ({ icon, color, width, height, fontSize }: PROPS) => {
           src={Vector}
           wrapper="span"
           svgClassName="vector"
+          svgStyle={{ width: width, height: height, fill: color }}
+        />
+      );
+    case "rich_1":
+      return (
+        <ReactSVG
+          className={classes ? classes : "rich"}
+          src={Rich_1}
+          wrapper="span"
+          svgClassName={classes ? classes : "rich"}
+          svgStyle={{ width: width, height: height, fill: color }}
+        />
+      );
+    case "rich_2":
+      return (
+        <ReactSVG
+          className={classes ? classes : "rich"}
+          src={Rich_2}
+          wrapper="span"
+          svgClassName={classes ? classes : "rich"}
+          svgStyle={{ width: width, height: height, fill: color }}
+        />
+      );
+    case "rich_3":
+      return (
+        <ReactSVG
+          className={classes ? classes : "rich"}
+          src={Rich_3}
+          wrapper="span"
+          svgClassName={classes ? classes : "rich"}
+          svgStyle={{ width: width, height: height, fill: color }}
+        />
+      );
+    case "rich_4":
+      return (
+        <ReactSVG
+          className={classes ? classes : "rich"}
+          src={Rich_4}
+          wrapper="span"
+          svgClassName={classes ? classes : "rich"}
           svgStyle={{ width: width, height: height, fill: color }}
         />
       );

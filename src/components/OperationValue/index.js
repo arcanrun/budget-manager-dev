@@ -2,6 +2,7 @@
 import React from "react";
 
 import style from "./OperationValue.module.css";
+import { ShortenNumber } from "../index";
 
 type PROPS = {
   children: string,
@@ -17,7 +18,7 @@ const OperationValue = ({ children, sign }: PROPS) => {
           : [style.value, style.valueMinus].join(" ")
       }
     >
-      {children}
+      <ShortenNumber minValToShort={1000000}>{children}</ShortenNumber>
     </div>
   );
 };

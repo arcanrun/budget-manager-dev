@@ -3,7 +3,7 @@
 import React from "react";
 
 import style from "./WholeBudget.module.css";
-import { Button, RoundButton } from "../index";
+import { Button, RoundButton, ShortenNumber } from "../index";
 
 type PROPS = {
   onClickToggleModal: Function,
@@ -36,8 +36,7 @@ const WholeBudget = ({
       {wholeBudget ? (
         <>
           <div className={[style.budget, "first-step"].join(" ")}>
-            {wholeBudget}
-            <b className={style.volute}>₽</b>
+            <ShortenNumber easterEggSize={"max"}>{wholeBudget}</ShortenNumber>
           </div>
           {footer}
         </>

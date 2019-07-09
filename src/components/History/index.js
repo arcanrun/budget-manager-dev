@@ -27,8 +27,6 @@ type STATE = {
   in: boolean
 };
 
-function SortByDate(a, b) {}
-
 class History extends React.Component<PROPS, STATE> {
   state = {
     in: false
@@ -36,7 +34,6 @@ class History extends React.Component<PROPS, STATE> {
 
   componentDidMount() {
     const ins = this.state.in;
-    console.log("---->", ins);
     const { vk_id } = this.props;
     this.props.getHistory(vk_id);
     this.toggleAnimation();

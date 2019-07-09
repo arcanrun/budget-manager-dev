@@ -14,7 +14,6 @@ type PROPS = {
 class PartBudget extends React.Component<PROPS, {}> {
   render() {
     const { costs, onClickToggleModal, typeModal, budget } = this.props;
-    console.log(costs.common);
     let title = "";
     let costsValue = "";
     let temp = "";

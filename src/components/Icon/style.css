@@ -14,6 +14,16 @@
   height: 25px;
   transition: 0.2s ease;
 }
+.rich {
+  display: flex;
+  width: 25px;
+  height: 25px;
+  transition: 0.2s ease;
+}
+.max {
+  width: 80px;
+  height: 80px;
+}
 .plus,
 .minus {
   width: 15px;
