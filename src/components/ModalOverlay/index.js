@@ -120,7 +120,6 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     }
   };
   handleOK = () => {
-    console.log("------->", this.state.transferTo);
     const { vk_id } = this.props;
     const { inputValue, isSetTransfer } = this.state;
     const [typeModal, operation] = this.props.typeModal.split("_");

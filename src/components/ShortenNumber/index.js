@@ -4,11 +4,13 @@ import NumericLabel from "react-pretty-numbers";
 
 import style from "./ShortenNumber.css";
 import { Icon } from "../index";
+import { cutNumber } from "./helpers";
 
 type PROPS = {
   children: number,
   easterEgg: boolean,
   alternative: boolean,
+  curency?: boolean,
   easterEggSize?: string,
   minValToShort?: number
 };
@@ -18,29 +20,14 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-function cutNumber(number) {
-  let notFullNumber = "" + number;
-  notFullNumber = notFullNumber.slice(0, 7);
-  if (notFullNumber.includes(".")) {
-    const dotPositon = notFullNumber.indexOf(".");
-    const lengthStr = notFullNumber.length;
-    let factor = `1e${lengthStr - dotPositon - 1}`;
-    factor = +factor;
-    let res = +notFullNumber * factor;
-    res = "" + res;
-    res = res.slice(0, res.indexOf("."));
-    return `${res}...`;
-  }
-
-  return notFullNumber + "...";
-}
 
 export const ShortenNumber = ({
   children,
   easterEgg,
   alternative,
   easterEggSize,
-  minValToShort
+  minValToShort,
+  curency
 }: PROPS) => {
   const params = {
     justification: "L",
@@ -57,9 +44,11 @@ export const ShortenNumber = ({
   };
   if (alternative) {
     if (+children > 1e10 || +children < -1e10) {
-      return cutNumber(children);
+      const res = curency ? cutNumber(children) + "₽" : cutNumber(children);
+      return res;
     } else {
-      return children;
+      const res = curency ? children + "₽" : children;
+      return res;
     }
   }
 
@@ -78,5 +67,6 @@ export const ShortenNumber = ({
 };
 ShortenNumber.defaultProps = {
   easterEgg: true,
-  alternative: false
+  alternative: false,
+  curency: false
 };

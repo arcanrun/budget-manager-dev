@@ -3,6 +3,7 @@ import React from "react";
 
 import style from "./Tab.module.css";
 import { Icon, LineChart } from "../index";
+import { ShortenNumber } from "../index";
 
 type PROPS = {
   costs: Object,
@@ -48,7 +49,9 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  {income.total}₽
+                  <ShortenNumber alternative={true} curency={true}>
+                    {income.total}
+                  </ShortenNumber>
                 </div>
               </div>
               <div className={style.tabRow}>
@@ -59,7 +62,9 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  {income.common}₽
+                  <ShortenNumber alternative={true} curency={true}>
+                    {income.common}
+                  </ShortenNumber>
                 </div>
               </div>
               <div className={style.tabRow}>
@@ -70,7 +75,9 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  {income.fun}₽
+                  <ShortenNumber alternative={true} curency={true}>
+                    {income.fun}
+                  </ShortenNumber>
                 </div>
               </div>
               <div className={style.tabRow}>
@@ -81,7 +88,9 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  {income.invest}₽
+                  <ShortenNumber alternative={true} curency={true}>
+                    {income.invest}
+                  </ShortenNumber>
                 </div>
               </div>
             </div>
@@ -95,7 +104,9 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  {costs.total}₽
+                  <ShortenNumber alternative={true} curency={true}>
+                    {costs.total}
+                  </ShortenNumber>
                 </div>
               </div>
               <div className={style.tabRow}>
@@ -106,7 +117,9 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  {costs.common}₽
+                  <ShortenNumber alternative={true} curency={true}>
+                    {costs.common}
+                  </ShortenNumber>
                 </div>
               </div>
               <div className={style.tabRow}>
@@ -117,7 +130,9 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  {costs.fun}₽
+                  <ShortenNumber alternative={true} curency={true}>
+                    {costs.fun}
+                  </ShortenNumber>
                 </div>
               </div>
               <div className={style.tabRow}>
@@ -128,7 +143,9 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  {costs.invest}₽
+                  <ShortenNumber alternative={true} curency={true}>
+                    {costs.invest}
+                  </ShortenNumber>
                 </div>
               </div>
             </div>
