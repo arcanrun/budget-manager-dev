@@ -4,6 +4,7 @@ import React from "react";
 import style from "./LineChart.module.css";
 import ChartistGraph from "react-chartist";
 import "./chartist.css";
+import { cutNumber } from "../ShortenNumber/helpers";
 
 type PROPS = {
   switcher: boolean,
@@ -66,10 +67,60 @@ export const LineChart = ({ switcher, history }: PROPS) => {
   dataIncome.series.push(tempSeriesIncome);
   dataCosts.series.push(tempSeriesCosts);
 
+  let offset = 25;
+
+  if (switcher) {
+    dataIncome.series[0].forEach(el => {
+      const toStr = "" + el;
+      console.log("--<", offset, toStr.length);
+
+      if (toStr.length === 4) {
+        const increment = 30;
+        if (offset < increment) offset = increment;
+      } else if (toStr.length === 5) {
+        const increment = 40;
+        if (offset < increment) offset = increment;
+      } else if (toStr.length === 6) {
+        const increment = 50;
+        if (offset < increment) offset = increment;
+      } else if (toStr.length >= 7) {
+        const increment = 57;
+        if (offset < increment) offset = increment;
+      }
+    });
+  } else {
+    dataCosts.series[0].forEach(el => {
+      const toStr = "" + el;
+      if (toStr.length === 4) {
+        const increment = 30;
+        if (offset < increment) offset = increment;
+      } else if (toStr.length === 5) {
+        const increment = 40;
+        if (offset < increment) offset = increment;
+      } else if (toStr.length === 6) {
+        const increment = 50;
+        if (offset < increment) offset = increment;
+      } else if (toStr.length >= 7) {
+        const increment = 57;
+        if (offset < increment) offset = increment;
+      }
+    });
+  }
+  console.log("end---->", offset);
+
   var options = {
     low: 0,
-
     showArea: true,
+    axisY: {
+      labelInterpolationFnc: function(value) {
+        let cutted = value;
+        if (value > 9999999) {
+          cutted = cutNumber(value);
+        }
+        return cutted;
+      },
+      offset: offset
+    },
     classNames: {
       chart: "ct-chart-line",
       label: "ct-label",
@@ -92,6 +143,7 @@ export const LineChart = ({ switcher, history }: PROPS) => {
     <div className={style.contianer}>
       {" "}
       <ChartistGraph
+        // data={data}
         data={switcher ? dataIncome : dataCosts}
         options={options}
         type={type}

@@ -4,7 +4,7 @@ import NumericLabel from "react-pretty-numbers";
 
 import style from "./ShortenNumber.css";
 import { Icon } from "../index";
-import { cutNumber } from "./helpers";
+import { cutNumber, toFixedCustom } from "./helpers";
 
 type PROPS = {
   children: number,
@@ -43,7 +43,7 @@ export const ShortenNumber = ({
     title: true
   };
   if (alternative) {
-    if (+children > 1e10 || +children < -1e10) {
+    if (+children > 1e7 || +children < -1e7) {
       const res = curency ? cutNumber(children) + "₽" : cutNumber(children);
       return res;
     } else {

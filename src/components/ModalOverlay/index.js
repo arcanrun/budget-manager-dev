@@ -69,7 +69,6 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     const common = this.props.calc.common.value;
     const fun = this.props.calc.fun.value;
     const invest = this.props.calc.invest.value;
-
     switch (typeModal) {
       case "budget":
       case "common_minus":
@@ -80,10 +79,13 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
       case "invest_plus":
       case "budget_plus":
       case "budget_minus":
-        if (val && !isNaN(val)) {
-          return true;
+        if (+val >= 999e9) {
+          console.log("too big number");
+          return false;
         } else if (isNaN(val)) {
           return false;
+        } else if (val && !isNaN(val)) {
+          return true;
         } else {
           return false;
         }
@@ -207,7 +209,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
 
   handleInput = (e: any, typeModal: string) => {
     const input = e.target;
-    console.log("---s", this.validate(typeModal));
+    console.log(input.value.includes("-"), input.value);
     this.setState({ inputValue: input.value }, () => {
       if (this.validate(typeModal)) {
         this.setState({ isErrorValidation: false });

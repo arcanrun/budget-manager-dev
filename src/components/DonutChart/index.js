@@ -3,6 +3,7 @@ import React from "react";
 
 import style from "./DonutChart.module.css";
 import { ShortenNumber } from "../index";
+import { cutNumber } from "../ShortenNumber/helpers";
 
 type PROPS = {
   color: string,
@@ -63,7 +64,9 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
             transform="rotate(90 17.5 17.5)"
             textAnchor="middle"
           >
-            <ShortenNumber alternative={true}>{cost}</ShortenNumber>₽
+            <ShortenNumber alternative={true} curency>
+              {cost}
+            </ShortenNumber>
           </text>
 
           <text
@@ -83,8 +86,13 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
             transform="rotate(90 17.5 17.5)"
             textAnchor="middle"
           >
-            <ShortenNumber alternative={true}>{temp}</ShortenNumber>/{" "}
-            <ShortenNumber alternative={true}>{maxToday}</ShortenNumber>₽
+            <ShortenNumber alternative={true} curency>
+              {temp}
+            </ShortenNumber>
+            /{" "}
+            <ShortenNumber alternative={true} curency>
+              {maxToday}
+            </ShortenNumber>
           </text>
         </g>
       </svg>

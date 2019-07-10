@@ -1,16 +1,25 @@
-export function cutNumber(number) {
-  let notFullNumber = "" + number;
-  notFullNumber = notFullNumber.slice(0, 7);
-  if (notFullNumber.includes(".")) {
-    const dotPositon = notFullNumber.indexOf(".");
-    const lengthStr = notFullNumber.length;
-    let factor = `1e${lengthStr - dotPositon - 1}`;
-    factor = +factor;
-    let res = +notFullNumber * factor;
-    res = "" + res;
-    res = res.slice(0, res.indexOf("."));
-    return `${res}...`;
+export function toFixedCustom(x) {
+  if (Math.abs(x) < 1.0) {
+    let e = parseInt(x.toString().split("e-")[1]);
+    if (e) {
+      x *= Math.pow(10, e - 1);
+      x = "0." + new Array(e).join("0") + x.toString().substring(2);
+    }
+  } else {
+    let e = parseInt(x.toString().split("+")[1]);
+    if (e > 20) {
+      e -= 20;
+      x /= Math.pow(10, e);
+      x += new Array(e + 1).join("0");
+    }
   }
+  return x;
+}
 
-  return notFullNumber + "...";
+export function cutNumber(number, from = 0, to = 7) {
+  let fullNumberStr = toFixedCustom(number);
+  fullNumberStr += "";
+  let cutted = fullNumberStr.slice(from, to);
+
+  return cutted + "...";
 }

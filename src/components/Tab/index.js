@@ -19,7 +19,6 @@ export class Tab extends React.Component<PROPS, STATE> {
     switcher: true
   };
   handleSwtich = () => {
-    console.log("toggling swithcet");
     this.setState({ switcher: !this.state.switcher });
   };
   render() {

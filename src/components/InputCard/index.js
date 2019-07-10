@@ -7,7 +7,7 @@ import style from "./InputCard.module.css";
 import "./animations.css";
 import "./animate.css";
 import { Button, ButtonGroup } from "../index";
-import { cutNumber } from "../ShortenNumber/helpers";
+import { cutNumber, toFixedCustom } from "../ShortenNumber/helpers";
 
 type PROPS = {
   onClick: Function,
@@ -95,15 +95,15 @@ class InputCard extends React.Component<PROPS, STATE> {
     let placeHolder = "0000.00";
     switch (transferingCategory) {
       case "common":
-        placeHolder =
-          +common > 1e10 || +common < -1e10 ? cutNumber(common) : common;
+        placeHolder = toFixedCustom(common);
+
         break;
       case "fun":
-        placeHolder = +fun > 1e10 || +fun < -1e10 ? cutNumber(fun) : fun;
+        placeHolder = toFixedCustom(fun);
         break;
       case "invest":
-        placeHolder =
-          +invest > 1e10 || +invest < -1e10 ? cutNumber(invest) : invest;
+        placeHolder = toFixedCustom(invest);
+
         break;
       default:
         break;
