@@ -1,5 +1,5 @@
 //@flow
-import { TOGGLE_MODAL } from "./menuTypes";
+import { TOGGLE_MODAL, HIDE_MODAL } from "./modalTypes";
 import {
   ADD_BUDGET_FAILURE,
   ADD_BUDGET_SUCCESS,
@@ -96,5 +96,6 @@ export {
   CALC_BUDGET_FAILURE,
   CALC_BUDGET_REQUEST,
   CALC_BUDGET_SUCCESS,
-  SIGNUP_STOP_GUIDE
+  SIGNUP_STOP_GUIDE,
+  HIDE_MODAL
 };

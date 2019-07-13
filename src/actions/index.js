@@ -1,7 +1,7 @@
 //@flow
 import { getWholeBudget } from "./getBudgetActions";
 import { addWholeBudget } from "./addBudgetActions";
-import { toggleModal } from "./modalActions";
+import { toggleModal, hideModal } from "./modalActions";
 import { addPayDay, getPayDay } from "./paydayActions";
 import { calcTempCosts } from "./calcActions";
 import { getAllCosts } from "./getAllCostsActions";
@@ -26,5 +26,6 @@ export {
   getStatistics,
   signUp,
   calcBudget,
-  stopGuide
+  stopGuide,
+  hideModal
 };

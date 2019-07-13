@@ -1,5 +1,5 @@
 //@flow
-import { TOGGLE_MODAL } from "../constants";
+import { TOGGLE_MODAL, HIDE_MODAL } from "../constants";
 
 type stateType = {
   modalIsVisible: boolean,
@@ -18,6 +18,12 @@ export function modal(state: stateType = initialState, action: Object) {
         ...state,
         modalIsVisible: !state.modalIsVisible,
         typeModal: action.payload.typeModal
+      };
+    case HIDE_MODAL:
+      return {
+        ...state,
+        modalIsVisible: false,
+        typeModal: null
       };
     default:
       return state;

@@ -85,7 +85,7 @@ class Manager extends React.Component<PROPS, STATE> {
           target: ".fifth-step",
           title: "50/30/20",
           content:
-            "Приложение разделяет весь ваш бюджет на 50%(общие расходы), 30%(развлечения), 20%(инвестиции). Диаграмма показывает остаток средств по той или иной категории, а также желательную сумму средств доступную на сегодняшний день.",
+            "Приложение разделяет весь ваш бюджет на 50%(общие расходы), 30%(развлечения), 20%(инвестиции). Диаграмма показывает остаток средств по той или иной категории, а также желательную сумму средств, доступную на сегодняшний день.",
           disableBeacon: true,
           placement: "auto",
           isFixed: true
@@ -310,7 +310,7 @@ class Manager extends React.Component<PROPS, STATE> {
             {budget && payday ? budgetCardCommon : ""}
             {budget && payday ? budgetCardFun : ""}
             {budget && payday ? budgetCardInvest : ""}
-            {!modalIsVisible || modalOverlay}
+            {/*!modalIsVisible || modalOverlay*/}
             {!is_first_time ? (budget && payday ? guide : "") : ""}
           </div>
         </CSSTransition>

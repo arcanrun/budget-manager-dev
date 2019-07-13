@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import { logIn } from "../actions";
 
-import App from "../App";
+import { App } from "../App";
 
 const mapStateToProps = state => ({
   vk_id: state.user.vk_id,

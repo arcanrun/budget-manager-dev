@@ -79,7 +79,11 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
       case "invest_plus":
       case "budget_plus":
       case "budget_minus":
-        if (+val >= 999e9) {
+        if (+val < 0) {
+          return false;
+        } else if (+val === 0) {
+          return false;
+        } else if (+val >= 999e9) {
           console.log("too big number");
           return false;
         } else if (isNaN(val)) {
@@ -207,10 +211,8 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     }
   };
 
-  handleInput = (e: any, typeModal: string) => {
-    const input = e.target;
-    console.log(input.value.includes("-"), input.value);
-    this.setState({ inputValue: input.value }, () => {
+  handleInput = (inputValue: string, typeModal: string) => {
+    this.setState({ inputValue: inputValue }, () => {
       if (this.validate(typeModal)) {
         this.setState({ isErrorValidation: false });
       } else {
@@ -223,7 +225,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
     const { onClick, typeModal, calc } = this.props;
     const { isErrorValidation, transferTo } = this.state;
 
-    const budgetInputCard = (
+    const inputCard = (
       <InputCard
         isErrorValidation={isErrorValidation}
         typeModal={typeModal}
@@ -243,7 +245,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
         classNames="modal_overlay"
         unmountOnExit
       >
-        <div className="modal">{budgetInputCard}</div>
+        <div className="modal">{inputCard}</div>
       </CSSTransition>,
       ModalDiv
     );

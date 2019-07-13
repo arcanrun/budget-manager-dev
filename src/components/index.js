@@ -28,6 +28,7 @@ import { ButtonGroup } from "./ButtonGroup";
 import { RoundButton } from "./RoundButton";
 import { LineChart } from "./LineChart";
 import { ShortenNumber } from "./ShortenNumber";
+import { Modal } from "./Modal";
 
 export {
   Header,
@@ -58,5 +59,6 @@ export {
   ButtonGroup,
   RoundButton,
   LineChart,
-  ShortenNumber
+  ShortenNumber,
+  Modal
 };

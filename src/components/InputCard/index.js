@@ -13,6 +13,7 @@ type PROPS = {
   onClick: Function,
   handleInput: Function,
   handleOK: Function,
+  inputRef: Function,
   handleTransferState: Function,
   isErrorValidation: boolean,
   typeModal: string,
@@ -25,12 +26,14 @@ type STATE = {
 };
 
 class InputCard extends React.Component<PROPS, STATE> {
+  mainInput: ?Function;
   constructor(props: Object) {
     super(props);
 
     this.state = {
       in: false
     };
+    this.mainInput = React.createRef();
   }
 
   componentDidMount() {
@@ -39,7 +42,23 @@ class InputCard extends React.Component<PROPS, STATE> {
   componentWillUnmount() {
     this.toggleAnimation();
   }
-
+  isValid(val: string) {
+    if (!isNaN(val)) {
+      return true;
+    } else if (val.includes("e")) {
+      return false;
+    }
+    return false;
+  }
+  handleInput = (typeModal: string) => {
+    let { value } = this.mainInput.current;
+    const { handleInput } = this.props;
+    if (this.isValid(value)) {
+      handleInput(value, typeModal);
+    } else {
+      this.mainInput.current.value = "";
+    }
+  };
   toggleAnimation = () => {
     this.setState({ in: !this.state.in });
   };
@@ -51,7 +70,6 @@ class InputCard extends React.Component<PROPS, STATE> {
     const {
       isErrorValidation,
       typeModal,
-      handleInput,
       onClick,
       handleOK,
       transferTo
@@ -130,6 +148,7 @@ class InputCard extends React.Component<PROPS, STATE> {
       <div className={style.inputContainer}>
         {title}
         <input
+          pattern={inputType === "number" ? "[\\d*]" : ""}
           placeholder={placeHolder}
           className={
             isErrorValidation
@@ -137,8 +156,10 @@ class InputCard extends React.Component<PROPS, STATE> {
               : style.cardInput
           }
           autoFocus
-          onChange={e => handleInput(e, typeModal)}
+          // onChange={e => handleInput(e, typeModal)}
+          onChange={() => this.handleInput(typeModal)}
           type={inputType}
+          ref={this.mainInput}
         />
       </div>
     );
@@ -212,6 +233,7 @@ class InputCard extends React.Component<PROPS, STATE> {
               name="transfer"
               onChange={this.handleTransferCateogry}
               checked={transferTo === "invest" ? true : false}
+              ref={this.props.inputRef}
             />
           )}
           <div className={style.fakeRadio} />

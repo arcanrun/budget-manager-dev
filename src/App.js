@@ -1,7 +1,6 @@
 //@flow
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { Header, BottomBar, Overlay } from "./components";
 import {
   ManagerContainer,
   HistoryContainer,
@@ -11,23 +10,31 @@ import EntranceContainer from "./containers/EntranceContainer";
 import { View, Panel, PanelHeader } from "@vkontakte/vkui";
 import "@vkontakte/vkui/dist/vkui.css";
 
+import { Header, BottomBar, Overlay, Modal } from "./components";
+import { ModalContainer } from "./containers";
+
 type PROPS = {
   logIn: Function,
   vk_id: ?number,
   isFetching: boolean
 };
 
-class App extends React.Component<PROPS, {}> {
+export class App extends React.Component<PROPS, {}> {
   componentDidMount() {
     this.props.logIn();
   }
   render() {
     const { vk_id, isFetching } = this.props;
+
     return (
       <>
         <Overlay isFetching={false} />
 
-        <View activePanel="main_panel" id="main_view">
+        <View
+          activePanel="main_panel"
+          id="main_view"
+          modal={<ModalContainer />}
+        >
           <Panel id="main_panel">
             {vk_id && (
               <PanelHeader>
@@ -58,5 +65,3 @@ class App extends React.Component<PROPS, {}> {
     );
   }
 }
-
-export default App;

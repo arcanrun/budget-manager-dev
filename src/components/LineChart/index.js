@@ -106,7 +106,6 @@ export const LineChart = ({ switcher, history }: PROPS) => {
       }
     });
   }
-  console.log("end---->", offset);
 
   var options = {
     low: 0,
@@ -115,7 +114,7 @@ export const LineChart = ({ switcher, history }: PROPS) => {
       labelInterpolationFnc: function(value) {
         let cutted = value;
         if (value > 9999999) {
-          cutted = cutNumber(value);
+          cutted = cutNumber(value, 0, 6);
         }
         return cutted;
       },

@@ -4,8 +4,8 @@
   "private": true,
   "homepage": "http://arcanrun.github.io/budget-manager",
   "dependencies": {
-    "@vkontakte/icons": "^1.4.3",
-    "@vkontakte/vkui": "^2.21.8",
+    "@vkontakte/icons": "^1.6.0",
+    "@vkontakte/vkui": "^2.23.1",
     "@vkontakte/vkui-connect-promise": "^0.1.19",
     "chartist": "^0.11.2",
     "deepcopy": "^2.0.0",
