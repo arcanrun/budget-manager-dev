@@ -29,49 +29,93 @@ type PROPS = {
 type STATE = {
   isErrorInput: boolean,
   inputValue?: string,
-  transferTo: ?string
+  transferTo: ?string,
+  errorExplain: ?string
 };
 export class Modal extends React.Component<PROPS, STATE> {
-  state = {
-    isErrorInput: false,
-    inputValue: undefined,
-    transferTo: undefined
-  };
-  isVaild = (val: string) => {
-    const valToNumber = +val;
+  constructor(props: Object) {
+    super(props);
+    this.state = {
+      isErrorInput: false,
+      inputValue: undefined,
+      transferTo: undefined,
+      errorExplain: undefined
+    };
+  }
+
+  isVaild = (value: ?string) => {
+    const valToNumber = +value;
+    const valToStr = "" + value;
+    console.log("isValid", valToStr, valToStr.includes("e"));
+
     if (valToNumber <= 0) {
+      this.setState({
+        isErrorInput: true,
+        inputValue: valToStr,
+        errorExplain: "Недопустимый символ"
+      });
       return false;
-    } else if (isNaN(val)) {
+    } else if (isNaN(value)) {
+      this.setState({
+        isErrorInput: true,
+        inputValue: valToStr,
+        errorExplain: "Недопустимый символ"
+      });
+      return false;
+    } else if (valToNumber === undefined) {
+      this.setState({
+        isErrorInput: true,
+        inputValue: valToStr,
+        errorExplain: "Недопустимый символ"
+      });
+      return false;
+    } else if (valToStr.includes("e")) {
+      this.setState({
+        isErrorInput: true,
+        inputValue: valToStr,
+        errorExplain: "Недопустимый символ"
+      });
+      return false;
+    } else if (valToNumber >= 999e9) {
+      this.setState({
+        isErrorInput: true,
+        inputValue: valToStr,
+        errorExplain: "Слишком большое число"
+      });
       return false;
     }
+    this.setState({
+      isErrorInput: false,
+      errorExplain: undefined,
+      inputValue: valToStr
+    });
     return true;
   };
   onChange = (e: Object) => {
     const { value } = e.currentTarget;
-    if (this.isVaild(value)) {
-      this.setState({ isErrorInput: false, inputValue: value });
-    } else {
-      this.setState({ isErrorInput: true, inputValue: value });
-    }
+    this.isVaild(value);
   };
   onClose = () => {
-    this.setState({ isErrorInput: false });
+    this.setState({
+      isErrorInput: false,
+      inputValue: undefined,
+      errorExplain: undefined
+    });
     this.props.hideModal();
   };
   handleSending = () => {
-    const { inputValue, isErrorInput } = this.state;
+    const { inputValue } = this.state;
     const {
       typeModal,
       daysToPayday,
       addWholeBudget,
       vk_id,
-      hideModal,
       calcTempCosts
     } = this.props;
     const [typeModalonly, operation] = typeModal.split("_");
     const dateNow = new Date().toLocaleDateString();
-    if (!isErrorInput) {
-      hideModal();
+    if (this.isVaild(inputValue)) {
+      this.onClose();
       switch (typeModalonly) {
         case "budget":
           if (operation) {
@@ -111,6 +155,7 @@ export class Modal extends React.Component<PROPS, STATE> {
 
   render() {
     const { typeModal } = this.props;
+    const { errorExplain } = this.state;
     let headerTitle = "";
     let placeholder = "";
     let bottomWarning = "";
@@ -118,22 +163,30 @@ export class Modal extends React.Component<PROPS, STATE> {
       case "budget_minus":
         headerTitle = "Расход - Бюджет";
         placeholder = "0000.0";
-        bottomWarning = "Введите число, которое больше нуля";
+        bottomWarning = errorExplain
+          ? errorExplain
+          : "Введите число, которое больше нуля";
         break;
       case "budget_plus":
         headerTitle = "Доход - Бюджет";
         placeholder = "0000.0";
-        bottomWarning = "Введите число, которое больше нуля";
+        bottomWarning = errorExplain
+          ? errorExplain
+          : "Введите число, которое больше нуля";
         break;
       case "budget":
         headerTitle = "Корректировка - Бюджет";
         placeholder = "0000.0";
-        bottomWarning = "Введите число, которое больше нуля";
+        bottomWarning = errorExplain
+          ? errorExplain
+          : "Введите число, которое больше нуля";
         break;
       case "common_minus":
         headerTitle = "Расход - 50%";
         placeholder = "0000.0";
-        bottomWarning = "Введите число, которое больше нуля";
+        bottomWarning = errorExplain
+          ? errorExplain
+          : "Введите число, которое больше нуля";
         break;
       case "common_plus":
         headerTitle = "Доход - 50%";
@@ -143,22 +196,30 @@ export class Modal extends React.Component<PROPS, STATE> {
       case "fun_plus":
         headerTitle = "Доход - 30%";
         placeholder = "0000.0";
-        bottomWarning = "Введите число, которое больше нуля";
+        bottomWarning = errorExplain
+          ? errorExplain
+          : "Введите число, которое больше нуля";
         break;
       case "fun_minus":
         headerTitle = "Расход - 30%";
         placeholder = "0000.0";
-        bottomWarning = "Введите число, которое больше нуля";
+        bottomWarning = errorExplain
+          ? errorExplain
+          : "Введите число, которое больше нуля";
         break;
       case "invest_minus":
         headerTitle = "Расход - 20%";
         placeholder = "0000.0";
-        bottomWarning = "Введите число, которое больше нуля";
+        bottomWarning = errorExplain
+          ? errorExplain
+          : "Введите число, которое больше нуля";
         break;
       case "invest_plus":
         headerTitle = "Доход - 20%";
         placeholder = "0000.0";
-        bottomWarning = "Введите число, которое больше нуля";
+        bottomWarning = errorExplain
+          ? errorExplain
+          : "Введите число, которое больше нуля";
         break;
       case null:
         break;
