@@ -139,7 +139,7 @@ class Profile extends React.Component<PROPS, STATE> {
                 {commonSettingsCard}
                 {statisticCard}
                 {settingsCard}
-                {!modalIsVisible || modalOverlay}
+                {/*!modalIsVisible || modalOverlay*/}
               </div>
             </CSSTransition>
           </>

@@ -27,7 +27,8 @@ type PROPS = {
   vk_id: string,
   common: ?number,
   fun: ?number,
-  invest: ?number
+  invest: ?number,
+  budget: ?string
 };
 type STATE = {
   isErrorInput: boolean,
@@ -209,7 +210,7 @@ export class Modal extends React.Component<PROPS, STATE> {
   };
 
   render() {
-    const { typeModal, common, fun, invest } = this.props;
+    const { typeModal, common, fun, invest, budget } = this.props;
 
     const { errorExplain } = this.state;
     let headerTitle = "";
@@ -231,7 +232,7 @@ export class Modal extends React.Component<PROPS, STATE> {
           : "Введите число, которое больше нуля";
         break;
       case "budget":
-        headerTitle = "Корректировка - Бюджет";
+        headerTitle = budget ? "Корректировка - Бюджет" : "Бюджет";
         placeholder = "0000.0";
         bottomWarning = errorExplain
           ? errorExplain
@@ -304,8 +305,6 @@ export class Modal extends React.Component<PROPS, STATE> {
         console.warn(`[Unknown type of modal]: ${typeModal}`);
         break;
     }
-
-    console.log("+++++", this.state.transferTo);
 
     const header = (
       <ModalPageHeader
