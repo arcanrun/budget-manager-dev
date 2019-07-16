@@ -5,10 +5,10 @@ import {
   ModalRoot,
   ModalPageHeader,
   HeaderButton,
-  FormLayoutGroup,
   FormLayout,
+  FormLayoutGroup,
   Input,
-  FormStatus
+  Radio
 } from "@vkontakte/vkui";
 import { IS_PLATFORM_IOS, IS_PLATFORM_ANDROID } from "@vkontakte/vkui";
 import Icon24Cancel from "@vkontakte/icons/dist/24/cancel";
@@ -24,7 +24,10 @@ type PROPS = {
   calcTempCosts: Function,
   typeModal: string,
   daysToPayday: string,
-  vk_id: string
+  vk_id: string,
+  common: ?number,
+  fun: ?number,
+  invest: ?number
 };
 type STATE = {
   isErrorInput: boolean,
@@ -35,6 +38,8 @@ type STATE = {
 export class Modal extends React.Component<PROPS, STATE> {
   constructor(props: Object) {
     super(props);
+    const { typeModal } = this.props;
+
     this.state = {
       isErrorInput: false,
       inputValue: undefined,
@@ -44,9 +49,11 @@ export class Modal extends React.Component<PROPS, STATE> {
   }
 
   isVaild = (value: ?string) => {
+    const { common, fun, invest } = this.props;
+    const [typeModal, operation] = this.props.typeModal.split("_");
+    const isTransfer = operation === "transfer";
     const valToNumber = +value;
     const valToStr = "" + value;
-    console.log("isValid", valToStr, valToStr.includes("e"));
 
     if (valToNumber <= 0) {
       this.setState({
@@ -83,6 +90,42 @@ export class Modal extends React.Component<PROPS, STATE> {
         errorExplain: "Слишком большое число"
       });
       return false;
+    } else if (isTransfer) {
+      switch (typeModal) {
+        case "common":
+          if (valToNumber > common) {
+            this.setState({
+              isErrorInput: true,
+              inputValue: valToStr,
+              errorExplain: `Больше допустимой суммы: ${common} ₽`
+            });
+            return false;
+          }
+          break;
+        case "fun":
+          if (valToNumber > fun) {
+            this.setState({
+              isErrorInput: true,
+              inputValue: valToStr,
+              errorExplain: `Больше допустимой суммы: ${fun} ₽`
+            });
+            return false;
+          }
+          break;
+        case "invest":
+          if (valToNumber > invest) {
+            this.setState({
+              isErrorInput: true,
+              inputValue: valToStr,
+              errorExplain: `Больше допустимой суммы: ${invest} ₽`
+            });
+            return false;
+          }
+          break;
+
+        default:
+          break;
+      }
     }
     this.setState({
       isErrorInput: false,
@@ -99,12 +142,13 @@ export class Modal extends React.Component<PROPS, STATE> {
     this.setState({
       isErrorInput: false,
       inputValue: undefined,
-      errorExplain: undefined
+      errorExplain: undefined,
+      transferTo: undefined
     });
     this.props.hideModal();
   };
   handleSending = () => {
-    const { inputValue } = this.state;
+    const { inputValue, transferTo } = this.state;
     const {
       typeModal,
       daysToPayday,
@@ -112,8 +156,15 @@ export class Modal extends React.Component<PROPS, STATE> {
       vk_id,
       calcTempCosts
     } = this.props;
+    let transferToDefault = transferTo || "common";
+    if (typeModal && typeModal.includes("transfer")) {
+      const to = typeModal.split("_")[0];
+      if (to === "common") transferToDefault = "fun";
+    }
     const [typeModalonly, operation] = typeModal.split("_");
     const dateNow = new Date().toLocaleDateString();
+    console.log("handleSending[ModalOverlay]:", operation, transferToDefault);
+
     if (this.isVaild(inputValue)) {
       this.onClose();
       switch (typeModalonly) {
@@ -129,7 +180,6 @@ export class Modal extends React.Component<PROPS, STATE> {
             break;
           }
           const type = daysToPayday ? "change" : "add";
-          console.log("handleOK[ModalOverlay]:", operation);
           addWholeBudget(vk_id, inputValue, type, daysToPayday);
           break;
         case "common":
@@ -141,7 +191,7 @@ export class Modal extends React.Component<PROPS, STATE> {
             typeModalonly,
             operation,
             dateNow,
-            this.state.transferTo
+            transferTo ? transferTo : transferToDefault
           );
           break;
         default:
@@ -153,8 +203,14 @@ export class Modal extends React.Component<PROPS, STATE> {
     }
   };
 
+  handleRadio = (e: Object) => {
+    const { value } = e.target;
+    this.setState({ transferTo: value });
+  };
+
   render() {
-    const { typeModal } = this.props;
+    const { typeModal, common, fun, invest } = this.props;
+
     const { errorExplain } = this.state;
     let headerTitle = "";
     let placeholder = "";
@@ -221,12 +277,35 @@ export class Modal extends React.Component<PROPS, STATE> {
           ? errorExplain
           : "Введите число, которое больше нуля";
         break;
+      case "common_transfer":
+        headerTitle = "Перевод из 50%";
+        placeholder = "" + common;
+        bottomWarning = errorExplain
+          ? errorExplain
+          : "Введите число, которое больше нуля";
+        break;
+      case "fun_transfer":
+        headerTitle = "Перевод из 30%";
+        placeholder = "" + fun;
+        bottomWarning = errorExplain
+          ? errorExplain
+          : "Введите число, которое больше нуля";
+        break;
+      case "invest_transfer":
+        headerTitle = "Перевод из 20%";
+        placeholder = "" + invest;
+        bottomWarning = errorExplain
+          ? errorExplain
+          : "Введите число, которое больше нуля";
+        break;
       case null:
         break;
       default:
         console.warn(`[Unknown type of modal]: ${typeModal}`);
         break;
     }
+
+    console.log("+++++", this.state.transferTo);
 
     const header = (
       <ModalPageHeader
@@ -264,7 +343,6 @@ export class Modal extends React.Component<PROPS, STATE> {
     );
 
     const { isErrorInput } = this.state;
-
     return (
       <ModalRoot activeModal={typeModal}>
         <ModalPage id={"budget_minus"} onClose={this.onClose} header={header}>
@@ -364,6 +442,127 @@ export class Modal extends React.Component<PROPS, STATE> {
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
             />
+          </FormLayout>
+        </ModalPage>
+        <ModalPage
+          id={"common_transfer"}
+          onClose={this.onClose}
+          header={header}
+        >
+          <FormLayout>
+            <Input
+              placeholder={placeholder}
+              type="number"
+              onChange={this.onChange}
+              status={isErrorInput ? "error" : "default"}
+              bottom={bottomWarning}
+            />
+            <FormLayoutGroup
+              bottom="Перевести в категорию"
+              onChange={this.handleRadio}
+            >
+              <Radio
+                name="radio"
+                value="common"
+                description="Общие расходы"
+                disabled
+              >
+                50%
+              </Radio>
+
+              <Radio
+                name="radio"
+                value="fun"
+                description="Расходы на развлечения"
+                defaultChecked
+              >
+                30%
+              </Radio>
+              <Radio name="radio" value="invest" description="Инвестиции">
+                20%
+              </Radio>
+            </FormLayoutGroup>
+          </FormLayout>
+        </ModalPage>
+        <ModalPage id={"fun_transfer"} onClose={this.onClose} header={header}>
+          <FormLayout>
+            <Input
+              placeholder={placeholder}
+              type="number"
+              onChange={this.onChange}
+              status={isErrorInput ? "error" : "default"}
+              bottom={bottomWarning}
+            />
+            <FormLayoutGroup
+              bottom="Перевести в категорию"
+              onChange={this.handleRadio}
+            >
+              <Radio
+                name="radio"
+                value="common"
+                description="Общие расходы"
+                defaultChecked
+              >
+                50%
+              </Radio>
+
+              <Radio
+                name="radio"
+                value="fun"
+                description="Расходы на развлечения"
+                disabled
+              >
+                30%
+              </Radio>
+              <Radio name="radio" value="invest" description="Инвестиции">
+                20%
+              </Radio>
+            </FormLayoutGroup>
+          </FormLayout>
+        </ModalPage>
+        <ModalPage
+          id={"invest_transfer"}
+          onClose={this.onClose}
+          header={header}
+        >
+          <FormLayout>
+            <Input
+              placeholder={placeholder}
+              type="number"
+              onChange={this.onChange}
+              status={isErrorInput ? "error" : "default"}
+              bottom={bottomWarning}
+            />
+            <FormLayoutGroup
+              bottom="Перевести в категорию"
+              onChange={this.handleRadio}
+            >
+              <Radio
+                name="radio"
+                value="common"
+                description="Общие расходы"
+                defaultChecked
+              >
+                50%
+              </Radio>
+
+              <Radio
+                name="radio"
+                value="fun"
+                description="Расходы на развлечения"
+              >
+                30%
+              </Radio>
+
+              <Radio
+                name="radio"
+                value="invest"
+                description="Инвестиции"
+                disabled
+              >
+                20%
+              </Radio>
+            </FormLayoutGroup>
           </FormLayout>
         </ModalPage>
       </ModalRoot>

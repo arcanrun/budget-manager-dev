@@ -13,7 +13,10 @@ import {
 const mapStateToProps = state => ({
   typeModal: state.modal.typeModal,
   daysToPayday: state.user.calc.daysToPayday,
-  vk_id: state.user.vk_id
+  vk_id: state.user.vk_id,
+  common: state.user.calc.common.value,
+  fun: state.user.calc.fun.value,
+  invest: state.user.calc.invest.value
 });
 
 export const ModalContainer = connect(
