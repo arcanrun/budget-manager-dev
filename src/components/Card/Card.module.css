@@ -30,6 +30,6 @@
   cursor: pointer;
   fill: #9aa2b0;
 }
-.options:hover > span > span > svg {
+.options:active > span > span > svg {
   fill: #f72d6b;
 }

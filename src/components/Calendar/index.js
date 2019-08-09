@@ -108,7 +108,6 @@ class Calendar extends React.Component<PROPS, {}> {
           weekdaysShort={WEEKDAYS_SHORT["ru"]}
           firstDayOfWeek={FIRST_DAY_OF_WEEK["ru"]}
           labels={LABELS["ru"]}
-          showOutsideDays
           todayButton={"сегодня"}
           onTodayButtonClick={this.handleToDayBtn}
           onDayClick={handleDayClick}

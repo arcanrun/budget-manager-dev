@@ -50,8 +50,13 @@ export class App extends React.Component<PROPS, STATE> {
   };
 
   render() {
-    // const { vk_id, isFetching } = this.props;
-    const { typeModal, hideModal, vk_id, makeProfileOperation } = this.props;
+    const {
+      typeModal,
+      hideModal,
+      vk_id,
+      makeProfileOperation,
+      isFetching
+    } = this.props;
     const { activeStory } = this.state;
     let alert = null;
     switch (typeModal) {
@@ -112,7 +117,7 @@ export class App extends React.Component<PROPS, STATE> {
         </TabbarItem>
       </Tabbar>
     );
-    return (
+    const epic = (
       <Epic tabbar={tabbar} activeStory={activeStory}>
         <View activePanel="main_panel" id="history">
           <Panel id="main_panel">
@@ -134,6 +139,14 @@ export class App extends React.Component<PROPS, STATE> {
         </View>
       </Epic>
     );
+    const entrance = (
+      <>
+        <Overlay isFetching={isFetching} />
+        // <Overlay isFetching={false} />
+        <EntranceContainer />
+      </>
+    );
+    return <>{vk_id ? epic : entrance}</>;
   }
 }
 // <>

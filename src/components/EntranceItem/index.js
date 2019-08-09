@@ -22,15 +22,17 @@ export const EntranceItem = ({
   imgWidth
 }: PROPS) => (
   <div className={style.entranceItem}>
-    <div className={style.imageBlock}>
-      <div className={style.imageBgText}>{bgText}</div>
-      <div className={style.image}>
-        <Icon icon={image} width={imgWidth} height={imgHeight} />
+    <div className={style.wrapper}>
+      <div className={style.imageBlock}>
+        <div className={style.imageBgText}>{bgText}</div>
+        <div className={style.image}>
+          <Icon icon={image} width={imgWidth} height={imgHeight} />
+        </div>
       </div>
-    </div>
 
-    <div className={style.title}>{title}</div>
-    <div className={style.text}>{text}</div>
-    <div className={style.footer} />
+      <div className={style.title}>{title}</div>
+      <div className={style.text}>{text}</div>
+      <div className={style.footer} />
+    </div>
   </div>
 );

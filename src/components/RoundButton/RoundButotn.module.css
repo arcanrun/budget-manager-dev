@@ -16,14 +16,14 @@
   /* border: 3px solid #0fde8c; */
   border: 2px solid #5281b9;
 }
-.greenBtn:hover {
+.greenBtn:active {
   background-color: #0fde8c;
 }
-.greenBtn:hover > div > div > svg {
+.greenBtn:active > div > div > svg {
   fill: #fff !important;
 }
 .greenBtn:active {
-  opacity: 0.5;
+  /* opacity: 0.5; */
 }
 .redBtn {
   background: url(../../static/minus.svg) no-repeat;
@@ -33,12 +33,12 @@
   border: 2px solid #5281b9;
   /* border: 3px solid #f72d6b; */
 }
-.redBtn:hover {
+.redBtn:active {
   background-color: #f72d6b;
 }
-.redBtn:hover > div > div > svg {
+.redBtn:active > div > div > svg {
   fill: #fff !important;
 }
 .redBtn:active {
-  opacity: 0.5;
+  /* opacity: 0.5; */
 }

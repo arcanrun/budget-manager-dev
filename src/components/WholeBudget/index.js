@@ -1,21 +1,24 @@
 //@flow
 
 import React from "react";
+import { Button } from "@vkontakte/vkui";
 
 import style from "./WholeBudget.module.css";
-import { Button, RoundButton, ShortenNumber } from "../index";
+import { RoundButton, ShortenNumber } from "../index";
 
 type PROPS = {
   onClickToggleModal: Function,
   typeModal: string,
   wholeBudget: ?number,
-  daysToPayday: ?string
+  daysToPayday: ?string,
+  isFetching: boolean
 };
 const WholeBudget = ({
   wholeBudget,
   onClickToggleModal,
   typeModal,
-  daysToPayday
+  daysToPayday,
+  isFetching
 }: PROPS) => {
   const footer = daysToPayday ? (
     <div className={style.footer}>
@@ -31,7 +34,7 @@ const WholeBudget = ({
   ) : (
     ""
   );
-  return (
+  const mainBlck = (
     <div className={style.budgetBlock}>
       {wholeBudget ? (
         <>
@@ -45,15 +48,19 @@ const WholeBudget = ({
           <div className={style.enterItem}>
             Для начала введите бюджет, которым обладаете на данный момент.
           </div>
+
           <Button
-            btnColor="red"
+            size="xl"
+            level="secondary"
             onClick={() => onClickToggleModal(typeModal)}
-            text="Введите ваш текущий бюджет"
-          />
+          >
+            Введите ваш текущий бюджет
+          </Button>
         </div>
       )}
     </div>
   );
+  return <>{!isFetching ? mainBlck : ""}</>;
 };
 
 export { WholeBudget };

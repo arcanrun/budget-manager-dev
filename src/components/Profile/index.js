@@ -2,9 +2,10 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
+import { Button, Avatar } from "@vkontakte/vkui";
 
 import style from "./Profile.module.css";
-import { Card, Button, ModalOverlay, Overlay, Tab } from "../index";
+import { Card, ModalOverlay, Overlay, Tab } from "../index";
 import "./animations.css";
 
 type PROPS = {
@@ -64,7 +65,6 @@ class Profile extends React.Component<PROPS, STATE> {
       name,
       sure_name,
       avatar,
-      modalIsVisible,
       typeModal,
       isFetching,
       costs,
@@ -79,7 +79,7 @@ class Profile extends React.Component<PROPS, STATE> {
       <Card icon={"profile"} headerTitle="Общая информация">
         <div className={style.user}>
           <div className={style.avatarContainer}>
-            <img className={style.avatar} src={avatar} alt="avatar" />
+            <Avatar src={avatar} size={100} />
           </div>
           <div className={style.footerUser}>
             <div className={style.fullName}>
@@ -104,28 +104,15 @@ class Profile extends React.Component<PROPS, STATE> {
     const settingsCard = (
       <Card icon={"settings"} headerTitle="настройки">
         <Button
-          text={"удалить профиль"}
-          btnColor={"red"}
-          size={"L"}
+          size="xl"
+          level="destructive"
           onClick={() => toggleModal("profile_delete")}
-        />
+        >
+          Удалить профиль
+        </Button>
       </Card>
     );
-    const modalOverlay = (
-      <ModalOverlay
-        onClick={toggleModal}
-        typeModal={typeModal}
-        vk_id={vk_id}
-        budget={0}
-        makeProfileOperation={makeProfileOperation}
-        calcTempCosts={""}
-        addPayDay={""}
-        addWholeBudget={""}
-        daysToPayday={""}
-        calc={calc}
-        calcBudget={""}
-      />
-    );
+
     return (
       <>
         {!vk_id ? (
@@ -139,7 +126,6 @@ class Profile extends React.Component<PROPS, STATE> {
                 {commonSettingsCard}
                 {statisticCard}
                 {settingsCard}
-                {/*!modalIsVisible || modalOverlay*/}
               </div>
             </CSSTransition>
           </>

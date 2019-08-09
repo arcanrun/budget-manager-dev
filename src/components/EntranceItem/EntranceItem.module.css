@@ -1,5 +1,10 @@
 .entranceItem {
   padding: 30px;
+  /* height: 100%; */
+  display: flex;
+  flex-flow: column;
+}
+.wrapper {
 }
 .title {
   font-weight: bold;

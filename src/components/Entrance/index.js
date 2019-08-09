@@ -3,7 +3,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import Swiper from "react-id-swiper/lib/ReactIdSwiper.full";
 
-import "swiper/dist/css/swiper.css";
+// import "swiper/dist/css/swiper.css";
 import style from "./Entrance.module.css";
 import "./costumizedSwiper.css";
 import { EntranceItem } from "../index";

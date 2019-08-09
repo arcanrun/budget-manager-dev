@@ -186,7 +186,9 @@ class Manager extends React.Component<PROPS, STATE> {
     console.log("--------->", daysToPayday);
     const { tempPayDay, steps } = this.state;
 
-    const wholeBudgetCard = (
+    const wholeBudgetCard = isFetching_calc ? (
+      ""
+    ) : (
       <Card
         headerTitle={"общий бюджет"}
         icon={"money-bag"}
@@ -198,6 +200,7 @@ class Manager extends React.Component<PROPS, STATE> {
           typeModal={"budget"}
           wholeBudget={budget}
           daysToPayday={daysToPayday}
+          isFetching={isFetching_calc}
         />
       </Card>
     );
@@ -311,7 +314,7 @@ class Manager extends React.Component<PROPS, STATE> {
             {budget && payday ? budgetCardFun : ""}
             {budget && payday ? budgetCardInvest : ""}
             {/*!modalIsVisible || modalOverlay*/}
-            {!is_first_time ? (budget && payday ? guide : "") : ""}
+            {is_first_time ? (budget && payday ? guide : "") : ""}
           </div>
         </CSSTransition>
       </>
