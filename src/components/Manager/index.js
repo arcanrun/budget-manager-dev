@@ -291,7 +291,11 @@ class Manager extends React.Component<PROPS, STATE> {
           options: {
             primaryColor: "#5281b9",
             zIndex: 1,
-            outline: 0
+            outline: "none",
+            border: "10px solid red"
+          },
+          buttonNext: {
+            outline: "none"
           }
         }}
       />

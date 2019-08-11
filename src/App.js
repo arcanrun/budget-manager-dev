@@ -45,6 +45,7 @@ export class App extends React.Component<PROPS, STATE> {
   }
 
   onStoryChange = (e: Object) => {
+    window.scroll(0, 0);
     const { story } = e.currentTarget.dataset;
     this.setState({ activeStory: story });
   };
