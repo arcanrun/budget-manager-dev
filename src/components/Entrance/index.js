@@ -13,13 +13,43 @@ type PROPS = {
   vk_id: ?number
 };
 
-class Entrance extends React.Component<PROPS, {}> {
+type STATE = {
+  screenHeight: ?number,
+  screenWidth: ?number
+};
+
+class Entrance extends React.Component<PROPS, STATE> {
+  state = {
+    screenHeight: window.innerHeight,
+    screenWidth: window.innerWidth
+  };
+
+  componentDidMount() {
+    window.addEventListener("resize", this.setSize);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.setSize);
+  }
+
+  setSize = (e: Object) => {
+    const screenHeight = e.target.innerHeight;
+    const screenWidth = e.target.innerWidth;
+    this.setState({
+      screenHeight,
+      screenWidth
+    });
+  };
+
   render() {
+    const { screenHeight, screenWidth } = this.state;
+    const isMinWidth = screenWidth <= 250 ? true : false;
+    const isMinHeight = screenHeight < 480 ? true : false;
+
     const firstScreenText =
-      "Проверьте свой бюджет по умной пропорциональной системе учета финансов. Правило 50/30/20 позволит Вам копить деньги и не отказывать себе в удовольствиях. ";
+      "Правило 50/30/20 позволит Вам копить деньги и не отказывать себе в удовольствиях. ";
 
     const secondScreenText =
-      "50% Вашего ежемесячного заработка должны уходить на все необходимые траты: аренду или ипотеку, транспорт, продукты, коммунальные услуги и прочие вещи, без которых никуда.";
+      "50% ежемесячного заработка должны уходить на все необходимые траты: аренду или ипотеку, транспорт, продукты, коммунальные услуги и тпрочие вещи, без которых никуда.";
     const thirdScreenText =
       "30% — на развлечения: шоппинг, рестораны, уход за собой и другое. ";
     const fourthScreenText =
@@ -49,6 +79,8 @@ class Entrance extends React.Component<PROPS, {}> {
         <Swiper {...params}>
           <div className={style.item}>
             <EntranceItem
+              isMinWidth={isMinWidth}
+              isMinHeight={isMinHeight}
               image={"budget-logo"}
               title={"50/30/20"}
               text={firstScreenText}
@@ -58,6 +90,8 @@ class Entrance extends React.Component<PROPS, {}> {
           </div>
           <div className={style.item}>
             <EntranceItem
+              isMinWidth={isMinWidth}
+              isMinHeight={isMinHeight}
               image={"payment-logo"}
               title={"ОБЯЗАТЕЛЬНЫЕ НУЖДЫ"}
               text={secondScreenText}
@@ -68,6 +102,8 @@ class Entrance extends React.Component<PROPS, {}> {
           </div>
           <div className={style.item}>
             <EntranceItem
+              isMinWidth={isMinWidth}
+              isMinHeight={isMinHeight}
               image={"fun-logo"}
               title={"ЖЕЛАНИЯ"}
               text={thirdScreenText}
@@ -78,6 +114,8 @@ class Entrance extends React.Component<PROPS, {}> {
           </div>
           <div className={style.item}>
             <EntranceItem
+              isMinWidth={isMinWidth}
+              isMinHeight={isMinHeight}
               image={"invest-logo"}
               title={"БУДУЩЕЕ"}
               text={fourthScreenText}
@@ -88,6 +126,8 @@ class Entrance extends React.Component<PROPS, {}> {
           </div>
           <div className={style.item}>
             <EntranceItem
+              isMinWidth={isMinWidth}
+              isMinHeight={isMinHeight}
               image={"protect-logo"}
               title={""}
               text={fivthScreen}
