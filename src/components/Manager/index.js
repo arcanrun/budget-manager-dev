@@ -292,10 +292,38 @@ class Manager extends React.Component<PROPS, STATE> {
             primaryColor: "#5281b9",
             zIndex: 1,
             outline: "none",
-            border: "10px solid red"
+            border: "10px solid red",
+            arrowColor: "#47a3ff"
           },
           buttonNext: {
-            outline: "none"
+            outline: "none",
+            color: "#fff",
+            backgroundColor: "#f72d6b"
+          },
+          buttonSkip: {
+            color: "#5281b9",
+            backgroundColor: "transparent",
+            fontSzie: "13px"
+          },
+          buttonClose: {
+            color: "#fff"
+          },
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0)",
+            left: 0,
+            mixBlendMode: "hard-light",
+            overflow: "hidden",
+            position: "absolute",
+            right: 0,
+            top: 0,
+            zIndex: 1
+          },
+          spotlight: {
+            backgroundColor: "rgba(0,0,0,0.1)"
+          },
+          tooltip: {
+            backgroundColor: "#47a3ff",
+            color: "#fff"
           }
         }}
       />

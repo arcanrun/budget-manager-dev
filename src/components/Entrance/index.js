@@ -93,8 +93,8 @@ class Entrance extends React.Component<PROPS, {}> {
               text={fivthScreen}
               imgHeight="140px"
               imgWidth="140px"
+              btnLogin={btnLogin}
             />
-            {btnLogin}
           </div>
         </Swiper>
       </div>

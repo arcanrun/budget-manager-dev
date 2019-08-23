@@ -25,7 +25,14 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
   }
   return (
     <div className={[style.donutContainer, "fifth-step"].join(" ")}>
-      <svg viewBox="0 0 35 35" className={style.donut}>
+      <svg
+        viewBox="0 0 35 35"
+        className={
+          tempValueInPercents <= 20
+            ? [style.donut, style.pulseAnimation].join(" ")
+            : style.donut
+        }
+      >
         <circle
           r="15.91549430918952"
           cx="50%"
@@ -33,20 +40,7 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
           className={style.circle}
           strokeDasharray={`${tempValueInPercents}, 100`}
           fill={colorTemp}
-        >
-          {tempValueInPercents <= 20 ? (
-            <animate
-              attributeType="XML"
-              attributeName="fill"
-              from="#F72D6B"
-              to="#ffffff"
-              dur="2s"
-              repeatCount="indefinite"
-            />
-          ) : (
-            ""
-          )}
-        </circle>
+        />
         <g className={style.text}>
           <text
             className={style.title}
