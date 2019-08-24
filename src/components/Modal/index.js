@@ -55,7 +55,6 @@ export class Modal extends React.Component<PROPS, STATE> {
     const isTransfer = operation === "transfer";
     const valToNumber = +value;
     const valToStr = "" + value;
-
     if (valToNumber <= 0) {
       this.setState({
         isErrorInput: true,
@@ -89,6 +88,13 @@ export class Modal extends React.Component<PROPS, STATE> {
         isErrorInput: true,
         inputValue: valToStr,
         errorExplain: "Слишком большое число"
+      });
+      return false;
+    } else if (value[0] === ".") {
+      this.setState({
+        isErrorInput: true,
+        inputValue: valToStr,
+        errorExplain: "Недопустимый символ"
       });
       return false;
     } else if (isTransfer) {
@@ -136,7 +142,9 @@ export class Modal extends React.Component<PROPS, STATE> {
     return true;
   };
   onChange = (e: Object) => {
+    console.log(e.currentTarget);
     const { value } = e.currentTarget;
+    console.log(value);
     this.isVaild(value);
   };
   onClose = () => {
@@ -347,8 +355,9 @@ export class Modal extends React.Component<PROPS, STATE> {
         <ModalPage id={"budget_minus"} onClose={this.onClose} header={header}>
           <FormLayout>
             <Input
+              inputMode="numeric"
               placeholder={placeholder}
-              type="number"
+              type="text"
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
@@ -358,8 +367,9 @@ export class Modal extends React.Component<PROPS, STATE> {
         <ModalPage id={"budget_plus"} onClose={this.onClose} header={header}>
           <FormLayout>
             <Input
+              inputMode="numeric"
               placeholder={placeholder}
-              type="number"
+              type="text"
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
@@ -369,8 +379,9 @@ export class Modal extends React.Component<PROPS, STATE> {
         <ModalPage id={"budget"} onClose={this.onClose} header={header}>
           <FormLayout>
             <Input
+              inputMode="numeric"
               placeholder={placeholder}
-              type="number"
+              type="text"
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
@@ -380,8 +391,9 @@ export class Modal extends React.Component<PROPS, STATE> {
         <ModalPage id={"common_minus"} onClose={this.onClose} header={header}>
           <FormLayout>
             <Input
+              inputMode="numeric"
               placeholder={placeholder}
-              type="number"
+              type="text"
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
@@ -391,8 +403,9 @@ export class Modal extends React.Component<PROPS, STATE> {
         <ModalPage id={"common_plus"} onClose={this.onClose} header={header}>
           <FormLayout>
             <Input
+              inputMode="numeric"
               placeholder={placeholder}
-              type="number"
+              type="text"
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
@@ -402,8 +415,9 @@ export class Modal extends React.Component<PROPS, STATE> {
         <ModalPage id={"fun_plus"} onClose={this.onClose} header={header}>
           <FormLayout>
             <Input
+              inputMode="numeric"
               placeholder={placeholder}
-              type="number"
+              type="text"
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
@@ -413,8 +427,9 @@ export class Modal extends React.Component<PROPS, STATE> {
         <ModalPage id={"fun_minus"} onClose={this.onClose} header={header}>
           <FormLayout>
             <Input
+              inputMode="numeric"
               placeholder={placeholder}
-              type="number"
+              type="text"
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
@@ -424,8 +439,9 @@ export class Modal extends React.Component<PROPS, STATE> {
         <ModalPage id={"invest_plus"} onClose={this.onClose} header={header}>
           <FormLayout>
             <Input
+              inputMode="numeric"
               placeholder={placeholder}
-              type="number"
+              type="text"
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
@@ -435,8 +451,9 @@ export class Modal extends React.Component<PROPS, STATE> {
         <ModalPage id={"invest_minus"} onClose={this.onClose} header={header}>
           <FormLayout>
             <Input
+              inputMode="numeric"
               placeholder={placeholder}
-              type="number"
+              type="text"
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
@@ -450,8 +467,9 @@ export class Modal extends React.Component<PROPS, STATE> {
         >
           <FormLayout>
             <Input
+              inputMode="numeric"
               placeholder={placeholder}
-              type="number"
+              type="text"
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
@@ -486,8 +504,9 @@ export class Modal extends React.Component<PROPS, STATE> {
         <ModalPage id={"fun_transfer"} onClose={this.onClose} header={header}>
           <FormLayout>
             <Input
+              inputMode="numeric"
               placeholder={placeholder}
-              type="number"
+              type="text"
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
@@ -526,8 +545,9 @@ export class Modal extends React.Component<PROPS, STATE> {
         >
           <FormLayout>
             <Input
+              inputMode="numeric"
               placeholder={placeholder}
-              type="number"
+              type="text"
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
