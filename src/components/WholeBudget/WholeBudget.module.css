@@ -31,3 +31,8 @@
   flex-flow: row;
   justify-content: space-between;
 }
+.budgetLoadingBlock {
+  padding: 40px 0 0 0;
+  opacity: 0.4;
+  text-align: center;
+}

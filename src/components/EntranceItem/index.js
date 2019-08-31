@@ -2,7 +2,7 @@
 import React from "react";
 
 import style from "./EntranceItem.module.css";
-import { Icon } from "../index";
+import { Icon, Spinner } from "../index";
 
 type PROPS = {
   image: string,
@@ -13,7 +13,9 @@ type PROPS = {
   imgWidth?: string,
   btnLogin?: React.Node,
   isMinWidth: boolean,
-  isMinHeight: boolean
+  isMinHeight: boolean,
+  isFetching?: boolean,
+  error?: boolean
 };
 
 export const EntranceItem = ({
@@ -25,8 +27,11 @@ export const EntranceItem = ({
   imgWidth,
   btnLogin,
   isMinWidth,
-  isMinHeight
+  isMinHeight,
+  isFetching,
+  error
 }: PROPS) => {
+  console.log("--->", isFetching);
   const imageBlock = (
     <div className={style.imageBlock}>
       <div className={style.imageBgText}>{bgText}</div>
@@ -35,14 +40,31 @@ export const EntranceItem = ({
       </div>
     </div>
   );
-  return (
-    <div className={style.entranceItem}>
-      <div className={style.wrapper}>
-        {isMinWidth || isMinHeight ? "" : imageBlock}
-        <div className={style.title}>{title}</div>
-        <div className={style.text}>{text}</div>
-        {btnLogin ? <div className={style.footer}>{btnLogin}</div> : ""}
-      </div>
+  const footer = (
+    <div className={style.footer}>
+      {isFetching ? (
+        <Spinner size={"m"} />
+      ) : (
+        <div style={{ marginTop: "50px" }}>{btnLogin}</div>
+      )}
     </div>
+  );
+  const errorBlock = (
+    <div>
+      <h1>Ошибка подключения к сети</h1>
+      <p>Проверьте соединение и повторите попытку</p>
+    </div>
+  );
+  const mainBlock = (
+    <div className={style.wrapper}>
+      {isMinWidth || isMinHeight ? "" : imageBlock}
+      <div className={style.title}>{title}</div>
+      <div className={style.text}>{text}</div>
+      {btnLogin ? footer : ""}
+    </div>
+  );
+
+  return (
+    <div className={style.entranceItem}>{error ? errorBlock : mainBlock}</div>
   );
 };

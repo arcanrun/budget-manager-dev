@@ -18,7 +18,9 @@ const OperationValue = ({ children, sign }: PROPS) => {
           : [style.value, style.valueMinus].join(" ")
       }
     >
-      <ShortenNumber minValToShort={1000000}>{children}</ShortenNumber>
+      <ShortenNumber minValToShort={1000000} size={12}>
+        {children}
+      </ShortenNumber>
     </div>
   );
 };

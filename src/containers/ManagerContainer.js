@@ -14,7 +14,8 @@ import {
   makeProfileOperation,
   logIn,
   calcBudget,
-  stopGuide
+  stopGuide,
+  tutorialChangeState
 } from "../actions/";
 
 const mapStateToProps = state => ({
@@ -27,7 +28,8 @@ const mapStateToProps = state => ({
   calc: state.user.calc,
   vk_id: state.user.vk_id,
   common: state.user.calc.common,
-  is_first_time: state.user.is_first_time
+  is_first_time: state.user.is_first_time,
+  is_tutorial_done: state.user.is_tutorial_done
 });
 
 export const ManagerContainer = connect(
@@ -43,6 +45,7 @@ export const ManagerContainer = connect(
     makeProfileOperation,
     logIn,
     calcBudget,
-    stopGuide
+    stopGuide,
+    tutorialChangeState
   }
 )(Manager);

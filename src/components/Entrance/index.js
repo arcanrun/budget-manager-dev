@@ -10,7 +10,9 @@ import { EntranceItem } from "../index";
 
 type PROPS = {
   signUp: Function,
-  vk_id: ?number
+  vk_id: ?number,
+  isFetching: boolean,
+  error: boolean
 };
 
 type STATE = {
@@ -42,6 +44,7 @@ class Entrance extends React.Component<PROPS, STATE> {
 
   render() {
     const { screenHeight, screenWidth } = this.state;
+    const { isFetching, error } = this.props;
     const isMinWidth = screenWidth <= 250 ? true : false;
     const isMinHeight = screenHeight < 480 ? true : false;
 
@@ -49,7 +52,7 @@ class Entrance extends React.Component<PROPS, STATE> {
       "Правило 50/30/20 позволит Вам копить деньги и не отказывать себе в удовольствиях. ";
 
     const secondScreenText =
-      "50% ежемесячного заработка должны уходить на все необходимые траты: аренду или ипотеку, транспорт, продукты, коммунальные услуги и тпрочие вещи, без которых никуда.";
+      "50% ежемесячного заработка должны уходить на все необходимые траты: аренду или ипотеку, транспорт, продукты, коммунальные услуги и прочие вещи, без которых никуда.";
     const thirdScreenText =
       "30% — на развлечения: шоппинг, рестораны, уход за собой и другое. ";
     const fourthScreenText =
@@ -126,6 +129,8 @@ class Entrance extends React.Component<PROPS, STATE> {
           </div>
           <div className={style.item}>
             <EntranceItem
+              error={error}
+              isFetching={isFetching}
               isMinWidth={isMinWidth}
               isMinHeight={isMinHeight}
               image={"protect-logo"}

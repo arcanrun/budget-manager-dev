@@ -283,7 +283,6 @@
 
 .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
   position: relative;
-
   background-color: #f72d6b;
   color: #f0f8ff;
 }
@@ -293,7 +292,7 @@
   background-color: #f0f8ff;
 } */
 
-.DayPicker-Day--today {
+.DayPicker-Day--today:not(.DayPicker-Day--outside) {
   color: #ffffff;
   font-weight: 700;
   background-color: #0fde8c;

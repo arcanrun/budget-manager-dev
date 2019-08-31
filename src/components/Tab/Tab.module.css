@@ -16,6 +16,7 @@
   text-transform: uppercase;
   width: 50%;
   font-weight: bold;
+  height: 40px;
 }
 .navBtnFirst {
   transition: 0.2s ease;
@@ -31,7 +32,7 @@
 .table {
   display: flex;
   flex-flow: column wrap;
-  padding: 20px 5px 20px 5px;
+  padding: 20px 0 20px 0;
 }
 .tabRow {
   display: flex;

@@ -1,0 +1,6 @@
+.small {
+  transform: scale(0.5);
+}
+.medium {
+  transform: scale(0.7);
+}

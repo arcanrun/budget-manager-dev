@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://arcanrun.github.io/budget-manager",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.2",
     "@vkontakte/icons": "^1.6.0",
     "@vkontakte/vkui": "^2.23.1",
     "@vkontakte/vkui-connect-promise": "^0.1.19",

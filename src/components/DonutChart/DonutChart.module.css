@@ -1,3 +1,15 @@
+.infoDonut {
+  z-index: 1;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
 .circle {
   /* fill: #110261; */
   stroke: #0fde8c;
@@ -6,22 +18,33 @@
   will-change: transform, opacity;
 }
 .text {
+  font-weight: bold;
+
   font-family: Arial;
   font-size: 5px;
   fill: #ffffff;
 }
 .title {
   font-weight: bold;
-  font-size: 6px;
+
+  position: relative;
+  top: -20px;
+  font-weight: bold;
+  font-size: 60px;
   opacity: 0.5;
 }
 .cost {
-  font-size: 3px;
+  font-weight: bold;
+
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: -20px;
+  padding-bottom: 20px;
+}
+.footer {
   font-weight: bold;
 }
-
 .footerTitle {
-  font-size: 2px;
 }
 .footerCost {
   font-weight: bold;
@@ -35,6 +58,7 @@
 .donutContainer {
   max-width: 250px;
   margin: auto;
+  position: relative;
 }
 
 .pulseAnimation {

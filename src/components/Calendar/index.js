@@ -112,6 +112,7 @@ class Calendar extends React.Component<PROPS, {}> {
           onTodayButtonClick={this.handleToDayBtn}
           onDayClick={handleDayClick}
           selectedDays={[stringToDate(payday), stringToDate(tempPayDay)]}
+          disabledDays={[{ before: new Date() }]}
         />
         <div className={style.footer}>
           {!payday && !tempPayDay

@@ -15,6 +15,8 @@ import Icon24Cancel from "@vkontakte/icons/dist/24/cancel";
 import Icon24Done from "@vkontakte/icons/dist/24/done";
 import Icon24Dismiss from "@vkontakte/icons/dist/24/dismiss";
 
+import style from "./Modal.module.css";
+
 import "@vkontakte/vkui/dist/vkui.css";
 
 type PROPS = {
@@ -34,7 +36,9 @@ type STATE = {
   isErrorInput: boolean,
   inputValue?: string,
   transferTo: ?string,
-  errorExplain: ?string
+  errorExplain: ?string,
+  screenHeight: number,
+  screenWidth: number
 };
 export class Modal extends React.Component<PROPS, STATE> {
   constructor(props: Object) {
@@ -45,9 +49,26 @@ export class Modal extends React.Component<PROPS, STATE> {
       isErrorInput: false,
       inputValue: undefined,
       transferTo: undefined,
-      errorExplain: undefined
+      errorExplain: undefined,
+      screenHeight: window.innerHeight,
+      screenWidth: window.innerWidth
     };
   }
+  componentDidMount() {
+    window.addEventListener("resize", this.setSize);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.setSize);
+  }
+
+  setSize = (e: Object) => {
+    const screenHeight = e.target.innerHeight;
+    const screenWidth = e.target.innerWidth;
+    this.setState({
+      screenHeight,
+      screenWidth
+    });
+  };
 
   isVaild = (value: ?string) => {
     const { common, fun, invest } = this.props;
@@ -95,6 +116,13 @@ export class Modal extends React.Component<PROPS, STATE> {
         isErrorInput: true,
         inputValue: valToStr,
         errorExplain: "Недопустимый символ"
+      });
+      return false;
+    } else if (valToNumber < 0.01) {
+      this.setState({
+        isErrorInput: true,
+        inputValue: valToStr,
+        errorExplain: "Слишком маленькое число"
       });
       return false;
     } else if (isTransfer) {
@@ -220,88 +248,184 @@ export class Modal extends React.Component<PROPS, STATE> {
   render() {
     const { typeModal, common, fun, invest, budget } = this.props;
 
-    const { errorExplain } = this.state;
+    const { errorExplain, screenWidth } = this.state;
     let headerTitle = "";
     let placeholder = "";
     let bottomWarning = "";
     switch (typeModal) {
       case "budget_minus":
-        headerTitle = "Расход - Бюджет";
+        headerTitle =
+          screenWidth < 246 ? (
+            <div className={style.marquee}>
+              <div>Расход - Бюджет</div>
+            </div>
+          ) : (
+            <span>Расход - Бюджет</span>
+          );
+
         placeholder = "0000.0";
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
         break;
       case "budget_plus":
-        headerTitle = "Доход - Бюджет";
+        headerTitle =
+          screenWidth < 240 ? (
+            <div className={style.marquee}>
+              <div>Доход - Бюджет</div>
+            </div>
+          ) : (
+            <span>Доход - Бюджет</span>
+          );
         placeholder = "0000.0";
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
         break;
       case "budget":
-        headerTitle = budget ? "Корректировка - Бюджет" : "Бюджет";
+        const titleOne =
+          screenWidth < 316 ? (
+            <div className={style.marquee}>
+              <div>Корректировка - Бюджет</div>
+            </div>
+          ) : (
+            <span>Корректировка - Бюджет</span>
+          );
+
+        const titleTwo =
+          screenWidth < 169 ? (
+            <div className={style.marquee}>
+              <div>Бюджет</div>
+            </div>
+          ) : (
+            <span>Бюджет</span>
+          );
+
+        headerTitle = budget ? titleOne : titleTwo;
         placeholder = "0000.0";
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
         break;
       case "common_minus":
-        headerTitle = "Расход - 50%";
+        headerTitle =
+          screenWidth < 214 ? (
+            <div className={style.marquee}>
+              <div>Расход - 50%</div>
+            </div>
+          ) : (
+            <span>Расход - 50%</span>
+          );
         placeholder = "0000.0";
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
         break;
       case "common_plus":
-        headerTitle = "Доход - 50%";
+        headerTitle =
+          screenWidth < 207 ? (
+            <div className={style.marquee}>
+              <div>Доход - 50%</div>
+            </div>
+          ) : (
+            <span>Доход - 50%</span>
+          );
         placeholder = "0000.0";
         bottomWarning = "Введите число, которое больше нуля";
         break;
       case "fun_plus":
-        headerTitle = "Доход - 30%";
+        headerTitle =
+          screenWidth < 207 ? (
+            <div className={style.marquee}>
+              <div>Доход - 30%</div>
+            </div>
+          ) : (
+            <span>Доход - 30%</span>
+          );
         placeholder = "0000.0";
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
         break;
       case "fun_minus":
-        headerTitle = "Расход - 30%";
+        headerTitle =
+          screenWidth < 214 ? (
+            <div className={style.marquee}>
+              <div>Расход - 30%</div>
+            </div>
+          ) : (
+            <span>Расход - 30%</span>
+          );
         placeholder = "0000.0";
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
         break;
       case "invest_minus":
-        headerTitle = "Расход - 20%";
+        headerTitle =
+          screenWidth < 214 ? (
+            <div className={style.marquee}>
+              <div>Расход - 20%</div>
+            </div>
+          ) : (
+            <span>Расход - 20%</span>
+          );
         placeholder = "0000.0";
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
         break;
       case "invest_plus":
-        headerTitle = "Доход - 20%";
+        headerTitle =
+          screenWidth < 207 ? (
+            <div className={style.marquee}>
+              <div>Доход - 20%</div>
+            </div>
+          ) : (
+            <span>Доход - 20%</span>
+          );
         placeholder = "0000.0";
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
         break;
       case "common_transfer":
-        headerTitle = "Перевод из 50%";
+        headerTitle =
+          screenWidth < 238 ? (
+            <div className={style.marquee}>
+              <div>Перевод из 50%</div>
+            </div>
+          ) : (
+            <span>Перевод из 50%</span>
+          );
         placeholder = "" + common;
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
         break;
       case "fun_transfer":
-        headerTitle = "Перевод из 30%";
+        headerTitle =
+          screenWidth < 238 ? (
+            <div className={style.marquee}>
+              <div>Перевод из 30%</div>
+            </div>
+          ) : (
+            <span>Перевод из 30%</span>
+          );
         placeholder = "" + fun;
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
         break;
       case "invest_transfer":
-        headerTitle = "Перевод из 20%";
+        headerTitle =
+          screenWidth < 238 ? (
+            <div className={style.marquee}>
+              <div>Перевод из 20%</div>
+            </div>
+          ) : (
+            <span>Перевод из 20%</span>
+          );
         placeholder = "" + invest;
         bottomWarning = errorExplain
           ? errorExplain
@@ -352,7 +476,13 @@ export class Modal extends React.Component<PROPS, STATE> {
     const { isErrorInput } = this.state;
     return (
       <ModalRoot activeModal={typeModal}>
-        <ModalPage id={"budget_minus"} onClose={this.onClose} header={header}>
+        <ModalPage
+          id={"budget_minus"}
+          onClose={this.onClose}
+          header={header}
+          dynamicContentHeight={true}
+          settlingHeight={100}
+        >
           <FormLayout>
             <Input
               inputMode="numeric"

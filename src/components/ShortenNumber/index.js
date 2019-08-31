@@ -1,6 +1,7 @@
 //@flow
 import React from "react";
 import NumericLabel from "react-pretty-numbers";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 import style from "./ShortenNumber.css";
 import { Icon } from "../index";
@@ -12,7 +13,8 @@ type PROPS = {
   alternative: boolean,
   curency?: boolean,
   easterEggSize?: string,
-  minValToShort?: number
+  minValToShort?: number,
+  size?: number
 };
 
 function getRandomInt(min, max) {
@@ -27,7 +29,8 @@ export const ShortenNumber = ({
   alternative,
   easterEggSize,
   minValToShort,
-  curency
+  curency,
+  size
 }: PROPS) => {
   const params = {
     justification: "L",
@@ -44,10 +47,30 @@ export const ShortenNumber = ({
   };
   if (alternative) {
     if (+children > 1e7 || +children < -1e7) {
-      const res = curency ? cutNumber(children) + "₽" : cutNumber(children);
+      const res = curency ? (
+        <>
+          {cutNumber(children)}
+          <i
+            style={{ fontSize: `${size}px` }}
+            className="fas fa-ruble-sign"
+          ></i>
+        </>
+      ) : (
+        cutNumber(children)
+      );
       return res;
     } else {
-      const res = curency ? children + "₽" : children;
+      const res = curency ? (
+        <>
+          {children}
+          <i
+            style={{ fontSize: `${size}px` }}
+            className="fas fa-ruble-sign"
+          ></i>
+        </>
+      ) : (
+        children
+      );
       return res;
     }
   }
@@ -61,7 +84,9 @@ export const ShortenNumber = ({
   return (
     <span>
       <NumericLabel params={params}>{children}</NumericLabel>{" "}
-      <span className={style.volute}>₽</span>
+      <span className={style.volute}>
+        <i style={{ fontSize: `${size}px` }} className="fas fa-ruble-sign"></i>
+      </span>
     </span>
   );
 };

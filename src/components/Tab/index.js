@@ -48,7 +48,7 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true}>
+                  <ShortenNumber alternative={true} curency={true} size={12}>
                     {income.total}
                   </ShortenNumber>
                 </div>
@@ -61,7 +61,7 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true}>
+                  <ShortenNumber alternative={true} curency={true} size={12}>
                     {income.common}
                   </ShortenNumber>
                 </div>
@@ -74,7 +74,7 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true}>
+                  <ShortenNumber alternative={true} curency={true} size={12}>
                     {income.fun}
                   </ShortenNumber>
                 </div>
@@ -87,7 +87,7 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true}>
+                  <ShortenNumber alternative={true} curency={true} size={12}>
                     {income.invest}
                   </ShortenNumber>
                 </div>
@@ -103,7 +103,7 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true}>
+                  <ShortenNumber alternative={true} curency={true} size={12}>
                     {costs.total}
                   </ShortenNumber>
                 </div>
@@ -116,7 +116,7 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true}>
+                  <ShortenNumber alternative={true} curency={true} size={12}>
                     {costs.common}
                   </ShortenNumber>
                 </div>
@@ -129,7 +129,7 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true}>
+                  <ShortenNumber alternative={true} curency={true} size={12}>
                     {costs.fun}
                   </ShortenNumber>
                 </div>
@@ -142,7 +142,7 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true}>
+                  <ShortenNumber alternative={true} curency={true} size={12}>
                     {costs.invest}
                   </ShortenNumber>
                 </div>

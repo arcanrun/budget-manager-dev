@@ -11,6 +11,7 @@ import "./animations.css";
 import { stopGuide } from "../../actions";
 
 type PROPS = {
+  tutorialChangeState: Function,
   getWholeBudget: Function,
   onClickToggleModal: Function,
   addWholeBudget: Function,
@@ -31,7 +32,8 @@ type PROPS = {
   vk_id: number,
   calc: Object,
   common: Object,
-  is_first_time: boolean
+  is_first_time: boolean,
+  is_tutorial_done: boolean
 };
 
 type STATE = {
@@ -50,7 +52,7 @@ class Manager extends React.Component<PROPS, STATE> {
         {
           target: ".first-step",
           title: "Общий бюджет",
-          content: "Здесь отображаются все ваши накопления.",
+          content: "Здесь отображаются все Ваши накопления.",
           disableBeacon: true,
           placement: "auto",
           isFixed: true
@@ -58,7 +60,7 @@ class Manager extends React.Component<PROPS, STATE> {
         {
           target: ".pencil",
           title: "Общий бюджет",
-          content: "Здесь вы можете изменить сумму вашего бюджета.",
+          content: "Здесь вы можете изменить сумму Вашего бюджета.",
           disableBeacon: true,
           placement: "auto",
           isFixed: true
@@ -85,7 +87,7 @@ class Manager extends React.Component<PROPS, STATE> {
           target: ".fifth-step",
           title: "50/30/20",
           content:
-            "Приложение разделяет весь ваш бюджет на 50%(общие расходы), 30%(развлечения), 20%(инвестиции). Диаграмма показывает остаток средств по той или иной категории, а также желательную сумму средств, доступную на сегодняшний день.",
+            "Приложение разделяет весь Ваш бюджет на 50%(общие расходы), 30%(развлечения), 20%(инвестиции). Диаграмма показывает остаток средств по той или иной категории, а также желательную сумму средств, доступную на сегодняшний день.",
           disableBeacon: true,
           placement: "auto",
           isFixed: true
@@ -165,9 +167,11 @@ class Manager extends React.Component<PROPS, STATE> {
     }
   };
   handleTour = (data: any) => {
+    const { stopGuide, tutorialChangeState, vk_id } = this.props;
     const { action } = data;
     if (action === "reset") {
-      this.props.stopGuide();
+      stopGuide();
+      tutorialChangeState(vk_id, true);
     }
   };
   render() {
@@ -181,14 +185,28 @@ class Manager extends React.Component<PROPS, STATE> {
       daysToPayday,
       calc,
       calcBudget,
-      is_first_time
+      is_first_time,
+      is_tutorial_done
     } = this.props;
-    console.log("--------->", daysToPayday);
     const { tempPayDay, steps } = this.state;
-
-    const wholeBudgetCard = isFetching_calc ? (
-      ""
-    ) : (
+    const enterBudgetCard = (
+      <Card
+        headerTitle={"общий бюджет"}
+        icon={"money-bag"}
+        rightIcon={budget ? "pencil" : ""}
+        onClick={() => onClickToggleModal("budget")}
+      >
+        <WholeBudget
+          onClickToggleModal={onClickToggleModal}
+          typeModal={"budget"}
+          wholeBudget={budget}
+          daysToPayday={daysToPayday}
+          isFetching={isFetching_calc}
+          isEnterBudget
+        />
+      </Card>
+    );
+    const wholeBudgetCard = (
       <Card
         headerTitle={"общий бюджет"}
         icon={"money-bag"}
@@ -289,6 +307,7 @@ class Manager extends React.Component<PROPS, STATE> {
         scrollToFirstStep
         styles={{
           options: {
+            userSelect: "none",
             primaryColor: "#5281b9",
             zIndex: 1,
             outline: "none",
@@ -296,21 +315,25 @@ class Manager extends React.Component<PROPS, STATE> {
             arrowColor: "#47a3ff"
           },
           buttonNext: {
+            userSelect: "none",
             outline: "none",
             color: "#fff",
             backgroundColor: "#f72d6b"
           },
           buttonSkip: {
+            userSelect: "none",
             color: "#5281b9",
+            outline: "none",
             backgroundColor: "transparent",
             fontSzie: "13px"
           },
           buttonClose: {
+            outline: "none",
+            userSelect: "none",
             color: "#fff"
           },
           overlay: {
             backgroundColor: "rgba(0, 0, 0, 0)",
-            left: 0,
             mixBlendMode: "hard-light",
             overflow: "hidden",
             position: "absolute",
@@ -322,6 +345,7 @@ class Manager extends React.Component<PROPS, STATE> {
             backgroundColor: "rgba(0,0,0,0.1)"
           },
           tooltip: {
+            userSelect: "none",
             backgroundColor: "#47a3ff",
             color: "#fff"
           }
@@ -340,13 +364,14 @@ class Manager extends React.Component<PROPS, STATE> {
           unmountOnExit
         >
           <div className={style.manager}>
-            {wholeBudgetCard}
+            {is_first_time ? enterBudgetCard : ""}
+            {budget ? wholeBudgetCard : ""}
             {budget ? calendarCard : ""}
             {budget && payday ? budgetCardCommon : ""}
             {budget && payday ? budgetCardFun : ""}
             {budget && payday ? budgetCardInvest : ""}
             {/*!modalIsVisible || modalOverlay*/}
-            {is_first_time ? (budget && payday ? guide : "") : ""}
+            {!is_tutorial_done ? (budget && payday ? guide : "") : ""}
           </div>
         </CSSTransition>
       </>

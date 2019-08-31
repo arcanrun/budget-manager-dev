@@ -11,6 +11,7 @@ import { signUp, stopGuide } from "./signUpActions";
 import { makeProfileOperation } from "./profileOperationsAction";
 import { getStatistics } from "./staisticsActions";
 import { calcBudget } from "./calcBudgetActions";
+import { tutorialChangeState } from "./tutorialAction";
 
 export {
   addWholeBudget,
@@ -27,5 +28,6 @@ export {
   signUp,
   calcBudget,
   stopGuide,
-  hideModal
+  hideModal,
+  tutorialChangeState
 };

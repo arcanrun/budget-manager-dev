@@ -28,18 +28,24 @@ import {
   CALC_BUDGET_REQUEST,
   CALC_BUDGET_SUCCESS,
   SIGNUP_STOP_GUIDE,
-  SIGNUP_SUCCESS
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
+  SIGNUP_REQUEST
 } from "../constants";
 
 type UserState = {
   is_first_time: boolean,
+  is_tutorial_done: boolean,
   vk_id: ?number,
   avatar: ?string,
   name: ?string,
   sure_name: ?string,
   isFetching: boolean,
+  isFetching_signup: boolean,
+  error_signup: boolean,
+  error_signup_message: ?string,
   error: boolean,
-  error_message: boolean,
+  error_message: ?string,
   register_date: ?string,
   history: {
     isFetching: false,
@@ -92,16 +98,20 @@ type UserState = {
 };
 
 export const initialState: UserState = {
+  is_tutorial_done: false,
   is_first_time: true,
   // vk_id: 65122543,
-  // vk_id: 1,
-  vk_id: undefined,
+  vk_id: 1,
+  // vk_id: undefined,
   avatar: undefined,
   name: undefined,
   sure_name: undefined,
   isFetching: true,
   error: false,
-  error_message: false,
+  error_signup_message: undefined,
+  error_signup: false,
+  isFetching_signup: false,
+  error_message: undefined,
   register_date: undefined,
   history: {
     value: [],
@@ -145,16 +155,16 @@ export const initialState: UserState = {
     error: true,
     error_message: undefined,
     costs: {
-      total: undefined,
-      common: undefined,
-      fun: undefined,
-      invest: undefined
+      total: 0,
+      common: 0,
+      fun: 0,
+      invest: 0
     },
     income: {
-      total: undefined,
-      common: undefined,
-      fun: undefined,
-      invest: undefined
+      total: 0,
+      common: 0,
+      fun: 0,
+      invest: 0
     }
   }
 };
@@ -162,7 +172,7 @@ export const initialState: UserState = {
 export function user(state: UserState = initialState, action: Object) {
   switch (action.type) {
     case SIGNUP_STOP_GUIDE:
-      return { ...state, is_first_time: false };
+      return { ...state, is_first_time: false, is_tutorial_done: true };
     case CALC_BUDGET_REQUEST:
     case ADD_BUDGET_REQUEST:
       return {
@@ -216,6 +226,7 @@ export function user(state: UserState = initialState, action: Object) {
     case GET_ALL_COSTS_SUCCESS:
       return {
         ...state,
+        is_tutorial_done: action.payload.payload.is_tutorial_done,
         register_date: action.payload.payload.register_date,
         calc: {
           ...state.calc,
@@ -263,7 +274,7 @@ export function user(state: UserState = initialState, action: Object) {
     case CALC_TODAY_COSTS_SUCCESS:
       return {
         ...state,
-
+        is_first_time: false,
         calc: {
           ...state.calc,
           budget: action.payload.payload.budget,
@@ -339,16 +350,27 @@ export function user(state: UserState = initialState, action: Object) {
         error: true,
         error_message: action.error.message
       };
-
+    case SIGNUP_REQUEST:
+      return { ...state, isFetching_signup: true, error_signup: false };
+    case SIGNUP_FAILURE: {
+      return {
+        ...state,
+        isFetching_signup: false,
+        error_signup: true,
+        error_signup_message: action.error.message
+      };
+    }
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        isFetching: false,
+        isFetching_signup: false,
         vk_id: action.payload.vk_id,
         name: action.payload.name,
         sure_name: action.payload.sure_name,
         avatar: action.payload.avatar,
-        is_first_time: true
+        is_first_time: true,
+        is_tutorial_done: action.payload.is_tutorial_done,
+        error_signup: false
       };
     case LOGIN_SUCCESS:
       return {
@@ -358,7 +380,8 @@ export function user(state: UserState = initialState, action: Object) {
         name: action.payload.name,
         sure_name: action.payload.sure_name,
         avatar: action.payload.avatar,
-        is_first_time: false
+        is_first_time: false,
+        is_tutorial_done: action.payload.is_tutorial_done
       };
 
     case PROFILE_OPERATION_SUCCESS:

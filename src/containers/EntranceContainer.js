@@ -9,19 +9,13 @@ import { Entrance } from "../components/index";
 import { signUp } from "../actions";
 
 const mapStateToProps = (state: Object) => ({
-  vk_id: state.user.vk_id
+  vk_id: state.user.vk_id,
+  isFetching: state.user.isFetching_signup,
+  error: state.user.error_signup
 });
 
-class EntranceContainer extends React.Component {
-  componentDidMount() {}
-  render() {
-    return <Entrance {...this.props} />;
-  }
-}
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    { signUp }
-  )(EntranceContainer)
-);
+const EntranceContainer = connect(
+  mapStateToProps,
+  { signUp }
+)(Entrance);
+export default EntranceContainer;

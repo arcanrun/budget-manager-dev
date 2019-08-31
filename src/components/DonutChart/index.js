@@ -4,6 +4,7 @@ import React from "react";
 import style from "./DonutChart.module.css";
 import { ShortenNumber } from "../index";
 import { cutNumber } from "../ShortenNumber/helpers";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 type PROPS = {
   color: string,
@@ -25,6 +26,24 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
   }
   return (
     <div className={[style.donutContainer, "fifth-step"].join(" ")}>
+      <div className={style.infoDonut}>
+        <div className={style.title}>{title}</div>
+        <div className={style.cost}>
+          <ShortenNumber alternative={true} curency size={12}>
+            {cost}
+          </ShortenNumber>
+        </div>
+        <div className={style.footerTitle}>На сегодня:</div>
+        <div className={style.footer}>
+          <ShortenNumber alternative={true} curency size={12}>
+            {temp}
+          </ShortenNumber>
+          /
+          <ShortenNumber size={12} alternative={true} curency>
+            {maxToday}
+          </ShortenNumber>
+        </div>
+      </div>
       <svg
         viewBox="0 0 35 35"
         className={
@@ -41,54 +60,6 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
           strokeDasharray={`${tempValueInPercents}, 100`}
           fill={colorTemp}
         />
-        <g className={style.text}>
-          <text
-            className={style.title}
-            x="50%"
-            y="35%"
-            transform="rotate(90 17.5 17.5)"
-            textAnchor="middle"
-          >
-            {title}
-          </text>
-          <text
-            className={style.cost}
-            x="50%"
-            y="50%"
-            transform="rotate(90 17.5 17.5)"
-            textAnchor="middle"
-          >
-            <ShortenNumber alternative={true} curency>
-              {cost}
-            </ShortenNumber>
-          </text>
-
-          <text
-            className={style.footerTitle}
-            x="50%"
-            y="60%"
-            transform="rotate(90 17.5 17.5)"
-            textAnchor="middle"
-          >
-            На сегодня:
-          </text>
-
-          <text
-            className={style.footerCost}
-            x="50%"
-            y="68%"
-            transform="rotate(90 17.5 17.5)"
-            textAnchor="middle"
-          >
-            <ShortenNumber alternative={true} curency>
-              {temp}
-            </ShortenNumber>
-            /{" "}
-            <ShortenNumber alternative={true} curency>
-              {maxToday}
-            </ShortenNumber>
-          </text>
-        </g>
       </svg>
     </div>
   );
