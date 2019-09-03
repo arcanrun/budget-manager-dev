@@ -38,13 +38,9 @@ export const signUp = () => {
     let toDay = new Date();
     toDay = toDay.toLocaleDateString();
     let vkRes = {
-      errors: false,
-      error_message: undefined,
-      vk_id: undefined,
+      params: undefined,
       name: undefined,
       sure_name: undefined,
-      avatar: undefined,
-      email: undefined,
       toDay
     };
 
@@ -57,12 +53,9 @@ export const signUp = () => {
       .send("VKWebAppGetUserInfo", {})
       .then(res => {
         console.log(res);
-        vkRes.vk_id = res.data.id;
+        vkRes.params = window.location.search;
         vkRes.name = res.data.first_name;
         vkRes.sure_name = res.data.last_name;
-        vkRes.avatar = res.data.photo_200;
-        vkRes.errors = false;
-        vkRes.error_message = undefined;
         fetch(API.SIGN_UP, {
           method: "POST",
           body: JSON.stringify(vkRes)

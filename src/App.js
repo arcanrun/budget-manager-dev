@@ -70,7 +70,7 @@ export class App extends React.Component<PROPS, STATE> {
                 title: "Удалить профиль",
                 autoclose: true,
                 style: "destructive",
-                action: () => makeProfileOperation(vk_id, "delete")
+                action: () => makeProfileOperation("delete")
               },
               {
                 title: "Отмена",

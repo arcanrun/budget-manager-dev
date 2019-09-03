@@ -189,7 +189,9 @@ class Manager extends React.Component<PROPS, STATE> {
       is_tutorial_done
     } = this.props;
     const { tempPayDay, steps } = this.state;
-    const enterBudgetCard = (
+    const enterBudgetCard = isFetching_calc ? (
+      ""
+    ) : (
       <Card
         headerTitle={"общий бюджет"}
         icon={"money-bag"}
@@ -364,7 +366,7 @@ class Manager extends React.Component<PROPS, STATE> {
           unmountOnExit
         >
           <div className={style.manager}>
-            {is_first_time ? enterBudgetCard : ""}
+            {budget ? "" : enterBudgetCard}
             {budget ? wholeBudgetCard : ""}
             {budget ? calendarCard : ""}
             {budget && payday ? budgetCardCommon : ""}
