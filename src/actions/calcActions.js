@@ -32,7 +32,6 @@ export const calcTempCostsFailure = (message: string) => ({
 
 export const calcTempCosts = (
   value: number,
-  vk_id: string,
   type: string,
   operation: string,
   date_now: string,
@@ -43,7 +42,7 @@ export const calcTempCosts = (
     fetch(API.TEMP_TODAY_COSTS, {
       method: "POST",
       body: JSON.stringify({
-        vk_id,
+        params: window.location.search,
         value,
         type,
         operation,

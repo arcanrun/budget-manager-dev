@@ -35,9 +35,7 @@ export const failuretGetAllCosts = (message: string) => ({
 });
 
 export const getAllCosts = (
-  vk_id: number,
   daysToPayday: number,
-  budget: string,
   toDay: string,
   toDayFormated: string
 ) => {
@@ -46,9 +44,7 @@ export const getAllCosts = (
     fetch(API.GET_ALL_COSTS, {
       method: "POST",
       body: JSON.stringify({
-        vk_id,
-        daysToPayday,
-        budget,
+        params: window.location.search,
         toDay
       })
     })

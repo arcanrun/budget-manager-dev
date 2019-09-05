@@ -34,7 +34,7 @@ export const getHistory = (vk_id: number) => {
     fetch(API.GET_HISTORY, {
       method: "POST",
       body: JSON.stringify({
-        vk_id
+        params: window.location.search
       })
     })
       .then(res => res.json())

@@ -209,7 +209,6 @@ export class Modal extends React.Component<PROPS, STATE> {
           if (operation) {
             this.props.calcBudget(
               inputValue,
-              this.props.vk_id,
               typeModalonly,
               operation,
               dateNow
@@ -217,14 +216,13 @@ export class Modal extends React.Component<PROPS, STATE> {
             break;
           }
           const type = daysToPayday ? "change" : "add";
-          addWholeBudget(vk_id, inputValue, type, daysToPayday);
+          addWholeBudget(inputValue, type);
           break;
         case "common":
         case "fun":
         case "invest":
           calcTempCosts(
             inputValue,
-            this.props.vk_id,
             typeModalonly,
             operation,
             dateNow,

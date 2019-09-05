@@ -32,7 +32,6 @@ export const calcBudgetFailure = (message: string) => ({
 
 export const calcBudget = (
   value: number,
-  vk_id: string,
   type: string,
   operation: string,
   date_now: string
@@ -42,7 +41,7 @@ export const calcBudget = (
     fetch(API.CALC_BUDGET, {
       method: "POST",
       body: JSON.stringify({
-        vk_id,
+        params: window.location.search,
         value,
         type,
         operation,

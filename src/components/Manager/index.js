@@ -4,7 +4,7 @@ import { CSSTransition } from "react-transition-group";
 import Joyride from "react-joyride";
 
 import { Card, Overlay } from "../index";
-import { ModalOverlay, WholeBudget, Calendar, PartBudget } from "../index";
+import { WholeBudget, Calendar, PartBudget } from "../index";
 import style from "./Manager.module.css";
 import { msToDays } from "../Calendar/calendarHelper";
 import "./animations.css";
@@ -106,16 +106,12 @@ class Manager extends React.Component<PROPS, STATE> {
   }
 
   componentDidMount() {
-    const budget = this.props.budget;
-    const vk_id = this.props.vk_id;
     const daysToPayday = this.props.daysToPayday;
 
     const toDay = new Date();
     const toDayFormated = toDay.toLocaleString().split(",")[0];
 
-    // this.props.logIn();
-
-    this.props.getAllCosts(vk_id, daysToPayday, budget, toDay, toDayFormated);
+    this.props.getAllCosts(daysToPayday, toDay, toDayFormated);
     this.toggleAnimation();
   }
   toggleAnimation = () => {
@@ -156,7 +152,7 @@ class Manager extends React.Component<PROPS, STATE> {
           Date.parse(tempPayDay || "") - Date.now()
         );
 
-        this.props.addPayDay(vk_id, tempPayDay, initial_daysToPayday);
+        this.props.addPayDay(tempPayDay, initial_daysToPayday);
         this.setState({ tempPayDay: undefined });
         break;
       case "chanel":
@@ -167,11 +163,11 @@ class Manager extends React.Component<PROPS, STATE> {
     }
   };
   handleTour = (data: any) => {
-    const { stopGuide, tutorialChangeState, vk_id } = this.props;
+    const { stopGuide, tutorialChangeState } = this.props;
     const { action } = data;
     if (action === "reset") {
       stopGuide();
-      tutorialChangeState(vk_id, true);
+      tutorialChangeState(true);
     }
   };
   render() {
@@ -236,16 +232,7 @@ class Manager extends React.Component<PROPS, STATE> {
         />
       </Card>
     );
-    const modalOverlay = (
-      <ModalOverlay
-        onClick={onClickToggleModal}
-        typeModal={typeModal}
-        calcBudget={calcBudget}
-        makeProfileOperation={""}
-        calc={calc}
-        {...this.props}
-      />
-    );
+
     const budgetCardCommon = (
       <Card
         icon="50%"
@@ -372,7 +359,6 @@ class Manager extends React.Component<PROPS, STATE> {
             {budget && payday ? budgetCardCommon : ""}
             {budget && payday ? budgetCardFun : ""}
             {budget && payday ? budgetCardInvest : ""}
-            {/*!modalIsVisible || modalOverlay*/}
             {!is_tutorial_done ? (budget && payday ? guide : "") : ""}
           </div>
         </CSSTransition>

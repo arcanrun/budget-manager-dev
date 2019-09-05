@@ -19,9 +19,9 @@ const requestSignUp = () => ({
     isFetching: true
   }
 });
-export const successSignUp = (res: Object) => ({
+export const successSignUp = (res: Object, avatar: strting) => ({
   type: SIGNUP_SUCCESS,
-  payload: res
+  payload: { ...res, avatar: avatar }
 });
 export const failureSignUp = (res: Object) => ({
   type: SIGNUP_FAILURE,
@@ -43,7 +43,7 @@ export const signUp = () => {
       sure_name: undefined,
       toDay
     };
-
+    let avatar = "";
     connect
       .send("VKWebAppInit", {})
       .then(data => console.log(data))
@@ -53,6 +53,7 @@ export const signUp = () => {
       .send("VKWebAppGetUserInfo", {})
       .then(res => {
         console.log(res);
+        avatar = res.data.photo_200;
         vkRes.params = window.location.search;
         vkRes.name = res.data.first_name;
         vkRes.sure_name = res.data.last_name;
@@ -63,7 +64,7 @@ export const signUp = () => {
           .then(res => res.json())
           .then(res => {
             console.log(res);
-            dispatch(successSignUp(res.PAYLOAD));
+            dispatch(successSignUp(res.PAYLOAD, avatar));
             return res;
           })
           .catch(err => console.log(err));

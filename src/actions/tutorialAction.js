@@ -26,15 +26,12 @@ const tutorialChangeSuccess = (res: Object) => {
   };
 };
 
-export const tutorialChangeState = (
-  vk_id: string,
-  is_tutorial_done: boolean
-) => {
+export const tutorialChangeState = (is_tutorial_done: boolean) => {
   return (dispatch: Function) => {
     dispatch(tutorialChangeRequest());
     fetch(API.CHANGE_TUTROIAL_STATE, {
       method: "POST",
-      body: JSON.stringify({ vk_id, is_tutorial_done })
+      body: JSON.stringify({ params: window.location.search, is_tutorial_done })
     })
       .then(res => res.json)
       .then(res => dispatch(tutorialChangeSuccess(res)))

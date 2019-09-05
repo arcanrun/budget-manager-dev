@@ -34,8 +34,7 @@ class History extends React.Component<PROPS, STATE> {
 
   componentDidMount() {
     const ins = this.state.in;
-    const { vk_id } = this.props;
-    this.props.getHistory(vk_id);
+    this.props.getHistory();
     this.toggleAnimation();
     console.log("---->", ins);
   }

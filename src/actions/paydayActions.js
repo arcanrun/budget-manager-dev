@@ -31,17 +31,13 @@ const failurePayDay = message => ({
   }
 });
 
-export const addPayDay = (
-  vk_id: number,
-  payday: string,
-  daysToPayday: number
-) => {
+export const addPayDay = (payday: string, daysToPayday: number) => {
   return (dispatch: any) => {
     dispatch(requestPayDay());
     fetch(API.ADD_PAYDAY, {
       method: "POST",
       body: JSON.stringify({
-        vk_id,
+        params: window.location.search,
         payday,
         days_to_payday: daysToPayday
       })

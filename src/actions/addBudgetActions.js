@@ -29,7 +29,6 @@ export const failuretAddWholeBudget = (message: string) => ({
 });
 
 export const addWholeBudget = (
-  vk_id: number,
   budget: number,
   operation: string,
   daysToPayday: number
@@ -38,7 +37,11 @@ export const addWholeBudget = (
     dispatch(requestAddWholeBudget());
     fetch(API.ADD_BUDGET, {
       method: "POST",
-      body: JSON.stringify({ vk_id, budget, operation, daysToPayday })
+      body: JSON.stringify({
+        params: window.location.search,
+        budget,
+        operation
+      })
     })
       .then(res => res.json())
       .then(res => {

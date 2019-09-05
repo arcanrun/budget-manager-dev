@@ -9,9 +9,7 @@ import { API } from "../API";
 const requestStatistics = (vk_id: number, toDayFormated: string) => ({
   type: STATISTICS_REQUEST,
   payload: {
-    isFetching: true,
-    vk_id,
-    toDayFormated
+    isFetching: true
   }
 });
 export const successStatistics = (payload: Object) => ({
@@ -36,7 +34,7 @@ export const getStatistics = (vk_id: number, toDayFormated: string) => {
     fetch(API.GET_STATISTICS, {
       method: "POST",
       body: JSON.stringify({
-        vk_id,
+        params: window.location.search,
         toDayFormated
       })
     })

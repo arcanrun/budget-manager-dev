@@ -142,13 +142,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
       switch (typeModal) {
         case "budget":
           if (operation) {
-            this.props.calcBudget(
-              inputValue,
-              this.props.vk_id,
-              typeModal,
-              operation,
-              dateNow
-            );
+            this.props.calcBudget(inputValue, typeModal, operation, dateNow);
             break;
           }
           const type = daysToPayday ? "change" : "add";
