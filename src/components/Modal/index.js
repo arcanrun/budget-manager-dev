@@ -190,7 +190,6 @@ export class Modal extends React.Component<PROPS, STATE> {
       typeModal,
       daysToPayday,
       addWholeBudget,
-      vk_id,
       calcTempCosts
     } = this.props;
     let transferToDefault = transferTo || "common";
@@ -300,7 +299,7 @@ export class Modal extends React.Component<PROPS, STATE> {
           );
 
         headerTitle = budget ? titleOne : titleTwo;
-        placeholder = "0000.0";
+        placeholder = budget ? budget : "0000.0";
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";

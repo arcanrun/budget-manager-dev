@@ -143,7 +143,7 @@ class Manager extends React.Component<PROPS, STATE> {
     }
   };
   handleNewPayDay = (e: any) => {
-    const { vk_id } = this.props;
+    const toDay = new Date();
     const btnType = e.target.dataset.btnType;
     const { tempPayDay } = this.state;
     switch (btnType) {
@@ -152,7 +152,7 @@ class Manager extends React.Component<PROPS, STATE> {
           Date.parse(tempPayDay || "") - Date.now()
         );
 
-        this.props.addPayDay(tempPayDay, initial_daysToPayday);
+        this.props.addPayDay(toDay, tempPayDay);
         this.setState({ tempPayDay: undefined });
         break;
       case "chanel":
