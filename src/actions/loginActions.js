@@ -44,7 +44,13 @@ export const logIn = () => {
         avatar = res.data.photo_200;
         fetch(API.LOG_IN, {
           method: "POST",
-          body: JSON.stringify(vkRes)
+          mode: "cors",
+          body: JSON.stringify(vkRes),
+          headers: {
+            "Content-Type": "application/json",
+            // "Content-Type": "application/x-www-form-urlencoded"
+            "X-Content-Type-Options": "nosniff"
+          }
         })
           .then(res => res.json())
           .then(res => {

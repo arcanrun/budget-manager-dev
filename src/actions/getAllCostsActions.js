@@ -43,10 +43,17 @@ export const getAllCosts = (
     dispatch(requestGetAllCosts());
     fetch(API.GET_ALL_COSTS, {
       method: "POST",
+      mode: "cors",
       body: JSON.stringify({
         params: window.location.search,
         toDay
-      })
+      }),
+
+      headers: {
+        "Content-Type": "application/json",
+        // "Content-Type": "application/x-www-form-urlencoded"
+        "X-Content-Type-Options": "nosniff"
+      }
     })
       .then(res => res.json())
       .then(res => {
