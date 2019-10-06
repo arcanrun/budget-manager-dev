@@ -19,9 +19,14 @@ const requestSignUp = () => ({
     isFetching: true
   }
 });
-export const successSignUp = (res: Object, avatar: strting) => ({
+export const successSignUp = (res: Object, vkRes: Object) => ({
   type: SIGNUP_SUCCESS,
-  payload: { ...res, avatar: avatar }
+  payload: {
+    ...res,
+    name: vkRes.name,
+    sure_name: vkRes.sure_name,
+    avatar: vkRes.avatar
+  }
 });
 export const failureSignUp = (res: Object) => ({
   type: SIGNUP_FAILURE,
@@ -38,12 +43,10 @@ export const signUp = () => {
     let toDay = new Date();
     toDay = toDay.toLocaleDateString();
     let vkRes = {
-      params: undefined,
       name: undefined,
       sure_name: undefined,
-      toDay
+      avatar: undefined
     };
-    let avatar = "";
     connect
       .send("VKWebAppInit", {})
       .then(data => console.log(data))
@@ -53,18 +56,17 @@ export const signUp = () => {
       .send("VKWebAppGetUserInfo", {})
       .then(res => {
         console.log(res);
-        avatar = res.data.photo_200;
-        vkRes.params = window.location.search;
+        vkRes.avatar = res.data.photo_200;
         vkRes.name = res.data.first_name;
         vkRes.sure_name = res.data.last_name;
         fetch(API.SIGN_UP, {
           method: "POST",
-          body: JSON.stringify(vkRes)
+          body: JSON.stringify({ params: window.location.search, toDay })
         })
           .then(res => res.json())
           .then(res => {
             console.log(res);
-            dispatch(successSignUp(res.PAYLOAD, avatar));
+            dispatch(successSignUp(res.PAYLOAD, vkRes));
             return res;
           })
           .catch(err => console.log(err));

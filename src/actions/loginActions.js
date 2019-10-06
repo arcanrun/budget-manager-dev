@@ -10,9 +10,14 @@ const requestLogIn = () => ({
     isFetching: true
   }
 });
-export const successLogIn = (res: Object, avatar: strting) => ({
+export const successLogIn = (res: Object, vkRes: Object) => ({
   type: LOGIN_SUCCESS,
-  payload: { ...res, avatar: avatar }
+  payload: {
+    ...res,
+    name: vkRes.name,
+    sure_name: vkRes.sure_name,
+    avatar: vkRes.avatar
+  }
 });
 export const failureLogIn = (msg: string) => ({
   type: LOGIN_FAILURE,
@@ -27,10 +32,10 @@ export const logIn = () => {
   return (dispatch: Function) => {
     dispatch(requestLogIn());
     let vkRes = {
-      params: window.location.search
+      name: undefined,
+      sure_name: undefined,
+      avatar: undefined
     };
-
-    let avatar = "";
 
     connect
       .send("VKWebAppInit", {})
@@ -41,11 +46,13 @@ export const logIn = () => {
       .send("VKWebAppGetUserInfo", {})
       .then(res => {
         console.log(res);
-        avatar = res.data.photo_200;
+        vkRes.avatar = res.data.photo_200;
+        vkRes.name = res.data.first_name;
+        vkRes.sure_name = res.data.last_name;
         fetch(API.LOG_IN, {
           method: "POST",
           mode: "cors",
-          body: JSON.stringify(vkRes),
+          body: JSON.stringify({ params: window.location.search }),
           headers: {
             "Content-Type": "application/json",
             // "Content-Type": "application/x-www-form-urlencoded"
@@ -59,7 +66,7 @@ export const logIn = () => {
             if (response === "LOGIN_ERROR") {
               dispatch(failureLogIn(response));
             } else {
-              dispatch(successLogIn(res.PAYLOAD, avatar));
+              dispatch(successLogIn(res.PAYLOAD, vkRes));
             }
 
             return res;
