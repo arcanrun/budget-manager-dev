@@ -6,7 +6,7 @@ import {
 } from "../constants";
 import { API } from "../API";
 
-const requestStatistics = (vk_id: number, toDayFormated: string) => ({
+const requestStatistics = (vk_id: number) => ({
   type: STATISTICS_REQUEST,
   payload: {
     isFetching: true
@@ -28,14 +28,13 @@ export const failuretStatistics = (message: string) => ({
   }
 });
 
-export const getStatistics = (vk_id: number, toDayFormated: string) => {
+export const getStatistics = (vk_id: number) => {
   return (dispatch: Function) => {
-    dispatch(requestStatistics(vk_id, toDayFormated));
+    dispatch(requestStatistics(vk_id));
     fetch(API.GET_STATISTICS, {
       method: "POST",
       body: JSON.stringify({
-        params: window.location.search,
-        toDayFormated
+        params: window.location.search
       })
     })
       .then(res => res.json())

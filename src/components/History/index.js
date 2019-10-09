@@ -15,12 +15,17 @@ import {
 
 import { compareDate } from "../Calendar/calendarHelper";
 import "./animations.css";
+import {
+  stringToDate,
+  compareDateWithMomentPlugin
+} from "../../helpers/datetime";
 
 type PROPS = {
   vk_id: number,
   getHistory: Function,
   history: Array<Object>,
-  isFetching: boolean
+  isFetching: boolean,
+  timezone: number
 };
 
 type STATE = {
@@ -47,7 +52,7 @@ class History extends React.Component<PROPS, STATE> {
   };
 
   render() {
-    const { history, isFetching, vk_id } = this.props;
+    const { history, isFetching, vk_id, timezone } = this.props;
 
     // const overlay = <Overlay isTransparent={true} />;
     const verticalLine = <div className={styleHistory.verticalLine} />;
@@ -94,7 +99,9 @@ class History extends React.Component<PROPS, STATE> {
                         width: "272px"
                       }}
                     >
-                      <div className={styleHistory.day}>{day}</div>
+                      <div className={styleHistory.day}>
+                        {stringToDate(day, timezone)}
+                      </div>
                     </Sticky>
                     {verticalLine}
 

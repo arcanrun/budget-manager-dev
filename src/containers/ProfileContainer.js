@@ -23,7 +23,8 @@ const mapStateToProps = state => ({
   toDayFormated: state.user.calc.toDayFormated,
   registerDate: state.user.register_date,
   calc: state.user.calc,
-  history: state.user.history.value
+  history: state.user.history.value,
+  timezone: state.user.timezone
 });
 export const ProfileContainer = connect(
   mapStateToProps,

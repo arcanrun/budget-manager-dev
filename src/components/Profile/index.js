@@ -7,6 +7,7 @@ import { Button, Avatar } from "@vkontakte/vkui";
 import style from "./Profile.module.css";
 import { Card, ModalOverlay, Overlay, Tab } from "../index";
 import "./animations.css";
+import { stringToDate } from "../../helpers/datetime";
 
 type PROPS = {
   makeProfileOperation: Function,
@@ -25,7 +26,8 @@ type PROPS = {
   registerDate: number,
   costs: Object,
   income: Object,
-  calc: Object
+  calc: Object,
+  timezone: number
 };
 
 type STATE = {
@@ -37,9 +39,9 @@ class Profile extends React.Component<PROPS, STATE> {
     in: false
   };
   componentDidMount() {
-    const { vk_id, toDayFormated } = this.props;
+    const { vk_id } = this.props;
 
-    this.props.getStatistics(vk_id, toDayFormated);
+    this.props.getStatistics(vk_id);
     this.props.getHistory(vk_id);
     this.toggleAnimation();
   }
@@ -59,19 +61,17 @@ class Profile extends React.Component<PROPS, STATE> {
   };
   render() {
     const {
-      makeProfileOperation,
       toggleModal,
       vk_id,
       name,
       sure_name,
       avatar,
-      typeModal,
       isFetching,
       costs,
       income,
       registerDate,
-      calc,
-      history
+      history,
+      timezone
     } = this.props;
     // const overlay = <Overlay isTransparent={true} />;
     // const showPreloader = isFetching ? overlay : "";
@@ -87,7 +87,8 @@ class Profile extends React.Component<PROPS, STATE> {
               <span> {sure_name}</span>
             </div>
             <div className={style.subFooter}>
-              c <b>{registerDate}</b> управляет своим бюджетом
+              c <b>{stringToDate(registerDate, timezone)}</b> управляет своим
+              бюджетом
             </div>
           </div>
         </div>
@@ -97,7 +98,12 @@ class Profile extends React.Component<PROPS, STATE> {
     const statisticCard = (
       <Card icon={"pie-chart-logo"} headerTitle={"статистика за текущий месяц"}>
         <div>
-          <Tab costs={costs} income={income} history={history} />
+          <Tab
+            costs={costs}
+            income={income}
+            history={history}
+            timezone={timezone}
+          />
         </div>
       </Card>
     );

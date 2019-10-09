@@ -34,7 +34,6 @@ export const calcTempCosts = (
   value: number,
   type: string,
   operation: string,
-  date_now: string,
   transfer_to: ?string = undefined
 ) => {
   return (dispatch: any) => {
@@ -46,7 +45,6 @@ export const calcTempCosts = (
         value,
         type,
         operation,
-        date_now,
         transfer_to
       })
     })

@@ -206,12 +206,7 @@ export class Modal extends React.Component<PROPS, STATE> {
       switch (typeModalonly) {
         case "budget":
           if (operation) {
-            this.props.calcBudget(
-              inputValue,
-              typeModalonly,
-              operation,
-              dateNow
-            );
+            this.props.calcBudget(inputValue, typeModalonly, operation);
             break;
           }
           const type = daysToPayday ? "change" : "add";
@@ -224,7 +219,6 @@ export class Modal extends React.Component<PROPS, STATE> {
             inputValue,
             typeModalonly,
             operation,
-            dateNow,
             transferTo ? transferTo : transferToDefault
           );
           break;

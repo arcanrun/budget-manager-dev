@@ -16,7 +16,8 @@ export const successLogIn = (res: Object, vkRes: Object) => ({
     ...res,
     name: vkRes.name,
     sure_name: vkRes.sure_name,
-    avatar: vkRes.avatar
+    avatar: vkRes.avatar,
+    timezone: vkRes.timezone
   }
 });
 export const failureLogIn = (msg: string) => ({
@@ -34,7 +35,8 @@ export const logIn = () => {
     let vkRes = {
       name: undefined,
       sure_name: undefined,
-      avatar: undefined
+      avatar: undefined,
+      timezone: undefined
     };
 
     connect
@@ -49,14 +51,15 @@ export const logIn = () => {
         vkRes.avatar = res.data.photo_200;
         vkRes.name = res.data.first_name;
         vkRes.sure_name = res.data.last_name;
+        vkRes.timezone = res.data.timezone;
         fetch(API.LOG_IN, {
           method: "POST",
-          mode: "cors",
+          // mode: "cors",
           body: JSON.stringify({ params: window.location.search }),
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
             // "Content-Type": "application/x-www-form-urlencoded"
-            "X-Content-Type-Options": "nosniff"
+            // "X-Content-Type-Options": "nosniff"
           }
         })
           .then(res => res.json())

@@ -5,22 +5,31 @@ import style from "./LineChart.module.css";
 import ChartistGraph from "react-chartist";
 import "./chartist.css";
 import { cutNumber } from "../ShortenNumber/helpers";
+import { stringToDate } from "../../helpers/datetime";
 
 type PROPS = {
   switcher: boolean,
-  history: Array<any>
+  history: Array<any>,
+  timezone: number
 };
 
-export const LineChart = ({ switcher, history }: PROPS) => {
+export const LineChart = ({ switcher, history, timezone }: PROPS) => {
   let currentMonth = new Date();
   currentMonth = currentMonth.getMonth() + 1;
   const currentMonthData = [];
   history.forEach(el => {
-    const month = +Object.keys(el)[0].substr(4, 1);
+    let month = Object.keys(el)[0];
+    console.log(month);
+    month = "" + stringToDate(month, timezone);
+    console.log(month);
+
+    month = +month.substr(3, 2);
+
     if (month === currentMonth) {
       currentMonthData.push(el);
     }
   });
+
   currentMonthData.reverse();
 
   var data = {
@@ -72,7 +81,6 @@ export const LineChart = ({ switcher, history }: PROPS) => {
   if (switcher) {
     dataIncome.series[0].forEach(el => {
       const toStr = "" + el;
-      console.log("--<", offset, toStr.length);
 
       if (toStr.length === 4) {
         const increment = 30;

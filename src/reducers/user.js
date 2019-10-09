@@ -113,6 +113,7 @@ export const initialState: UserState = {
   isFetching_signup: false,
   error_message: undefined,
   register_date: undefined,
+  timezone: 0,
   history: {
     value: [],
     isFetching: false,
@@ -363,6 +364,7 @@ export function user(state: UserState = initialState, action: Object) {
     case SIGNUP_SUCCESS:
       return {
         ...state,
+        timezone: action.payload.timezone,
         isFetching_signup: false,
         vk_id: action.payload.vk_id,
         name: action.payload.name,
@@ -375,6 +377,7 @@ export function user(state: UserState = initialState, action: Object) {
     case LOGIN_SUCCESS:
       return {
         ...state,
+        timezone: action.payload.timezone,
         isFetching: false,
         vk_id: action.payload.vk_id,
         name: action.payload.name,
