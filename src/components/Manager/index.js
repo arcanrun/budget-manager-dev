@@ -278,12 +278,14 @@ class Manager extends React.Component<PROPS, STATE> {
         />
       </Card>
     );
+
     const guide = (
       <Joyride
         callback={this.handleTour}
         steps={steps}
         continuous
         disableOverlayClose
+        scrollOffset={90}
         locale={{
           back: "Назад",
           close: "Закрыть",
@@ -336,7 +338,8 @@ class Manager extends React.Component<PROPS, STATE> {
           tooltip: {
             userSelect: "none",
             backgroundColor: "#47a3ff",
-            color: "#fff"
+            color: "#fff",
+            transition: "opacity 0.3s ease 0s, transform 0.2s ease 0s"
           }
         }}
       />

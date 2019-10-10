@@ -13,6 +13,9 @@ body {
   position: relative;
   z-index: 1000;
 }
+/* #root {
+  height: auto !important;
+} */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
