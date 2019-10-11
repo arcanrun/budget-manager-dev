@@ -5,6 +5,7 @@
   flex-flow: column;
 }
 .wrapper {
+  color: #fff;
 }
 .footer {
   padding: 20px 0 0 0;
@@ -20,7 +21,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 100%;
-  background-color: #eaeff2;
+  background-color: #fff;
   width: 200px;
   height: 200px;
   margin: auto;
@@ -37,4 +38,5 @@
 }
 .text {
   font-size: 15px;
+  font-weight: bold;
 }
