@@ -79,7 +79,7 @@ class Profile extends React.Component<PROPS, STATE> {
       <Card icon={"profile"} headerTitle="Общая информация">
         <div className={style.user}>
           <div className={style.avatarContainer}>
-            <Avatar src={avatar} size={100} />
+            <Avatar src={avatar} size={80} />
           </div>
           <div className={style.footerUser}>
             <div className={style.fullName}>
