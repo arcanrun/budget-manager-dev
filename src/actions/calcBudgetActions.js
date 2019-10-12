@@ -44,7 +44,6 @@ export const calcBudget = (value: number, type: string, operation: string) => {
     })
       .then(res => res.json())
       .then(res => {
-        console.log("[calcBudget - action]", res);
         dispatch(calcBudgetSuccess(res.PAYLOAD));
         return res;
       })

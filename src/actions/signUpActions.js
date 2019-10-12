@@ -49,15 +49,11 @@ export const signUp = () => {
       avatar: undefined,
       timezone: undefined
     };
-    connect
-      .send("VKWebAppInit", {})
-      .then(data => console.log(data))
-      .catch(error => console.log(error));
+    connect.send("VKWebAppInit", {});
 
     connect
       .send("VKWebAppGetUserInfo", {})
       .then(res => {
-        console.log(res);
         vkRes.avatar = res.data.photo_200;
         vkRes.name = res.data.first_name;
         vkRes.sure_name = res.data.last_name;
@@ -68,7 +64,6 @@ export const signUp = () => {
         })
           .then(res => res.json())
           .then(res => {
-            console.log(res);
             dispatch(successSignUp(res.PAYLOAD, vkRes));
             return res;
           })

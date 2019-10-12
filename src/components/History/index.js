@@ -41,14 +41,11 @@ class History extends React.Component<PROPS, STATE> {
     const ins = this.state.in;
     this.props.getHistory();
     this.toggleAnimation();
-    console.log("---->", ins);
   }
 
   toggleAnimation = () => {
     const ins = this.state.in;
-    this.setState({ in: !this.state.in }, () =>
-      console.log("---->", this.state.in)
-    );
+    this.setState({ in: !this.state.in });
   };
 
   render() {

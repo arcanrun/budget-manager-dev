@@ -31,7 +31,6 @@ export const EntranceItem = ({
   isFetching,
   error
 }: PROPS) => {
-  console.log("--->", isFetching);
   const imageBlock = (
     <div className={style.imageBlock}>
       <div className={style.imageBgText}>{bgText}</div>

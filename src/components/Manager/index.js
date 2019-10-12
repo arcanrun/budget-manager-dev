@@ -159,7 +159,7 @@ class Manager extends React.Component<PROPS, STATE> {
         this.setState({ tempPayDay: undefined });
         break;
       default:
-        console.log("btnType hmm...");
+        console.warn("btnType hmm...");
     }
   };
   handleTour = (data: any) => {

@@ -25,7 +25,7 @@ export const RoundButton = ({ text, onClick }: PROPS) => {
       type = style.redBtn;
       break;
     default:
-      console.log("RoundButton - ???");
+      console.warn("RoundButton - ???");
       icon = "";
       break;
   }

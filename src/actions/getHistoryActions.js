@@ -39,7 +39,6 @@ export const getHistory = (vk_id: number) => {
     })
       .then(res => res.json())
       .then(res => {
-        console.log("[getHistory] dispatcher: ", res);
         dispatch(successGetHistory(res.PAYLOAD));
         return res;
       })

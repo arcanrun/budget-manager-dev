@@ -57,7 +57,6 @@ export const getAllCosts = (
     })
       .then(res => res.json())
       .then(res => {
-        console.log("[getAllcosts] dispatcner: ", res);
         dispatch(successGetAllCosts(res.PAYLOAD, toDay, toDayFormated));
         return res;
       })

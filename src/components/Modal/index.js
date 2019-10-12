@@ -170,9 +170,7 @@ export class Modal extends React.Component<PROPS, STATE> {
     return true;
   };
   onChange = (e: Object) => {
-    console.log(e.currentTarget);
     const { value } = e.currentTarget;
-    console.log(value);
     this.isVaild(value);
   };
   onClose = () => {
@@ -199,7 +197,6 @@ export class Modal extends React.Component<PROPS, STATE> {
     }
     const [typeModalonly, operation] = typeModal.split("_");
     const dateNow = new Date().toLocaleDateString();
-    console.log("handleSending[ModalOverlay]:", operation, transferToDefault);
 
     if (this.isVaild(inputValue)) {
       this.onClose();

@@ -41,7 +41,6 @@ export const makeProfileOperation = (operationType: string) => {
     })
       .then(res => res.json())
       .then(res => {
-        console.log("[makeProfileOperation] dispatcner: ", res);
         dispatch(successProfileOperation(res.PAYLOAD));
         return res;
       })

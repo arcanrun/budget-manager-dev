@@ -39,7 +39,6 @@ export const getStatistics = (vk_id: number) => {
     })
       .then(res => res.json())
       .then(res => {
-        console.log("[getStatistics] dispatcner: ", res);
         dispatch(successStatistics(res.PAYLOAD));
         return res;
       })

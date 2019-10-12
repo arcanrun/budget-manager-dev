@@ -84,7 +84,6 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
         } else if (+val === 0) {
           return false;
         } else if (+val >= 999e9) {
-          console.log("too big number");
           return false;
         } else if (isNaN(val)) {
           return false;
@@ -121,7 +120,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
         return true;
 
       default:
-        console.log("typeModal[" + typeModal + "]: ¯|_(ツ)_/¯");
+        console.warn("typeModal[" + typeModal + "]: ¯|_(ツ)_/¯");
         break;
     }
   };
@@ -146,7 +145,6 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
             break;
           }
           const type = daysToPayday ? "change" : "add";
-          console.log("handleOK[ModalOverlay]:", operation);
           this.props.addWholeBudget(vk_id, inputValue, type, daysToPayday);
           this.toggleAnimation();
           break;
@@ -192,7 +190,7 @@ class ModalOverlay extends React.Component<PROPS, STATE> {
           break;
 
         default:
-          console.log(
+          console.warn(
             "MISSING DISPATCHER FOR TYPE:",
             typeModal,
             "AND OPERATION:",

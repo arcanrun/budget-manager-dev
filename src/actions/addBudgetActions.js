@@ -45,8 +45,6 @@ export const addWholeBudget = (
     })
       .then(res => res.json())
       .then(res => {
-        console.log("[addBudget] dispatcner: ", res);
-
         dispatch(successAddWholeBudget(res.PAYLOAD));
         return res;
       })

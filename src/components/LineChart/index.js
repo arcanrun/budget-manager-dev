@@ -19,12 +19,8 @@ export const LineChart = ({ switcher, history, timezone }: PROPS) => {
   const currentMonthData = [];
   history.forEach(el => {
     let month = Object.keys(el)[0];
-    console.log(month);
     month = "" + stringToDate(month, timezone);
-    console.log(month);
-
     month = +month.substr(3, 2);
-
     if (month === currentMonth) {
       currentMonthData.push(el);
     }
