@@ -54,7 +54,7 @@ class Manager extends React.Component<PROPS, STATE> {
           title: "Общий бюджет",
           content: "Здесь отображаются все Ваши накопления.",
           disableBeacon: true,
-          placement: "auto",
+          placement: "bottom",
           isFixed: true
         },
         {
@@ -62,7 +62,7 @@ class Manager extends React.Component<PROPS, STATE> {
           title: "Общий бюджет",
           content: "Здесь вы можете изменить сумму Вашего бюджета.",
           disableBeacon: true,
-          placement: "auto",
+          placement: "bottom",
           isFixed: true
         },
         {
@@ -71,7 +71,7 @@ class Manager extends React.Component<PROPS, STATE> {
           content:
             "Управляйте сбережениями в зависимости от доходов или расходов.",
           disableBeacon: true,
-          placement: "auto",
+          placement: "bottom",
           isFixed: true
         },
         {
@@ -80,7 +80,7 @@ class Manager extends React.Component<PROPS, STATE> {
           content:
             "Календарь отображает количество дней до зарплаты. Нажмите на день, чтобы изменить дату получения зарплаты.",
           disableBeacon: true,
-          placement: "auto",
+          placement: "top",
           isFixed: true
         },
         {
@@ -89,7 +89,7 @@ class Manager extends React.Component<PROPS, STATE> {
           content:
             "Приложение разделяет весь Ваш бюджет на 50%(общие расходы), 30%(развлечения), 20%(инвестиции). Диаграмма показывает остаток средств по той или иной категории, а также желательную сумму средств, доступную на сегодняшний день.",
           disableBeacon: true,
-          placement: "auto",
+          placement: "top",
           isFixed: true
         },
         {
@@ -98,7 +98,7 @@ class Manager extends React.Component<PROPS, STATE> {
           content:
             "Вы также можете переводить средства из одной категории в другую.",
           disableBeacon: true,
-          placement: "auto",
+          placement: "top",
           isFixed: true
         }
       ]
@@ -286,6 +286,9 @@ class Manager extends React.Component<PROPS, STATE> {
         continuous
         disableOverlayClose
         scrollOffset={90}
+        floaterProps={{
+          disableFlip: true
+        }}
         locale={{
           back: "Назад",
           close: "Закрыть",
