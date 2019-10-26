@@ -16,8 +16,7 @@ export const successLogIn = (res: Object, vkRes: Object) => ({
     ...res,
     name: vkRes.name,
     sure_name: vkRes.sure_name,
-    avatar: vkRes.avatar,
-    timezone: vkRes.timezone
+    avatar: vkRes.avatar
   }
 });
 export const failureLogIn = (msg: string) => ({
@@ -51,7 +50,10 @@ export const logIn = () => {
         fetch(API.LOG_IN, {
           method: "POST",
           // mode: "cors",
-          body: JSON.stringify({ params: window.location.search }),
+          body: JSON.stringify({
+            params: window.location.search,
+            timezone: vkRes.timezone
+          }),
           headers: {
             "Content-Type": "application/json"
             // "Content-Type": "application/x-www-form-urlencoded"

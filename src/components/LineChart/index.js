@@ -9,18 +9,22 @@ import { stringToDate } from "../../helpers/datetime";
 
 type PROPS = {
   switcher: boolean,
-  history: Array<any>,
-  timezone: number
+  history: Array<any>
 };
 
-export const LineChart = ({ switcher, history, timezone }: PROPS) => {
+export const LineChart = ({ switcher, history }: PROPS) => {
   let currentMonth = new Date();
   currentMonth = currentMonth.getMonth() + 1;
   const currentMonthData = [];
   history.forEach(el => {
     let month = Object.keys(el)[0];
-    month = "" + stringToDate(month, timezone);
+    month = "" + stringToDate(month);
+    // console.log("1)", month);
+
     month = +month.substr(3, 2);
+    // console.log("2)", month);
+    // console.log("current", currentMonth);
+
     if (month === currentMonth) {
       currentMonthData.push(el);
     }
@@ -49,6 +53,7 @@ export const LineChart = ({ switcher, history, timezone }: PROPS) => {
     const dayData = el[key];
     let plus = 0;
     let minus = 0;
+
     dayData.forEach(item => {
       switch (item.operation) {
         case "minus":
@@ -57,8 +62,10 @@ export const LineChart = ({ switcher, history, timezone }: PROPS) => {
         case "plus":
           plus += +item.value;
           break;
+        case "transfer":
+          break;
         default:
-          console.log("unknown operation in Chart");
+          console.warn("unknown operation in Chart");
           break;
       }
     });

@@ -24,8 +24,7 @@ type PROPS = {
   vk_id: number,
   getHistory: Function,
   history: Array<Object>,
-  isFetching: boolean,
-  timezone: number
+  isFetching: boolean
 };
 
 type STATE = {
@@ -49,7 +48,7 @@ class History extends React.Component<PROPS, STATE> {
   };
 
   render() {
-    const { history, isFetching, vk_id, timezone } = this.props;
+    const { history, isFetching, vk_id } = this.props;
 
     // const overlay = <Overlay isTransparent={true} />;
     const verticalLine = <div className={styleHistory.verticalLine} />;
@@ -97,7 +96,7 @@ class History extends React.Component<PROPS, STATE> {
                       }}
                     >
                       <div className={styleHistory.day}>
-                        {stringToDate(day, timezone)}
+                        {stringToDate(day)}
                       </div>
                     </Sticky>
                     {verticalLine}

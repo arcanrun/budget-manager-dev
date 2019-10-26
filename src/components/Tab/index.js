@@ -8,8 +8,7 @@ import { ShortenNumber } from "../index";
 type PROPS = {
   costs: Object,
   income: Object,
-  history: Array<any>,
-  timezone: number
+  history: Array<any>
 };
 type STATE = {
   switcher: boolean
@@ -24,7 +23,7 @@ export class Tab extends React.Component<PROPS, STATE> {
   };
   render() {
     const { switcher } = this.state;
-    const { income, costs, history, timezone } = this.props;
+    const { income, costs, history } = this.props;
     return (
       <div>
         <div className={style.nav} onClick={this.handleSwtich}>
@@ -151,7 +150,7 @@ export class Tab extends React.Component<PROPS, STATE> {
             </div>
           )}
         </div>
-        <LineChart switcher={switcher} history={history} timezone={timezone} />
+        <LineChart switcher={switcher} history={history} />
       </div>
     );
   }

@@ -25,8 +25,7 @@ export const successSignUp = (res: Object, vkRes: Object) => ({
     ...res,
     name: vkRes.name,
     sure_name: vkRes.sure_name,
-    avatar: vkRes.avatar,
-    timezone: vkRes.timezone
+    avatar: vkRes.avatar
   }
 });
 export const failureSignUp = (res: Object) => ({
@@ -60,7 +59,10 @@ export const signUp = () => {
         vkRes.timezone = res.data.timezone;
         fetch(API.SIGN_UP, {
           method: "POST",
-          body: JSON.stringify({ params: window.location.search })
+          body: JSON.stringify({
+            params: window.location.search,
+            timezone: vkRes.timezone
+          })
         })
           .then(res => res.json())
           .then(res => {

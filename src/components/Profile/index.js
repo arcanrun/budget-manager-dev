@@ -26,8 +26,7 @@ type PROPS = {
   registerDate: number,
   costs: Object,
   income: Object,
-  calc: Object,
-  timezone: number
+  calc: Object
 };
 
 type STATE = {
@@ -70,8 +69,7 @@ class Profile extends React.Component<PROPS, STATE> {
       costs,
       income,
       registerDate,
-      history,
-      timezone
+      history
     } = this.props;
     // const overlay = <Overlay isTransparent={true} />;
     // const showPreloader = isFetching ? overlay : "";
@@ -87,8 +85,7 @@ class Profile extends React.Component<PROPS, STATE> {
               <span> {sure_name}</span>
             </div>
             <div className={style.subFooter}>
-              c <b>{stringToDate(registerDate, timezone)}</b> управляет своим
-              бюджетом
+              c <b>{stringToDate(registerDate)}</b> управляет своим бюджетом
             </div>
           </div>
         </div>
@@ -98,12 +95,7 @@ class Profile extends React.Component<PROPS, STATE> {
     const statisticCard = (
       <Card icon={"pie-chart-logo"} headerTitle={"статистика за текущий месяц"}>
         <div>
-          <Tab
-            costs={costs}
-            income={income}
-            history={history}
-            timezone={timezone}
-          />
+          <Tab costs={costs} income={income} history={history} />
         </div>
       </Card>
     );
