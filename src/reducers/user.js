@@ -173,15 +173,15 @@ export function user(state: UserState = initialState, action: Object) {
   switch (action.type) {
     case SIGNUP_STOP_GUIDE:
       return { ...state, is_first_time: false, is_tutorial_done: true };
-    case CALC_BUDGET_REQUEST:
-    case ADD_BUDGET_REQUEST:
-      return {
-        ...state,
-        calc: {
-          ...state.calc,
-          isFetching: action.payload.isFetching
-        }
-      };
+    // case CALC_BUDGET_REQUEST:
+    // case ADD_BUDGET_REQUEST:
+    //   return {
+    //     ...state,
+    //     calc: {
+    //       ...state.calc,
+    //       isFetching: action.payload.isFetching
+    //     }
+    //   };
     case CALC_BUDGET_FAILURE:
     case ADD_BUDGET_FAILURE:
       return {
@@ -312,8 +312,8 @@ export function user(state: UserState = initialState, action: Object) {
           }
         }
       };
-    case CALC_TODAY_COSTS_REQUEST:
-      return { ...state, calc: { ...state.calc, isFetching: true } };
+    // case CALC_TODAY_COSTS_REQUEST:
+    //   return { ...state, calc: { ...state.calc, isFetching: true } };
     case GET_HISTORY_REQUEST:
       return {
         ...state,
