@@ -3,7 +3,7 @@ import React from "react";
 
 import style from "./Tab.module.css";
 import { Icon, LineChart } from "../index";
-import { ShortenNumber } from "../index";
+import { toPrettyNumber } from "../../helpers/prettyNumbers";
 
 type PROPS = {
   costs: Object,
@@ -48,9 +48,16 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  <ShortenNumber alternative={false} curency={true} size={12}>
-                    {income.total}
-                  </ShortenNumber>
+                  {toPrettyNumber(
+                    income.total,
+                    true,
+                    1000000000,
+                    false,
+                    "",
+                    "",
+                    "0.00a",
+                    "0.0"
+                  )}
                 </div>
               </div>
               <div className={style.tabRow}>
@@ -61,14 +68,16 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  <ShortenNumber
-                    alternative={false}
-                    curency={true}
-                    size={12}
-                    minValToShort={100000000}
-                  >
-                    {income.common}
-                  </ShortenNumber>
+                  {toPrettyNumber(
+                    income.common,
+                    true,
+                    10000000,
+                    false,
+                    "",
+                    "",
+                    "0.00a",
+                    "0.0"
+                  )}
                 </div>
               </div>
               <div className={style.tabRow}>
@@ -79,14 +88,16 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  <ShortenNumber
-                    alternative={false}
-                    curency={true}
-                    size={12}
-                    minValToShort={100000000}
-                  >
-                    {income.fun}
-                  </ShortenNumber>
+                  {toPrettyNumber(
+                    income.fun,
+                    true,
+                    10000000,
+                    false,
+                    "",
+                    "",
+                    "0.00a",
+                    "0.0"
+                  )}
                 </div>
               </div>
               <div className={style.tabRow}>
@@ -97,14 +108,16 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  <ShortenNumber
-                    alternative={false}
-                    curency={true}
-                    size={12}
-                    minValToShort={100000000}
-                  >
-                    {income.invest}
-                  </ShortenNumber>
+                  {toPrettyNumber(
+                    income.invest,
+                    true,
+                    10000000,
+                    false,
+                    "",
+                    "",
+                    "0.00a",
+                    "0.0"
+                  )}
                 </div>
               </div>
             </div>
@@ -118,9 +131,16 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  <ShortenNumber alternative={false} curency={true} size={12}>
-                    {costs.total}
-                  </ShortenNumber>
+                  {toPrettyNumber(
+                    costs.total,
+                    true,
+                    1000000000,
+                    false,
+                    "",
+                    "",
+                    "0.00a",
+                    "0.0"
+                  )}
                 </div>
               </div>
               <div className={style.tabRow}>
@@ -131,14 +151,16 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  <ShortenNumber
-                    alternative={false}
-                    curency={true}
-                    size={12}
-                    minValToShort={100000000}
-                  >
-                    {costs.common}
-                  </ShortenNumber>
+                  {toPrettyNumber(
+                    costs.common,
+                    true,
+                    10000000,
+                    false,
+                    "",
+                    "",
+                    "0.00a",
+                    "0.0"
+                  )}
                 </div>
               </div>
               <div className={style.tabRow}>
@@ -149,14 +171,16 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  <ShortenNumber
-                    alternative={false}
-                    curency={true}
-                    size={12}
-                    minValToShort={100000000}
-                  >
-                    {costs.fun}
-                  </ShortenNumber>
+                  {toPrettyNumber(
+                    costs.fun,
+                    true,
+                    10000000,
+                    false,
+                    "",
+                    "",
+                    "0.00a",
+                    "0.0"
+                  )}
                 </div>
               </div>
               <div className={style.tabRow}>
@@ -167,14 +191,16 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  <ShortenNumber
-                    alternative={false}
-                    curency={true}
-                    size={12}
-                    minValToShort={100000000}
-                  >
-                    {costs.invest}
-                  </ShortenNumber>
+                  {toPrettyNumber(
+                    costs.invest,
+                    true,
+                    10000000,
+                    false,
+                    "",
+                    "",
+                    "0.00a",
+                    "0.0"
+                  )}
                 </div>
               </div>
             </div>

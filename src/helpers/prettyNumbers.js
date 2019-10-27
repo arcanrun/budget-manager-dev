@@ -16,7 +16,8 @@ export function toPrettyNumber(
   isEasterEgg = false,
   easterEggStartsFrom = 100000000,
   easterEggSize = "",
-  format = "0.00a"
+  format = "0.00a",
+  alwaysFromat = false
 ) {
   let res = num;
   const randNumber = getRandomInt(1, 4);
@@ -32,6 +33,8 @@ export function toPrettyNumber(
     ) {
       return easterEgg;
     }
+  } else if (alwaysFromat) {
+    res = numeral(num).format(`${alwaysFromat}`);
   }
   // ADDITIONS:
   if (iScurrSign) {

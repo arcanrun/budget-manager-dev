@@ -1,10 +1,9 @@
 //@flow
 import React from "react";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 import style from "./DonutChart.module.css";
-import { ShortenNumber } from "../index";
-import { cutNumber } from "../ShortenNumber/helpers";
-import "@fortawesome/fontawesome-free/css/all.css";
+import { toPrettyNumber } from "../../helpers/prettyNumbers";
 
 type PROPS = {
   color: string,
@@ -29,34 +28,21 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
       <div className={style.infoDonut}>
         <div className={style.title}>{title}</div>
         <div className={style.cost}>
-          <ShortenNumber
-            alternative={false}
-            curency
-            size={12}
-            minValToShort={10000000}
-          >
-            {cost}
-          </ShortenNumber>
+          {toPrettyNumber(cost, true, 100000000)}
         </div>
         <div className={style.footerTitle}>На сегодня:</div>
         <div className={style.footer}>
-          <ShortenNumber
-            alternative={false}
-            curency
-            size={12}
-            minValToShort={10000}
-          >
-            {temp}
-          </ShortenNumber>
-          /
-          <ShortenNumber
-            size={12}
-            alternative={false}
-            curency
-            minValToShort={10000}
-          >
-            {maxToday}
-          </ShortenNumber>
+          {toPrettyNumber(temp, true, 100000, false, "", "", "0.00a", "0.0")}/
+          {toPrettyNumber(
+            maxToday,
+            true,
+            100000,
+            false,
+            "",
+            "",
+            "0.00a",
+            "0.0"
+          )}
         </div>
       </div>
       <svg

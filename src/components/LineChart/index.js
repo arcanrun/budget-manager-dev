@@ -33,10 +33,10 @@ export const LineChart = ({ switcher, history }: PROPS) => {
 
   currentMonthData.reverse();
 
-  var data = {
-    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    series: [[1, 2, 4, 8, 6, 2, 1, 4, 6, 22, 100]]
-  };
+  // var data = {
+  //   labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  //   series: [[1, 2, 4, 8, 6, 2, 1, 4, 6, 22, 100]]
+  // };
 
   const dataIncome = {
     labels: [],
@@ -80,40 +80,52 @@ export const LineChart = ({ switcher, history }: PROPS) => {
   dataIncome.series.push(tempSeriesIncome);
   dataCosts.series.push(tempSeriesCosts);
 
-  let offset = 25;
+  let offset = 23;
 
   if (switcher) {
     dataIncome.series[0].forEach(el => {
-      const toStr = "" + el;
+      const toStr =
+        "" + toPrettyNumber(el, false, 1000, false, "", "", "0.0a", "0");
 
-      if (toStr.length === 4) {
-        const increment = 30;
+      if (toStr.indexOf("k") !== -1) {
+        let increment = 24;
+        if (toStr.length >= 5) {
+          increment = 25;
+        }
+        if (toStr.length >= 6) {
+          increment = 26;
+        }
         if (offset < increment) offset = increment;
-      } else if (toStr.length === 5) {
-        const increment = 40;
+      }
+      if (toStr.indexOf("m") !== -1) {
+        const increment = 26;
         if (offset < increment) offset = increment;
-      } else if (toStr.length === 6) {
-        const increment = 50;
-        if (offset < increment) offset = increment;
-      } else if (toStr.length >= 7) {
-        const increment = 57;
+      }
+      if (toStr.indexOf("b") !== -1 || toStr.indexOf("t") !== -1) {
+        const increment = 27;
         if (offset < increment) offset = increment;
       }
     });
   } else {
     dataCosts.series[0].forEach(el => {
-      const toStr = "" + el;
-      if (toStr.length === 4) {
-        const increment = 30;
+      const toStr =
+        "" + toPrettyNumber(el, false, 1000, false, "", "", "0.0a", "0");
+      if (toStr.indexOf("k") !== -1) {
+        let increment = 24;
+        if (toStr.length >= 5) {
+          increment = 25;
+        }
+        if (toStr.length >= 6) {
+          increment = 26;
+        }
         if (offset < increment) offset = increment;
-      } else if (toStr.length === 5) {
-        const increment = 40;
+      }
+      if (toStr.indexOf("m") !== -1) {
+        const increment = 26;
         if (offset < increment) offset = increment;
-      } else if (toStr.length === 6) {
-        const increment = 50;
-        if (offset < increment) offset = increment;
-      } else if (toStr.length >= 7) {
-        const increment = 57;
+      }
+      if (toStr.indexOf("b") !== -1 || toStr.indexOf("t") !== -1) {
+        const increment = 27;
         if (offset < increment) offset = increment;
       }
     });
@@ -124,7 +136,7 @@ export const LineChart = ({ switcher, history }: PROPS) => {
     showArea: true,
     axisY: {
       labelInterpolationFnc: function(value) {
-        return toPrettyNumber(value, false, 100000, "", "", "", "0.0a");
+        return toPrettyNumber(value, false, 1000, "", "", "", "0a");
       },
       offset: offset
     },
