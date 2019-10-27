@@ -56,7 +56,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "",
                     "0.00a",
-                    "0.0"
+                    "0.0",
+                    "14px"
                   )}
                 </div>
               </div>
@@ -76,7 +77,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "",
                     "0.00a",
-                    "0.0"
+                    "0.0",
+                    "14px"
                   )}
                 </div>
               </div>
@@ -96,7 +98,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "",
                     "0.00a",
-                    "0.0"
+                    "0.0",
+                    "14px"
                   )}
                 </div>
               </div>
@@ -116,7 +119,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "",
                     "0.00a",
-                    "0.0"
+                    "0.0",
+                    "14px"
                   )}
                 </div>
               </div>
@@ -139,7 +143,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "",
                     "0.00a",
-                    "0.0"
+                    "0.0",
+                    "14px"
                   )}
                 </div>
               </div>
@@ -159,7 +164,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "",
                     "0.00a",
-                    "0.0"
+                    "0.0",
+                    "14px"
                   )}
                 </div>
               </div>
@@ -179,7 +185,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "",
                     "0.00a",
-                    "0.0"
+                    "0.0",
+                    "14px"
                   )}
                 </div>
               </div>
@@ -199,7 +206,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "",
                     "0.00a",
-                    "0.0"
+                    "0.0",
+                    "14px"
                   )}
                 </div>
               </div>

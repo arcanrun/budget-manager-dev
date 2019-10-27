@@ -19,7 +19,17 @@ const OperationValue = ({ children, sign }: PROPS) => {
           : [style.value, style.valueMinus].join(" ")
       }
     >
-      {toPrettyNumber(children, true, 1000000, true, 1e18)}
+      {toPrettyNumber(
+        children,
+        true,
+        1000000,
+        true,
+        1e18,
+        "",
+        "0.00a",
+        "0.00",
+        "13px"
+      )}
     </div>
   );
 };

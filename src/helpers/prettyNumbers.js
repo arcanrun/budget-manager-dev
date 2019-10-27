@@ -1,4 +1,5 @@
 import React from "react";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 import { Icon } from "../components/Icon";
 import numeral from "numeral";
@@ -17,7 +18,8 @@ export function toPrettyNumber(
   easterEggStartsFrom = 100000000,
   easterEggSize = "",
   format = "0.00a",
-  alwaysFromat = false
+  alwaysFromat = false,
+  alterSign = false
 ) {
   let res = num;
   const randNumber = getRandomInt(1, 4);
@@ -37,8 +39,18 @@ export function toPrettyNumber(
     res = numeral(num).format(`${alwaysFromat}`);
   }
   // ADDITIONS:
-  if (iScurrSign) {
+  if (iScurrSign && !alterSign) {
     res += " ₽";
+  } else if (iScurrSign && alterSign) {
+    res = (
+      <>
+        {res}{" "}
+        <i
+          style={{ fontSize: `${alterSign}` }}
+          className="fas fa-ruble-sign"
+        ></i>
+      </>
+    );
   }
 
   return res;

@@ -48,7 +48,17 @@ const WholeBudget = ({
   const mainBlck = (
     <div className={style.budgetBlock}>
       <div className={[style.budget, "first-step"].join(" ")}>
-        {toPrettyNumber(wholeBudget, true, 1000000000, true, 1e18, "max")}
+        {toPrettyNumber(
+          wholeBudget,
+          true,
+          1000000000,
+          true,
+          1e18,
+          "max",
+          "0.00a",
+          "0.00",
+          "25px"
+        )}
       </div>
       {footer}
     </div>

@@ -28,11 +28,32 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
       <div className={style.infoDonut}>
         <div className={style.title}>{title}</div>
         <div className={style.cost}>
-          {toPrettyNumber(cost, true, 100000000)}
+          {toPrettyNumber(
+            cost,
+            true,
+            100000000,
+            false,
+            "",
+            "",
+            "0.00a",
+            "0.0",
+            "14px"
+          )}
         </div>
         <div className={style.footerTitle}>На сегодня:</div>
         <div className={style.footer}>
-          {toPrettyNumber(temp, true, 100000, false, "", "", "0.00a", "0.0")}/
+          {toPrettyNumber(
+            temp,
+            true,
+            100000,
+            false,
+            "",
+            "",
+            "0.00a",
+            "0.0",
+            "12px"
+          )}
+          /
           {toPrettyNumber(
             maxToday,
             true,
@@ -41,7 +62,8 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
             "",
             "",
             "0.00a",
-            "0.0"
+            "0.0",
+            "12px"
           )}
         </div>
       </div>
