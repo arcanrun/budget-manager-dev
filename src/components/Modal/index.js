@@ -8,7 +8,8 @@ import {
   FormLayout,
   FormLayoutGroup,
   Input,
-  Radio
+  Radio,
+  Button
 } from "@vkontakte/vkui";
 import { IS_PLATFORM_IOS, IS_PLATFORM_ANDROID } from "@vkontakte/vkui";
 import Icon24Cancel from "@vkontakte/icons/dist/24/cancel";
@@ -429,38 +430,28 @@ export class Modal extends React.Component<PROPS, STATE> {
     const header = (
       <ModalPageHeader
         left={
-          <>
-            {IS_PLATFORM_ANDROID && (
-              <HeaderButton onClick={this.onClose}>
-                <Icon24Cancel />
-              </HeaderButton>
-            )}
-            {IS_PLATFORM_IOS && (
-              <HeaderButton onClick={this.handleSending}>
-                <Icon24Done />
-              </HeaderButton>
-            )}
-          </>
+          IS_PLATFORM_ANDROID && (
+            <HeaderButton onClick={this.onClose}>
+              <Icon24Cancel />
+            </HeaderButton>
+          )
         }
         right={
-          <>
-            {IS_PLATFORM_ANDROID && (
-              <HeaderButton onClick={this.handleSending}>
-                <Icon24Done />
-              </HeaderButton>
-            )}
-            {IS_PLATFORM_IOS && (
-              <HeaderButton onClick={this.onClose}>
-                <Icon24Dismiss />
-              </HeaderButton>
-            )}
-          </>
+          IS_PLATFORM_IOS && (
+            <HeaderButton onClick={this.onClose}>
+              <Icon24Dismiss />
+            </HeaderButton>
+          )
         }
       >
         {headerTitle}
       </ModalPageHeader>
     );
-
+    const submitBtn = (
+      <Button level="commerce" size="xl" onClick={this.handleSending}>
+        Готово
+      </Button>
+    );
     const { isErrorInput } = this.state;
     return (
       <ModalRoot activeModal={typeModal}>
@@ -480,6 +471,7 @@ export class Modal extends React.Component<PROPS, STATE> {
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
             />
+            {submitBtn}
           </FormLayout>
         </ModalPage>
         <ModalPage id={"budget_plus"} onClose={this.onClose} header={header}>
@@ -492,6 +484,7 @@ export class Modal extends React.Component<PROPS, STATE> {
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
             />
+            {submitBtn}
           </FormLayout>
         </ModalPage>
         <ModalPage id={"budget"} onClose={this.onClose} header={header}>
@@ -504,6 +497,7 @@ export class Modal extends React.Component<PROPS, STATE> {
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
             />
+            {submitBtn}
           </FormLayout>
         </ModalPage>
         <ModalPage id={"common_minus"} onClose={this.onClose} header={header}>
@@ -516,6 +510,7 @@ export class Modal extends React.Component<PROPS, STATE> {
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
             />
+            {submitBtn}
           </FormLayout>
         </ModalPage>
         <ModalPage id={"common_plus"} onClose={this.onClose} header={header}>
@@ -528,6 +523,7 @@ export class Modal extends React.Component<PROPS, STATE> {
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
             />
+            {submitBtn}
           </FormLayout>
         </ModalPage>
         <ModalPage id={"fun_plus"} onClose={this.onClose} header={header}>
@@ -540,6 +536,7 @@ export class Modal extends React.Component<PROPS, STATE> {
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
             />
+            {submitBtn}
           </FormLayout>
         </ModalPage>
         <ModalPage id={"fun_minus"} onClose={this.onClose} header={header}>
@@ -552,6 +549,7 @@ export class Modal extends React.Component<PROPS, STATE> {
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
             />
+            {submitBtn}
           </FormLayout>
         </ModalPage>
         <ModalPage id={"invest_plus"} onClose={this.onClose} header={header}>
@@ -564,6 +562,7 @@ export class Modal extends React.Component<PROPS, STATE> {
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
             />
+            {submitBtn}
           </FormLayout>
         </ModalPage>
         <ModalPage id={"invest_minus"} onClose={this.onClose} header={header}>
@@ -576,6 +575,7 @@ export class Modal extends React.Component<PROPS, STATE> {
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
             />
+            {submitBtn}
           </FormLayout>
         </ModalPage>
         <ModalPage
@@ -617,6 +617,7 @@ export class Modal extends React.Component<PROPS, STATE> {
                 20%
               </Radio>
             </FormLayoutGroup>
+            {submitBtn}
           </FormLayout>
         </ModalPage>
         <ModalPage id={"fun_transfer"} onClose={this.onClose} header={header}>
@@ -654,6 +655,7 @@ export class Modal extends React.Component<PROPS, STATE> {
                 20%
               </Radio>
             </FormLayoutGroup>
+            {submitBtn}
           </FormLayout>
         </ModalPage>
         <ModalPage
@@ -700,6 +702,7 @@ export class Modal extends React.Component<PROPS, STATE> {
                 20%
               </Radio>
             </FormLayoutGroup>
+            {submitBtn}
           </FormLayout>
         </ModalPage>
       </ModalRoot>
