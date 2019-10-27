@@ -175,13 +175,13 @@ export class Modal extends React.Component<PROPS, STATE> {
     this.isVaild(value);
   };
   onClose = () => {
+    this.props.hideModal();
     this.setState({
       isErrorInput: false,
       inputValue: undefined,
       errorExplain: undefined,
       transferTo: undefined
     });
-    this.props.hideModal();
   };
   handleSending = () => {
     const { inputValue, transferTo } = this.state;
@@ -238,9 +238,9 @@ export class Modal extends React.Component<PROPS, STATE> {
     const { typeModal, common, fun, invest, budget } = this.props;
 
     const { errorExplain, screenWidth } = this.state;
-    let headerTitle = "";
-    let placeholder = "";
-    let bottomWarning = "";
+    let headerTitle = "...";
+    let placeholder = "...";
+    let bottomWarning = "...";
     switch (typeModal) {
       case "budget_minus":
         headerTitle =
