@@ -29,17 +29,32 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
       <div className={style.infoDonut}>
         <div className={style.title}>{title}</div>
         <div className={style.cost}>
-          <ShortenNumber alternative={true} curency size={12}>
+          <ShortenNumber
+            alternative={false}
+            curency
+            size={12}
+            minValToShort={10000000}
+          >
             {cost}
           </ShortenNumber>
         </div>
         <div className={style.footerTitle}>На сегодня:</div>
         <div className={style.footer}>
-          <ShortenNumber alternative={true} curency size={12}>
+          <ShortenNumber
+            alternative={false}
+            curency
+            size={12}
+            minValToShort={10000}
+          >
             {temp}
           </ShortenNumber>
           /
-          <ShortenNumber size={12} alternative={true} curency>
+          <ShortenNumber
+            size={12}
+            alternative={false}
+            curency
+            minValToShort={10000}
+          >
             {maxToday}
           </ShortenNumber>
         </div>

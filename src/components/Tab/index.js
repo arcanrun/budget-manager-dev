@@ -48,7 +48,7 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true} size={12}>
+                  <ShortenNumber alternative={false} curency={true} size={12}>
                     {income.total}
                   </ShortenNumber>
                 </div>
@@ -61,7 +61,12 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true} size={12}>
+                  <ShortenNumber
+                    alternative={false}
+                    curency={true}
+                    size={12}
+                    minValToShort={100000000}
+                  >
                     {income.common}
                   </ShortenNumber>
                 </div>
@@ -74,7 +79,12 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true} size={12}>
+                  <ShortenNumber
+                    alternative={false}
+                    curency={true}
+                    size={12}
+                    minValToShort={100000000}
+                  >
                     {income.fun}
                   </ShortenNumber>
                 </div>
@@ -87,7 +97,12 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorFirst].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true} size={12}>
+                  <ShortenNumber
+                    alternative={false}
+                    curency={true}
+                    size={12}
+                    minValToShort={100000000}
+                  >
                     {income.invest}
                   </ShortenNumber>
                 </div>
@@ -103,7 +118,7 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true} size={12}>
+                  <ShortenNumber alternative={false} curency={true} size={12}>
                     {costs.total}
                   </ShortenNumber>
                 </div>
@@ -116,7 +131,12 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true} size={12}>
+                  <ShortenNumber
+                    alternative={false}
+                    curency={true}
+                    size={12}
+                    minValToShort={100000000}
+                  >
                     {costs.common}
                   </ShortenNumber>
                 </div>
@@ -129,7 +149,12 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true} size={12}>
+                  <ShortenNumber
+                    alternative={false}
+                    curency={true}
+                    size={12}
+                    minValToShort={100000000}
+                  >
                     {costs.fun}
                   </ShortenNumber>
                 </div>
@@ -142,7 +167,12 @@ export class Tab extends React.Component<PROPS, STATE> {
                 <div
                   className={[style.TabRowValue, style.colorSecond].join(" ")}
                 >
-                  <ShortenNumber alternative={true} curency={true} size={12}>
+                  <ShortenNumber
+                    alternative={false}
+                    curency={true}
+                    size={12}
+                    minValToShort={100000000}
+                  >
                     {costs.invest}
                   </ShortenNumber>
                 </div>

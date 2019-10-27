@@ -5,6 +5,7 @@ import { Button } from "@vkontakte/vkui";
 
 import style from "./WholeBudget.module.css";
 import { RoundButton, ShortenNumber } from "../index";
+import { toPrettyNumber } from "../../helpers/prettyNumbers";
 
 type PROPS = {
   onClickToggleModal: Function,
@@ -47,9 +48,7 @@ const WholeBudget = ({
   const mainBlck = (
     <div className={style.budgetBlock}>
       <div className={[style.budget, "first-step"].join(" ")}>
-        <ShortenNumber easterEggSize={"max"} size={22}>
-          {wholeBudget}
-        </ShortenNumber>
+        {toPrettyNumber(wholeBudget, true, 1000000000, true, 1e18, "max")}
       </div>
       {footer}
     </div>

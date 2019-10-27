@@ -6,6 +6,7 @@ import ChartistGraph from "react-chartist";
 import "./chartist.css";
 import { cutNumber } from "../ShortenNumber/helpers";
 import { stringToDate } from "../../helpers/datetime";
+import { toPrettyNumber } from "../../helpers/prettyNumbers";
 
 type PROPS = {
   switcher: boolean,
@@ -123,11 +124,7 @@ export const LineChart = ({ switcher, history }: PROPS) => {
     showArea: true,
     axisY: {
       labelInterpolationFnc: function(value) {
-        let cutted = value;
-        if (value > 9999999) {
-          cutted = cutNumber(value, 0, 6);
-        }
-        return cutted;
+        return toPrettyNumber(value, false, 100000, "", "", "", "0.0a");
       },
       offset: offset
     },

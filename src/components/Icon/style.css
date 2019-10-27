@@ -24,6 +24,14 @@
   width: 80px;
   height: 80px;
 }
+.small {
+  width: 20px;
+  height: 20px;
+}
+.medium {
+  width: 65px;
+  height: 65px;
+}
 .plus,
 .minus {
   width: 15px;

@@ -3,6 +3,7 @@ import React from "react";
 
 import style from "./OperationValue.module.css";
 import { ShortenNumber } from "../index";
+import { toPrettyNumber } from "../../helpers/prettyNumbers";
 
 type PROPS = {
   children: string,
@@ -18,9 +19,7 @@ const OperationValue = ({ children, sign }: PROPS) => {
           : [style.value, style.valueMinus].join(" ")
       }
     >
-      <ShortenNumber minValToShort={1000000} size={12}>
-        {children}
-      </ShortenNumber>
+      {toPrettyNumber(children, true, 1000000, true, 1e18)}
     </div>
   );
 };
