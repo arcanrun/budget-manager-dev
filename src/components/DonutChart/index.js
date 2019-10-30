@@ -15,13 +15,10 @@ type PROPS = {
 
 const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
   let tempValueInPercents = "";
-  let colorTemp = "";
   if (temp <= 0) {
     tempValueInPercents = 0;
-    colorTemp = "#F72D6B";
   } else {
     tempValueInPercents = (100 * temp) / maxToday;
-    colorTemp = color;
   }
 
   return (
@@ -82,7 +79,7 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
           cy="50%"
           className={style.circle}
           strokeDasharray={`${tempValueInPercents}, 100`}
-          fill={colorTemp}
+          fill={tempValueInPercents <= 20 ? "#F72D6B" : color}
         />
       </svg>
     </div>
