@@ -50,7 +50,7 @@ export const LineChart = ({ switcher, history }: PROPS) => {
   const tempSeriesCosts = [];
   currentMonthData.forEach(el => {
     const key = Object.keys(el)[0];
-    const day = Object.keys(el)[0].substr(0, 2);
+    const day = Object.keys(el)[0].slice(-2);
     const dayData = el[key];
     let plus = 0;
     let minus = 0;
@@ -70,7 +70,6 @@ export const LineChart = ({ switcher, history }: PROPS) => {
           break;
       }
     });
-
     dataIncome.labels.push(day);
     tempSeriesIncome.push(plus);
 

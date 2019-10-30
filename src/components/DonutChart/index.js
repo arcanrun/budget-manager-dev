@@ -23,6 +23,7 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
     tempValueInPercents = (100 * temp) / maxToday;
     colorTemp = color;
   }
+
   return (
     <div className={[style.donutContainer, "fifth-step"].join(" ")}>
       <div className={style.infoDonut}>
