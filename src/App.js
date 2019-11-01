@@ -29,7 +29,8 @@ type PROPS = {
   makeProfileOperation: Function,
   vk_id: ?number,
   isFetching: boolean,
-  typeModal: ?string
+  typeModal: ?string,
+  isTutorDone: boolean
 };
 
 type STATE = {
@@ -45,9 +46,14 @@ export class App extends React.Component<PROPS, STATE> {
   }
 
   onStoryChange = (e: Object) => {
-    window.scroll(0, 0);
-    const { story } = e.currentTarget.dataset;
-    this.setState({ activeStory: story });
+    const { isTutorDone } = this.props;
+    if (isTutorDone) {
+      window.scroll(0, 0);
+      const { story } = e.currentTarget.dataset;
+      this.setState({ activeStory: story });
+    } else {
+      this.setState({ activeStory: "manager" });
+    }
   };
 
   render() {

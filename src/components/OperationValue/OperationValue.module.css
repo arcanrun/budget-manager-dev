@@ -11,11 +11,15 @@
 }
 .valueMinus {
   border: 3px solid #f72d6b;
-  background-color: rgba(0, 0, 0, 0);
-  color: #f72d6b;
+  background-color: #f72d6b;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 3px 2px 4px 0px #00000061;
 }
 .valuePlus {
   border: 3px solid #0fde8c;
-  background-color: rgba(0, 0, 0, 0);
-  color: #0fde8c;
+  background-color: #0fde8c;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 3px 2px 4px 0px #00000061;
 }

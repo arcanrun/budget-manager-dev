@@ -387,18 +387,11 @@ export function user(state: UserState = initialState, action: Object) {
       };
 
     case PROFILE_OPERATION_SUCCESS:
-      let res = "";
-      if (action.payload.payload === "DELETE_USER_SUCCESS") {
-        res = undefined;
+      if (action.payload.payload.RESPONSE === "DELETE_USER_SUCCESS") {
+        return { ...initialState, isFetching: false };
       }
-      return {
-        ...state,
-        isFetching: false,
-        vk_id: res,
-        name: res,
-        sure_name: res,
-        avatar: res
-      };
+      return { ...state };
+
     case STATISTICS_REQUEST:
       return {
         ...state,

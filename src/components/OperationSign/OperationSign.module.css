@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   color: #ffffff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
   background-color: #000000;
   margin-left: 10px;
   font-weight: bold;
@@ -19,6 +19,7 @@
   background-size: 12px 12px;
   color: #f72d6b;
   background-color: #f72d6b;
+  box-shadow: 1px 1px 4px 1px #00000061;
 }
 .signPlus {
   background: url(../../static/plus.svg) no-repeat;
@@ -26,6 +27,7 @@
   background-size: 14px 14px;
   color: #0fde8c;
   background-color: #0fde8c;
+  box-shadow: 1px 1px 4px 1px #00000061;
 }
 .signTransfer {
   background: url(../../static/transfer_white.svg) no-repeat;
@@ -33,4 +35,5 @@
   background-size: 20px 20px;
   color: #5281b9;
   background-color: #5281b9;
+  box-shadow: 1px 1px 4px 1px #00000061;
 }

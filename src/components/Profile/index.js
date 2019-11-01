@@ -2,7 +2,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import { Button, Avatar } from "@vkontakte/vkui";
+import { Button, Avatar, Cell, Group } from "@vkontakte/vkui";
 
 import style from "./Profile.module.css";
 import { Card, ModalOverlay, Overlay, Tab } from "../index";
@@ -101,6 +101,10 @@ class Profile extends React.Component<PROPS, STATE> {
     );
     const settingsCard = (
       <Card icon={"settings"} headerTitle="настройки">
+        <Button size="xl" level="secondary">
+          Очистка истории
+        </Button>
+        <hr style={{ opacity: 0 }} />
         <Button
           size="xl"
           level="destructive"

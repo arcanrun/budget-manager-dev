@@ -99,12 +99,14 @@ class History extends React.Component<PROPS, STATE> {
                         {stringToDate(day)}
                       </div>
                     </Sticky>
+                    <div className={styleHistory.dayOffset}></div>
                     {verticalLine}
 
                     {item[day].map((elem, j) => (
                       <div key={j} className={styleHistory.operation}>
                         <OperationType>{elem.type_cost}</OperationType>
                         <OperationSign>{elem.operation}</OperationSign>
+                        <div className={styleHistory.isComment}>!</div>
                         <OperationValue sign={elem.operation}>
                           {elem.value}
                         </OperationValue>
