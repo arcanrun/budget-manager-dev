@@ -125,10 +125,15 @@ class Manager extends React.Component<PROPS, STATE> {
     const modalIsVisible = this.props.modalIsVisible;
     const body = document.getElementsByTagName("body")[0];
 
+    const { budget, payday } = this.props;
+
     if (prevProps.modalIsVisible !== modalIsVisible) {
       modalIsVisible
         ? (body.style.overflow = "hidden")
         : (body.style.overflow = "auto");
+    }
+    if (!!budget && !!payday === false) {
+      window.scrollTo({ top: 1000, behavior: "smooth" });
     }
   }
 
@@ -141,6 +146,16 @@ class Manager extends React.Component<PROPS, STATE> {
         tempPayDay: day
       });
     }
+    const calendarFooter = document.body.querySelector(".calendarFooter");
+    const calendarFooterYCoordinate =
+      calendarFooter.getBoundingClientRect().y +
+      window.pageYOffset -
+      calendarFooter.getBoundingClientRect().height;
+
+    window.scrollTo({
+      top: calendarFooterYCoordinate,
+      behavior: "smooth"
+    });
   };
   handleNewPayDay = (e: any) => {
     const toDay = new Date();

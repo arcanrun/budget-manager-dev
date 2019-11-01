@@ -114,7 +114,7 @@ class Calendar extends React.Component<PROPS, {}> {
           selectedDays={[stringToDate(payday), stringToDate(tempPayDay)]}
           disabledDays={[{ before: new Date() }]}
         />
-        <div className={style.footer}>
+        <div className={[style.footer, "calendarFooter"].join(" ")}>
           {!payday && !tempPayDay
             ? paydayEmptyTitle
             : !tempPayDay

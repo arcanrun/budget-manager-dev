@@ -106,7 +106,6 @@ class History extends React.Component<PROPS, STATE> {
                       <div key={j} className={styleHistory.operation}>
                         <OperationType>{elem.type_cost}</OperationType>
                         <OperationSign>{elem.operation}</OperationSign>
-                        <div className={styleHistory.isComment}>!</div>
                         <OperationValue sign={elem.operation}>
                           {elem.value}
                         </OperationValue>

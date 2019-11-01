@@ -101,9 +101,13 @@ class Profile extends React.Component<PROPS, STATE> {
     );
     const settingsCard = (
       <Card icon={"settings"} headerTitle="настройки">
-        <Button size="xl" level="secondary">
+        {/*
+       <Button size="xl" level="secondary">
           Очистка истории
         </Button>
+      
+      */}
+
         <hr style={{ opacity: 0 }} />
         <Button
           size="xl"
