@@ -30,7 +30,12 @@ export const calcBudgetFailure = (message: string) => ({
   }
 });
 
-export const calcBudget = (value: number, type: string, operation: string) => {
+export const calcBudget = (
+  value: number,
+  type: string,
+  operation: string,
+  comment: string
+) => {
   return (dispatch: any) => {
     dispatch(calcBudgetRequest());
     fetch(API.CALC_BUDGET, {
@@ -39,7 +44,8 @@ export const calcBudget = (value: number, type: string, operation: string) => {
         params: window.location.search,
         value,
         type,
-        operation
+        operation,
+        comment
       })
     })
       .then(res => res.json())

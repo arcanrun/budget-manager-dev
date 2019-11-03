@@ -22,9 +22,10 @@ import {
 
 type PROPS = {
   vk_id: number,
-  getHistory: Function,
   history: Array<Object>,
-  isFetching: boolean
+  isFetching: boolean,
+  getHistory: Function,
+  toggleModal: Function
 };
 
 type STATE = {
@@ -48,11 +49,11 @@ class History extends React.Component<PROPS, STATE> {
   };
 
   render() {
-    const { history, isFetching, vk_id } = this.props;
+    const { history, isFetching, vk_id, toggleModal } = this.props;
 
     // const overlay = <Overlay isTransparent={true} />;
     const verticalLine = <div className={styleHistory.verticalLine} />;
-
+    const exclamation = <div className={styleHistory.isComment}>!</div>;
     history.sort(compareDate);
 
     return vk_id ? (
@@ -105,7 +106,19 @@ class History extends React.Component<PROPS, STATE> {
                     {item[day].map((elem, j) => (
                       <div key={j} className={styleHistory.operation}>
                         <OperationType>{elem.type_cost}</OperationType>
-                        <OperationSign>{elem.operation}</OperationSign>
+                        {elem.comment ? (
+                          <div
+                            onClick={() =>
+                              toggleModal("history_comment", elem.comment)
+                            }
+                          >
+                            <OperationSign>{elem.operation}</OperationSign>
+                            {elem.comment ? exclamation : ""}
+                          </div>
+                        ) : (
+                          <OperationSign>{elem.operation}</OperationSign>
+                        )}
+
                         <OperationValue sign={elem.operation}>
                           {elem.value}
                         </OperationValue>

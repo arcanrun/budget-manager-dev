@@ -9,7 +9,8 @@ import {
   FormLayoutGroup,
   Input,
   Radio,
-  Button
+  Button,
+  Textarea
 } from "@vkontakte/vkui";
 import { IS_PLATFORM_IOS, IS_PLATFORM_ANDROID } from "@vkontakte/vkui";
 import Icon24Cancel from "@vkontakte/icons/dist/24/cancel";
@@ -35,7 +36,9 @@ type PROPS = {
 };
 type STATE = {
   isErrorInput: boolean,
+  codeErrorInputComment: number,
   inputValue?: string,
+  inputValueComment?: string,
   transferTo: ?string,
   errorExplain: ?string,
   screenHeight: number,
@@ -49,6 +52,8 @@ export class Modal extends React.Component<PROPS, STATE> {
     this.state = {
       isErrorInput: false,
       inputValue: undefined,
+      inputValueComment: undefined,
+      codeErrorInputComment: 0,
       transferTo: undefined,
       errorExplain: undefined,
       screenHeight: window.innerHeight,
@@ -170,41 +175,80 @@ export class Modal extends React.Component<PROPS, STATE> {
     });
     return true;
   };
+
   onChange = (e: Object) => {
     const { value } = e.currentTarget;
     this.isVaild(value);
   };
+
+  onChangeComment = (e: Object) => {
+    const { value } = e.currentTarget;
+    const userText = value.replace(/^\s+/, "").replace(/\s+$/, "");
+    if (userText.length > 126) {
+      this.setState({ codeErrorInputComment: 1 });
+      this.setState({ inputValueComment: value });
+    } else if (userText === "") {
+      if (value.length === 0) {
+        this.setState({ codeErrorInputComment: 0 });
+        this.setState({ inputValueComment: value });
+      } else {
+        this.setState({ codeErrorInputComment: 2 });
+        this.setState({ inputValueComment: value });
+      }
+    } else if (userText.search(/[<>/:={};$%^&*#@|'"]/) !== -1) {
+      this.setState({ codeErrorInputComment: 2 });
+      this.setState({ inputValueComment: value });
+    } else {
+      this.setState({ codeErrorInputComment: 0 });
+      this.setState({ inputValueComment: value });
+    }
+  };
+
   onClose = () => {
     this.props.hideModal();
     this.setState({
       isErrorInput: false,
       inputValue: undefined,
+      inputValueComment: undefined,
       errorExplain: undefined,
       transferTo: undefined
     });
   };
   handleSending = () => {
-    const { inputValue, transferTo } = this.state;
+    const {
+      inputValue,
+      inputValueComment,
+      transferTo,
+      codeErrorInputComment
+    } = this.state;
     const {
       typeModal,
       daysToPayday,
       addWholeBudget,
       calcTempCosts
     } = this.props;
+
     let transferToDefault = transferTo || "common";
+
     if (typeModal && typeModal.includes("transfer")) {
       const to = typeModal.split("_")[0];
       if (to === "common") transferToDefault = "fun";
     }
-    const [typeModalonly, operation] = typeModal.split("_");
-    const dateNow = new Date().toLocaleDateString();
 
-    if (this.isVaild(inputValue)) {
+    const [typeModalonly, operation] = typeModal.split("_");
+
+    if (this.isVaild(inputValue) && !!codeErrorInputComment === false) {
       this.onClose();
+
       switch (typeModalonly) {
         case "budget":
           if (operation) {
-            this.props.calcBudget(inputValue, typeModalonly, operation);
+            this.props.calcBudget(
+              inputValue,
+              typeModalonly,
+              operation,
+              inputValueComment
+            );
             break;
           }
           const type = daysToPayday ? "change" : "add";
@@ -217,7 +261,8 @@ export class Modal extends React.Component<PROPS, STATE> {
             inputValue,
             typeModalonly,
             operation,
-            transferTo ? transferTo : transferToDefault
+            transferTo ? transferTo : transferToDefault,
+            inputValueComment
           );
           break;
         default:
@@ -236,11 +281,17 @@ export class Modal extends React.Component<PROPS, STATE> {
 
   render() {
     const { typeModal, common, fun, invest, budget } = this.props;
+    const {
+      errorExplain,
+      screenWidth,
+      isErrorInput,
+      codeErrorInputComment
+    } = this.state;
 
-    const { errorExplain, screenWidth } = this.state;
     let headerTitle = "...";
     let placeholder = "...";
     let bottomWarning = "...";
+    let bottomWarningComment = "...";
     switch (typeModal) {
       case "budget_minus":
         headerTitle =
@@ -256,6 +307,13 @@ export class Modal extends React.Component<PROPS, STATE> {
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
+        if (codeErrorInputComment === 0)
+          bottomWarningComment = "Введите комментарий или оставьте поле пустым";
+        if (codeErrorInputComment === 1)
+          bottomWarningComment = "Слишком большой комментарий";
+        if (codeErrorInputComment === 2)
+          bottomWarningComment = "Недопустимый символ";
+
         break;
       case "budget_plus":
         headerTitle =
@@ -270,6 +328,12 @@ export class Modal extends React.Component<PROPS, STATE> {
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
+        if (codeErrorInputComment === 0)
+          bottomWarningComment = "Введите комментарий или оставьте поле пустым";
+        if (codeErrorInputComment === 1)
+          bottomWarningComment = "Слишком большой комментарий";
+        if (codeErrorInputComment === 2)
+          bottomWarningComment = "Недопустимый символ";
         break;
       case "budget":
         const titleOne =
@@ -309,6 +373,12 @@ export class Modal extends React.Component<PROPS, STATE> {
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
+        if (codeErrorInputComment === 0)
+          bottomWarningComment = "Введите комментарий или оставьте поле пустым";
+        if (codeErrorInputComment === 1)
+          bottomWarningComment = "Слишком большой комментарий";
+        if (codeErrorInputComment === 2)
+          bottomWarningComment = "Недопустимый символ";
         break;
       case "common_plus":
         headerTitle =
@@ -320,7 +390,15 @@ export class Modal extends React.Component<PROPS, STATE> {
             <span>Доход - 50%</span>
           );
         placeholder = "0000.0";
-        bottomWarning = "Введите число, которое больше нуля";
+        bottomWarning = errorExplain
+          ? errorExplain
+          : "Введите число, которое больше нуля";
+        if (codeErrorInputComment === 0)
+          bottomWarningComment = "Введите комментарий или оставьте поле пустым";
+        if (codeErrorInputComment === 1)
+          bottomWarningComment = "Слишком большой комментарий";
+        if (codeErrorInputComment === 2)
+          bottomWarningComment = "Недопустимый символ";
         break;
       case "fun_plus":
         headerTitle =
@@ -335,6 +413,12 @@ export class Modal extends React.Component<PROPS, STATE> {
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
+        if (codeErrorInputComment === 0)
+          bottomWarningComment = "Введите комментарий или оставьте поле пустым";
+        if (codeErrorInputComment === 1)
+          bottomWarningComment = "Слишком большой комментарий";
+        if (codeErrorInputComment === 2)
+          bottomWarningComment = "Недопустимый символ";
         break;
       case "fun_minus":
         headerTitle =
@@ -349,6 +433,12 @@ export class Modal extends React.Component<PROPS, STATE> {
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
+        if (codeErrorInputComment === 0)
+          bottomWarningComment = "Введите комментарий или оставьте поле пустым";
+        if (codeErrorInputComment === 1)
+          bottomWarningComment = "Слишком большой комментарий";
+        if (codeErrorInputComment === 2)
+          bottomWarningComment = "Недопустимый символ";
         break;
       case "invest_minus":
         headerTitle =
@@ -363,6 +453,12 @@ export class Modal extends React.Component<PROPS, STATE> {
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
+        if (codeErrorInputComment === 0)
+          bottomWarningComment = "Введите комментарий или оставьте поле пустым";
+        if (codeErrorInputComment === 1)
+          bottomWarningComment = "Слишком большой комментарий";
+        if (codeErrorInputComment === 2)
+          bottomWarningComment = "Недопустимый символ";
         break;
       case "invest_plus":
         headerTitle =
@@ -377,6 +473,12 @@ export class Modal extends React.Component<PROPS, STATE> {
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
+        if (codeErrorInputComment === 0)
+          bottomWarningComment = "Введите комментарий или оставьте поле пустым";
+        if (codeErrorInputComment === 1)
+          bottomWarningComment = "Слишком большой комментарий";
+        if (codeErrorInputComment === 2)
+          bottomWarningComment = "Недопустимый символ";
         break;
       case "common_transfer":
         headerTitle =
@@ -391,6 +493,12 @@ export class Modal extends React.Component<PROPS, STATE> {
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
+        if (codeErrorInputComment === 0)
+          bottomWarningComment = "Введите комментарий или оставьте поле пустым";
+        if (codeErrorInputComment === 1)
+          bottomWarningComment = "Слишком большой комментарий";
+        if (codeErrorInputComment === 2)
+          bottomWarningComment = "Недопустимый символ";
         break;
       case "fun_transfer":
         headerTitle =
@@ -405,6 +513,12 @@ export class Modal extends React.Component<PROPS, STATE> {
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
+        if (codeErrorInputComment === 0)
+          bottomWarningComment = "Введите комментарий или оставьте поле пустым";
+        if (codeErrorInputComment === 1)
+          bottomWarningComment = "Слишком большой комментарий";
+        if (codeErrorInputComment === 2)
+          bottomWarningComment = "Недопустимый символ";
         break;
       case "invest_transfer":
         headerTitle =
@@ -419,6 +533,12 @@ export class Modal extends React.Component<PROPS, STATE> {
         bottomWarning = errorExplain
           ? errorExplain
           : "Введите число, которое больше нуля";
+        if (codeErrorInputComment === 0)
+          bottomWarningComment = "Введите комментарий или оставьте поле пустым";
+        if (codeErrorInputComment === 1)
+          bottomWarningComment = "Слишком большой комментарий";
+        if (codeErrorInputComment === 2)
+          bottomWarningComment = "Недопустимый символ";
         break;
       case null:
         break;
@@ -452,7 +572,6 @@ export class Modal extends React.Component<PROPS, STATE> {
         Готово
       </Button>
     );
-    const { isErrorInput } = this.state;
     return (
       <ModalRoot activeModal={typeModal}>
         <ModalPage
@@ -471,6 +590,12 @@ export class Modal extends React.Component<PROPS, STATE> {
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
             />
+            <Textarea
+              onChange={this.onChangeComment}
+              placeholder="Комментарий"
+              status={codeErrorInputComment ? "error" : "default"}
+              bottom={bottomWarningComment}
+            />
             {submitBtn}
           </FormLayout>
         </ModalPage>
@@ -483,6 +608,12 @@ export class Modal extends React.Component<PROPS, STATE> {
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
+            />
+            <Textarea
+              onChange={this.onChangeComment}
+              placeholder="Комментарий"
+              status={codeErrorInputComment ? "error" : "default"}
+              bottom={bottomWarningComment}
             />
             {submitBtn}
           </FormLayout>
@@ -510,6 +641,12 @@ export class Modal extends React.Component<PROPS, STATE> {
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
             />
+            <Textarea
+              onChange={this.onChangeComment}
+              placeholder="Комментарий"
+              status={codeErrorInputComment ? "error" : "default"}
+              bottom={bottomWarningComment}
+            />
             {submitBtn}
           </FormLayout>
         </ModalPage>
@@ -522,6 +659,12 @@ export class Modal extends React.Component<PROPS, STATE> {
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
+            />
+            <Textarea
+              onChange={this.onChangeComment}
+              placeholder="Комментарий"
+              status={codeErrorInputComment ? "error" : "default"}
+              bottom={bottomWarningComment}
             />
             {submitBtn}
           </FormLayout>
@@ -536,6 +679,12 @@ export class Modal extends React.Component<PROPS, STATE> {
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
             />
+            <Textarea
+              onChange={this.onChangeComment}
+              placeholder="Комментарий"
+              status={codeErrorInputComment ? "error" : "default"}
+              bottom={bottomWarningComment}
+            />
             {submitBtn}
           </FormLayout>
         </ModalPage>
@@ -548,6 +697,12 @@ export class Modal extends React.Component<PROPS, STATE> {
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
+            />
+            <Textarea
+              onChange={this.onChangeComment}
+              placeholder="Комментарий"
+              status={codeErrorInputComment ? "error" : "default"}
+              bottom={bottomWarningComment}
             />
             {submitBtn}
           </FormLayout>
@@ -562,6 +717,12 @@ export class Modal extends React.Component<PROPS, STATE> {
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
             />
+            <Textarea
+              onChange={this.onChangeComment}
+              placeholder="Комментарий"
+              status={codeErrorInputComment ? "error" : "default"}
+              bottom={bottomWarningComment}
+            />
             {submitBtn}
           </FormLayout>
         </ModalPage>
@@ -574,6 +735,12 @@ export class Modal extends React.Component<PROPS, STATE> {
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
+            />
+            <Textarea
+              onChange={this.onChangeComment}
+              placeholder="Комментарий"
+              status={codeErrorInputComment ? "error" : "default"}
+              bottom={bottomWarningComment}
             />
             {submitBtn}
           </FormLayout>
@@ -591,6 +758,12 @@ export class Modal extends React.Component<PROPS, STATE> {
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
+            />
+            <Textarea
+              onChange={this.onChangeComment}
+              placeholder="Комментарий"
+              status={codeErrorInputComment ? "error" : "default"}
+              bottom={bottomWarningComment}
             />
             <FormLayoutGroup
               bottom="Перевести в категорию"
@@ -629,6 +802,12 @@ export class Modal extends React.Component<PROPS, STATE> {
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
+            />
+            <Textarea
+              onChange={this.onChangeComment}
+              placeholder="Комментарий"
+              status={codeErrorInputComment ? "error" : "default"}
+              bottom={bottomWarningComment}
             />
             <FormLayoutGroup
               bottom="Перевести в категорию"
@@ -671,6 +850,12 @@ export class Modal extends React.Component<PROPS, STATE> {
               onChange={this.onChange}
               status={isErrorInput ? "error" : "default"}
               bottom={bottomWarning}
+            />
+            <Textarea
+              onChange={this.onChangeComment}
+              placeholder="Комментарий"
+              status={codeErrorInputComment ? "error" : "default"}
+              bottom={bottomWarningComment}
             />
             <FormLayoutGroup
               bottom="Перевести в категорию"

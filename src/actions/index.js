@@ -12,6 +12,7 @@ import { makeProfileOperation } from "./profileOperationsAction";
 import { getStatistics } from "./staisticsActions";
 import { calcBudget } from "./calcBudgetActions";
 import { tutorialChangeState } from "./tutorialAction";
+import { getHistoryShort } from "./getHsitoryShort";
 
 export {
   addWholeBudget,
@@ -29,5 +30,6 @@ export {
   calcBudget,
   stopGuide,
   hideModal,
-  tutorialChangeState
+  tutorialChangeState,
+  getHistoryShort
 };

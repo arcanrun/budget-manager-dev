@@ -3,7 +3,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { getHistory } from "../actions/index";
+import { getHistory, toggleModal } from "../actions/index";
 
 import { History } from "../components/index";
 
@@ -15,5 +15,5 @@ const mapStateToProps = (state: Object) => ({
 
 export const HistoryContainer = connect(
   mapStateToProps,
-  { getHistory }
+  { getHistory, toggleModal }
 )(History);

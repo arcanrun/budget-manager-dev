@@ -8,7 +8,8 @@ type stateType = {
 
 const initialState: stateType = {
   modalIsVisible: false,
-  typeModal: null
+  typeModal: null,
+  payload: undefined
 };
 
 export function modal(state: stateType = initialState, action: Object) {
@@ -17,13 +18,15 @@ export function modal(state: stateType = initialState, action: Object) {
       return {
         ...state,
         modalIsVisible: !state.modalIsVisible,
-        typeModal: action.payload.typeModal
+        typeModal: action.payload.typeModal,
+        payload: action.payload.payload
       };
     case HIDE_MODAL:
       return {
         ...state,
         modalIsVisible: false,
-        typeModal: null
+        typeModal: null,
+        payload: undefined
       };
     default:
       return state;

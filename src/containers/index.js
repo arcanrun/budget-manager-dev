@@ -5,6 +5,7 @@ import { HistoryContainer } from "./HistoryContainer";
 import { ProfileContainer } from "./ProfileContainer";
 import { AppContainer } from "./AppContainer";
 import { ModalContainer } from "./ModalContainer";
+import { ModalHistoryContainer } from "./ModalHistoryContainer";
 
 export {
   WholeBudgetContainer,
@@ -12,5 +13,6 @@ export {
   HistoryContainer,
   ProfileContainer,
   AppContainer,
-  ModalContainer
+  ModalContainer,
+  ModalHistoryContainer
 };

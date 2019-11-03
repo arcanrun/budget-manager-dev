@@ -13,7 +13,7 @@ type PROPS = {
   makeProfileOperation: Function,
   toggleModal: Function,
   getStatistics: Function,
-  getHistory: Function,
+  getHistoryShort: Function,
   history: Array<any>,
   toDayFormated: string,
   modalIsVisible: boolean,
@@ -41,7 +41,7 @@ class Profile extends React.Component<PROPS, STATE> {
     const { vk_id } = this.props;
 
     this.props.getStatistics(vk_id);
-    this.props.getHistory(vk_id);
+    this.props.getHistoryShort(vk_id);
     this.toggleAnimation();
   }
   componentDidUpdate(prevProps: Object, prevState: Object) {

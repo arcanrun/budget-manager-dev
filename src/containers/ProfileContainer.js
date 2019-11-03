@@ -7,7 +7,7 @@ import {
   toggleModal,
   makeProfileOperation,
   getStatistics,
-  getHistory
+  getHistoryShort
 } from "../actions/";
 
 const mapStateToProps = state => ({
@@ -28,5 +28,5 @@ const mapStateToProps = state => ({
 });
 export const ProfileContainer = connect(
   mapStateToProps,
-  { toggleModal, makeProfileOperation, getStatistics, getHistory }
+  { toggleModal, makeProfileOperation, getStatistics, getHistoryShort }
 )(Profile);

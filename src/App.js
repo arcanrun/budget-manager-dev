@@ -15,12 +15,13 @@ import Icon24MoneyCircle from "@vkontakte/icons/dist/24/money_circle";
 import Icon24User from "@vkontakte/icons/dist/24/user";
 import Icon24Recent from "@vkontakte/icons/dist/24/recent";
 
-import { Header, BottomBar, Overlay } from "./components";
+import { Overlay } from "./components";
 import {
   ManagerContainer,
   HistoryContainer,
   ProfileContainer,
-  ModalContainer
+  ModalContainer,
+  ModalHistoryContainer
 } from "./containers";
 
 type PROPS = {
@@ -46,14 +47,9 @@ export class App extends React.Component<PROPS, STATE> {
   }
 
   onStoryChange = (e: Object) => {
-    const { isTutorDone } = this.props;
-    if (isTutorDone) {
-      window.scroll(0, 0);
-      const { story } = e.currentTarget.dataset;
-      this.setState({ activeStory: story });
-    } else {
-      this.setState({ activeStory: "manager" });
-    }
+    window.scroll(0, 0);
+    const { story } = e.currentTarget.dataset;
+    this.setState({ activeStory: story });
   };
 
   render() {
@@ -62,7 +58,8 @@ export class App extends React.Component<PROPS, STATE> {
       hideModal,
       vk_id,
       makeProfileOperation,
-      isFetching
+      isFetching,
+      isTutorDone
     } = this.props;
     const { activeStory } = this.state;
     let alert = null;
@@ -98,14 +95,18 @@ export class App extends React.Component<PROPS, STATE> {
 
     const tabbar = (
       <Tabbar>
-        <TabbarItem
-          onClick={this.onStoryChange}
-          selected={activeStory === "history"}
-          data-story="history"
-          text="История"
-        >
-          <Icon24Recent />
-        </TabbarItem>
+        {isTutorDone ? (
+          <TabbarItem
+            onClick={this.onStoryChange}
+            selected={activeStory === "history"}
+            data-story="history"
+            text="История"
+          >
+            <Icon24Recent />
+          </TabbarItem>
+        ) : (
+          ""
+        )}
         <TabbarItem
           onClick={this.onStoryChange}
           selected={activeStory === "manager"}
@@ -114,19 +115,27 @@ export class App extends React.Component<PROPS, STATE> {
         >
           <Icon24MoneyCircle />
         </TabbarItem>
-        <TabbarItem
-          onClick={this.onStoryChange}
-          selected={activeStory === "profile"}
-          data-story="profile"
-          text="Профиль"
-        >
-          <Icon24User />
-        </TabbarItem>
+        {isTutorDone ? (
+          <TabbarItem
+            onClick={this.onStoryChange}
+            selected={activeStory === "profile"}
+            data-story="profile"
+            text="Профиль"
+          >
+            <Icon24User />
+          </TabbarItem>
+        ) : (
+          ""
+        )}
       </Tabbar>
     );
     const epic = (
       <Epic tabbar={tabbar} activeStory={activeStory}>
-        <View activePanel="main_panel" id="history">
+        <View
+          activePanel="main_panel"
+          id="history"
+          modal={<ModalHistoryContainer />}
+        >
           <Panel id="main_panel">
             <PanelHeader>История</PanelHeader>
             <HistoryContainer />

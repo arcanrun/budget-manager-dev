@@ -79,7 +79,7 @@ export const LineChart = ({ switcher, history }: PROPS) => {
   dataIncome.series.push(tempSeriesIncome);
   dataCosts.series.push(tempSeriesCosts);
 
-  let offset = 23;
+  let offset = 26;
 
   if (switcher) {
     dataIncome.series[0].forEach(el => {
@@ -87,21 +87,21 @@ export const LineChart = ({ switcher, history }: PROPS) => {
         "" + toPrettyNumber(el, false, 1000, false, "", "", "0.0a", "0");
 
       if (toStr.indexOf("k") !== -1) {
-        let increment = 24;
+        let increment = 27;
         if (toStr.length >= 5) {
-          increment = 25;
+          increment = 28;
         }
         if (toStr.length >= 6) {
-          increment = 26;
+          increment = 29;
         }
         if (offset < increment) offset = increment;
       }
       if (toStr.indexOf("m") !== -1) {
-        const increment = 26;
+        const increment = 29;
         if (offset < increment) offset = increment;
       }
       if (toStr.indexOf("b") !== -1 || toStr.indexOf("t") !== -1) {
-        const increment = 27;
+        const increment = 30;
         if (offset < increment) offset = increment;
       }
     });
@@ -110,21 +110,21 @@ export const LineChart = ({ switcher, history }: PROPS) => {
       const toStr =
         "" + toPrettyNumber(el, false, 1000, false, "", "", "0.0a", "0");
       if (toStr.indexOf("k") !== -1) {
-        let increment = 24;
+        let increment = 27;
         if (toStr.length >= 5) {
-          increment = 25;
+          increment = 28;
         }
         if (toStr.length >= 6) {
-          increment = 26;
+          increment = 29;
         }
         if (offset < increment) offset = increment;
       }
       if (toStr.indexOf("m") !== -1) {
-        const increment = 26;
+        const increment = 29;
         if (offset < increment) offset = increment;
       }
       if (toStr.indexOf("b") !== -1 || toStr.indexOf("t") !== -1) {
-        const increment = 27;
+        const increment = 30;
         if (offset < increment) offset = increment;
       }
     });

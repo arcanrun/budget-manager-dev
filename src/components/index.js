@@ -29,6 +29,7 @@ import { RoundButton } from "./RoundButton";
 import { LineChart } from "./LineChart";
 import { ShortenNumber } from "./ShortenNumber";
 import { Modal } from "./Modal";
+import { ModalHistory } from "./ModalHistory";
 
 export {
   Header,
@@ -60,5 +61,6 @@ export {
   RoundButton,
   LineChart,
   ShortenNumber,
-  Modal
+  Modal,
+  ModalHistory
 };
