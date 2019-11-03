@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
 import mVKMiniAppsScrollHelper from "@vkontakte/mvk-mini-apps-scroll-helper";
 
 import "./index.css";
@@ -15,9 +14,7 @@ mVKMiniAppsScrollHelper(root);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <AppContainer />
-    </Router>
+    <AppContainer />
   </Provider>,
   root
 );

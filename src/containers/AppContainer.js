@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 
 import { logIn, hideModal, makeProfileOperation } from "../actions";
 
@@ -12,9 +11,7 @@ const mapStateToProps = state => ({
   isFetching: state.user.isFetching,
   isTutorDone: state.user.is_tutorial_done
 });
-export const AppContainer = withRouter(
-  connect(
-    mapStateToProps,
-    { logIn, hideModal, makeProfileOperation }
-  )(App)
-);
+export const AppContainer = connect(
+  mapStateToProps,
+  { logIn, hideModal, makeProfileOperation }
+)(App);

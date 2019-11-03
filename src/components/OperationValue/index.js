@@ -2,7 +2,6 @@
 import React from "react";
 
 import style from "./OperationValue.module.css";
-import { ShortenNumber } from "../index";
 import { toPrettyNumber } from "../../helpers/prettyNumbers";
 
 type PROPS = {
@@ -16,6 +15,8 @@ const OperationValue = ({ children, sign }: PROPS) => {
       className={
         sign === "plus"
           ? [style.value, style.valuePlus].join(" ")
+          : sign === "transfer"
+          ? [style.value, style.valueTransfer].join(" ")
           : [style.value, style.valueMinus].join(" ")
       }
     >
