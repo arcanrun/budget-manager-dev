@@ -71,15 +71,19 @@ class Calendar extends React.Component<PROPS, {}> {
     } = this.props;
 
     const paydayEmptyTitle = <div>Выберите дату получения зарплаты</div>;
-    const counterBlock = (
-      <div className={style.counterBlock}>
-        <div className={style.counter}>{daysToPayday}</div>
-        <div className={style.counterBlockFooter}>
-          <div className={style.highlight}>{addSuffix(daysToPayday)}</div>
-          <div>до зарплаты</div>
+    const counterBlock =
+      daysToPayday === 0 || daysToPayday === "0" ? (
+        <div className={style.paydayToDay}>зарплата сегодня</div>
+      ) : (
+        <div className={style.counterBlock}>
+          <div className={style.counter}>{daysToPayday}</div>
+          <div className={style.counterBlockFooter}>
+            <div className={style.highlight}>{addSuffix(daysToPayday)}</div>
+            <div>до зарплаты</div>
+          </div>
         </div>
-      </div>
-    );
+      );
+
     const counterChoose = (
       <div className={style.chooser}>
         Дата получения зарплаты

@@ -69,3 +69,12 @@
   padding-top: 20px;
   display: inline-block;
 }
+.paydayToDay {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 24px;
+  background: #0fde8c;
+  color: #ffffff;
+  padding: 10px;
+}
