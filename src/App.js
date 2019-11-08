@@ -14,6 +14,7 @@ import {
 import Icon24MoneyCircle from "@vkontakte/icons/dist/24/money_circle";
 import Icon24User from "@vkontakte/icons/dist/24/user";
 import Icon24Recent from "@vkontakte/icons/dist/24/recent";
+import mVKMiniAppsScrollHelper from "@vkontakte/mvk-mini-apps-scroll-helper";
 
 import { Overlay } from "./components";
 import {

@@ -4,34 +4,35 @@
   "private": true,
   "homepage": "http://arcanrun.github.io/budget-manager",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.10.2",
-    "@vkontakte/icons": "^1.6.0",
+    "@fortawesome/fontawesome-free": "^5.11.2",
+    "@vkontakte/icons": "^1.11.0",
     "@vkontakte/mvk-mini-apps-scroll-helper": "^1.2.0",
-    "@vkontakte/vkui": "^2.23.1",
+    "@vkontakte/vk-connect": "^1.6.8",
+    "@vkontakte/vkui": "^2.32.4",
     "@vkontakte/vkui-connect-promise": "^0.1.19",
-    "chartist": "^0.11.2",
+    "chartist": "^0.11.4",
     "deepcopy": "^2.0.0",
     "flow-bin": "^0.95.1",
     "moment": "^2.24.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.0",
     "numeral": "^2.0.6",
     "prop-types": "^15.7.2",
-    "react": "^16.8.4",
+    "react": "^16.11.0",
     "react-chartist": "^0.13.3",
-    "react-day-picker": "^7.3.0",
-    "react-dom": "^16.8.4",
-    "react-id-swiper": "^2.1.1",
+    "react-day-picker": "^7.4.0",
+    "react-dom": "^16.11.0",
+    "react-id-swiper": "^2.3.2",
     "react-joyride": "^2.1.1",
     "react-pretty-numbers": "^3.0.0",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
-    "react-sticky-el": "^1.0.20",
-    "react-svg": "^8.0.1",
+    "react-sticky-el": "^1.1.0",
+    "react-svg": "^8.0.8",
     "react-transition-group": "^2.9.0",
-    "redux": "^4.0.1",
+    "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "swiper": "^4.5.0"
+    "swiper": "^4.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -52,7 +53,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "gh-pages": "^2.0.1",
+    "gh-pages": "^2.1.1",
     "redux-logger": "^3.0.6"
   }
 }

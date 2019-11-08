@@ -125,7 +125,7 @@ class Manager extends React.Component<PROPS, STATE> {
     const modalIsVisible = this.props.modalIsVisible;
     const body = document.getElementsByTagName("body")[0];
 
-    const { budget, payday } = this.props;
+    const { budget, payday, is_tutorial_done } = this.props;
 
     if (prevProps.modalIsVisible !== modalIsVisible) {
       modalIsVisible
@@ -327,14 +327,24 @@ class Manager extends React.Component<PROPS, STATE> {
             userSelect: "none",
             outline: "none",
             color: "#fff",
-            backgroundColor: "#f72d6b"
+            backgroundColor: "#f72d6b",
+            fontSize: 14
+          },
+          buttonBack: {
+            color: "#fff",
+            userSelect: "none",
+            outline: "none",
+            backgroundColor: "rgb(82, 129, 185)",
+            borderRadius: "4px",
+            fontSize: 14
           },
           buttonSkip: {
             userSelect: "none",
-            color: "#5281b9",
+            color: "#fff",
             outline: "none",
-            backgroundColor: "transparent",
-            fontSzie: "13px"
+            backgroundColor: "rgb(82, 129, 185)",
+            borderRadius: "4px",
+            fontSize: 14
           },
           buttonClose: {
             outline: "none",

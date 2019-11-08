@@ -4,7 +4,6 @@ import React from "react";
 import style from "./LineChart.module.css";
 import ChartistGraph from "react-chartist";
 import "./chartist.css";
-import { cutNumber } from "../ShortenNumber/helpers";
 import { stringToDate } from "../../helpers/datetime";
 import { toPrettyNumber } from "../../helpers/prettyNumbers";
 
