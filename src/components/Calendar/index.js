@@ -59,6 +59,7 @@ class Calendar extends React.Component<PROPS, {}> {
   handleToDayBtn = () => {
     const { handleDayClick } = this.props;
     const toDay = new Date();
+    console.log(toDay);
     handleDayClick(toDay);
   };
   render() {

@@ -9,6 +9,7 @@ import style from "./Manager.module.css";
 import { msToDays } from "../Calendar/calendarHelper";
 import "./animations.css";
 import { stopGuide } from "../../actions";
+import { type } from "os";
 
 type PROPS = {
   tutorialChangeState: Function,
@@ -141,6 +142,7 @@ class Manager extends React.Component<PROPS, STATE> {
     let toDay = new Date();
     toDay = Date.parse(toDay.toDateString());
     const selectedDay = Date.parse(day.toDateString());
+
     if (selectedDay >= toDay) {
       this.setState({
         tempPayDay: day
