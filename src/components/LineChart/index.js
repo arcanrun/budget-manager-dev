@@ -47,6 +47,14 @@ export const LineChart = ({ switcher, history }: PROPS) => {
   };
   const tempSeriesIncome = [];
   const tempSeriesCosts = [];
+
+  currentMonthData.sort((a, b) => {
+    const dayA = +Object.keys(a)[0].slice(-2);
+    const dayB = +Object.keys(b)[0].slice(-2);
+
+    return dayA - dayB;
+  });
+
   currentMonthData.forEach(el => {
     const key = Object.keys(el)[0];
     const day = Object.keys(el)[0].slice(-2);
@@ -154,6 +162,8 @@ export const LineChart = ({ switcher, history }: PROPS) => {
       end: "ct-end"
     }
   };
+
+  console.log("---->", dataIncome);
 
   var type = "Line";
   return (
