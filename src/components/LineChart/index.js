@@ -163,8 +163,6 @@ export const LineChart = ({ switcher, history }: PROPS) => {
     }
   };
 
-  console.log("---->", dataIncome);
-
   var type = "Line";
   return (
     <div className={style.contianer}>

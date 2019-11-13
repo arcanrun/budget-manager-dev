@@ -29,13 +29,13 @@ export const failuretProfileOperation = (message: string) => ({
   }
 });
 
-export const makeProfileOperation = (operationType: string) => {
+export const makeProfileOperation = (operationType: string, params: string) => {
   return (dispatch: Function) => {
     dispatch(requestProfileOperation(operationType));
     fetch(API.PROFILE_MANAGE, {
       method: "POST",
       body: JSON.stringify({
-        params: window.location.search,
+        params,
         operationType
       })
     })

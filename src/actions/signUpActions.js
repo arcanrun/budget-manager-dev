@@ -25,7 +25,8 @@ export const successSignUp = (res: Object, vkRes: Object) => ({
     ...res,
     name: vkRes.name,
     sure_name: vkRes.sure_name,
-    avatar: vkRes.avatar
+    avatar: vkRes.avatar,
+    params: vkRes.params
   }
 });
 export const failureSignUp = (res: Object) => ({
@@ -37,7 +38,7 @@ export const failureSignUp = (res: Object) => ({
   }
 });
 
-export const signUp = () => {
+export const signUp = (params: string) => {
   return (dispatch: Function) => {
     dispatch(requestSignUp());
     // let toDay = new Date();
@@ -46,7 +47,8 @@ export const signUp = () => {
       name: undefined,
       sure_name: undefined,
       avatar: undefined,
-      timezone: undefined
+      timezone: undefined,
+      params: undefined
     };
     connect.send("VKWebAppInit", {});
 
@@ -57,10 +59,11 @@ export const signUp = () => {
         vkRes.name = res.data.first_name;
         vkRes.sure_name = res.data.last_name;
         vkRes.timezone = res.data.timezone;
+        vkRes.params = window.location.search ? window.location.search : params;
         fetch(API.SIGN_UP, {
           method: "POST",
           body: JSON.stringify({
-            params: window.location.search,
+            params: vkRes.params,
             timezone: vkRes.timezone
           })
         })

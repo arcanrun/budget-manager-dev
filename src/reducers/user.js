@@ -34,6 +34,7 @@ import {
 } from "../constants";
 
 type UserState = {
+  params: string,
   is_first_time: boolean,
   is_tutorial_done: boolean,
   vk_id: ?number,
@@ -98,6 +99,7 @@ type UserState = {
 };
 
 export const initialState: UserState = {
+  params: undefined,
   is_tutorial_done: false,
   is_first_time: true,
   // vk_id: 65122543,
@@ -363,6 +365,7 @@ export function user(state: UserState = initialState, action: Object) {
     case SIGNUP_SUCCESS:
       return {
         ...state,
+        params: action.payload.params,
         register_date: action.payload.register_date,
         isFetching_signup: false,
         vk_id: action.payload.vk_id,
@@ -376,6 +379,7 @@ export function user(state: UserState = initialState, action: Object) {
     case LOGIN_SUCCESS:
       return {
         ...state,
+        params: action.payload.params,
         register_date: action.payload.register_date,
         isFetching: false,
         vk_id: action.payload.vk_id,
@@ -388,7 +392,11 @@ export function user(state: UserState = initialState, action: Object) {
 
     case PROFILE_OPERATION_SUCCESS:
       if (action.payload.payload.RESPONSE === "DELETE_USER_SUCCESS") {
-        return { ...initialState, isFetching: false };
+        return {
+          ...initialState,
+          isFetching: false,
+          params: state.params
+        };
       }
       return { ...state };
 

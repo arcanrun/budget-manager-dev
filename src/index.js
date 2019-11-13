@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import { AppContainer } from "./containers/index";
 import * as serviceWorker from "./serviceWorker";
@@ -10,9 +10,11 @@ import { store } from "./configureStore";
 const root = document.getElementById("root");
 
 ReactDOM.render(
-  <Provider store={store}>
-    <AppContainer />
-  </Provider>,
+  <BrowserRouter>
+    <Provider store={store}>
+      <AppContainer />
+    </Provider>
+  </BrowserRouter>,
   root
 );
 

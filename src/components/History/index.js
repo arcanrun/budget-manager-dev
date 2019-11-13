@@ -4,6 +4,7 @@ import styleHistory from "./History.module.css";
 import Sticky from "react-sticky-el";
 import { Redirect } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
+import { Route } from "react-router-dom";
 
 import {
   OperationSign,
@@ -24,6 +25,7 @@ type PROPS = {
   vk_id: number,
   history: Array<Object>,
   isFetching: boolean,
+  params: string,
   getHistory: Function,
   toggleModal: Function
 };
@@ -39,7 +41,7 @@ class History extends React.Component<PROPS, STATE> {
 
   componentDidMount() {
     const ins = this.state.in;
-    this.props.getHistory();
+    this.props.getHistory(this.props.params);
     this.toggleAnimation();
   }
 

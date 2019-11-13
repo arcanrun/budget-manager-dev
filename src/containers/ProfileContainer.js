@@ -1,6 +1,7 @@
 //@flow
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import { Profile } from "../components/index";
 import {
@@ -24,9 +25,12 @@ const mapStateToProps = state => ({
   registerDate: state.user.register_date,
   calc: state.user.calc,
   history: state.user.history.value,
-  timezone: state.user.timezone
+  timezone: state.user.timezone,
+  params: state.user.params
 });
-export const ProfileContainer = connect(
-  mapStateToProps,
-  { toggleModal, makeProfileOperation, getStatistics, getHistoryShort }
-)(Profile);
+export const ProfileContainer = withRouter(
+  connect(
+    mapStateToProps,
+    { toggleModal, makeProfileOperation, getStatistics, getHistoryShort }
+  )(Profile)
+);

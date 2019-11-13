@@ -31,14 +31,14 @@ export const failuretAddWholeBudget = (message: string) => ({
 export const addWholeBudget = (
   budget: number,
   operation: string,
-  daysToPayday: number
+  params: string
 ) => {
   return (dispatch: Function) => {
     dispatch(requestAddWholeBudget());
     fetch(API.ADD_BUDGET, {
       method: "POST",
       body: JSON.stringify({
-        params: window.location.search,
+        params,
         budget,
         operation
       })

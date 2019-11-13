@@ -35,14 +35,15 @@ export const calcTempCosts = (
   type: string,
   operation: string,
   transfer_to: ?string = undefined,
-  comment
+  comment: string,
+  params: string
 ) => {
   return (dispatch: any) => {
     dispatch(calcTempCostsRequest());
     fetch(API.TEMP_TODAY_COSTS, {
       method: "POST",
       body: JSON.stringify({
-        params: window.location.search,
+        params,
         value,
         type,
         operation,

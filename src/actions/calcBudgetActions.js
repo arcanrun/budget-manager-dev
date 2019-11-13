@@ -34,14 +34,15 @@ export const calcBudget = (
   value: number,
   type: string,
   operation: string,
-  comment: string
+  comment: string,
+  params: string
 ) => {
   return (dispatch: any) => {
     dispatch(calcBudgetRequest());
     fetch(API.CALC_BUDGET, {
       method: "POST",
       body: JSON.stringify({
-        params: window.location.search,
+        params,
         value,
         type,
         operation,

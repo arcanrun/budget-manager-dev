@@ -37,7 +37,8 @@ export const failuretGetAllCosts = (message: string) => ({
 export const getAllCosts = (
   daysToPayday: number,
   toDay: string,
-  toDayFormated: string
+  toDayFormated: string,
+  params: string
 ) => {
   return (dispatch: Function) => {
     dispatch(requestGetAllCosts());
@@ -45,7 +46,7 @@ export const getAllCosts = (
       method: "POST",
       mode: "cors",
       body: JSON.stringify({
-        params: window.location.search,
+        params,
         toDay
       }),
 

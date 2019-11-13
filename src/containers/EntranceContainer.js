@@ -11,7 +11,8 @@ import { signUp } from "../actions";
 const mapStateToProps = (state: Object) => ({
   vk_id: state.user.vk_id,
   isFetching: state.user.isFetching_signup,
-  error: state.user.error_signup
+  error: state.user.error_signup,
+  params: state.user.params
 });
 
 const EntranceContainer = connect(

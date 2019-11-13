@@ -17,7 +17,8 @@ const mapStateToProps = state => ({
   common: state.user.calc.common.value,
   fun: state.user.calc.fun.value,
   invest: state.user.calc.invest.value,
-  budget: state.user.calc.budget
+  budget: state.user.calc.budget,
+  params: state.user.params
 });
 
 export const ModalContainer = connect(

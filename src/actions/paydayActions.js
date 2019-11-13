@@ -31,14 +31,14 @@ const failurePayDay = message => ({
   }
 });
 
-export const addPayDay = (toDay: string, payday: string) => {
+export const addPayDay = (toDay: string, payday: string, params: string) => {
   return (dispatch: any) => {
     dispatch(requestPayDay());
     fetch(API.ADD_PAYDAY, {
       method: "POST",
       body: JSON.stringify({
         toDay,
-        params: window.location.search,
+        params,
         payday
       })
     })

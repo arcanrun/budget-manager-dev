@@ -28,13 +28,13 @@ export const failuretGetAllHistroy = (message: string) => ({
   }
 });
 
-export const getHistory = (vk_id: number) => {
+export const getHistory = (params: string) => {
   return (dispatch: Function) => {
     dispatch(requestGetHistory());
     fetch(API.GET_HISTORY, {
       method: "POST",
       body: JSON.stringify({
-        params: window.location.search
+        params
       })
     })
       .then(res => res.json())

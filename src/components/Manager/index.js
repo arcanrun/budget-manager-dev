@@ -34,7 +34,8 @@ type PROPS = {
   calc: Object,
   common: Object,
   is_first_time: boolean,
-  is_tutorial_done: boolean
+  is_tutorial_done: boolean,
+  params: string
 };
 
 type STATE = {
@@ -107,12 +108,12 @@ class Manager extends React.Component<PROPS, STATE> {
   }
 
   componentDidMount() {
-    const daysToPayday = this.props.daysToPayday;
+    const { daysToPayday, params } = this.props;
 
     const toDay = new Date();
     const toDayFormated = toDay.toLocaleString().split(",")[0];
 
-    this.props.getAllCosts(daysToPayday, toDay, toDayFormated);
+    this.props.getAllCosts(daysToPayday, toDay, toDayFormated, params);
     this.toggleAnimation();
   }
   toggleAnimation = () => {
@@ -163,13 +164,14 @@ class Manager extends React.Component<PROPS, STATE> {
     const toDay = new Date();
     const btnType = e.target.dataset.btnType;
     const { tempPayDay } = this.state;
+    const { params } = this.props;
     switch (btnType) {
       case "ok":
         const initial_daysToPayday = msToDays(
           Date.parse(tempPayDay || "") - Date.now()
         );
 
-        this.props.addPayDay(toDay, tempPayDay);
+        this.props.addPayDay(toDay, tempPayDay, params);
         this.setState({ tempPayDay: undefined });
         break;
       case "chanel":
@@ -180,11 +182,11 @@ class Manager extends React.Component<PROPS, STATE> {
     }
   };
   handleTour = (data: any) => {
-    const { stopGuide, tutorialChangeState } = this.props;
+    const { stopGuide, tutorialChangeState, params } = this.props;
     const { action } = data;
     if (action === "reset") {
       stopGuide();
-      tutorialChangeState(true);
+      tutorialChangeState(true, params);
     }
   };
   render() {

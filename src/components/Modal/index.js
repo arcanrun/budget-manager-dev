@@ -32,7 +32,8 @@ type PROPS = {
   common: ?number,
   fun: ?number,
   invest: ?number,
-  budget: ?string
+  budget: ?string,
+  params: string
 };
 type STATE = {
   isErrorInput: boolean,
@@ -225,7 +226,8 @@ export class Modal extends React.Component<PROPS, STATE> {
       typeModal,
       daysToPayday,
       addWholeBudget,
-      calcTempCosts
+      calcTempCosts,
+      params
     } = this.props;
 
     let transferToDefault = transferTo || "common";
@@ -247,12 +249,13 @@ export class Modal extends React.Component<PROPS, STATE> {
               inputValue,
               typeModalonly,
               operation,
-              inputValueComment
+              inputValueComment,
+              params
             );
             break;
           }
           const type = daysToPayday ? "change" : "add";
-          addWholeBudget(inputValue, type);
+          addWholeBudget(inputValue, type, params);
           break;
         case "common":
         case "fun":
@@ -262,7 +265,8 @@ export class Modal extends React.Component<PROPS, STATE> {
             typeModalonly,
             operation,
             transferTo ? transferTo : transferToDefault,
-            inputValueComment
+            inputValueComment,
+            params
           );
           break;
         default:

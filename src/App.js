@@ -14,7 +14,7 @@ import {
 import Icon24MoneyCircle from "@vkontakte/icons/dist/24/money_circle";
 import Icon24User from "@vkontakte/icons/dist/24/user";
 import Icon24Recent from "@vkontakte/icons/dist/24/recent";
-import mVKMiniAppsScrollHelper from "@vkontakte/mvk-mini-apps-scroll-helper";
+import { Link, NavLink } from "react-router-dom";
 
 import { Overlay } from "./components";
 import {
@@ -32,7 +32,10 @@ type PROPS = {
   vk_id: ?number,
   isFetching: boolean,
   typeModal: ?string,
-  isTutorDone: boolean
+  isTutorDone: boolean,
+  history: Array<any>,
+  location: Object,
+  params: string
 };
 
 type STATE = {
@@ -51,6 +54,7 @@ export class App extends React.Component<PROPS, STATE> {
     window.scroll(0, 0);
     const { story } = e.currentTarget.dataset;
     this.setState({ activeStory: story });
+    this.props.history.push(story);
   };
 
   render() {
@@ -60,8 +64,11 @@ export class App extends React.Component<PROPS, STATE> {
       vk_id,
       makeProfileOperation,
       isFetching,
-      isTutorDone
+      isTutorDone,
+      location,
+      params
     } = this.props;
+
     const { activeStory } = this.state;
     let alert = null;
     switch (typeModal) {
@@ -74,7 +81,7 @@ export class App extends React.Component<PROPS, STATE> {
                 title: "Удалить профиль",
                 autoclose: true,
                 style: "destructive",
-                action: () => makeProfileOperation("delete")
+                action: () => makeProfileOperation("delete", params)
               },
               {
                 title: "Отмена",
@@ -99,7 +106,7 @@ export class App extends React.Component<PROPS, STATE> {
         {isTutorDone ? (
           <TabbarItem
             onClick={this.onStoryChange}
-            selected={activeStory === "history"}
+            selected={location.pathname === "/history"}
             data-story="history"
             text="История"
           >
@@ -110,8 +117,8 @@ export class App extends React.Component<PROPS, STATE> {
         )}
         <TabbarItem
           onClick={this.onStoryChange}
-          selected={activeStory === "manager"}
-          data-story="manager"
+          selected={location.pathname === "/"}
+          data-story="/"
           text="Менеджер"
         >
           <Icon24MoneyCircle />
@@ -119,7 +126,7 @@ export class App extends React.Component<PROPS, STATE> {
         {isTutorDone ? (
           <TabbarItem
             onClick={this.onStoryChange}
-            selected={activeStory === "profile"}
+            selected={location.pathname === "/profile"}
             data-story="profile"
             text="Профиль"
           >
@@ -130,30 +137,39 @@ export class App extends React.Component<PROPS, STATE> {
         )}
       </Tabbar>
     );
+    const historyView = (
+      <View
+        activePanel="main_panel"
+        id="/history"
+        modal={<ModalHistoryContainer />}
+      >
+        <Panel id="main_panel">
+          <PanelHeader>История</PanelHeader>
+          <HistoryContainer />
+        </Panel>
+      </View>
+    );
+    const managerView = (
+      <View activePanel="main_panel" id="/" modal={<ModalContainer />}>
+        <Panel id="main_panel">
+          <PanelHeader>Менеджер</PanelHeader>
+          <ManagerContainer />
+        </Panel>
+      </View>
+    );
+    const profileView = (
+      <View activePanel="main_panel" id="/profile" popout={alert}>
+        <Panel id="main_panel">
+          <PanelHeader>Профиль</PanelHeader>
+          <ProfileContainer />
+        </Panel>
+      </View>
+    );
     const epic = (
-      <Epic tabbar={tabbar} activeStory={activeStory}>
-        <View
-          activePanel="main_panel"
-          id="history"
-          modal={<ModalHistoryContainer />}
-        >
-          <Panel id="main_panel">
-            <PanelHeader>История</PanelHeader>
-            <HistoryContainer />
-          </Panel>
-        </View>
-        <View activePanel="main_panel" id="manager" modal={<ModalContainer />}>
-          <Panel id="main_panel">
-            <PanelHeader>Менеджер</PanelHeader>
-            <ManagerContainer />
-          </Panel>
-        </View>
-        <View activePanel="main_panel" id="profile" popout={alert}>
-          <Panel id="main_panel">
-            <PanelHeader>Профиль</PanelHeader>
-            <ProfileContainer />
-          </Panel>
-        </View>
+      <Epic tabbar={tabbar} activeStory={location.pathname}>
+        {historyView}
+        {managerView}
+        {profileView}
       </Epic>
     );
     const entrance = (

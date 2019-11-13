@@ -12,7 +12,8 @@ type PROPS = {
   signUp: Function,
   vk_id: ?number,
   isFetching: boolean,
-  error: boolean
+  error: boolean,
+  params: string
 };
 
 type STATE = {
@@ -70,7 +71,10 @@ class Entrance extends React.Component<PROPS, STATE> {
       containerClass: "customized-swiper-container"
     };
     const btnLogin = (
-      <button onClick={this.props.signUp} className={style.btn}>
+      <button
+        onClick={() => this.props.signUp(this.props.params)}
+        className={style.btn}
+      >
         войти
       </button>
     );

@@ -26,7 +26,8 @@ type PROPS = {
   registerDate: number,
   costs: Object,
   income: Object,
-  calc: Object
+  calc: Object,
+  params: string
 };
 
 type STATE = {
@@ -38,10 +39,10 @@ class Profile extends React.Component<PROPS, STATE> {
     in: false
   };
   componentDidMount() {
-    const { vk_id } = this.props;
+    const { params } = this.props;
 
-    this.props.getStatistics(vk_id);
-    this.props.getHistoryShort(vk_id);
+    this.props.getStatistics(params);
+    this.props.getHistoryShort(params);
     this.toggleAnimation();
   }
   componentDidUpdate(prevProps: Object, prevState: Object) {
