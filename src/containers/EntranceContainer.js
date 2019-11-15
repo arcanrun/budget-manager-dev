@@ -15,8 +15,10 @@ const mapStateToProps = (state: Object) => ({
   params: state.user.params
 });
 
-const EntranceContainer = connect(
-  mapStateToProps,
-  { signUp }
-)(Entrance);
+const EntranceContainer = withRouter(
+  connect(
+    mapStateToProps,
+    { signUp }
+  )(Entrance)
+);
 export default EntranceContainer;

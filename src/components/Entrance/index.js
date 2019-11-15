@@ -13,7 +13,8 @@ type PROPS = {
   vk_id: ?number,
   isFetching: boolean,
   error: boolean,
-  params: string
+  params: string,
+  history: Array<any>
 };
 
 type STATE = {

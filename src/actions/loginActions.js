@@ -7,7 +7,8 @@ import { API } from "../API";
 const requestLogIn = () => ({
   type: LOGIN_REQUEST,
   payload: {
-    isFetching: true
+    isFetching: true,
+    params: window.location.search
   }
 });
 export const successLogIn = (res: Object, vkRes: Object) => ({
@@ -29,7 +30,7 @@ export const failureLogIn = (msg: string) => ({
   }
 });
 
-export const logIn = () => {
+export const logIn = (params: string) => {
   return (dispatch: Function) => {
     dispatch(requestLogIn());
     let vkRes = {
@@ -49,7 +50,9 @@ export const logIn = () => {
         vkRes.name = res.data.first_name;
         vkRes.sure_name = res.data.last_name;
         vkRes.timezone = res.data.timezone;
-        vkRes.params = window.location.search;
+        vkRes.params = window.location.search ? window.location.search : params;
+        console.log("window...", window.location.search);
+        console.log("params...", params);
         fetch(API.LOG_IN, {
           method: "POST",
           // mode: "cors",

@@ -14,7 +14,6 @@ import {
 import Icon24MoneyCircle from "@vkontakte/icons/dist/24/money_circle";
 import Icon24User from "@vkontakte/icons/dist/24/user";
 import Icon24Recent from "@vkontakte/icons/dist/24/recent";
-import { Link, NavLink } from "react-router-dom";
 
 import { Overlay } from "./components";
 import {
@@ -42,22 +41,47 @@ type STATE = {
   activeStory: ?string,
   popoutProfile: ?React.Node
 };
-
 export class App extends React.Component<PROPS, STATE> {
   state = { activeStory: "manager", popoutProfile: null };
 
   componentDidMount() {
-    this.props.logIn();
+    console.log(window.location);
+
+    this.props.logIn(this.props.params);
   }
 
+  shouldComponentUpdate(nextProps: Object, nextState: Object) {
+    if (nextState.activeStory !== window.location.pathname) {
+      this.props.hideModal();
+      this.setState({ activeStory: window.location.pathname });
+      return false;
+    }
+    if (window.location.pathname === "/budget-manager/") {
+      this.props.logIn(this.props.params);
+
+      this.props.history.push("/budget-manager");
+      return false;
+    }
+
+    return true;
+  }
   onStoryChange = (e: Object) => {
     window.scroll(0, 0);
     const { story } = e.currentTarget.dataset;
+    this.props.hideModal();
     this.setState({ activeStory: story });
     this.props.history.push(story);
   };
+  deleteProfile = () => {
+    this.props.makeProfileOperation("delete", this.props.params);
+    this.props.history.push("/budget-manager");
+  };
 
   render() {
+    console.log("======>", this.props.history.push);
+
+    console.log("[APP]------->", window.location.pathname);
+
     const {
       typeModal,
       hideModal,
@@ -81,7 +105,7 @@ export class App extends React.Component<PROPS, STATE> {
                 title: "Удалить профиль",
                 autoclose: true,
                 style: "destructive",
-                action: () => makeProfileOperation("delete", params)
+                action: this.deleteProfile
               },
               {
                 title: "Отмена",
@@ -106,8 +130,10 @@ export class App extends React.Component<PROPS, STATE> {
         {isTutorDone ? (
           <TabbarItem
             onClick={this.onStoryChange}
-            selected={location.pathname === "/history"}
-            data-story="history"
+            selected={location.pathname === "/budget-manager/history"}
+            data-story="/budget-manager/history"
+            // selected={activeStory === "history"}
+            // data-story="history"
             text="История"
           >
             <Icon24Recent />
@@ -117,8 +143,10 @@ export class App extends React.Component<PROPS, STATE> {
         )}
         <TabbarItem
           onClick={this.onStoryChange}
-          selected={location.pathname === "/"}
-          data-story="/"
+          selected={location.pathname === "/budget-manager"}
+          data-story="/budget-manager"
+          // selected={activeStory === "manager"}
+          // data-story="manager"
           text="Менеджер"
         >
           <Icon24MoneyCircle />
@@ -126,8 +154,10 @@ export class App extends React.Component<PROPS, STATE> {
         {isTutorDone ? (
           <TabbarItem
             onClick={this.onStoryChange}
-            selected={location.pathname === "/profile"}
-            data-story="profile"
+            selected={location.pathname === "/budget-manager/profile"}
+            data-story="/budget-manager/profile"
+            // selected={activeStory === "profile"}
+            // data-story="profile"
             text="Профиль"
           >
             <Icon24User />
@@ -140,7 +170,8 @@ export class App extends React.Component<PROPS, STATE> {
     const historyView = (
       <View
         activePanel="main_panel"
-        id="/history"
+        id="/budget-manager/history"
+        // id="history"
         modal={<ModalHistoryContainer />}
       >
         <Panel id="main_panel">
@@ -150,7 +181,12 @@ export class App extends React.Component<PROPS, STATE> {
       </View>
     );
     const managerView = (
-      <View activePanel="main_panel" id="/" modal={<ModalContainer />}>
+      <View
+        activePanel="main_panel"
+        id="/budget-manager"
+        // id="manager"
+        modal={<ModalContainer />}
+      >
         <Panel id="main_panel">
           <PanelHeader>Менеджер</PanelHeader>
           <ManagerContainer />
@@ -158,7 +194,12 @@ export class App extends React.Component<PROPS, STATE> {
       </View>
     );
     const profileView = (
-      <View activePanel="main_panel" id="/profile" popout={alert}>
+      <View
+        activePanel="main_panel"
+        id="/budget-manager/profile"
+        // id="profile"
+        popout={alert}
+      >
         <Panel id="main_panel">
           <PanelHeader>Профиль</PanelHeader>
           <ProfileContainer />
@@ -166,7 +207,11 @@ export class App extends React.Component<PROPS, STATE> {
       </View>
     );
     const epic = (
-      <Epic tabbar={tabbar} activeStory={location.pathname}>
+      <Epic
+        tabbar={tabbar}
+        activeStory={location.pathname}
+        // activeStory={activeStory}
+      >
         {historyView}
         {managerView}
         {profileView}

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { ModalHistory } from "../components";
-import { hideModal } from "../actions/index";
+import { hideModal } from "../actions";
 
 const mapStateToProps = state => ({
   typeModal: state.modal.typeModal,

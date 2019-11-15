@@ -21,6 +21,7 @@ export function modal(state: stateType = initialState, action: Object) {
         typeModal: action.payload.typeModal,
         payload: action.payload.payload
       };
+
     case HIDE_MODAL:
       return {
         ...state,

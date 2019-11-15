@@ -338,6 +338,12 @@ export function user(state: UserState = initialState, action: Object) {
         history: { ...state.history, isFetching: false, error: true }
       };
     case LOGIN_REQUEST:
+      return {
+        ...state,
+        params: action.payload.params,
+        isFetching: true,
+        error: false
+      };
     case PROFILE_OPERATION_REQUEST:
       return {
         ...state,

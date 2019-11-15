@@ -124,16 +124,8 @@ class Manager extends React.Component<PROPS, STATE> {
     this.toggleAnimation();
   }
   componentDidUpdate(prevProps: Object, prevState: Object) {
-    const modalIsVisible = this.props.modalIsVisible;
-    const body = document.getElementsByTagName("body")[0];
+    const { budget, payday } = this.props;
 
-    const { budget, payday, is_tutorial_done } = this.props;
-
-    if (prevProps.modalIsVisible !== modalIsVisible) {
-      modalIsVisible
-        ? (body.style.overflow = "hidden")
-        : (body.style.overflow = "auto");
-    }
     if (!!budget && !!payday === false) {
       window.scrollTo({ top: 1000, behavior: "smooth" });
     }

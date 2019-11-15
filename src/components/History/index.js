@@ -27,7 +27,8 @@ type PROPS = {
   isFetching: boolean,
   params: string,
   getHistory: Function,
-  toggleModal: Function
+  toggleModal: Function,
+  hideModal: Function
 };
 
 type STATE = {
