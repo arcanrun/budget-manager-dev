@@ -2,7 +2,7 @@
   "name": "budget-manager",
   "version": "1.0.0",
   "private": true,
-  "homepage": "http://arcanrun.github.io/budget-manager",
+  "homepage": "http://arcanrun.github.io/budget-manager-dev",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
     "@vkontakte/icons": "^1.11.0",
