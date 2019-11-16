@@ -50,38 +50,17 @@ export class App extends React.Component<PROPS, STATE> {
     this.props.logIn(this.props.params);
   }
 
-  shouldComponentUpdate(nextProps: Object, nextState: Object) {
-    if (nextState.activeStory !== window.location.pathname) {
-      this.props.hideModal();
-      this.setState({ activeStory: window.location.pathname });
-      return false;
-    }
-    if (window.location.pathname === "/budget-manager/") {
-      this.props.logIn(this.props.params);
-
-      this.props.history.push("/budget-manager");
-      return false;
-    }
-
-    return true;
-  }
   onStoryChange = (e: Object) => {
     window.scroll(0, 0);
     const { story } = e.currentTarget.dataset;
     this.props.hideModal();
     this.setState({ activeStory: story });
-    this.props.history.push(story);
   };
   deleteProfile = () => {
     this.props.makeProfileOperation("delete", this.props.params);
-    this.props.history.push("/budget-manager");
   };
 
   render() {
-    console.log("======>", this.props.history.push);
-
-    console.log("[APP]------->", window.location.pathname);
-
     const {
       typeModal,
       hideModal,
@@ -130,10 +109,8 @@ export class App extends React.Component<PROPS, STATE> {
         {isTutorDone ? (
           <TabbarItem
             onClick={this.onStoryChange}
-            selected={location.pathname === "/budget-manager/history"}
-            data-story="/budget-manager/history"
-            // selected={activeStory === "history"}
-            // data-story="history"
+            selected={activeStory === "history"}
+            data-story="history"
             text="История"
           >
             <Icon24Recent />
@@ -143,10 +120,8 @@ export class App extends React.Component<PROPS, STATE> {
         )}
         <TabbarItem
           onClick={this.onStoryChange}
-          selected={location.pathname === "/budget-manager"}
-          data-story="/budget-manager"
-          // selected={activeStory === "manager"}
-          // data-story="manager"
+          selected={activeStory === "manager"}
+          data-story="manager"
           text="Менеджер"
         >
           <Icon24MoneyCircle />
@@ -154,10 +129,8 @@ export class App extends React.Component<PROPS, STATE> {
         {isTutorDone ? (
           <TabbarItem
             onClick={this.onStoryChange}
-            selected={location.pathname === "/budget-manager/profile"}
-            data-story="/budget-manager/profile"
-            // selected={activeStory === "profile"}
-            // data-story="profile"
+            selected={activeStory === "profile"}
+            data-story="profile"
             text="Профиль"
           >
             <Icon24User />
@@ -170,8 +143,7 @@ export class App extends React.Component<PROPS, STATE> {
     const historyView = (
       <View
         activePanel="main_panel"
-        id="/budget-manager/history"
-        // id="history"
+        id="history"
         modal={<ModalHistoryContainer />}
       >
         <Panel id="main_panel">
@@ -181,12 +153,7 @@ export class App extends React.Component<PROPS, STATE> {
       </View>
     );
     const managerView = (
-      <View
-        activePanel="main_panel"
-        id="/budget-manager"
-        // id="manager"
-        modal={<ModalContainer />}
-      >
+      <View activePanel="main_panel" id="manager" modal={<ModalContainer />}>
         <Panel id="main_panel">
           <PanelHeader>Менеджер</PanelHeader>
           <ManagerContainer />
@@ -194,12 +161,7 @@ export class App extends React.Component<PROPS, STATE> {
       </View>
     );
     const profileView = (
-      <View
-        activePanel="main_panel"
-        id="/budget-manager/profile"
-        // id="profile"
-        popout={alert}
-      >
+      <View activePanel="main_panel" id="profile" popout={alert}>
         <Panel id="main_panel">
           <PanelHeader>Профиль</PanelHeader>
           <ProfileContainer />
@@ -207,11 +169,7 @@ export class App extends React.Component<PROPS, STATE> {
       </View>
     );
     const epic = (
-      <Epic
-        tabbar={tabbar}
-        activeStory={location.pathname}
-        // activeStory={activeStory}
-      >
+      <Epic tabbar={tabbar} activeStory={activeStory}>
         {historyView}
         {managerView}
         {profileView}

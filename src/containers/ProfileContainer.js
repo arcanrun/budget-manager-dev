@@ -28,9 +28,9 @@ const mapStateToProps = state => ({
   timezone: state.user.timezone,
   params: state.user.params
 });
-export const ProfileContainer = withRouter(
-  connect(
-    mapStateToProps,
-    { toggleModal, makeProfileOperation, getStatistics, getHistoryShort }
-  )(Profile)
-);
+export const ProfileContainer = connect(mapStateToProps, {
+  toggleModal,
+  makeProfileOperation,
+  getStatistics,
+  getHistoryShort
+})(Profile);

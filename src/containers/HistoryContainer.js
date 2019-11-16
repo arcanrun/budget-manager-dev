@@ -2,7 +2,6 @@
 
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 
 import { getHistory, toggleModal, hideModal } from "../actions/index";
 
@@ -15,9 +14,8 @@ const mapStateToProps = (state: Object) => ({
   params: state.user.params
 });
 
-export const HistoryContainer = withRouter(
-  connect(
-    mapStateToProps,
-    { getHistory, toggleModal, hideModal }
-  )(History)
-);
+export const HistoryContainer = connect(mapStateToProps, {
+  getHistory,
+  toggleModal,
+  hideModal
+})(History);

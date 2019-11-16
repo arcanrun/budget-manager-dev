@@ -2,7 +2,6 @@
 
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import * as connectVK from "@vkontakte/vkui-connect-promise";
 
 import { Entrance } from "../components/index";
@@ -15,10 +14,6 @@ const mapStateToProps = (state: Object) => ({
   params: state.user.params
 });
 
-const EntranceContainer = withRouter(
-  connect(
-    mapStateToProps,
-    { signUp }
-  )(Entrance)
-);
+const EntranceContainer = connect(mapStateToProps, { signUp })(Entrance);
+
 export default EntranceContainer;

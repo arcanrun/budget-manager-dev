@@ -1,7 +1,6 @@
 //@flow
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 
 import { Manager } from "../components";
 import {
@@ -34,22 +33,17 @@ const mapStateToProps = state => ({
   params: state.user.params
 });
 
-export const ManagerContainer = withRouter(
-  connect(
-    mapStateToProps,
-    {
-      onClickToggleModal: toggleModal,
-      addWholeBudget,
-      addPayDay,
-      getWholeBudget,
-      getPayDay,
-      calcTempCosts,
-      getAllCosts,
-      makeProfileOperation,
-      logIn,
-      calcBudget,
-      stopGuide,
-      tutorialChangeState
-    }
-  )(Manager)
-);
+export const ManagerContainer = connect(mapStateToProps, {
+  onClickToggleModal: toggleModal,
+  addWholeBudget,
+  addPayDay,
+  getWholeBudget,
+  getPayDay,
+  calcTempCosts,
+  getAllCosts,
+  makeProfileOperation,
+  logIn,
+  calcBudget,
+  stopGuide,
+  tutorialChangeState
+})(Manager);
