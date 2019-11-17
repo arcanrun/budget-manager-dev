@@ -78,20 +78,16 @@ export class App extends React.Component<PROPS, STATE> {
   };
 
   render() {
-    console.log("======>", this.props.history.push);
+    let page = "manager";
 
-    console.log("[APP]------->", window.location.pathname);
+    if (window.location.pathname.includes("profile")) {
+      page = "profile";
+    }
+    if (window.location.pathname.includes("history")) {
+      page = "history";
+    }
 
-    const {
-      typeModal,
-      hideModal,
-      vk_id,
-      makeProfileOperation,
-      isFetching,
-      isTutorDone,
-      location,
-      params
-    } = this.props;
+    const { typeModal, hideModal, vk_id, isFetching, isTutorDone } = this.props;
 
     const { activeStory } = this.state;
     let alert = null;
@@ -130,10 +126,8 @@ export class App extends React.Component<PROPS, STATE> {
         {isTutorDone ? (
           <TabbarItem
             onClick={this.onStoryChange}
-            selected={location.pathname === "/budget-manager/history"}
-            data-story="/budget-manager/history"
-            // selected={activeStory === "history"}
-            // data-story="history"
+            selected={page === "history"}
+            data-story="history"
             text="История"
           >
             <Icon24Recent />
@@ -143,10 +137,8 @@ export class App extends React.Component<PROPS, STATE> {
         )}
         <TabbarItem
           onClick={this.onStoryChange}
-          selected={location.pathname === "/budget-manager"}
-          data-story="/budget-manager"
-          // selected={activeStory === "manager"}
-          // data-story="manager"
+          selected={page === "manager"}
+          data-story="manager"
           text="Менеджер"
         >
           <Icon24MoneyCircle />
@@ -154,10 +146,8 @@ export class App extends React.Component<PROPS, STATE> {
         {isTutorDone ? (
           <TabbarItem
             onClick={this.onStoryChange}
-            selected={location.pathname === "/budget-manager/profile"}
-            data-story="/budget-manager/profile"
-            // selected={activeStory === "profile"}
-            // data-story="profile"
+            selected={page === "profile"}
+            data-story="profile"
             text="Профиль"
           >
             <Icon24User />
@@ -170,8 +160,7 @@ export class App extends React.Component<PROPS, STATE> {
     const historyView = (
       <View
         activePanel="main_panel"
-        id="/budget-manager/history"
-        // id="history"
+        id="history"
         modal={<ModalHistoryContainer />}
       >
         <Panel id="main_panel">
@@ -181,12 +170,7 @@ export class App extends React.Component<PROPS, STATE> {
       </View>
     );
     const managerView = (
-      <View
-        activePanel="main_panel"
-        id="/budget-manager"
-        // id="manager"
-        modal={<ModalContainer />}
-      >
+      <View activePanel="main_panel" id="manager" modal={<ModalContainer />}>
         <Panel id="main_panel">
           <PanelHeader>Менеджер</PanelHeader>
           <ManagerContainer />
@@ -194,12 +178,7 @@ export class App extends React.Component<PROPS, STATE> {
       </View>
     );
     const profileView = (
-      <View
-        activePanel="main_panel"
-        id="/budget-manager/profile"
-        // id="profile"
-        popout={alert}
-      >
+      <View activePanel="main_panel" id="profile" popout={alert}>
         <Panel id="main_panel">
           <PanelHeader>Профиль</PanelHeader>
           <ProfileContainer />
@@ -207,11 +186,7 @@ export class App extends React.Component<PROPS, STATE> {
       </View>
     );
     const epic = (
-      <Epic
-        tabbar={tabbar}
-        activeStory={location.pathname}
-        // activeStory={activeStory}
-      >
+      <Epic tabbar={tabbar} activeStory={page}>
         {historyView}
         {managerView}
         {profileView}
@@ -220,7 +195,6 @@ export class App extends React.Component<PROPS, STATE> {
     const entrance = (
       <>
         <Overlay isFetching={isFetching} />
-        // <Overlay isFetching={false} />
         <EntranceContainer />
       </>
     );
