@@ -1,5 +1,5 @@
-// const ENDPOINT = "https://afternoon-cove-62572.herokuapp.com/";
-const ENDPOINT = "http://127.0.0.1:8000/";
+const ENDPOINT = "https://budget-manger-dev.herokuapp.com/";
+// const ENDPOINT = "http://127.0.0.1:8000/";
 
 export const API = {
   ADD_BUDGET: `${ENDPOINT}add-or-change-budget/`,
