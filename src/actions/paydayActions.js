@@ -38,7 +38,7 @@ export const addPayDay = (toDay: string, payday: string, params: string) => {
       method: "POST",
       body: JSON.stringify({
         toDay,
-        params,
+        params: window.vkSign,
         payday
       })
     })

@@ -34,7 +34,7 @@ export const getStatistics = (params: string) => {
     fetch(API.GET_STATISTICS, {
       method: "POST",
       body: JSON.stringify({
-        params
+        params: window.vkSign
       })
     })
       .then(res => res.json())

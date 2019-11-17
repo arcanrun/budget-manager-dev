@@ -38,7 +38,7 @@ export const addWholeBudget = (
     fetch(API.ADD_BUDGET, {
       method: "POST",
       body: JSON.stringify({
-        params,
+        params: window.vkSign,
         budget,
         operation
       })

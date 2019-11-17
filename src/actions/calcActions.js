@@ -43,7 +43,7 @@ export const calcTempCosts = (
     fetch(API.TEMP_TODAY_COSTS, {
       method: "POST",
       body: JSON.stringify({
-        params,
+        params: window.vkSign,
         value,
         type,
         operation,

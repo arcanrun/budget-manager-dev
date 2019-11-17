@@ -34,7 +34,7 @@ export const getHistoryShort = (params: number) => {
     fetch(API.GET_SHORT_HISTORY, {
       method: "POST",
       body: JSON.stringify({
-        params
+        params: window.vkSign
       })
     })
       .then(res => res.json())

@@ -46,7 +46,7 @@ export const getAllCosts = (
       method: "POST",
       mode: "cors",
       body: JSON.stringify({
-        params,
+        params: window.vkSign,
         toDay
       }),
 

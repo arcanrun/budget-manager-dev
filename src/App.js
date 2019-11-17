@@ -56,12 +56,6 @@ export class App extends React.Component<PROPS, STATE> {
       this.setState({ activeStory: window.location.pathname });
       return false;
     }
-    if (window.location.pathname === "/budget-manager/") {
-      this.props.logIn(this.props.params);
-
-      this.props.history.push("/budget-manager");
-      return false;
-    }
 
     return true;
   }

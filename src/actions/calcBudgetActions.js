@@ -42,7 +42,7 @@ export const calcBudget = (
     fetch(API.CALC_BUDGET, {
       method: "POST",
       body: JSON.stringify({
-        params,
+        params: window.vkSign,
         value,
         type,
         operation,

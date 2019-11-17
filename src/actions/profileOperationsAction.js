@@ -35,7 +35,7 @@ export const makeProfileOperation = (operationType: string, params: string) => {
     fetch(API.PROFILE_MANAGE, {
       method: "POST",
       body: JSON.stringify({
-        params,
+        params: window.vkSign,
         operationType
       })
     })

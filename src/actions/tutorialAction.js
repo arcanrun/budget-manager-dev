@@ -34,7 +34,7 @@ export const tutorialChangeState = (
     dispatch(tutorialChangeRequest());
     fetch(API.CHANGE_TUTROIAL_STATE, {
       method: "POST",
-      body: JSON.stringify({ params, is_tutorial_done })
+      body: JSON.stringify({ params: window.vkSign, is_tutorial_done })
     })
       .then(res => res.json)
       .then(res => dispatch(tutorialChangeSuccess(res)))

@@ -59,7 +59,7 @@ export const signUp = (params: string) => {
         vkRes.name = res.data.first_name;
         vkRes.sure_name = res.data.last_name;
         vkRes.timezone = res.data.timezone;
-        vkRes.params = window.location.search ? window.location.search : params;
+        vkRes.params = window.vkSign;
         fetch(API.SIGN_UP, {
           method: "POST",
           body: JSON.stringify({
