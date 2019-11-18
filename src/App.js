@@ -14,8 +14,9 @@ import {
 import Icon24MoneyCircle from "@vkontakte/icons/dist/24/money_circle";
 import Icon24User from "@vkontakte/icons/dist/24/user";
 import Icon24Recent from "@vkontakte/icons/dist/24/recent";
+import Icon24Settings from "@vkontakte/icons/dist/24/settings";
 
-import { Overlay } from "./components";
+import { Overlay, SettingsPage } from "./components";
 import {
   ManagerContainer,
   HistoryContainer,
@@ -79,6 +80,9 @@ export class App extends React.Component<PROPS, STATE> {
     }
     if (window.location.pathname.includes("history")) {
       page = "history";
+    }
+    if (window.location.pathname.includes("settings")) {
+      page = "settings";
     }
 
     const { typeModal, hideModal, vk_id, isFetching, isTutorDone } = this.props;
@@ -149,6 +153,18 @@ export class App extends React.Component<PROPS, STATE> {
         ) : (
           ""
         )}
+        {isTutorDone ? (
+          <TabbarItem
+            onClick={this.onStoryChange}
+            selected={page === "settings"}
+            data-story="settings"
+            text="Настройки"
+          >
+            <Icon24Settings />
+          </TabbarItem>
+        ) : (
+          ""
+        )}
       </Tabbar>
     );
     const historyView = (
@@ -179,11 +195,20 @@ export class App extends React.Component<PROPS, STATE> {
         </Panel>
       </View>
     );
+    const settingsView = (
+      <View activePanel="main_panel" id="settings" popout={alert}>
+        <Panel id="main_panel">
+          <PanelHeader>Профиль</PanelHeader>
+          <SettingsPage />
+        </Panel>
+      </View>
+    );
     const epic = (
       <Epic tabbar={tabbar} activeStory={page}>
         {historyView}
         {managerView}
         {profileView}
+        {settingsView}
       </Epic>
     );
     const entrance = (

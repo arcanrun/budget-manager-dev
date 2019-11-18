@@ -30,6 +30,7 @@ import { LineChart } from "./LineChart";
 import { ShortenNumber } from "./ShortenNumber";
 import { Modal } from "./Modal";
 import { ModalHistory } from "./ModalHistory";
+import { SettingsPage } from "./SettingsPage";
 
 export {
   Header,
@@ -62,5 +63,6 @@ export {
   LineChart,
   ShortenNumber,
   Modal,
-  ModalHistory
+  ModalHistory,
+  SettingsPage
 };
