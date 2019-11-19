@@ -90,25 +90,6 @@ class Profile extends React.Component<PROPS, STATE> {
         </div>
       </Card>
     );
-    const settingsCard = (
-      <Card icon={"settings"} headerTitle="настройки">
-        {/*
-       <Button size="xl" level="secondary">
-          Очистка истории
-        </Button>
-      
-      */}
-
-        <hr style={{ opacity: 0 }} />
-        <Button
-          size="xl"
-          level="destructive"
-          onClick={() => toggleModal("profile_delete")}
-        >
-          Удалить профиль
-        </Button>
-      </Card>
-    );
 
     return (
       <>
@@ -122,7 +103,6 @@ class Profile extends React.Component<PROPS, STATE> {
               <div className={style.profile}>
                 {commonSettingsCard}
                 {statisticCard}
-                {settingsCard}
               </div>
             </CSSTransition>
           </>

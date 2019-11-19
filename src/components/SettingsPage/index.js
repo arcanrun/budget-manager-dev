@@ -8,9 +8,14 @@ import { Card } from "../index";
 
 export const SettingsPage = () => {
   const [isIn, setIn] = useState(false);
+  const [theme, setTheme] = useState(false);
   useEffect(() => {
     setIn(true);
   });
+
+  function toggleTheme(e) {
+    console.log("CHECKED---->", e.currentTarget.checked);
+  }
 
   function switchTheme() {
     const body = document.getElementsByTagName("body")[0];
@@ -29,17 +34,27 @@ export const SettingsPage = () => {
     <CSSTransition in={isIn} timeout={300} classNames={"page"}>
       <div className={style.settings}>
         <Card headerTitle={"Внешний вид"} icon={"eye"}>
-          <Cell asideContent={<Switch defaultChecked />}>Тема клиента VK</Cell>
+          <Cell asideContent={<Switch defaultChecked onChange={switchTheme} />}>
+            Тема клиента VK {theme}
+          </Cell>
           <hr />
-          <Cell asideContent={<Switch disabled />}>Темная тема</Cell>
+          <Cell
+            asideContent={<Switch disabled onChange={e => toggleTheme(e)} />}
+          >
+            Темная тема
+          </Cell>
         </Card>
         <Card headerTitle={"Обучение"} icon={"bulb"}>
-          <Cell asideContent={<Switch />}>Показть обучение</Cell>
+          <Cell asideContent={<Switch onChange={e => toggleTheme(e)} />}>
+            Показть обучение
+          </Cell>
         </Card>
         <Card headerTitle={"История"} icon={"history"}>
           <Cell
             description={"За месяц или за все время"}
-            asideContent={<Switch defaultChecked />}
+            asideContent={
+              <Switch defaultChecked onChange={e => toggleTheme(e)} />
+            }
           >
             Показывать всю историю
           </Cell>
@@ -59,6 +74,18 @@ export const SettingsPage = () => {
             onClick={() => console.log("unrealized")}
           >
             Очисить историю
+          </Button>
+        </Card>
+
+        <Card icon={"profile"} headerTitle="Профиль">
+          <hr style={{ opacity: 0 }} />
+          <Button
+            size="xl"
+            level="destructive"
+            // onClick={() => toggleModal("profile_delete")}
+            onClick={() => console.log("unrealized")}
+          >
+            Удалить профиль
           </Button>
         </Card>
       </div>
