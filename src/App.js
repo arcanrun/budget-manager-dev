@@ -198,7 +198,7 @@ export class App extends React.Component<PROPS, STATE> {
     const settingsView = (
       <View activePanel="main_panel" id="settings" popout={alert}>
         <Panel id="main_panel">
-          <PanelHeader>Профиль</PanelHeader>
+          <PanelHeader>Настройки</PanelHeader>
           <SettingsPage />
         </Panel>
       </View>

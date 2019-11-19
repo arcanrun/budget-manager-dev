@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 
+import style from "./SettingsPage.module.css";
+import { Card } from "../index";
+
 export const SettingsPage = () => {
   const [isIn, setIn] = useState(false);
   useEffect(() => {
@@ -23,10 +26,17 @@ export const SettingsPage = () => {
 
   return (
     <CSSTransition in={isIn} timeout={300} classNames={"page"}>
-      <>
-        <div>THIS WILL BE SETTINGS PAGES</div>
-        <button onClick={switchTheme}>switch theme</button>
-      </>
+      <div className={style.settings}>
+        <Card headerTitle={"Внешний вид"} icon={"eye"}>
+          theme
+        </Card>
+        <Card headerTitle={"Обучение"} icon={"bulb"}>
+          theme
+        </Card>
+        <Card headerTitle={"История"} icon={"history"}>
+          theme
+        </Card>
+      </div>
     </CSSTransition>
   );
 };

@@ -8,7 +8,9 @@
 .check,
 .pie-chart-logo,
 .transfer,
-.vector {
+.vector,
+.eye,
+.bulb {
   display: flex;
   width: 25px;
   height: 25px;
