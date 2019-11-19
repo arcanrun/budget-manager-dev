@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/money-bag.773dcb53.svg"
   },
   {
-    "revision": "b3270e2427b270d838e2",
-    "url": "/budget-manager-dev/static/css/main.da2e97b5.chunk.css"
+    "revision": "db5f1af9f37ad9f9b11e",
+    "url": "/budget-manager-dev/static/css/main.e24ebbed.chunk.css"
   },
   {
     "revision": "094d6f4077ec791109e4",
@@ -16,8 +16,8 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/money-flow-loader.68fc7de3.svg"
   },
   {
-    "revision": "06d45de3bb7254620ebf",
-    "url": "/budget-manager-dev/static/js/2.db6a7883.chunk.js"
+    "revision": "d538d04ed1b9c79648bf",
+    "url": "/budget-manager-dev/static/js/2.c93e45bc.chunk.js"
   },
   {
     "revision": "210aad6494b434a0c18f0fae8367c21c",
@@ -84,12 +84,12 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/fa-regular-400.7b9568e6.svg"
   },
   {
-    "revision": "0bff33a5fd7ec390235476b4859747a0",
-    "url": "/budget-manager-dev/static/media/fa-solid-900.0bff33a5.ttf"
-  },
-  {
     "revision": "8e4a6dcc692b3887f9f542cd6894d6d4",
     "url": "/budget-manager-dev/static/media/fa-solid-900.8e4a6dcc.eot"
+  },
+  {
+    "revision": "0bff33a5fd7ec390235476b4859747a0",
+    "url": "/budget-manager-dev/static/media/fa-solid-900.0bff33a5.ttf"
   },
   {
     "revision": "a9c4bb7348f42626454c988dbde1d0a0",
@@ -100,8 +100,8 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/fa-solid-900.c2801fb4.svg"
   },
   {
-    "revision": "b3270e2427b270d838e2",
-    "url": "/budget-manager-dev/static/js/main.a277c025.chunk.js"
+    "revision": "db5f1af9f37ad9f9b11e",
+    "url": "/budget-manager-dev/static/js/main.2553f679.chunk.js"
   },
   {
     "revision": "2cfec6c1b527f7fbca5e77263b0363aa",
@@ -192,11 +192,11 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/rich_4.c4ed42f0.svg"
   },
   {
-    "revision": "06d45de3bb7254620ebf",
+    "revision": "d538d04ed1b9c79648bf",
     "url": "/budget-manager-dev/static/css/2.f5a513f1.chunk.css"
   },
   {
-    "revision": "2075281b7bf0e7ddcb1371c02ac9f143",
+    "revision": "5c93149bd8fab0569d79a6ecfd2109a7",
     "url": "/budget-manager-dev/index.html"
   }
 ];
