@@ -1,12 +1,11 @@
 .card {
   margin: auto;
-  background-color: #fff;
+  background-color: var(--background_color_card);
   padding: 20px;
   margin-top: 5px;
   margin-bottom: 5px;
   border-radius: 2px;
-  box-shadow: 0px 0px 5px 1px rgb(191, 191, 191);
-
+  box-shadow: var(--box_shadow_card);
   position: relative;
 }
 .header {

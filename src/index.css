@@ -24,3 +24,15 @@ code {
 .View__header {
   z-index: 1200 !important;
 }
+
+:root {
+  /*Card */
+  --background_color_card: #fff;
+  --box_shadow_card: 0px 0px 5px 1px rgb(191, 191, 191);
+}
+
+body[scheme="client_dark"] {
+  /*Card */
+  --background_color_card: #19191a;
+  --box_shadow_card: none;
+}
