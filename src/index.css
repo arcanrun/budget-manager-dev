@@ -29,10 +29,18 @@ code {
   /*Card */
   --background_color_card: #fff;
   --box_shadow_card: 0px 0px 5px 1px rgb(191, 191, 191);
+
+  /*History*/
+  --background_color_history: #eaeff2;
+  --background_color_history_sticker: rgba(18, 9, 66, 0.25);
 }
 
 body[scheme="client_dark"] {
   /*Card */
   --background_color_card: #19191a;
   --box_shadow_card: none;
+
+  /*History*/
+  --background_color_history: #0a0a0a;
+  --background_color_history_sticker: rgba(77, 90, 119, 0.25);
 }

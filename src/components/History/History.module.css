@@ -4,14 +4,13 @@
   align-items: center;
   position: absolute;
   width: 100%;
-  /* height: 100%; */
-  background-color: #eaeff2;
+  background-color: var(--background_color_history);
 }
 .background {
   position: fixed;
   height: 100%;
   width: 100%;
-  background-color: #eaeff2;
+  background-color: var(--background_color_history);
 }
 .verticalLine {
   /* position: fixed;
@@ -42,7 +41,7 @@
 .day {
   position: relative;
   font-weight: bold;
-  background: rgba(18, 9, 66, 0.25);
+  background: var(--background_color_history_sticker);
   border-radius: 10px;
   color: #ffffff;
   width: 100px;
