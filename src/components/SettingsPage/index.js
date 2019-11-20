@@ -26,7 +26,6 @@ export const SettingsPage = () => {
   const themeVkClient = useSelector(state => state.user.themeVkClient);
 
   useEffect(() => {
-    console.log("========>", switchCustom.current.checked);
     setIn(true);
     if (isThemeVk) {
       switchCustom.current.checked = false;
