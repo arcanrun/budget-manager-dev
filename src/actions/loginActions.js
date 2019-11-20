@@ -1,5 +1,6 @@
 //@flow
 import connect from "@vkontakte/vkui-connect-promise";
+import * as old from "@vkontakte/vk-connect";
 
 import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "../constants";
 import { API } from "../API";
@@ -40,20 +41,17 @@ export const logIn = (params: string) => {
       avatar: undefined,
       timezone: undefined,
       params: undefined,
-      theme: undefined //not sending to server it just for redux store
+      theme: "client_light" //not sending to server it just for redux store
     };
 
     connect.send("VKWebAppInit", {});
-    connect
-      .send("VKWebAppUpdateConfig", {})
-      .then(res => {
-        vkRes.theme = res.e.detail.data;
-        return res;
-      })
-      .catch(err => {
-        vkRes.theme = "client_light";
-        return err;
-      });
+    old.send("VKWebAppUpdateConfig", {});
+    old.subscribe(e => {
+      if (e.detail.data.scheme) {
+        vkRes.theme = e.detail.data.scheme;
+      }
+    });
+
     connect
       .send("VKWebAppGetUserInfo", {})
       .then(res => {

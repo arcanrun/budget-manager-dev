@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 import { Cell, Switch, List, Button, Div } from "@vkontakte/vkui";
+import connect from "@vkontakte/vkui-connect-promise";
 
 import style from "./SettingsPage.module.css";
 import { Card } from "../index";
@@ -14,10 +15,25 @@ import {
 } from "../../actions";
 
 export const SettingsPage = () => {
+  let logger = "";
+
+  connect
+    .send("VKWebAppUpdateConfig", {})
+    .then(res => {
+      logger = res;
+      return res;
+    })
+    .catch(err => {
+      logger = err;
+      return err;
+    });
+  console.log("========>", logger);
+
   const body = document.getElementsByTagName("body")[0];
   const switchCustom = useRef();
   const [isIn, setIn] = useState(false);
   const [theme, setTheme] = useState(false);
+  const [test, setTest] = useState(false);
 
   const dispatch = useDispatch();
   const isTutorialDone = useSelector(state => state.user.is_tutorial_done);
@@ -67,7 +83,7 @@ export const SettingsPage = () => {
               />
             }
           >
-            Тема клиента VK {theme}
+            Тема клиента VK
           </Cell>
           <hr />
           <Cell

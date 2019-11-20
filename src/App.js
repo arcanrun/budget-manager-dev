@@ -49,8 +49,6 @@ export class App extends React.Component<PROPS, STATE> {
   state = { activeStory: "manager", popoutProfile: null };
 
   componentDidMount() {
-    console.log(window.location);
-
     this.props.logIn(this.props.params);
   }
 
