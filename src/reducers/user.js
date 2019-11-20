@@ -30,7 +30,10 @@ import {
   SIGNUP_STOP_GUIDE,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
-  SIGNUP_REQUEST
+  SIGNUP_REQUEST,
+  TUTORUAL_CHANGE_SUCCESS,
+  TUTORIAL_CHANGE_REQUEST,
+  TUTORUAL_CHANGE_ERROR
 } from "../constants";
 
 type UserState = {
@@ -444,6 +447,11 @@ export function user(state: UserState = initialState, action: Object) {
             invest: action.payload.payload.income.invest
           }
         }
+      };
+    case TUTORUAL_CHANGE_SUCCESS:
+      return {
+        ...state,
+        is_tutorial_done: action.payload.is_tutorial_done
       };
 
     default:

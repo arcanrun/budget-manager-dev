@@ -174,11 +174,11 @@ class Manager extends React.Component<PROPS, STATE> {
     }
   };
   handleTour = (data: any) => {
-    const { stopGuide, tutorialChangeState, params } = this.props;
+    const { stopGuide, tutorialChangeState } = this.props;
     const { action } = data;
     if (action === "reset") {
       stopGuide();
-      tutorialChangeState(true, params);
+      tutorialChangeState(true);
     }
   };
   render() {

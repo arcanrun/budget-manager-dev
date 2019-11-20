@@ -29,7 +29,7 @@ export const failuretProfileOperation = (message: string) => ({
   }
 });
 
-export const makeProfileOperation = (operationType: string, params: string) => {
+export const makeProfileOperation = (operationType: string) => {
   return (dispatch: Function) => {
     dispatch(requestProfileOperation(operationType));
     fetch(API.PROFILE_MANAGE, {

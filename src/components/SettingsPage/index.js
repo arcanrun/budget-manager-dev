@@ -1,21 +1,31 @@
 //@flow
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 import { Cell, Switch, List, Button, Div } from "@vkontakte/vkui";
 
 import style from "./SettingsPage.module.css";
 import { Card } from "../index";
+import { tutorialChangeState, toggleModal } from "../../actions";
 
 export const SettingsPage = () => {
   const [isIn, setIn] = useState(false);
   const [theme, setTheme] = useState(false);
+  const dispatch = useDispatch();
+  const isTutorialDone = useSelector(state => state.user.is_tutorial_done);
+
   useEffect(() => {
     setIn(true);
+    console.log("-------<<<", !isTutorialDone);
   });
 
   function toggleTheme(e) {
     console.log("CHECKED---->", e.currentTarget.checked);
   }
+
+  const toggleTutorial = () => {
+    dispatch(tutorialChangeState(!isTutorialDone));
+  };
 
   function switchTheme() {
     const body = document.getElementsByTagName("body")[0];
@@ -45,16 +55,17 @@ export const SettingsPage = () => {
           </Cell>
         </Card>
         <Card headerTitle={"Обучение"} icon={"bulb"}>
-          <Cell asideContent={<Switch onChange={e => toggleTheme(e)} />}>
+          <Cell
+            defaultChecked={isTutorialDone ? false : true}
+            asideContent={<Switch onChange={toggleTutorial} />}
+          >
             Показть обучение
           </Cell>
         </Card>
         <Card headerTitle={"История"} icon={"history"}>
           <Cell
             description={"За месяц или за все время"}
-            asideContent={
-              <Switch defaultChecked onChange={e => toggleTheme(e)} />
-            }
+            asideContent={<Switch onChange={e => toggleTheme(e)} />}
           >
             Показывать всю историю
           </Cell>
@@ -82,8 +93,7 @@ export const SettingsPage = () => {
           <Button
             size="xl"
             level="destructive"
-            // onClick={() => toggleModal("profile_delete")}
-            onClick={() => console.log("unrealized")}
+            onClick={() => dispatch(toggleModal("profile_delete"))}
           >
             Удалить профиль
           </Button>
