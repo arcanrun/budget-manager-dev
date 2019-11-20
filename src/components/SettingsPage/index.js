@@ -1,46 +1,60 @@
 //@flow
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 import { Cell, Switch, List, Button, Div } from "@vkontakte/vkui";
 
 import style from "./SettingsPage.module.css";
 import { Card } from "../index";
-import { tutorialChangeState, toggleModal } from "../../actions";
+import {
+  tutorialChangeState,
+  toggleModal,
+  toggleVkClientTheme,
+  toggleCustomDarkTheme
+} from "../../actions";
 
 export const SettingsPage = () => {
+  const body = document.getElementsByTagName("body")[0];
+  const switchCustom = useRef();
   const [isIn, setIn] = useState(false);
   const [theme, setTheme] = useState(false);
 
   const dispatch = useDispatch();
   const isTutorialDone = useSelector(state => state.user.is_tutorial_done);
   const isThemeVk = useSelector(state => state.user.is_vk_theme);
-  const tsThemeCustom = useSelector(state => state.user.is_costom_dark_theme);
+  const isThemeCustom = useSelector(state => state.user.is_costom_dark_theme);
+  const themeVkClient = useSelector(state => state.user.themeVkClient);
 
   useEffect(() => {
+    console.log("========>", switchCustom.current.checked);
     setIn(true);
+    if (isThemeVk) {
+      switchCustom.current.checked = false;
+      body.setAttribute("scheme", themeVkClient);
+    }
+    if (isThemeCustom && !isThemeVk) {
+      body.setAttribute("scheme", "client_dark");
+    }
+    if (!isThemeCustom && !isThemeVk) {
+      body.setAttribute("scheme", "client_light");
+    }
   });
 
   function toggleTheme(e) {
     console.log("CHECKED---->", e.currentTarget.checked);
   }
 
+  const toggleVkTheme = () => {
+    dispatch(toggleVkClientTheme(!isThemeVk));
+  };
+
+  const toggleDarkTheme = () => {
+    dispatch(toggleCustomDarkTheme(!isThemeCustom));
+  };
+
   const toggleTutorial = () => {
     dispatch(tutorialChangeState(!isTutorialDone));
   };
-
-  function switchTheme() {
-    const body = document.getElementsByTagName("body")[0];
-    console.log(body.getAttribute("scheme"));
-    const scheme = body.getAttribute("scheme");
-    if (scheme === "client_dark") {
-      body.setAttribute("scheme", "client_light");
-    } else if (scheme === "client_light") {
-      body.setAttribute("scheme", "client_dark");
-    } else {
-      body.setAttribute("scheme", "client_dark");
-    }
-  }
 
   return (
     <CSSTransition in={isIn} timeout={300} classNames={"page"}>
@@ -50,7 +64,7 @@ export const SettingsPage = () => {
             asideContent={
               <Switch
                 defaultChecked={isThemeVk ? true : false}
-                onChange={switchTheme}
+                onChange={toggleVkTheme}
               />
             }
           >
@@ -61,8 +75,9 @@ export const SettingsPage = () => {
             asideContent={
               <Switch
                 disabled={isThemeVk ? true : false}
-                defaultChecked={tsThemeCustom ? true : false}
-                onChange={e => toggleTheme(e)}
+                defaultChecked={isThemeCustom ? true : false}
+                onChange={toggleDarkTheme}
+                getRef={switchCustom}
               />
             }
           >

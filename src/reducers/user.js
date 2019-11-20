@@ -33,7 +33,9 @@ import {
   SIGNUP_REQUEST,
   TUTORUAL_CHANGE_SUCCESS,
   TUTORIAL_CHANGE_REQUEST,
-  TUTORUAL_CHANGE_ERROR
+  TUTORUAL_CHANGE_ERROR,
+  TOGGLE_VK_CLIENT_SUCCESS,
+  TOGGLE_CUSTOM_DARK_THEME_SUCCESS
 } from "../constants";
 
 type UserState = {
@@ -462,6 +464,17 @@ export function user(state: UserState = initialState, action: Object) {
       return {
         ...state,
         is_tutorial_done: action.payload.is_tutorial_done
+      };
+    case TOGGLE_VK_CLIENT_SUCCESS:
+      return {
+        ...state,
+        is_vk_theme: action.payload.is_vk_theme,
+        is_costom_dark_theme: action.payload.is_costom_dark_theme
+      };
+    case TOGGLE_CUSTOM_DARK_THEME_SUCCESS:
+      return {
+        ...state,
+        is_costom_dark_theme: action.payload.is_costom_dark_theme
       };
 
     default:

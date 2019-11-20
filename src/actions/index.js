@@ -13,6 +13,8 @@ import { getStatistics } from "./staisticsActions";
 import { calcBudget } from "./calcBudgetActions";
 import { tutorialChangeState } from "./tutorialAction";
 import { getHistoryShort } from "./getHsitoryShort";
+import { toggleVkClientTheme } from "./vkClientThemeActions";
+import { toggleCustomDarkTheme } from "./customDarkThemeActions";
 
 export {
   addWholeBudget,
@@ -31,5 +33,7 @@ export {
   stopGuide,
   hideModal,
   tutorialChangeState,
-  getHistoryShort
+  getHistoryShort,
+  toggleVkClientTheme,
+  toggleCustomDarkTheme
 };

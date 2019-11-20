@@ -14,5 +14,6 @@ export const API = {
   LOG_IN: `${ENDPOINT}log-in/`,
   CHANGE_TUTROIAL_STATE: `${ENDPOINT}tutorial-state/`,
   GET_SHORT_HISTORY: `${ENDPOINT}history-short/`,
-  TOGGLE_VK_CLIENT_THEME: `${ENDPOINT}vk_client_theme/`
+  TOGGLE_VK_CLIENT_THEME: `${ENDPOINT}vk_client_theme/`,
+  TOGGLE_CUSTOM_DARK_THEME: `${ENDPOINT}custom_dark_theme/`
 };
