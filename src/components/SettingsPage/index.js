@@ -16,7 +16,6 @@ export const SettingsPage = () => {
 
   useEffect(() => {
     setIn(true);
-    console.log("-------<<<", !isTutorialDone);
   });
 
   function toggleTheme(e) {
@@ -56,8 +55,12 @@ export const SettingsPage = () => {
         </Card>
         <Card headerTitle={"Обучение"} icon={"bulb"}>
           <Cell
-            defaultChecked={isTutorialDone ? false : true}
-            asideContent={<Switch onChange={toggleTutorial} />}
+            asideContent={
+              <Switch
+                defaultChecked={isTutorialDone ? false : true}
+                onChange={toggleTutorial}
+              />
+            }
           >
             Показть обучение
           </Cell>
