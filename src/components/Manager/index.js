@@ -52,6 +52,15 @@ class Manager extends React.Component<PROPS, STATE> {
       in: false,
       steps: [
         {
+          target: "body",
+          title: "Добро пожаловать!",
+          content:
+            "Сейчас я покажу Вам как пользоваться приложением, которое позволит грамотнее распоряжаться Вашим бюджетом.",
+          disableBeacon: true,
+          placement: "center",
+          isFixed: true
+        },
+        {
           target: ".first-step",
           title: "Общий бюджет",
           content: "Здесь отображаются все Ваши накопления.",
