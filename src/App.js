@@ -35,7 +35,10 @@ type PROPS = {
   isTutorDone: boolean,
   history: Array<any>,
   location: Object,
-  params: string
+  params: string,
+  isVkTheme: boolean,
+  isCostomDarkTheme: boolean,
+  themeVkClient: string
 };
 
 type STATE = {
@@ -52,6 +55,14 @@ export class App extends React.Component<PROPS, STATE> {
   }
 
   shouldComponentUpdate(nextProps: Object, nextState: Object) {
+    const body = document.getElementsByTagName("body")[0];
+    if (this.props.isVkTheme) {
+      body.setAttribute("scheme", this.props.themeVkClient);
+    } else {
+      this.props.isCostomDarkTheme
+        ? body.setAttribute("scheme", "client_dark")
+        : body.setAttribute("scheme", "client_light");
+    }
     if (nextState.activeStory !== window.location.pathname) {
       this.props.hideModal();
       this.setState({ activeStory: window.location.pathname });

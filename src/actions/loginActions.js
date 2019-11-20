@@ -17,7 +17,8 @@ export const successLogIn = (res: Object, vkRes: Object) => ({
     name: vkRes.name,
     sure_name: vkRes.sure_name,
     avatar: vkRes.avatar,
-    params: vkRes.params
+    params: vkRes.params,
+    theme: vkRes.theme
   }
 });
 export const failureLogIn = (msg: string) => ({
@@ -38,11 +39,21 @@ export const logIn = (params: string) => {
       sure_name: undefined,
       avatar: undefined,
       timezone: undefined,
-      params: undefined
+      params: undefined,
+      theme: undefined //not sending to server it just for redux store
     };
 
     connect.send("VKWebAppInit", {});
-
+    connect
+      .send("VKWebAppUpdateConfig", {})
+      .then(res => {
+        vkRes.theme = res.e.detail.data;
+        return res;
+      })
+      .catch(err => {
+        vkRes.theme = "client_light";
+        return err;
+      });
     connect
       .send("VKWebAppGetUserInfo", {})
       .then(res => {

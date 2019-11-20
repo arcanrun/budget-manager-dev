@@ -11,8 +11,11 @@ import { tutorialChangeState, toggleModal } from "../../actions";
 export const SettingsPage = () => {
   const [isIn, setIn] = useState(false);
   const [theme, setTheme] = useState(false);
+
   const dispatch = useDispatch();
   const isTutorialDone = useSelector(state => state.user.is_tutorial_done);
+  const isThemeVk = useSelector(state => state.user.is_vk_theme);
+  const tsThemeCustom = useSelector(state => state.user.is_costom_dark_theme);
 
   useEffect(() => {
     setIn(true);
@@ -43,12 +46,25 @@ export const SettingsPage = () => {
     <CSSTransition in={isIn} timeout={300} classNames={"page"}>
       <div className={style.settings}>
         <Card headerTitle={"Внешний вид"} icon={"eye"}>
-          <Cell asideContent={<Switch defaultChecked onChange={switchTheme} />}>
+          <Cell
+            asideContent={
+              <Switch
+                defaultChecked={isThemeVk ? true : false}
+                onChange={switchTheme}
+              />
+            }
+          >
             Тема клиента VK {theme}
           </Cell>
           <hr />
           <Cell
-            asideContent={<Switch disabled onChange={e => toggleTheme(e)} />}
+            asideContent={
+              <Switch
+                disabled={isThemeVk ? true : false}
+                defaultChecked={tsThemeCustom ? true : false}
+                onChange={e => toggleTheme(e)}
+              />
+            }
           >
             Темная тема
           </Cell>

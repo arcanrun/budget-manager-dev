@@ -38,6 +38,9 @@ import {
 
 type UserState = {
   // params: string,
+  themeVkClient: string,
+  is_vk_theme: boolean,
+  is_costom_dark_theme: boolean,
   is_first_time: boolean,
   is_tutorial_done: boolean,
   vk_id: ?number,
@@ -103,6 +106,10 @@ type UserState = {
 
 export const initialState: UserState = {
   // params: undefined,
+
+  themeVkClient: undefined,
+  is_vk_theme: true,
+  is_costom_dark_theme: true,
   is_tutorial_done: false,
   is_first_time: true,
   // vk_id: 65122543,
@@ -389,6 +396,9 @@ export function user(state: UserState = initialState, action: Object) {
       return {
         ...state,
         // params: action.payload.params,
+        themeVkClient: action.payload.theme,
+        is_vk_theme: action.payload.is_vk_theme,
+        is_costom_dark_theme: action.payload.is_costom_dark_theme,
         register_date: action.payload.register_date,
         isFetching: false,
         vk_id: action.payload.vk_id,
