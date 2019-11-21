@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/money-bag-2.2cfec6c1.svg"
   },
   {
-    "revision": "92712ff417dde50de323",
+    "revision": "58fc5bea6c174f42f3cd",
     "url": "/budget-manager-dev/static/css/main.6f34f6ee.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/lightbulb.c81046f0.svg"
   },
   {
-    "revision": "283bc4467b926132f4a5",
-    "url": "/budget-manager-dev/static/js/2.417b636b.chunk.js"
+    "revision": "75de1242fc9139f3e343",
+    "url": "/budget-manager-dev/static/js/2.07a85d8c.chunk.js"
   },
   {
     "revision": "210aad6494b434a0c18f0fae8367c21c",
@@ -84,12 +84,12 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/fa-regular-400.7b9568e6.svg"
   },
   {
-    "revision": "8e4a6dcc692b3887f9f542cd6894d6d4",
-    "url": "/budget-manager-dev/static/media/fa-solid-900.8e4a6dcc.eot"
-  },
-  {
     "revision": "0bff33a5fd7ec390235476b4859747a0",
     "url": "/budget-manager-dev/static/media/fa-solid-900.0bff33a5.ttf"
+  },
+  {
+    "revision": "8e4a6dcc692b3887f9f542cd6894d6d4",
+    "url": "/budget-manager-dev/static/media/fa-solid-900.8e4a6dcc.eot"
   },
   {
     "revision": "a9c4bb7348f42626454c988dbde1d0a0",
@@ -104,8 +104,8 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/money-bag.773dcb53.svg"
   },
   {
-    "revision": "92712ff417dde50de323",
-    "url": "/budget-manager-dev/static/js/main.4fee2b61.chunk.js"
+    "revision": "58fc5bea6c174f42f3cd",
+    "url": "/budget-manager-dev/static/js/main.e9d5dbbc.chunk.js"
   },
   {
     "revision": "d73f20accac5c2b9f62c824b8aca40c0",
@@ -200,11 +200,11 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/eye.df8f4a50.svg"
   },
   {
-    "revision": "283bc4467b926132f4a5",
+    "revision": "75de1242fc9139f3e343",
     "url": "/budget-manager-dev/static/css/2.f5a513f1.chunk.css"
   },
   {
-    "revision": "8ae8becc0fcd4963ff1f1b815f5d5c83",
+    "revision": "ce2741f8dba8842ad04ad641d63aa709",
     "url": "/budget-manager-dev/index.html"
   }
 ];
