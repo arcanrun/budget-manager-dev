@@ -125,6 +125,7 @@ export class App extends React.Component<PROPS, STATE> {
             <p>Вы уверены, что хотите удалить профиль?</p>
           </Alert>
         );
+        break;
       case "history_delete_all":
         alert = (
           <Alert
