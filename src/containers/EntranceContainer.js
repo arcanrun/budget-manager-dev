@@ -12,13 +12,13 @@ const mapStateToProps = (state: Object) => ({
   vk_id: state.user.vk_id,
   isFetching: state.user.isFetching_signup,
   error: state.user.error_signup,
-  params: state.user.params
+  params: state.user.params,
+  isVkTheme: state.user.is_vk_theme,
+  isCostomDarkTheme: state.user.is_costom_dark_theme,
+  themeVkClient: state.user.themeVkClient
 });
 
 const EntranceContainer = withRouter(
-  connect(
-    mapStateToProps,
-    { signUp }
-  )(Entrance)
+  connect(mapStateToProps, { signUp })(Entrance)
 );
 export default EntranceContainer;

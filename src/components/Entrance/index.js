@@ -14,7 +14,10 @@ type PROPS = {
   isFetching: boolean,
   error: boolean,
   params: string,
-  history: Array<any>
+  history: Array<any>,
+  isVkTheme: boolean,
+  isCostomDarkTheme: boolean,
+  themeVkClient: string
 };
 
 type STATE = {
@@ -30,6 +33,19 @@ class Entrance extends React.Component<PROPS, STATE> {
 
   componentDidMount() {
     window.addEventListener("resize", this.setSize);
+  }
+  shouldComponentUpdate(nextProps: Object, nextState: Object) {
+    const body = document.getElementsByTagName("body")[0];
+    if (this.props.isVkTheme) {
+      body.setAttribute("scheme", this.props.themeVkClient);
+    }
+    if (this.props.isCostomDarkTheme && !this.props.isVkTheme) {
+      body.setAttribute("scheme", "client_dark");
+    }
+    if (!this.props.isCostomDarkTheme && !this.props.isVkTheme) {
+      body.setAttribute("scheme", "client_light");
+    }
+    return true;
   }
   componentWillUnmount() {
     window.removeEventListener("resize", this.setSize);

@@ -352,7 +352,6 @@ export function user(state: UserState = initialState, action: Object) {
     case LOGIN_REQUEST:
       return {
         ...state,
-        // params: action.payload.params,
         isFetching: true,
         error: false
       };
@@ -383,7 +382,9 @@ export function user(state: UserState = initialState, action: Object) {
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        // params: action.payload.params,
+        themeVkClient: action.payload.theme,
+        is_vk_theme: action.payload.is_vk_theme,
+        is_costom_dark_theme: action.payload.is_costom_dark_theme,
         register_date: action.payload.register_date,
         isFetching_signup: false,
         vk_id: action.payload.vk_id,

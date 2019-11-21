@@ -1,5 +1,6 @@
 //@flow
 import connect from "@vkontakte/vkui-connect-promise";
+import * as old from "@vkontakte/vk-connect";
 
 import {
   SIGNUP_FAILURE,
@@ -26,7 +27,8 @@ export const successSignUp = (res: Object, vkRes: Object) => ({
     name: vkRes.name,
     sure_name: vkRes.sure_name,
     avatar: vkRes.avatar,
-    params: vkRes.params
+    params: vkRes.params,
+    theme: vkRes.theme
   }
 });
 export const failureSignUp = (res: Object) => ({
@@ -48,9 +50,17 @@ export const signUp = (params: string) => {
       sure_name: undefined,
       avatar: undefined,
       timezone: undefined,
-      params: undefined
+      params: undefined,
+      theme: "client_light" //not sending to server it just for redux store
     };
     connect.send("VKWebAppInit", {});
+    connect.send("VKWebAppInit", {});
+    old.send("VKWebAppUpdateConfig", {});
+    old.subscribe(e => {
+      if (e.detail.data.scheme) {
+        vkRes.theme = e.detail.data.scheme;
+      }
+    });
 
     connect
       .send("VKWebAppGetUserInfo", {})
