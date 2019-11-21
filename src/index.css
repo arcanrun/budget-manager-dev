@@ -40,6 +40,10 @@ code {
   /* reassign*/
   --header_background: #110261 !important;
   --tabbar_active_icon: #f72d6b !important;
+
+  /*line chart*/
+  --grid-color: rgba(0, 0, 0, 0.2);
+  --labels-color: rgba(0, 0, 0, 0.4);
 }
 
 body[scheme="client_dark"] {
@@ -51,4 +55,8 @@ body[scheme="client_dark"] {
   --background_color_history: #0a0a0a;
   --background_color_history_sticker: rgba(77, 90, 119, 0.25);
   --color_text_enterbudget: #9aa2b0;
+
+  /*line chart*/
+  --grid-color: #eaeff2;
+  --labels-color: #eaeff2;
 }

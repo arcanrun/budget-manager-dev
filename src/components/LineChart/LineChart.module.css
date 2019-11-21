@@ -32,3 +32,20 @@
   fill-opacity: 0.1;
   fill: #0fde8c;
 }
+
+.customGrid {
+  stroke: var(--grid-color);
+  stroke-width: 1px;
+  stroke-dasharray: 2px;
+}
+
+.customGridbackground {
+  fill: none;
+}
+
+.customLabels {
+  fill: var(--labels-color);
+  color: var(--labels-color);
+  font-size: 0.75rem;
+  line-height: 1;
+}
