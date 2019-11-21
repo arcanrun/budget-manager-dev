@@ -124,7 +124,7 @@ export const SettingsPage = () => {
             <Button
               size="xl"
               level="secondary"
-              onClick={() => console.log("unrealized")}
+              onClick={() => dispatch(toggleModal("month_picker"))}
             >
               Очисить историю за месяц
             </Button>

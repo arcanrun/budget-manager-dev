@@ -16,7 +16,7 @@ import Icon24User from "@vkontakte/icons/dist/24/user";
 import Icon24Recent from "@vkontakte/icons/dist/24/recent";
 import Icon24Settings from "@vkontakte/icons/dist/24/settings";
 
-import { Overlay, SettingsPage } from "./components";
+import { Overlay, SettingsPage, ModalSettings } from "./components";
 import {
   ManagerContainer,
   HistoryContainer,
@@ -236,7 +236,12 @@ export class App extends React.Component<PROPS, STATE> {
       </View>
     );
     const settingsView = (
-      <View activePanel="main_panel" id="settings" popout={alert}>
+      <View
+        activePanel="main_panel"
+        id="settings"
+        popout={alert}
+        modal={<ModalSettings />}
+      >
         <Panel id="main_panel">
           <PanelHeader>Настройки</PanelHeader>
           <SettingsPage />

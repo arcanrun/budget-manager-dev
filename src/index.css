@@ -46,6 +46,10 @@ code {
   /*line chart*/
   --grid-color: rgba(0, 0, 0, 0.2);
   --labels-color: rgba(107, 85, 85, 0.4);
+
+  /*Month picker*/
+  --color_year: #110261;
+  --color_month: #f72d6b;
 }
 
 body[scheme="client_dark"] {
@@ -61,4 +65,7 @@ body[scheme="client_dark"] {
   /*line chart*/
   --grid-color: #eaeff2;
   --labels-color: #eaeff2;
+  /*Month picker*/
+  --color_year: #9aa2b0;
+  --color_month: #9aa2b0;
 }
