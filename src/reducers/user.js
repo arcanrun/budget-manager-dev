@@ -417,7 +417,13 @@ export function user(state: UserState = initialState, action: Object) {
         return {
           ...initialState,
           isFetching: false
-          // params: state.params
+        };
+      }
+      if (action.payload.payload.RESPONSE === "HISTORY_DELETE_ALL") {
+        return {
+          ...state,
+          history: { ...state.history, value: [] },
+          isFetching: false
         };
       }
       return { ...state };

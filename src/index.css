@@ -33,6 +33,9 @@ code {
   /*History*/
   --background_color_history: #eaeff2;
   --background_color_history_sticker: rgba(18, 9, 66, 0.25);
+
+  /* whole bduget*/
+  --color_text_enterbudget: #000000;
 }
 
 body[scheme="client_dark"] {
@@ -43,4 +46,5 @@ body[scheme="client_dark"] {
   /*History*/
   --background_color_history: #0a0a0a;
   --background_color_history_sticker: rgba(77, 90, 119, 0.25);
+  --color_text_enterbudget: #9aa2b0;
 }

@@ -17,6 +17,9 @@ type PROPS = {
   history: Array<any>,
   isVkTheme: boolean,
   isCostomDarkTheme: boolean,
+  themeVkClient: string,
+  isVkTheme: boolean,
+  isCostomDarkTheme: boolean,
   themeVkClient: string
 };
 

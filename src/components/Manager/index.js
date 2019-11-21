@@ -35,7 +35,10 @@ type PROPS = {
   common: Object,
   is_first_time: boolean,
   is_tutorial_done: boolean,
-  params: string
+  params: string,
+  isVkTheme: boolean,
+  isCostomDarkTheme: boolean,
+  themeVkClient: string
 };
 
 type STATE = {
@@ -128,6 +131,20 @@ class Manager extends React.Component<PROPS, STATE> {
   toggleAnimation = () => {
     this.setState({ in: !this.state.in });
   };
+
+  shouldComponentUpdate(nextProps: Object, nextState: Object) {
+    const body = document.getElementsByTagName("body")[0];
+    if (this.props.isVkTheme) {
+      body.setAttribute("scheme", this.props.themeVkClient);
+    }
+    if (this.props.isCostomDarkTheme && !this.props.isVkTheme) {
+      body.setAttribute("scheme", "client_dark");
+    }
+    if (!this.props.isCostomDarkTheme && !this.props.isVkTheme) {
+      body.setAttribute("scheme", "client_light");
+    }
+    return true;
+  }
 
   componentWillUnmount() {
     this.toggleAnimation();

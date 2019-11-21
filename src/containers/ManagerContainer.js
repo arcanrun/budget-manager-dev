@@ -31,25 +31,25 @@ const mapStateToProps = state => ({
   common: state.user.calc.common,
   is_first_time: state.user.is_first_time,
   is_tutorial_done: state.user.is_tutorial_done,
-  params: state.user.params
+  params: state.user.params,
+  isVkTheme: state.user.is_vk_theme,
+  isCostomDarkTheme: state.user.is_costom_dark_theme,
+  themeVkClient: state.user.themeVkClient
 });
 
 export const ManagerContainer = withRouter(
-  connect(
-    mapStateToProps,
-    {
-      onClickToggleModal: toggleModal,
-      addWholeBudget,
-      addPayDay,
-      getWholeBudget,
-      getPayDay,
-      calcTempCosts,
-      getAllCosts,
-      makeProfileOperation,
-      logIn,
-      calcBudget,
-      stopGuide,
-      tutorialChangeState
-    }
-  )(Manager)
+  connect(mapStateToProps, {
+    onClickToggleModal: toggleModal,
+    addWholeBudget,
+    addPayDay,
+    getWholeBudget,
+    getPayDay,
+    calcTempCosts,
+    getAllCosts,
+    makeProfileOperation,
+    logIn,
+    calcBudget,
+    stopGuide,
+    tutorialChangeState
+  })(Manager)
 );

@@ -15,20 +15,6 @@ import {
 } from "../../actions";
 
 export const SettingsPage = () => {
-  let logger = "";
-
-  connect
-    .send("VKWebAppUpdateConfig", {})
-    .then(res => {
-      logger = res;
-      return res;
-    })
-    .catch(err => {
-      logger = err;
-      return err;
-    });
-  console.log("========>", logger);
-
   const body = document.getElementsByTagName("body")[0];
   const switchCustom = useRef();
   const [isIn, setIn] = useState(false);
@@ -54,10 +40,6 @@ export const SettingsPage = () => {
       body.setAttribute("scheme", "client_light");
     }
   });
-
-  function toggleTheme(e) {
-    console.log("CHECKED---->", e.currentTarget.checked);
-  }
 
   const toggleVkTheme = () => {
     dispatch(toggleVkClientTheme(!isThemeVk));
@@ -114,7 +96,7 @@ export const SettingsPage = () => {
         <Card headerTitle={"История"} icon={"history"}>
           <Cell
             description={"За месяц или за все время"}
-            asideContent={<Switch onChange={e => toggleTheme(e)} />}
+            asideContent={<Switch onChange={() => console.log("unrealized")} />}
           >
             Показывать всю историю
           </Cell>
@@ -131,7 +113,7 @@ export const SettingsPage = () => {
           <Button
             size="xl"
             level="destructive"
-            onClick={() => console.log("unrealized")}
+            onClick={() => dispatch(toggleModal("history_delete_all"))}
           >
             Очисить историю
           </Button>

@@ -80,7 +80,7 @@ export class App extends React.Component<PROPS, STATE> {
     this.props.history.push(story);
   };
   deleteProfile = () => {
-    this.props.makeProfileOperation("delete", this.props.params);
+    this.props.makeProfileOperation("delete");
     this.props.history.push("/budget-manager");
   };
 
@@ -123,6 +123,33 @@ export class App extends React.Component<PROPS, STATE> {
           >
             <h2>Подтвердите действие</h2>
             <p>Вы уверены, что хотите удалить профиль?</p>
+          </Alert>
+        );
+      case "history_delete_all":
+        alert = (
+          <Alert
+            actionsLayout="vertical"
+            actions={[
+              {
+                title: "Очистить историю",
+                autoclose: true,
+                style: "destructive",
+                action: () =>
+                  this.props.makeProfileOperation(
+                    "history_delete_all",
+                    this.props.params
+                  )
+              },
+              {
+                title: "Отмена",
+                autoclose: true,
+                style: "cancel"
+              }
+            ]}
+            onClose={hideModal}
+          >
+            <h2>Подтвердите действие</h2>
+            <p>Вы уверены, что хотите очистить всю историю?</p>
           </Alert>
         );
         break;
