@@ -11,12 +11,14 @@ import {
   tutorialChangeState,
   toggleModal,
   toggleVkClientTheme,
-  toggleCustomDarkTheme
+  toggleCustomDarkTheme,
+  makeProfileOperation
 } from "../../actions";
 
 export const SettingsPage = () => {
   const body = document.getElementsByTagName("body")[0];
   const switchCustom = useRef();
+  const switchHistory = useRef();
   const [isIn, setIn] = useState(false);
   const [theme, setTheme] = useState(false);
   const [test, setTest] = useState(false);
@@ -26,6 +28,7 @@ export const SettingsPage = () => {
   const isThemeVk = useSelector(state => state.user.is_vk_theme);
   const isThemeCustom = useSelector(state => state.user.is_costom_dark_theme);
   const themeVkClient = useSelector(state => state.user.themeVkClient);
+  const isFullhistory = useSelector(state => state.user.is_full_history);
 
   useEffect(() => {
     setIn(true);
@@ -39,10 +42,20 @@ export const SettingsPage = () => {
     if (!isThemeCustom && !isThemeVk) {
       body.setAttribute("scheme", "client_light");
     }
+
+    if (isFullhistory) {
+      switchHistory.current.checked = true;
+    } else {
+      switchHistory.current.checked = false;
+    }
   });
 
   const toggleVkTheme = () => {
     dispatch(toggleVkClientTheme(!isThemeVk));
+  };
+  const toggleFullHistory = () => {
+    dispatch(makeProfileOperation("toggle_full_history"));
+    switchHistory.current.checked = !switchHistory.current.checked;
   };
 
   const toggleDarkTheme = () => {
@@ -96,7 +109,13 @@ export const SettingsPage = () => {
         <Card headerTitle={"История"} icon={"history"}>
           <Cell
             description={"За месяц или за все время"}
-            asideContent={<Switch onChange={() => console.log("unrealized")} />}
+            asideContent={
+              <Switch
+                getRef={switchHistory}
+                defaultChecked={isFullhistory ? true : false}
+                onChange={toggleFullHistory}
+              />
+            }
           >
             Показывать всю историю
           </Cell>

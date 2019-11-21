@@ -40,6 +40,7 @@ import {
 
 type UserState = {
   // params: string,
+  is_full_history: boolean,
   themeVkClient: string,
   is_vk_theme: boolean,
   is_costom_dark_theme: boolean,
@@ -108,7 +109,7 @@ type UserState = {
 
 export const initialState: UserState = {
   // params: undefined,
-
+  is_full_history: true,
   themeVkClient: undefined,
   is_vk_theme: true,
   is_costom_dark_theme: true,
@@ -382,6 +383,7 @@ export function user(state: UserState = initialState, action: Object) {
     case SIGNUP_SUCCESS:
       return {
         ...state,
+        is_full_history: action.payload.is_full_history,
         themeVkClient: action.payload.theme,
         is_vk_theme: action.payload.is_vk_theme,
         is_costom_dark_theme: action.payload.is_costom_dark_theme,
@@ -399,6 +401,8 @@ export function user(state: UserState = initialState, action: Object) {
       return {
         ...state,
         // params: action.payload.params,
+
+        is_full_history: action.payload.is_full_history,
         themeVkClient: action.payload.theme,
         is_vk_theme: action.payload.is_vk_theme,
         is_costom_dark_theme: action.payload.is_costom_dark_theme,
@@ -423,6 +427,13 @@ export function user(state: UserState = initialState, action: Object) {
         return {
           ...state,
           history: { ...state.history, value: [] },
+          isFetching: false
+        };
+      }
+      if (action.payload.payload.RESPONSE === "TOGGLE_IS_FULL_HISTORY") {
+        return {
+          ...state,
+          is_full_history: action.payload.payload.PAYLOAD,
           isFetching: false
         };
       }
