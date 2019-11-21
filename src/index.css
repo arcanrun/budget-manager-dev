@@ -36,6 +36,10 @@ code {
 
   /* whole bduget*/
   --color_text_enterbudget: #000000;
+
+  /* reassign*/
+  --header_background: #110261 !important;
+  --tabbar_active_icon: #f72d6b !important;
 }
 
 body[scheme="client_dark"] {
