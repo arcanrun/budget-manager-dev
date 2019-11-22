@@ -129,7 +129,7 @@ export const SettingsPage = ({ openAlert, changePanelSetting }: PROPS) => {
             <Button
               size="xl"
               level="secondary"
-              onClick={() => changePanelSetting("month_picker")}
+              onClick={() => changePanelSetting("month_picker_panel")}
             >
               Очисить историю за месяц
             </Button>

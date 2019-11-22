@@ -57,45 +57,6 @@ export class App extends React.Component<PROPS, STATE> {
     this.props.logIn(this.props.params);
   }
 
-  componentDidUpdate(prevProps: Object, prevState: Object) {
-    const alertsMap = ["profile_delete", "history_delete_all"];
-
-    if (
-      this.props.typeModal !== prevProps.typeModal &&
-      alertsMap.includes(this.props.typeModal)
-    ) {
-      this.setState({
-        popupAlert: (
-          <Alert
-            actionsLayout="vertical"
-            actions={[
-              {
-                title: "Удалить профиль",
-                autoclose: true,
-                style: "destructive",
-                action: () => console.log()
-              },
-              {
-                title: "Отмена",
-                autoclose: true,
-                style: "cancel"
-              }
-            ]}
-            onClose={this.props.hideModal}
-          >
-            <h2>Подтвердите действие</h2>
-            <p>Вы уверены, что хотите удалить профиль?</p>
-          </Alert>
-        )
-      });
-    } else if (
-      alertsMap.includes(prevProps.typeModal) &&
-      this.props.typeModal === null
-    ) {
-      this.setState({ popupAlert: null });
-    }
-  }
-
   deleteProfile = () => {
     this.props.makeProfileOperation("delete");
     this.props.history.push("/budget-manager");
@@ -160,8 +121,14 @@ export class App extends React.Component<PROPS, STATE> {
     this.setState({ popupAlert: null });
   };
 
-  changePanelSetting = panel => {
+  changePanelSetting = (panel: string) => {
     this.setState({ settingsPanels: panel });
+    console.log("000000000000000", this.props.history);
+    if (panel.includes("main")) {
+      this.props.history.goBack();
+    } else {
+      this.props.history.push(`settings_${panel}`);
+    }
   };
 
   shouldComponentUpdate(nextProps: Object, nextState: Object) {
@@ -189,6 +156,7 @@ export class App extends React.Component<PROPS, STATE> {
     const { story } = e.currentTarget.dataset;
     this.props.hideModal();
     this.setState({ activeStory: story });
+
     this.props.history.push(story);
   };
 
@@ -204,6 +172,14 @@ export class App extends React.Component<PROPS, STATE> {
     if (window.location.pathname.includes("settings")) {
       page = "settings";
     }
+
+    let panel = "main_panel";
+
+    if (window.location.pathname.includes("settings_month_picker_panel")) {
+      panel = "month_picker_panel";
+    }
+
+    console.log("!!!!!!!!!!", panel, page, window.location.pathname);
 
     const { typeModal, hideModal, vk_id, isFetching, isTutorDone } = this.props;
 
@@ -286,11 +262,7 @@ export class App extends React.Component<PROPS, STATE> {
       </View>
     );
     const settingsView = (
-      <View
-        activePanel={this.state.settingsPanels}
-        id="settings"
-        popout={this.state.popupAlert}
-      >
+      <View activePanel={panel} id="settings" popout={this.state.popupAlert}>
         <Panel id="main_panel">
           <PanelHeader>Настройки</PanelHeader>
           <SettingsPage
@@ -298,7 +270,7 @@ export class App extends React.Component<PROPS, STATE> {
             changePanelSetting={this.changePanelSetting}
           />
         </Panel>
-        <Panel id="month_picker">
+        <Panel id="month_picker_panel">
           <PanelMonthPicker goTo={this.changePanelSetting} />
         </Panel>
       </View>
