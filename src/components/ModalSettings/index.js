@@ -56,8 +56,8 @@ export const ModalSettings = () => {
           rootNativeProps={{ "data-xx": "yy" }}
           mode={"month"}
           // locale={props.locale}
-          maxDate={new Date(2130, 1, 1, 23, 59, 59)}
-          minDate={new Date(1991, 1, 1, 0, 0, 0)}
+          maxDate={new Date(2030, 1, 1, 23, 59, 59)}
+          minDate={new Date(2000, 1, 1, 0, 0, 0)}
           // onDateChange={this.onDateChange}
           // onValueChange={this.onValueChange}
           onScrollChange={onScrollChange}

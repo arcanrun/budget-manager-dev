@@ -32,6 +32,7 @@ import { Modal } from "./Modal";
 import { ModalHistory } from "./ModalHistory";
 import { ModalSettings } from "./ModalSettings";
 import { SettingsPage } from "./SettingsPage";
+import AlertSettings from "./AlertSettings";
 
 export {
   Header,
@@ -66,5 +67,6 @@ export {
   Modal,
   ModalHistory,
   SettingsPage,
-  ModalSettings
+  ModalSettings,
+  AlertSettings
 };

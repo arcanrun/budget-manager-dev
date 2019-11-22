@@ -1,7 +1,7 @@
 //@flow
 import { TOGGLE_MODAL, HIDE_MODAL } from "../constants";
 
-export const toggleModal = (typeModal: string, payload: string) => ({
+export const toggleModal = (typeModal: string, payload?: string) => ({
   type: TOGGLE_MODAL,
   payload: {
     typeModal,

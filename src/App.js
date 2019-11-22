@@ -16,7 +16,12 @@ import Icon24User from "@vkontakte/icons/dist/24/user";
 import Icon24Recent from "@vkontakte/icons/dist/24/recent";
 import Icon24Settings from "@vkontakte/icons/dist/24/settings";
 
-import { Overlay, SettingsPage, ModalSettings } from "./components";
+import {
+  Overlay,
+  SettingsPage,
+  ModalSettings,
+  AlertSettings
+} from "./components";
 import {
   ManagerContainer,
   HistoryContainer,
@@ -43,14 +48,112 @@ type PROPS = {
 
 type STATE = {
   activeStory: ?string,
-  popoutProfile: ?React.Node
+  popupAlert: ?React.Node
 };
 export class App extends React.Component<PROPS, STATE> {
-  state = { activeStory: "manager", popoutProfile: null };
+  state = { activeStory: "manager", popupAlert: null };
 
   componentDidMount() {
     this.props.logIn(this.props.params);
   }
+
+  componentDidUpdate(prevProps: Object, prevState: Object) {
+    const alertsMap = ["profile_delete", "history_delete_all"];
+
+    if (
+      this.props.typeModal !== prevProps.typeModal &&
+      alertsMap.includes(this.props.typeModal)
+    ) {
+      this.setState({
+        popupAlert: (
+          <Alert
+            actionsLayout="vertical"
+            actions={[
+              {
+                title: "Удалить профиль",
+                autoclose: true,
+                style: "destructive",
+                action: () => console.log()
+              },
+              {
+                title: "Отмена",
+                autoclose: true,
+                style: "cancel"
+              }
+            ]}
+            onClose={this.props.hideModal}
+          >
+            <h2>Подтвердите действие</h2>
+            <p>Вы уверены, что хотите удалить профиль?</p>
+          </Alert>
+        )
+      });
+    } else if (
+      alertsMap.includes(prevProps.typeModal) &&
+      this.props.typeModal === null
+    ) {
+      this.setState({ popupAlert: null });
+    }
+  }
+
+  openAlert = (alertType: string) => {
+    const deleteProfileAlert = (
+      <Alert
+        actionsLayout="vertical"
+        actions={[
+          {
+            title: "Удалить профиль",
+            autoclose: true,
+            style: "destructive",
+            action: () => this.props.makeProfileOperation("delete")
+          },
+          {
+            title: "Отмена",
+            autoclose: true,
+            style: "cancel"
+          }
+        ]}
+        onClose={this.colsoePopout}
+      >
+        <h2>Подтвердите действие</h2>
+        <p>Вы уверены, что хотите удалить профиль?</p>
+      </Alert>
+    );
+
+    const clearHistoryAlert = (
+      <Alert
+        actionsLayout="vertical"
+        actions={[
+          {
+            title: "Очистить историю",
+            autoclose: true,
+            style: "destructive",
+            action: () => this.props.makeProfileOperation("history_delete_all")
+          },
+          {
+            title: "Отмена",
+            autoclose: true,
+            style: "cancel"
+          }
+        ]}
+        onClose={this.colsoePopout}
+      >
+        <h2>Подтвердите действие</h2>
+        <p>Вы уверены, что хотите очистить всю историю?</p>
+      </Alert>
+    );
+
+    if (alertType === "profile_delete") {
+      this.setState({ popupAlert: deleteProfileAlert });
+    }
+    if (alertType === "history_delete_all") {
+      this.setState({ popupAlert: clearHistoryAlert });
+    }
+  };
+
+  colsoePopout = () => {
+    this.setState({ popupAlert: null });
+  };
 
   shouldComponentUpdate(nextProps: Object, nextState: Object) {
     const body = document.getElementsByTagName("body")[0];
@@ -79,10 +182,6 @@ export class App extends React.Component<PROPS, STATE> {
     this.setState({ activeStory: story });
     this.props.history.push(story);
   };
-  deleteProfile = () => {
-    this.props.makeProfileOperation("delete");
-    this.props.history.push("/budget-manager");
-  };
 
   render() {
     let page = "manager";
@@ -100,64 +199,6 @@ export class App extends React.Component<PROPS, STATE> {
     const { typeModal, hideModal, vk_id, isFetching, isTutorDone } = this.props;
 
     const { activeStory } = this.state;
-    let alert = null;
-    switch (typeModal) {
-      case "profile_delete":
-        alert = (
-          <Alert
-            actionsLayout="vertical"
-            actions={[
-              {
-                title: "Удалить профиль",
-                autoclose: true,
-                style: "destructive",
-                action: this.deleteProfile
-              },
-              {
-                title: "Отмена",
-                autoclose: true,
-                style: "cancel"
-              }
-            ]}
-            onClose={hideModal}
-          >
-            <h2>Подтвердите действие</h2>
-            <p>Вы уверены, что хотите удалить профиль?</p>
-          </Alert>
-        );
-        break;
-      case "history_delete_all":
-        alert = (
-          <Alert
-            actionsLayout="vertical"
-            actions={[
-              {
-                title: "Очистить историю",
-                autoclose: true,
-                style: "destructive",
-                action: () =>
-                  this.props.makeProfileOperation(
-                    "history_delete_all",
-                    this.props.params
-                  )
-              },
-              {
-                title: "Отмена",
-                autoclose: true,
-                style: "cancel"
-              }
-            ]}
-            onClose={hideModal}
-          >
-            <h2>Подтвердите действие</h2>
-            <p>Вы уверены, что хотите очистить всю историю?</p>
-          </Alert>
-        );
-        break;
-
-      default:
-        break;
-    }
 
     const tabbar = (
       <Tabbar>
@@ -228,7 +269,7 @@ export class App extends React.Component<PROPS, STATE> {
       </View>
     );
     const profileView = (
-      <View activePanel="main_panel" id="profile" popout={alert}>
+      <View activePanel="main_panel" id="profile">
         <Panel id="main_panel">
           <PanelHeader>Профиль</PanelHeader>
           <ProfileContainer />
@@ -239,12 +280,12 @@ export class App extends React.Component<PROPS, STATE> {
       <View
         activePanel="main_panel"
         id="settings"
-        popout={alert}
+        popout={this.state.popupAlert}
         modal={<ModalSettings />}
       >
         <Panel id="main_panel">
           <PanelHeader>Настройки</PanelHeader>
-          <SettingsPage />
+          <SettingsPage openAlert={this.openAlert} />
         </Panel>
       </View>
     );
@@ -265,37 +306,3 @@ export class App extends React.Component<PROPS, STATE> {
     return <>{vk_id ? epic : entrance}</>;
   }
 }
-// <>
-//   <Overlay isFetching={false} />
-//   <View
-//     activePanel="main_panel"
-//     id="main_view"
-//     modal={<ModalContainer />}
-//   >
-//     <Panel id="main_panel">
-//       {vk_id && (
-//         <PanelHeader>
-//           <Header />
-//         </PanelHeader>
-//       )}
-
-//       <Switch>
-//         <Route path="/history" component={HistoryContainer} />
-//         {!vk_id ? (
-//           <Redirect exact to="/" from="/budget-manager" />
-//         ) : (
-//           <Route
-//             exact
-//             path="/budget-manager"
-//             component={ManagerContainer}
-//           />
-//         )}
-
-//         <Route path="/profile" component={ProfileContainer} />
-//         <Route path="/" component={EntranceContainer} />
-//       </Switch>
-//       {vk_id && <BottomBar />}
-//     </Panel>
-//     <Panel id="test">Just for test</Panel>
-//   </View>
-// </>

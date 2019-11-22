@@ -15,7 +15,11 @@ import {
   makeProfileOperation
 } from "../../actions";
 
-export const SettingsPage = () => {
+type PROPS = {
+  openAlert: Function
+};
+
+export const SettingsPage = ({ openAlert }: PROPS) => {
   const body = document.getElementsByTagName("body")[0];
   const switchCustom = useRef();
   const switchHistory = useRef();
@@ -132,7 +136,7 @@ export const SettingsPage = () => {
           <Button
             size="xl"
             level="destructive"
-            onClick={() => dispatch(toggleModal("history_delete_all"))}
+            onClick={() => openAlert("history_delete_all")}
           >
             Очисить историю
           </Button>
@@ -143,7 +147,7 @@ export const SettingsPage = () => {
           <Button
             size="xl"
             level="destructive"
-            onClick={() => dispatch(toggleModal("profile_delete"))}
+            onClick={() => openAlert("profile_delete")}
           >
             Удалить профиль
           </Button>

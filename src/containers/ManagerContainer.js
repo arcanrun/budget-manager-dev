@@ -37,19 +37,17 @@ const mapStateToProps = state => ({
   themeVkClient: state.user.themeVkClient
 });
 
-export const ManagerContainer = withRouter(
-  connect(mapStateToProps, {
-    onClickToggleModal: toggleModal,
-    addWholeBudget,
-    addPayDay,
-    getWholeBudget,
-    getPayDay,
-    calcTempCosts,
-    getAllCosts,
-    makeProfileOperation,
-    logIn,
-    calcBudget,
-    stopGuide,
-    tutorialChangeState
-  })(Manager)
-);
+export const ManagerContainer = connect(mapStateToProps, {
+  onClickToggleModal: toggleModal,
+  addWholeBudget,
+  addPayDay,
+  getWholeBudget,
+  getPayDay,
+  calcTempCosts,
+  getAllCosts,
+  makeProfileOperation,
+  logIn,
+  calcBudget,
+  stopGuide,
+  tutorialChangeState
+})(Manager);
