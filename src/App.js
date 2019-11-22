@@ -16,12 +16,7 @@ import Icon24User from "@vkontakte/icons/dist/24/user";
 import Icon24Recent from "@vkontakte/icons/dist/24/recent";
 import Icon24Settings from "@vkontakte/icons/dist/24/settings";
 
-import {
-  Overlay,
-  SettingsPage,
-  ModalSettings,
-  AlertSettings
-} from "./components";
+import { Overlay, SettingsPage, PanelMonthPicker } from "./components";
 import {
   ManagerContainer,
   HistoryContainer,
@@ -48,10 +43,15 @@ type PROPS = {
 
 type STATE = {
   activeStory: ?string,
-  popupAlert: ?React.Node
+  popupAlert: ?React.Node,
+  settingsPanels: string
 };
 export class App extends React.Component<PROPS, STATE> {
-  state = { activeStory: "manager", popupAlert: null };
+  state = {
+    activeStory: "manager",
+    popupAlert: null,
+    settingsPanels: "main_panel"
+  };
 
   componentDidMount() {
     this.props.logIn(this.props.params);
@@ -96,6 +96,11 @@ export class App extends React.Component<PROPS, STATE> {
     }
   }
 
+  deleteProfile = () => {
+    this.props.makeProfileOperation("delete");
+    this.props.history.push("/budget-manager");
+  };
+
   openAlert = (alertType: string) => {
     const deleteProfileAlert = (
       <Alert
@@ -105,7 +110,7 @@ export class App extends React.Component<PROPS, STATE> {
             title: "Удалить профиль",
             autoclose: true,
             style: "destructive",
-            action: () => this.props.makeProfileOperation("delete")
+            action: this.deleteProfile
           },
           {
             title: "Отмена",
@@ -153,6 +158,10 @@ export class App extends React.Component<PROPS, STATE> {
 
   colsoePopout = () => {
     this.setState({ popupAlert: null });
+  };
+
+  changePanelSetting = panel => {
+    this.setState({ settingsPanels: panel });
   };
 
   shouldComponentUpdate(nextProps: Object, nextState: Object) {
@@ -278,14 +287,19 @@ export class App extends React.Component<PROPS, STATE> {
     );
     const settingsView = (
       <View
-        activePanel="main_panel"
+        activePanel={this.state.settingsPanels}
         id="settings"
         popout={this.state.popupAlert}
-        modal={<ModalSettings />}
       >
         <Panel id="main_panel">
           <PanelHeader>Настройки</PanelHeader>
-          <SettingsPage openAlert={this.openAlert} />
+          <SettingsPage
+            openAlert={this.openAlert}
+            changePanelSetting={this.changePanelSetting}
+          />
+        </Panel>
+        <Panel id="month_picker">
+          <PanelMonthPicker goTo={this.changePanelSetting} />
         </Panel>
       </View>
     );

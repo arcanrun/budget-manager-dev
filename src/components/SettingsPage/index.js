@@ -16,10 +16,11 @@ import {
 } from "../../actions";
 
 type PROPS = {
-  openAlert: Function
+  openAlert: Function,
+  changePanelSetting: Function
 };
 
-export const SettingsPage = ({ openAlert }: PROPS) => {
+export const SettingsPage = ({ openAlert, changePanelSetting }: PROPS) => {
   const body = document.getElementsByTagName("body")[0];
   const switchCustom = useRef();
   const switchHistory = useRef();
@@ -128,7 +129,7 @@ export const SettingsPage = ({ openAlert }: PROPS) => {
             <Button
               size="xl"
               level="secondary"
-              onClick={() => dispatch(toggleModal("month_picker"))}
+              onClick={() => changePanelSetting("month_picker")}
             >
               Очисить историю за месяц
             </Button>
