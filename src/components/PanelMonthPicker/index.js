@@ -58,10 +58,17 @@ export const PanelMonthPicker = ({ goTo }: PROPS) => {
       onScrollChange={onScrollChange}
     />
   );
+
+  const submit = (
+    <Button size="xl" level={"destructive"}>
+      Очистить историю!
+    </Button>
+  );
   return (
     <>
       {header}
       {datePicker}
+      {submit}
     </>
   );
 };

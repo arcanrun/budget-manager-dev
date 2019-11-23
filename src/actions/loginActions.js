@@ -47,8 +47,12 @@ export const logIn = (params: string) => {
     connect.send("VKWebAppInit", {});
     old.send("VKWebAppUpdateConfig", {});
     old.subscribe(e => {
-      if (e.detail.data.scheme) {
-        vkRes.theme = e.detail.data.scheme;
+      let reffernceToVkres = vkRes.theme;
+      try {
+        reffernceToVkres = e.detail.data.scheme;
+      } catch (error) {
+        console.warn(error);
+        reffernceToVkres = "client_light";
       }
     });
 
