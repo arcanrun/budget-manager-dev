@@ -32,6 +32,7 @@ import { Modal } from "./Modal";
 import { ModalHistory } from "./ModalHistory";
 import { PanelMonthPicker } from "./PanelMonthPicker";
 import { SettingsPage } from "./SettingsPage";
+import { SettingsView } from "./SettingsView";
 
 export {
   Header,
@@ -66,5 +67,6 @@ export {
   Modal,
   ModalHistory,
   SettingsPage,
-  PanelMonthPicker
+  PanelMonthPicker,
+  SettingsView
 };

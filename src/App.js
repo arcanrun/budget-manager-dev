@@ -150,7 +150,7 @@ export class App extends React.Component<PROPS, STATE> {
 
   changePanelSetting = (panel: string) => {
     this.setState({ settingsPanels: panel });
-    console.log("000000000000000", this.props.history);
+    this.setState({ popupAlert: null });
     if (panel.includes("main")) {
       this.props.history.goBack();
     } else {
@@ -173,6 +173,8 @@ export class App extends React.Component<PROPS, STATE> {
     if (nextState.activeStory !== window.location.pathname) {
       this.props.hideModal();
       this.setState({ activeStory: window.location.pathname });
+      this.setState({ popupAlert: null });
+
       return false;
     }
 
@@ -205,8 +207,6 @@ export class App extends React.Component<PROPS, STATE> {
     if (window.location.pathname.includes("settings_month_picker_panel")) {
       panel = "month_picker_panel";
     }
-
-    console.log("!!!!!!!!!!", panel, page, window.location.pathname);
 
     const { typeModal, hideModal, vk_id, isFetching, isTutorDone } = this.props;
 
