@@ -18,20 +18,24 @@ import DatePicker from "rmc-date-picker";
 
 import "./style.css";
 import style from "./ModalSettings.module.css";
-import { hideModal } from "../../actions";
+import { Card } from "../index";
 
 type PROPS = {
-  goTo: Function
+  goTo: Function,
+  openAlert: Function
 };
 
-export const PanelMonthPicker = ({ goTo }: PROPS) => {
+export const PanelMonthPicker = ({ goTo, openAlert }: PROPS) => {
+  const [pickedDate, setPickedDate] = useState(new Date());
   const dispatch = useDispatch();
   const typeModal = useSelector(state => state.modal.typeModal);
   const payload = useSelector(state => state.modal.payload);
-  const onScrollChange = (values, index) => {
-    console.log("onScrollChange", values, index);
-  };
   const osname = platform();
+
+  const onScrollChange = (values, index) => {
+    setPickedDate(values);
+  };
+
   const header = (
     <PanelHeader
       addon={
@@ -50,7 +54,7 @@ export const PanelMonthPicker = ({ goTo }: PROPS) => {
     <DatePicker
       rootNativeProps={{ "data-xx": "yy" }}
       mode={"month"}
-      // locale={props.locale}
+      defaultDate={pickedDate}
       maxDate={new Date(2030, 1, 1, 23, 59, 59)}
       minDate={new Date(2000, 1, 1, 0, 0, 0)}
       // onDateChange={this.onDateChange}
@@ -60,15 +64,21 @@ export const PanelMonthPicker = ({ goTo }: PROPS) => {
   );
 
   const submit = (
-    <Button size="xl" level={"destructive"}>
-      Очистить историю!
+    <Button
+      size="xl"
+      level={"destructive"}
+      onClick={() => openAlert("history_delete_month", pickedDate)}
+    >
+      Очистить историю
     </Button>
   );
   return (
-    <>
-      {header}
-      {datePicker}
-      {submit}
-    </>
+    <div className={style.container}>
+      <Card>
+        {header}
+        {datePicker}
+        <div className={style.footer}>{submit}</div>
+      </Card>
+    </div>
   );
 };

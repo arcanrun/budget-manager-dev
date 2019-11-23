@@ -62,7 +62,7 @@ export class App extends React.Component<PROPS, STATE> {
     this.props.history.push("/budget-manager");
   };
 
-  openAlert = (alertType: string) => {
+  openAlert = (alertType: string, payload?: any) => {
     const deleteProfileAlert = (
       <Alert
         actionsLayout="vertical"
@@ -109,11 +109,38 @@ export class App extends React.Component<PROPS, STATE> {
       </Alert>
     );
 
+    const clearHistoryMonthAlert = (
+      <Alert
+        actionsLayout="vertical"
+        actions={[
+          {
+            title: "Очистить историю",
+            autoclose: true,
+            style: "destructive",
+            action: () =>
+              this.props.makeProfileOperation("history_delete_month", payload)
+          },
+          {
+            title: "Отмена",
+            autoclose: true,
+            style: "cancel"
+          }
+        ]}
+        onClose={this.colsoePopout}
+      >
+        <h2>Подтвердите действие</h2>
+        <p>Вы уверены, что хотите очистить историю за указанный месяц?</p>
+      </Alert>
+    );
+
     if (alertType === "profile_delete") {
       this.setState({ popupAlert: deleteProfileAlert });
     }
     if (alertType === "history_delete_all") {
       this.setState({ popupAlert: clearHistoryAlert });
+    }
+    if (alertType === "history_delete_month") {
+      this.setState({ popupAlert: clearHistoryMonthAlert });
     }
   };
 
@@ -271,7 +298,10 @@ export class App extends React.Component<PROPS, STATE> {
           />
         </Panel>
         <Panel id="month_picker_panel">
-          <PanelMonthPicker goTo={this.changePanelSetting} />
+          <PanelMonthPicker
+            goTo={this.changePanelSetting}
+            openAlert={this.openAlert}
+          />
         </Panel>
       </View>
     );

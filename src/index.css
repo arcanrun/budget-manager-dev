@@ -50,6 +50,13 @@ code {
   /*Month picker*/
   --color_year: #110261;
   --color_month: #f72d6b;
+
+  --gradient_spining_wheel_bg: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.95),
+      rgba(255, 255, 255, 0.6)
+    ),
+    linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.6));
 }
 
 body[scheme="client_dark"] {
@@ -68,4 +75,11 @@ body[scheme="client_dark"] {
   /*Month picker*/
   --color_year: #9aa2b0;
   --color_month: #9aa2b0;
+
+  --gradient_spining_wheel_bg: linear-gradient(
+      to bottom,
+      rgba(24, 26, 25, 0.95),
+      rgba(24, 26, 25, 0.6)
+    ),
+    linear-gradient(to top, rgba(24, 26, 25, 0.95), rgba(24, 26, 25, 0.6));
 }

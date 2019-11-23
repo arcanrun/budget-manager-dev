@@ -30,7 +30,7 @@ import { LineChart } from "./LineChart";
 import { ShortenNumber } from "./ShortenNumber";
 import { Modal } from "./Modal";
 import { ModalHistory } from "./ModalHistory";
-import { PanelMonthPicker } from "./PanelMobthPicker";
+import { PanelMonthPicker } from "./PanelMonthPicker";
 import { SettingsPage } from "./SettingsPage";
 
 export {

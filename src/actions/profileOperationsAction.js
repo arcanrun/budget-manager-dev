@@ -29,14 +29,15 @@ export const failuretProfileOperation = (message: string) => ({
   }
 });
 
-export const makeProfileOperation = (operationType: string) => {
+export const makeProfileOperation = (operationType: string, payload?: any) => {
   return (dispatch: Function) => {
     dispatch(requestProfileOperation(operationType));
     fetch(API.PROFILE_MANAGE, {
       method: "POST",
       body: JSON.stringify({
         params: window.vkSign,
-        operationType
+        operationType,
+        payload
       })
     })
       .then(res => res.json())
