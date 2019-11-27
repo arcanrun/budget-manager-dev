@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/money-bag-2.2cfec6c1.svg"
   },
   {
-    "revision": "c1e54d1cdacd7b3e49d9",
+    "revision": "62135bfa9a78dd33deb4",
     "url": "/budget-manager-dev/static/css/main.d3214046.chunk.css"
   },
   {
@@ -28,16 +28,16 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/cross-white.9ca6ab3b.svg"
   },
   {
+    "revision": "0ebebd45a566793c2444d01bcfcff373",
+    "url": "/budget-manager-dev/static/media/minus.0ebebd45.svg"
+  },
+  {
     "revision": "38abd07a31646eacd551f3715421da7f",
     "url": "/budget-manager-dev/static/media/plus.38abd07a.svg"
   },
   {
     "revision": "8dab467d1c9d8665eab577e474c72de2",
     "url": "/budget-manager-dev/static/media/transfer_white.8dab467d.svg"
-  },
-  {
-    "revision": "0ebebd45a566793c2444d01bcfcff373",
-    "url": "/budget-manager-dev/static/media/minus.0ebebd45.svg"
   },
   {
     "revision": "f5f2566b93e89391da4db79462b8078b",
@@ -104,8 +104,8 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/money-bag.773dcb53.svg"
   },
   {
-    "revision": "c1e54d1cdacd7b3e49d9",
-    "url": "/budget-manager-dev/static/js/main.a77966fd.chunk.js"
+    "revision": "62135bfa9a78dd33deb4",
+    "url": "/budget-manager-dev/static/js/main.8a8c58a2.chunk.js"
   },
   {
     "revision": "d73f20accac5c2b9f62c824b8aca40c0",
@@ -204,7 +204,7 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/css/2.98ba7730.chunk.css"
   },
   {
-    "revision": "9e086f17ebf2a825d18638858a05abcd",
+    "revision": "694f03a1f45765ce951b18785c396f8b",
     "url": "/budget-manager-dev/index.html"
   }
 ];
