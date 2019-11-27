@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/money-bag-2.2cfec6c1.svg"
   },
   {
-    "revision": "09e9f30f6043d089c20f",
-    "url": "/budget-manager-dev/static/css/main.22a4091b.chunk.css"
+    "revision": "71c47e3f31de2c59f6ff",
+    "url": "/budget-manager-dev/static/css/main.d3214046.chunk.css"
   },
   {
     "revision": "094d6f4077ec791109e4",
@@ -16,8 +16,8 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/lightbulb.c81046f0.svg"
   },
   {
-    "revision": "3cad6138853280f7fe7d",
-    "url": "/budget-manager-dev/static/js/2.03d3eed8.chunk.js"
+    "revision": "4211f2aad2f3e32b9522",
+    "url": "/budget-manager-dev/static/js/2.0e04b751.chunk.js"
   },
   {
     "revision": "210aad6494b434a0c18f0fae8367c21c",
@@ -84,12 +84,12 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/fa-regular-400.7b9568e6.svg"
   },
   {
-    "revision": "8e4a6dcc692b3887f9f542cd6894d6d4",
-    "url": "/budget-manager-dev/static/media/fa-solid-900.8e4a6dcc.eot"
-  },
-  {
     "revision": "0bff33a5fd7ec390235476b4859747a0",
     "url": "/budget-manager-dev/static/media/fa-solid-900.0bff33a5.ttf"
+  },
+  {
+    "revision": "8e4a6dcc692b3887f9f542cd6894d6d4",
+    "url": "/budget-manager-dev/static/media/fa-solid-900.8e4a6dcc.eot"
   },
   {
     "revision": "a9c4bb7348f42626454c988dbde1d0a0",
@@ -104,8 +104,8 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/money-bag.773dcb53.svg"
   },
   {
-    "revision": "09e9f30f6043d089c20f",
-    "url": "/budget-manager-dev/static/js/main.83901662.chunk.js"
+    "revision": "71c47e3f31de2c59f6ff",
+    "url": "/budget-manager-dev/static/js/main.c3749211.chunk.js"
   },
   {
     "revision": "d73f20accac5c2b9f62c824b8aca40c0",
@@ -200,11 +200,11 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/eye.df8f4a50.svg"
   },
   {
-    "revision": "3cad6138853280f7fe7d",
+    "revision": "4211f2aad2f3e32b9522",
     "url": "/budget-manager-dev/static/css/2.98ba7730.chunk.css"
   },
   {
-    "revision": "164bfef3b757c165f3ee4867f2d2d06e",
+    "revision": "a4ce5271eae357facb54b0c78b73f5d8",
     "url": "/budget-manager-dev/index.html"
   }
 ];
