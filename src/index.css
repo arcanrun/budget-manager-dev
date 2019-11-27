@@ -57,6 +57,9 @@ code {
       rgba(255, 255, 255, 0.6)
     ),
     linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.6));
+
+  /* FeedBack */
+  --color_feedback: #4a76a8;
 }
 
 body[scheme="client_dark"] {
@@ -82,4 +85,7 @@ body[scheme="client_dark"] {
       rgba(24, 26, 25, 0.6)
     ),
     linear-gradient(to top, rgba(24, 26, 25, 0.95), rgba(24, 26, 25, 0.6));
+
+  /* FeedBack */
+  --color_feedback: #9aa2b0;
 }

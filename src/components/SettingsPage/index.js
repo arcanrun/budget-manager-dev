@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 import { Cell, Switch, List, Button, Div } from "@vkontakte/vkui";
 import connect from "@vkontakte/vkui-connect-promise";
+import Icon36LogoVk from "@vkontakte/icons/dist/36/logo_vk";
+import Icon24Chevron from "@vkontakte/icons/dist/24/chevron";
 
 import style from "./SettingsPage.module.css";
 import { Card } from "../index";
@@ -70,6 +72,31 @@ export const SettingsPage = ({ openAlert, changePanelSetting }: PROPS) => {
   const toggleTutorial = () => {
     dispatch(tutorialChangeState(!isTutorialDone));
   };
+
+  const feedBackCard = (
+    <Card>
+      <a
+        href="https://vk.com/public184093326"
+        target="_blank"
+        style={{ textDecoration: "none" }}
+      >
+        <div className={style.feedBack}>
+          <div>
+            <Icon36LogoVk />
+          </div>
+          <div className={style.textBlock}>
+            <div className={style.title}>Группа 50/30/20</div>
+            <div className={style.underTitle}>
+              Новости, Ваши отзывы и пожелания
+            </div>
+          </div>
+          <div>
+            <Icon24Chevron />
+          </div>
+        </div>
+      </a>
+    </Card>
+  );
 
   return (
     <CSSTransition in={isIn} timeout={300} classNames={"page"}>
@@ -153,6 +180,7 @@ export const SettingsPage = ({ openAlert, changePanelSetting }: PROPS) => {
             Удалить профиль
           </Button>
         </Card>
+        {feedBackCard}
       </div>
     </CSSTransition>
   );
