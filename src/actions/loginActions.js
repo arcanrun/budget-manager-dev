@@ -11,17 +11,44 @@ const requestLogIn = () => ({
     isFetching: true
   }
 });
-export const successLogIn = (res: Object, vkRes: Object) => ({
-  type: LOGIN_SUCCESS,
-  payload: {
-    ...res,
-    name: vkRes.name,
-    sure_name: vkRes.sure_name,
-    avatar: vkRes.avatar,
-    params: vkRes.params,
-    theme: vkRes.theme
+export const successLogIn = (res: Object, vkRes: Object) => {
+  if (res.is_vk_theme && vkRes.theme === "client_light") {
+    connect.send("VKWebAppSetViewSettings", {
+      status_bar_style: "light",
+      action_bar_color: "#110261"
+    });
   }
-});
+  if (res.is_vk_theme && vkRes.theme === "client_black") {
+    connect.send("VKWebAppSetViewSettings", {
+      status_bar_style: "light",
+      action_bar_color: "#2C2D2F"
+    });
+  }
+  if (!res.is_vk_theme && !res.is_costom_dark_theme) {
+    connect.send("VKWebAppSetViewSettings", {
+      status_bar_style: "light",
+      action_bar_color: "#110261"
+    });
+  }
+  if (!res.is_vk_theme && res.is_costom_dark_theme) {
+    connect.send("VKWebAppSetViewSettings", {
+      status_bar_style: "light",
+      action_bar_color: "#2C2D2F"
+    });
+  }
+
+  return {
+    type: LOGIN_SUCCESS,
+    payload: {
+      ...res,
+      name: vkRes.name,
+      sure_name: vkRes.sure_name,
+      avatar: vkRes.avatar,
+      params: vkRes.params,
+      theme: vkRes.theme
+    }
+  };
+};
 export const failureLogIn = (msg: string) => ({
   type: LOGIN_FAILURE,
   error: {
@@ -34,10 +61,7 @@ export const failureLogIn = (msg: string) => ({
 export const logIn = (params: string) => {
   return (dispatch: Function) => {
     window.vkSign = window.location.search;
-    connect.send("VKWebAppSetViewSettings", {
-      status_bar_style: "light",
-      action_bar_color: "#110261"
-    });
+
     dispatch(requestLogIn());
     let vkRes = {
       name: undefined,

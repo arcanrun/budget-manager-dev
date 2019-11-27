@@ -58,7 +58,7 @@ export const SettingsPage = ({ openAlert, changePanelSetting }: PROPS) => {
   });
 
   const toggleVkTheme = () => {
-    dispatch(toggleVkClientTheme(!isThemeVk));
+    dispatch(toggleVkClientTheme(!isThemeVk, themeVkClient));
   };
   const toggleFullHistory = () => {
     dispatch(makeProfileOperation("toggle_full_history"));

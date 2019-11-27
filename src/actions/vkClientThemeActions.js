@@ -16,18 +16,26 @@ const toggleVkThemeRequest = () => ({
   }
 });
 
-const toggleVkThemeSuccess = res => {
-  if (res) {
+const toggleVkThemeSuccess = (res: Object, themeVkClient: string) => {
+  if (res.is_vk_theme && themeVkClient === "client_dark") {
     connect.send("VKWebAppSetViewSettings", {
       status_bar_style: "light",
       action_bar_color: "#2C2D2F"
     });
-  } else {
+  }
+  if (res.is_vk_theme && themeVkClient === "client_light") {
     connect.send("VKWebAppSetViewSettings", {
       status_bar_style: "light",
       action_bar_color: "#110261"
     });
   }
+  if (!res.is_vk_theme) {
+    connect.send("VKWebAppSetViewSettings", {
+      status_bar_style: "light",
+      action_bar_color: "#110261"
+    });
+  }
+
   return {
     type: TOGGLE_VK_CLIENT_SUCCESS,
     payload: res
@@ -42,7 +50,10 @@ const toggleVkThemeFailure = message => ({
   }
 });
 
-export const toggleVkClientTheme = (is_vk_theme: boolean) => {
+export const toggleVkClientTheme = (
+  is_vk_theme: boolean,
+  themeVkClient: string
+) => {
   return (dispatch: Function) => {
     dispatch(toggleVkThemeRequest());
     fetch(API.TOGGLE_VK_CLIENT_THEME, {
@@ -53,7 +64,7 @@ export const toggleVkClientTheme = (is_vk_theme: boolean) => {
       })
     })
       .then(res => res.json())
-      .then(res => dispatch(toggleVkThemeSuccess(res.PAYLOAD)))
+      .then(res => dispatch(toggleVkThemeSuccess(res.PAYLOAD, themeVkClient)))
       .catch(err => dispatch(toggleVkThemeFailure(err)));
   };
 };
