@@ -50,18 +50,6 @@ export const PanelMonthPicker = ({ goTo, openAlert }: PROPS) => {
       Дата
     </PanelHeader>
   );
-  const datePicker = (
-    <DatePicker
-      rootNativeProps={{ "data-xx": "yy" }}
-      mode={"month"}
-      defaultDate={pickedDate}
-      maxDate={new Date(2030, 1, 1, 23, 59, 59)}
-      minDate={new Date(2000, 1, 1, 0, 0, 0)}
-      // onDateChange={this.onDateChange}
-      // onValueChange={this.onValueChange}
-      onScrollChange={onScrollChange}
-    />
-  );
 
   const submit = (
     <Button
@@ -73,12 +61,24 @@ export const PanelMonthPicker = ({ goTo, openAlert }: PROPS) => {
     </Button>
   );
   return (
-    <div className={style.container}>
-      <Card>
-        {header}
-        {datePicker}
-        <div className={style.footer}>{submit}</div>
-      </Card>
-    </div>
+    <>
+      {header}
+      <div className={style.container}>
+        <Card>
+          <DatePicker
+            rootNativeProps={{ "data-xx": "yy" }}
+            mode={"month"}
+            defaultDate={pickedDate}
+            maxDate={new Date(2030, 1, 1, 23, 59, 59)}
+            minDate={new Date(2000, 1, 1, 0, 0, 0)}
+            // onDateChange={this.onDateChange}
+            onValueChange={(values, index) => console.log(index)}
+            // onScrollChange={() => console.log()}
+            onScrollChange={(values, index) => setPickedDate(values)}
+          />
+          <div className={style.footer}>{submit}</div>
+        </Card>
+      </div>
+    </>
   );
 };
