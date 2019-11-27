@@ -1,4 +1,6 @@
 //@flow
+import connect from "@vkontakte/vkui-connect-promise";
+
 import {
   TOGGLE_CUSTOM_DARK_THEME_FAILED,
   TOGGLE_CUSTOM_DARK_THEME_REQUEST,
@@ -14,10 +16,24 @@ const toggleCustomDarkThemeRequest = () => ({
   }
 });
 
-const toggleCustomDarkThemeSuccess = res => ({
-  type: TOGGLE_CUSTOM_DARK_THEME_SUCCESS,
-  payload: res
-});
+const toggleCustomDarkThemeSuccess = res => {
+  if (res.is_costom_dark_theme) {
+    connect.send("VKWebAppSetViewSettings", {
+      status_bar_style: "light",
+      action_bar_color: "#2C2D2F"
+    });
+  } else {
+    connect.send("VKWebAppSetViewSettings", {
+      status_bar_style: "light",
+      action_bar_color: "#110261"
+    });
+  }
+
+  return {
+    type: TOGGLE_CUSTOM_DARK_THEME_SUCCESS,
+    payload: res
+  };
+};
 
 const toggleCustomDarkThemeFailure = message => ({
   type: TOGGLE_CUSTOM_DARK_THEME_FAILED,

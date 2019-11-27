@@ -1,4 +1,6 @@
 //@flow
+import connect from "@vkontakte/vkui-connect-promise";
+
 import {
   TOGGLE_VK_CLIENT_SUCCESS,
   TOGGLE_VK_CLIENT_REQUEST,
@@ -14,10 +16,23 @@ const toggleVkThemeRequest = () => ({
   }
 });
 
-const toggleVkThemeSuccess = res => ({
-  type: TOGGLE_VK_CLIENT_SUCCESS,
-  payload: res
-});
+const toggleVkThemeSuccess = res => {
+  if (res) {
+    connect.send("VKWebAppSetViewSettings", {
+      status_bar_style: "light",
+      action_bar_color: "#2C2D2F"
+    });
+  } else {
+    connect.send("VKWebAppSetViewSettings", {
+      status_bar_style: "light",
+      action_bar_color: "#110261"
+    });
+  }
+  return {
+    type: TOGGLE_VK_CLIENT_SUCCESS,
+    payload: res
+  };
+};
 
 const toggleVkThemeFailure = message => ({
   type: TOGGLE_VK_CLIENT_FAILED,

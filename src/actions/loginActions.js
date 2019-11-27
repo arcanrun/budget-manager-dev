@@ -34,6 +34,10 @@ export const failureLogIn = (msg: string) => ({
 export const logIn = (params: string) => {
   return (dispatch: Function) => {
     window.vkSign = window.location.search;
+    connect.send("VKWebAppSetViewSettings", {
+      status_bar_style: "light",
+      action_bar_color: "#110261"
+    });
     dispatch(requestLogIn());
     let vkRes = {
       name: undefined,
