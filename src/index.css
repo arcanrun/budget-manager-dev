@@ -42,6 +42,7 @@ code {
   --tabbar_active_icon: #f72d6b !important;
   --button_commerce_background: #0fde8c !important;
   --destructive: #f72d6b !important;
+  --button_primary_background: #110261 !important;
 
   /*line chart*/
   --grid-color: rgba(0, 0, 0, 0.2);
