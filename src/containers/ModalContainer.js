@@ -14,14 +14,16 @@ const mapStateToProps = state => ({
   typeModal: state.modal.typeModal,
   daysToPayday: state.user.calc.daysToPayday,
   vk_id: state.user.vk_id,
-  common: state.user.calc.common.value,
-  fun: state.user.calc.fun.value,
-  invest: state.user.calc.invest.value,
+  common: state.user.calc.common.tempMonth,
+  fun: state.user.calc.fun.tempMonth,
+  invest: state.user.calc.invest.tempMonth,
   budget: state.user.calc.budget,
   params: state.user.params
 });
 
-export const ModalContainer = connect(
-  mapStateToProps,
-  { hideModal, calcBudget, calcTempCosts, addWholeBudget }
-)(Modal);
+export const ModalContainer = connect(mapStateToProps, {
+  hideModal,
+  calcBudget,
+  calcTempCosts,
+  addWholeBudget
+})(Modal);
