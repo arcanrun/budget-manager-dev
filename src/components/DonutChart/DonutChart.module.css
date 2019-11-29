@@ -10,9 +10,20 @@
   position: absolute;
 }
 
+.svgCircleOutter {
+}
+
 .circle {
   /* fill: #110261; */
   stroke: #0fde8c;
+  stroke-width: 1.3px;
+  transition: 0.2s;
+  will-change: transform, opacity;
+}
+.circleOutter {
+  /* fill: #110261; */
+  stroke-linecap: round;
+  stroke: #2405c6;
   stroke-width: 1.3px;
   transition: 0.2s;
   will-change: transform, opacity;
@@ -52,8 +63,14 @@
 }
 
 .donut {
-  transform: rotate(-90deg);
+  transform: rotate(-90deg) scale(0.9);
   border-radius: 100%;
+}
+.donutOuter {
+  transform: rotate(-90deg) scale(0.97);
+  border-radius: 100%;
+  position: absolute;
+  left: 0;
 }
 .donutContainer {
   max-width: 250px;

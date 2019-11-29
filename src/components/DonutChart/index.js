@@ -29,6 +29,13 @@ const DonutChart = ({
     tempValueInPercents = (100 * temp) / maxToday;
   }
 
+  let tempMonthInPercents = "";
+  if (tempMonth <= 0) {
+    tempMonthInPercents = 0;
+  } else {
+    tempMonthInPercents = (100 * tempMonth) / cost;
+  }
+
   return (
     <div className={[style.donutContainer, "fifth-step"].join(" ")}>
       <div className={style.infoDonut}>
@@ -89,8 +96,8 @@ const DonutChart = ({
         viewBox="0 0 35 35"
         className={
           tempValueInPercents <= 20
-            ? [style.donut, style.pulseAnimation].join(" ")
-            : style.donut
+            ? [style.donut, style.pulseAnimation, style.svgCircle].join(" ")
+            : [style.donut, style.svgCircle].join(" ")
         }
       >
         <circle
@@ -100,6 +107,23 @@ const DonutChart = ({
           className={style.circle}
           strokeDasharray={`${tempValueInPercents}, 100`}
           fill={tempValueInPercents <= 20 ? "#F72D6B" : color}
+        />
+      </svg>
+      <svg
+        viewBox="0 0 35 35"
+        className={
+          tempValueInPercents <= 20
+            ? [style.donutOuter, style.pulseAnimation].join(" ")
+            : style.donutOuter
+        }
+      >
+        <circle
+          r="15.91549430918952"
+          cx="50%"
+          cy="50%"
+          className={style.circleOutter}
+          strokeDasharray={`${tempMonthInPercents}, 100`}
+          fillOpacity="0"
         />
       </svg>
     </div>
