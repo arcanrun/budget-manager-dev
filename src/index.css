@@ -60,6 +60,11 @@ code {
 
   /* FeedBack */
   --color_feedback: #4a76a8;
+
+  /* Calendar*/
+  --color_disabled_days: #dce0e0;
+  --today_btn_bg: rgba(0, 57, 115, 0.1);
+  --today_btn_color: #45678f;
 }
 
 body[scheme="client_dark"] {
@@ -88,4 +93,8 @@ body[scheme="client_dark"] {
 
   /* FeedBack */
   --color_feedback: #9aa2b0;
+  /* Calendar*/
+  --color_disabled_days: #000000;
+  --today_btn_bg: #454647;
+  --today_btn_color: #e1e3e6;
 }
