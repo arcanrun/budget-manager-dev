@@ -10,10 +10,18 @@ type PROPS = {
   title: string,
   cost: number,
   temp: number,
-  maxToday: number
+  maxToday: number,
+  tempMonth: number
 };
 
-const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
+const DonutChart = ({
+  color,
+  title,
+  cost,
+  temp,
+  maxToday,
+  tempMonth
+}: PROPS) => {
   let tempValueInPercents = "";
   if (temp <= 0) {
     tempValueInPercents = 0;
@@ -26,6 +34,18 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
       <div className={style.infoDonut}>
         <div className={style.title}>{title}</div>
         <div className={style.cost}>
+          {toPrettyNumber(
+            tempMonth,
+            true,
+            100000000,
+            false,
+            "",
+            "",
+            "0.00a",
+            "0.0",
+            "14px"
+          )}
+          /
           {toPrettyNumber(
             cost,
             true,

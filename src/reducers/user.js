@@ -85,6 +85,7 @@ type UserState = {
     toDayFormated: ?string,
     common: {
       value: ?number,
+      tempMonth: ?number,
       maxToday: {
         value: ?number,
         temp: ?number
@@ -92,6 +93,7 @@ type UserState = {
     },
     fun: {
       value: ?number,
+      tempMonth: ?number,
       maxToday: {
         value: ?number,
         temp: ?number
@@ -99,6 +101,7 @@ type UserState = {
     },
     invest: {
       value: ?number,
+      tempMonth: ?number,
       maxToday: {
         value: ?number,
         temp: ?number
@@ -145,6 +148,7 @@ export const initialState: UserState = {
     error_message: undefined,
     common: {
       value: undefined,
+      tempMonth: undefined,
       maxToday: {
         value: undefined,
         temp: undefined
@@ -152,6 +156,7 @@ export const initialState: UserState = {
     },
     fun: {
       value: undefined,
+      tempMonth: undefined,
       maxToday: {
         value: undefined,
         temp: undefined
@@ -159,6 +164,7 @@ export const initialState: UserState = {
     },
     invest: {
       value: undefined,
+      tempMonth: undefined,
       maxToday: {
         value: undefined,
         temp: undefined
@@ -171,12 +177,14 @@ export const initialState: UserState = {
     error_message: undefined,
     costs: {
       total: 0,
+      tempMonth: 0,
       common: 0,
       fun: 0,
       invest: 0
     },
     income: {
       total: 0,
+      tempMonth: 0,
       common: 0,
       fun: 0,
       invest: 0
@@ -257,6 +265,7 @@ export function user(state: UserState = initialState, action: Object) {
           common: {
             ...state.calc.common,
             value: action.payload.payload.common.value,
+            tempMonth: action.payload.payload.common.tempMonth,
             maxToday: {
               ...state.calc.common.maxToday,
               value: action.payload.payload.common.maxToday,
@@ -266,6 +275,7 @@ export function user(state: UserState = initialState, action: Object) {
           fun: {
             ...state.calc.fun,
             value: action.payload.payload.fun.value,
+            tempMonth: action.payload.payload.fun.tempMonth,
             maxToday: {
               ...state.calc.fun.maxToday,
               value: action.payload.payload.fun.maxToday,
@@ -275,6 +285,7 @@ export function user(state: UserState = initialState, action: Object) {
           invest: {
             ...state.calc.invest,
             value: action.payload.payload.invest.value,
+            tempMonth: action.payload.payload.invest.tempMonth,
             maxToday: {
               ...state.calc.invest.maxToday,
               value: action.payload.payload.invest.maxToday,
@@ -301,6 +312,7 @@ export function user(state: UserState = initialState, action: Object) {
           common: {
             ...state.calc.common,
             value: action.payload.payload.common.value,
+            tempMonth: action.payload.payload.common.tempMonth,
             maxToday: {
               ...state.calc.common.maxToday,
               value: action.payload.payload.common.maxToday,
@@ -310,6 +322,7 @@ export function user(state: UserState = initialState, action: Object) {
           fun: {
             ...state.calc.fun,
             value: action.payload.payload.fun.value,
+            tempMonth: action.payload.payload.fun.tempMonth,
             maxToday: {
               ...state.calc.fun.maxToday,
               value: action.payload.payload.fun.maxToday,
@@ -319,6 +332,7 @@ export function user(state: UserState = initialState, action: Object) {
           invest: {
             ...state.calc.invest,
             value: action.payload.payload.invest.value,
+            tempMonth: action.payload.payload.invest.tempMonth,
             maxToday: {
               ...state.calc.invest.maxToday,
               value: action.payload.payload.invest.maxToday,

@@ -19,6 +19,7 @@ class PartBudget extends React.Component<PROPS, {}> {
     let temp = "";
     let maxTodayValue = "";
     let color = "";
+    let tempMonth = "";
     switch (typeModal) {
       case "common":
         title = "50";
@@ -26,6 +27,7 @@ class PartBudget extends React.Component<PROPS, {}> {
         maxTodayValue = costs.common.maxToday.value;
         temp = costs.common.maxToday.temp;
         color = "#3E2AAA";
+        tempMonth = costs.common.tempMonth;
         break;
       case "fun":
         title = "30";
@@ -33,6 +35,8 @@ class PartBudget extends React.Component<PROPS, {}> {
         maxTodayValue = costs.fun.maxToday.value;
         temp = costs.fun.maxToday.temp;
         color = "#FFB200";
+        tempMonth = costs.fun.tempMonth;
+
         break;
       case "invest":
         title = "20";
@@ -40,6 +44,8 @@ class PartBudget extends React.Component<PROPS, {}> {
         maxTodayValue = costs.invest.maxToday.value;
         temp = costs.invest.maxToday.temp;
         color = "#F95789";
+        tempMonth = costs.invest.tempMonth;
+
         break;
       default:
         title = "SOME ERROR";
@@ -47,9 +53,10 @@ class PartBudget extends React.Component<PROPS, {}> {
         maxTodayValue = 0;
         temp = 0;
         color = "#000000";
+        tempMonth = 0;
+
         break;
     }
-
     const plusBtn = (
       <button
         className={[style.button, style.buttonPlus].join(" ")}
@@ -103,6 +110,7 @@ class PartBudget extends React.Component<PROPS, {}> {
     );
     const chart = (
       <DonutChart
+        tempMonth={tempMonth}
         title={title}
         cost={costsValue}
         temp={+temp}
