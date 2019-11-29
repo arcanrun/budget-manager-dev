@@ -35,16 +35,53 @@ const DonutChart = ({
   } else {
     tempMonthInPercents = (100 * tempMonth) / cost;
   }
+  let circleOutter = "";
+  if (title === "50") {
+    circleOutter = (
+      <circle
+        r="15.91549430918952"
+        cx="50%"
+        cy="50%"
+        className={[style.circleOutter, style.circleOutterCommon].join(" ")}
+        strokeDasharray={`${tempMonthInPercents}, 100`}
+        fillOpacity="0"
+      />
+    );
+  }
+  if (title === "30") {
+    circleOutter = (
+      <circle
+        r="15.91549430918952"
+        cx="50%"
+        cy="50%"
+        className={[style.circleOutter, style.circleOutterFun].join(" ")}
+        strokeDasharray={`${tempMonthInPercents}, 100`}
+        fillOpacity="0"
+      />
+    );
+  }
+  if (title === "20") {
+    circleOutter = (
+      <circle
+        r="15.91549430918952"
+        cx="50%"
+        cy="50%"
+        className={[style.circleOutter, style.circleOutterInvest].join(" ")}
+        strokeDasharray={`${tempMonthInPercents}, 100`}
+        fillOpacity="0"
+      />
+    );
+  }
 
   return (
     <div className={[style.donutContainer, "fifth-step"].join(" ")}>
-      <div className={style.infoDonut}>
+      <div className={title === "30" ? style.infoDonutBlack : style.infoDonut}>
         <div className={style.title}>{title}</div>
         <div className={style.cost}>
           {toPrettyNumber(
             tempMonth,
             true,
-            100000000,
+            10000000,
             false,
             "",
             "",
@@ -56,7 +93,7 @@ const DonutChart = ({
           {toPrettyNumber(
             cost,
             true,
-            100000000,
+            10000000,
             false,
             "",
             "",
@@ -117,14 +154,7 @@ const DonutChart = ({
             : style.donutOuter
         }
       >
-        <circle
-          r="15.91549430918952"
-          cx="50%"
-          cy="50%"
-          className={style.circleOutter}
-          strokeDasharray={`${tempMonthInPercents}, 100`}
-          fillOpacity="0"
-        />
+        {circleOutter}
       </svg>
     </div>
   );

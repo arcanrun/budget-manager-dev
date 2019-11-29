@@ -26,7 +26,7 @@ class PartBudget extends React.Component<PROPS, {}> {
         costsValue = costs.common.value;
         maxTodayValue = costs.common.maxToday.value;
         temp = costs.common.maxToday.temp;
-        color = "#3E2AAA";
+        color = "#110261";
         tempMonth = costs.common.tempMonth;
         break;
       case "fun":
@@ -34,7 +34,7 @@ class PartBudget extends React.Component<PROPS, {}> {
         costsValue = costs.fun.value;
         maxTodayValue = costs.fun.maxToday.value;
         temp = costs.fun.maxToday.temp;
-        color = "#FFB200";
+        color = "#F2EC70";
         tempMonth = costs.fun.tempMonth;
 
         break;
