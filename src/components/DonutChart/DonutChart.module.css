@@ -23,9 +23,6 @@
   transform: scale(0.9);
 }
 
-.svgCircleOutter {
-}
-
 .circle {
   /* fill: #110261; */
   stroke: #0fde8c;
@@ -77,8 +74,7 @@
 .footer {
   font-weight: bold;
 }
-.footerTitle {
-}
+
 .footerCost {
   font-weight: bold;
   font-size: 2px;
@@ -104,17 +100,6 @@
   animation: pulse 1.5s infinite;
 }
 
-/* @keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(247, 45, 107, 1);
-  }
-  70% {
-    box-shadow: 0 0 0 40px rgba(247, 45, 107, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(247, 45, 107, 0);
-  }
-} */
 @keyframes pulse {
   0% {
     opacity: 1;
@@ -127,5 +112,21 @@
   100% {
     opacity: 1;
     transform: scale(1) rotate(-90deg);
+  }
+}
+
+.flashAnimation {
+  animation: flash 1.5s infinite;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
   }
 }

@@ -133,7 +133,7 @@ const DonutChart = ({
         viewBox="0 0 35 35"
         className={
           tempValueInPercents <= 20
-            ? [style.donut, style.pulseAnimation, style.svgCircle].join(" ")
+            ? [style.donut, style.flashAnimation, style.svgCircle].join(" ")
             : [style.donut, style.svgCircle].join(" ")
         }
       >
@@ -143,13 +143,13 @@ const DonutChart = ({
           cy="50%"
           className={style.circle}
           strokeDasharray={`${tempValueInPercents}, 100`}
-          fill={tempValueInPercents <= 20 ? "#F72D6B" : color}
+          fill={color}
         />
       </svg>
       <svg
         viewBox="0 0 35 35"
         className={
-          tempValueInPercents <= 20
+          tempMonthInPercents <= 20
             ? [style.donutOuter, style.pulseAnimation].join(" ")
             : style.donutOuter
         }
