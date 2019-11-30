@@ -24,8 +24,7 @@
   padding: 10px;
   color: #224b7a;
 }
-.chooser {
-}
+
 .counterBlock {
   display: flex;
   padding-left: 10px;
@@ -41,16 +40,16 @@
   transition: 0.2s;
   background-color: #0fde8c;
 }
-.btnOk:hover {
-  background-color: #0fde8b83;
+.btnOk:active {
+  opacity: 0.5;
 }
 .btnChanel {
   background: url("../../static/cross-white.svg") no-repeat;
   background-position: center;
   background-color: #f72d6b;
 }
-.btnChanel:hover {
-  background-color: #f72d6a71;
+.btnChanel:active {
+  opacity: 0.5;
 }
 
 .btn {
