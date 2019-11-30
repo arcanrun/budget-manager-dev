@@ -75,7 +75,7 @@ const DonutChart = ({
 
   return (
     <div className={[style.donutContainer, "fifth-step"].join(" ")}>
-      <div className={title === "30" ? style.infoDonutBlack : style.infoDonut}>
+      <div className={style.infoDonutBlack}>
         <div className={style.title}>{title}</div>
         <div className={style.cost}>
           {toPrettyNumber(
@@ -133,7 +133,9 @@ const DonutChart = ({
         viewBox="0 0 35 35"
         className={
           tempValueInPercents <= 20
-            ? [style.donut, style.flashAnimation, style.svgCircle].join(" ")
+            ? [style.donut, style.pulseAnimationInner, style.svgCircle].join(
+                " "
+              )
             : [style.donut, style.svgCircle].join(" ")
         }
       >
@@ -143,7 +145,7 @@ const DonutChart = ({
           cy="50%"
           className={style.circle}
           strokeDasharray={`${tempValueInPercents}, 100`}
-          fill={color}
+          fillOpacity="0"
         />
       </svg>
       <svg

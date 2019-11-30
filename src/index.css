@@ -66,6 +66,9 @@ code {
   --color_disabled_days: #dce0e0;
   --today_btn_bg: rgba(0, 57, 115, 0.1);
   --today_btn_color: #45678f;
+
+  /* Donut*/
+  --info_donut_color: #110261;
 }
 
 body[scheme="client_dark"] {
@@ -98,4 +101,7 @@ body[scheme="client_dark"] {
   --color_disabled_days: #000000;
   --today_btn_bg: #454647;
   --today_btn_color: #e1e3e6;
+
+  /* Donut*/
+  --info_donut_color: #9aa2b0;
 }
