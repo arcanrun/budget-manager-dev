@@ -148,7 +148,7 @@ class Entrance extends React.Component<PROPS, STATE> {
         <CSSTransition
           in={this.state.isBudgetShown}
           timeout={300}
-          classNames={"page"}
+          classNames={"zooming"}
           unmountOnExit
         >
           {enterBudget}
@@ -156,7 +156,7 @@ class Entrance extends React.Component<PROPS, STATE> {
         <CSSTransition
           in={this.state.isCalendarShown}
           timeout={300}
-          classNames={"page"}
+          classNames={"zooming"}
           unmountOnExit
         >
           {enterPayDay}

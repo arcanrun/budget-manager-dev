@@ -7,7 +7,6 @@ import { Card, Overlay } from "../index";
 import { WholeBudget, Calendar, PartBudget } from "../index";
 import style from "./Manager.module.css";
 import { msToDays } from "../Calendar/calendarHelper";
-import "./animations.css";
 import { stopGuide } from "../../actions";
 import { type } from "os";
 
