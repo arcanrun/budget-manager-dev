@@ -54,7 +54,8 @@ type PROPS = {
   handleNewPayDay: Function,
   payday: string,
   tempPayDay: ?string,
-  daysToPayday: ?string
+  daysToPayday: ?string,
+  isTutorialDone: ?boolean
 };
 
 type STATE = {
@@ -65,8 +66,15 @@ class Calendar extends React.Component<PROPS, STATE> {
     isCalendarVisible: false
   };
 
+  componentDidMount() {
+    if (!this.props.isTutorialDone) {
+      this.setState({ isCalendarVisible: true });
+    }
+  }
+
   toggleCalendar = () => {
     this.setState({ isCalendarVisible: !this.state.isCalendarVisible });
+    this.props.handleNewPayDay({ target: { dataset: { btnType: "chanel" } } });
   };
 
   handleToDayBtn = () => {
@@ -81,7 +89,8 @@ class Calendar extends React.Component<PROPS, STATE> {
       handleNewPayDay,
       payday,
       tempPayDay,
-      daysToPayday
+      daysToPayday,
+      isTutorialDone
     } = this.props;
 
     const paydayEmptyTitle = <div>Выберите дату получения зарплаты</div>;

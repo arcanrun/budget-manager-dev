@@ -268,6 +268,7 @@ class Manager extends React.Component<PROPS, STATE> {
           tempPayDay={tempPayDay}
           payday={payday}
           daysToPayday={daysToPayday}
+          isTutorialDone={is_tutorial_done}
         />
       </Card>
     );

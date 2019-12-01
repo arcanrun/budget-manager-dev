@@ -78,7 +78,7 @@
   padding: 10px;
 }
 .pickerWrapper {
-  transition: 0.2s;
+  transition: 0.3s ease-in-out;
   overflow: hidden;
   height: 380px;
 }
