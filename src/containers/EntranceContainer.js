@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 import * as connectVK from "@vkontakte/vkui-connect-promise";
 
 import { Entrance } from "../components/index";
-import { signUp } from "../actions";
+import { signUp, addWholeBudget } from "../actions";
 
 const mapStateToProps = (state: Object) => ({
   vk_id: state.user.vk_id,
@@ -15,10 +15,12 @@ const mapStateToProps = (state: Object) => ({
   params: state.user.params,
   isVkTheme: state.user.is_vk_theme,
   isCostomDarkTheme: state.user.is_costom_dark_theme,
-  themeVkClient: state.user.themeVkClient
+  themeVkClient: state.user.themeVkClient,
+  budget: state.user.calc.budget,
+  payDay: state.user.calc.pay_day
 });
 
 const EntranceContainer = withRouter(
-  connect(mapStateToProps, { signUp })(Entrance)
+  connect(mapStateToProps, { signUp, addWholeBudget })(Entrance)
 );
 export default EntranceContainer;

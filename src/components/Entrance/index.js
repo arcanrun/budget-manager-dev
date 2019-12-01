@@ -2,6 +2,8 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import Swiper from "react-id-swiper";
+import { Input, Button } from "@vkontakte/vkui";
+import { CSSTransition } from "react-transition-group";
 
 // import "swiper/dist/css/swiper.css";
 import style from "./Entrance.module.css";
@@ -20,18 +22,27 @@ type PROPS = {
   themeVkClient: string,
   isVkTheme: boolean,
   isCostomDarkTheme: boolean,
-  themeVkClient: string
+  themeVkClient: string,
+  budget: string,
+  addWholeBudget: Function,
+  payDay: string
 };
 
 type STATE = {
   screenHeight: ?number,
-  screenWidth: ?number
+  screenWidth: ?number,
+  isBudgetValue: ?boolean,
+  isBudgetShown: ?boolean,
+  isCalendarShown: ?boolean
 };
 
 class Entrance extends React.Component<PROPS, STATE> {
   state = {
     screenHeight: window.innerHeight,
-    screenWidth: window.innerWidth
+    screenWidth: window.innerWidth,
+    isBudgetValue: false,
+    isBudgetShown: true,
+    isCalendarShown: false
   };
 
   componentDidMount() {
@@ -63,9 +74,19 @@ class Entrance extends React.Component<PROPS, STATE> {
     });
   };
 
+  step = () => {
+    console.log(this.state);
+    this.setState({ isBudgetShown: false, isCalendarShown: true });
+    // this.props.addWholeBudget("1000", "add");
+  };
+
+  onChangeBudget = (e: Object) => {
+    const { value } = e.currentTarget;
+    this.setState({ isBudgetValue: true });
+  };
   render() {
     const { screenHeight, screenWidth } = this.state;
-    const { isFetching, error } = this.props;
+    const { isFetching, error, budget, payDay } = this.props;
     const isMinWidth = screenWidth <= 250 ? true : false;
     const isMinHeight = screenHeight < 480 ? true : false;
 
@@ -98,9 +119,49 @@ class Entrance extends React.Component<PROPS, STATE> {
         войти
       </button>
     );
+    const enterCurrency = <div>currency</div>;
+    console.log("--___---___--___>", budget);
+    const enterBudget = (
+      <div className={style.enterContainer}>
+        <div className={style.enterTitle}>Введите Ваш текущий бюджет</div>
+        <div className={style.inputBudget}>
+          <Input
+            inputMode="numeric"
+            // placeholder={placeholder}
+            type="text"
+            onChange={this.onChangeBudget}
+            // status={isErrorInput ? "error" : "default"}
+            // bottom={bottomWarning}
+          />
+        </div>
+        <div className={style.enterBudgetFooter}>
+          <Button level={"commerce"} size={"xl"} onClick={this.step}>
+            Далее
+          </Button>
+        </div>
+      </div>
+    );
+    console.log("+++++++++++", budget, !payDay);
+    const enterPayDay = <div className={style.enterContainer}>Payday</div>;
     return this.props.vk_id ? (
-      // <Redirect to="/" />
-      <Redirect to="/budget-manager" />
+      <div className={style.entrance}>
+        <CSSTransition
+          in={this.state.isBudgetShown}
+          timeout={300}
+          classNames={"page"}
+          unmountOnExit
+        >
+          {enterBudget}
+        </CSSTransition>
+        <CSSTransition
+          in={this.state.isCalendarShown}
+          timeout={300}
+          classNames={"page"}
+          unmountOnExit
+        >
+          {enterPayDay}
+        </CSSTransition>
+      </div>
     ) : (
       <div className={style.entrance}>
         <Swiper {...params}>

@@ -14,7 +14,9 @@ const mapStateToProps = state => ({
   params: state.user.params,
   isVkTheme: state.user.is_vk_theme,
   isCostomDarkTheme: state.user.is_costom_dark_theme,
-  themeVkClient: state.user.themeVkClient
+  themeVkClient: state.user.themeVkClient,
+  budget: state.user.calc.budget,
+  payDay: state.user.calc.pay_day
 });
 export const AppContainer = withRouter(
   connect(mapStateToProps, { logIn, hideModal, makeProfileOperation })(App)

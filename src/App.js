@@ -38,7 +38,9 @@ type PROPS = {
   params: string,
   isVkTheme: boolean,
   isCostomDarkTheme: boolean,
-  themeVkClient: string
+  themeVkClient: string,
+  budget: string,
+  payDay: string
 };
 
 type STATE = {
@@ -208,7 +210,15 @@ export class App extends React.Component<PROPS, STATE> {
       panel = "month_picker_panel";
     }
 
-    const { typeModal, hideModal, vk_id, isFetching, isTutorDone } = this.props;
+    const {
+      typeModal,
+      hideModal,
+      vk_id,
+      isFetching,
+      isTutorDone,
+      budget,
+      payDay
+    } = this.props;
 
     const { activeStory } = this.state;
 
@@ -319,6 +329,6 @@ export class App extends React.Component<PROPS, STATE> {
         <EntranceContainer />
       </>
     );
-    return <>{vk_id ? epic : entrance}</>;
+    return <>{vk_id && budget && payDay ? epic : entrance}</>;
   }
 }

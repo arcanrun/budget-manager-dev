@@ -415,7 +415,7 @@ export function user(state: UserState = initialState, action: Object) {
       return {
         ...state,
         // params: action.payload.params,
-
+        budget: action.payload.budget,
         is_full_history: action.payload.is_full_history,
         themeVkClient: action.payload.theme,
         is_vk_theme: action.payload.is_vk_theme,
