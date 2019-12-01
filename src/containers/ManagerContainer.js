@@ -16,7 +16,8 @@ import {
   logIn,
   calcBudget,
   stopGuide,
-  tutorialChangeState
+  tutorialChangeState,
+  hideModal
 } from "../actions/";
 
 const mapStateToProps = state => ({
@@ -49,5 +50,6 @@ export const ManagerContainer = connect(mapStateToProps, {
   logIn,
   calcBudget,
   stopGuide,
-  tutorialChangeState
+  tutorialChangeState,
+  hideModal
 })(Manager);

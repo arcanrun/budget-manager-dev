@@ -38,7 +38,8 @@ type PROPS = {
   params: string,
   isVkTheme: boolean,
   isCostomDarkTheme: boolean,
-  themeVkClient: string
+  themeVkClient: string,
+  hideModal: Function
 };
 
 type STATE = {
@@ -219,7 +220,8 @@ class Manager extends React.Component<PROPS, STATE> {
       calc,
       calcBudget,
       is_first_time,
-      is_tutorial_done
+      is_tutorial_done,
+      hideModal
     } = this.props;
     const { tempPayDay, steps } = this.state;
     const enterBudgetCard = isFetching_calc ? (

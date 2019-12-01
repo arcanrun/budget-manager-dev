@@ -7,14 +7,8 @@ import DayPicker from "react-day-picker";
 import "./style.css";
 import style from "./Calendar.module.css";
 import { stringToDate, dateToString, addSuffix } from "./calendarHelper";
+import { Icon } from "../Icon";
 
-type PROPS = {
-  handleDayClick: Function,
-  handleNewPayDay: Function,
-  payday: string,
-  tempPayDay: ?string,
-  daysToPayday: ?string
-};
 const WEEKDAYS_SHORT = {
   ru: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]
 };
@@ -55,7 +49,26 @@ const LABELS = {
   ru: { nextMonth: "следующий месяц", previousMonth: "предыдущий месяц" }
 };
 
-class Calendar extends React.Component<PROPS, {}> {
+type PROPS = {
+  handleDayClick: Function,
+  handleNewPayDay: Function,
+  payday: string,
+  tempPayDay: ?string,
+  daysToPayday: ?string
+};
+
+type STATE = {
+  isCalendarVisible: boolean
+};
+class Calendar extends React.Component<PROPS, STATE> {
+  state = {
+    isCalendarVisible: false
+  };
+
+  toggleCalendar = () => {
+    this.setState({ isCalendarVisible: !this.state.isCalendarVisible });
+  };
+
   handleToDayBtn = () => {
     const { handleDayClick } = this.props;
     const toDay = new Date();
@@ -103,22 +116,33 @@ class Calendar extends React.Component<PROPS, {}> {
         </div>
       </div>
     );
-
+    const { isCalendarVisible } = this.state;
     return (
       <>
-        <DayPicker
-          locale={"ru"}
-          months={MONTHS["ru"]}
-          weekdaysLong={WEEKDAYS_LONG["ru"]}
-          weekdaysShort={WEEKDAYS_SHORT["ru"]}
-          firstDayOfWeek={FIRST_DAY_OF_WEEK["ru"]}
-          labels={LABELS["ru"]}
-          todayButton={"сегодня"}
-          onTodayButtonClick={this.handleToDayBtn}
-          onDayClick={handleDayClick}
-          selectedDays={[stringToDate(payday), stringToDate(tempPayDay)]}
-          disabledDays={[{ before: new Date() }]}
-        />
+        <div className={style.pencil} onClick={this.toggleCalendar}>
+          <Icon icon={"pencil"} />
+        </div>
+        <div
+          className={
+            isCalendarVisible
+              ? style.pickerWrapper
+              : [style.pickerWrapper, style.pickerClosed].join(" ")
+          }
+        >
+          <DayPicker
+            locale={"ru"}
+            months={MONTHS["ru"]}
+            weekdaysLong={WEEKDAYS_LONG["ru"]}
+            weekdaysShort={WEEKDAYS_SHORT["ru"]}
+            firstDayOfWeek={FIRST_DAY_OF_WEEK["ru"]}
+            labels={LABELS["ru"]}
+            todayButton={"сегодня"}
+            onTodayButtonClick={this.handleToDayBtn}
+            onDayClick={handleDayClick}
+            selectedDays={[stringToDate(payday), stringToDate(tempPayDay)]}
+            disabledDays={[{ before: new Date() }]}
+          />
+        </div>
         <div className={[style.footer, "calendarFooter"].join(" ")}>
           {!payday && !tempPayDay
             ? paydayEmptyTitle

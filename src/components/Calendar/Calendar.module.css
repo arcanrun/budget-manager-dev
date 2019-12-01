@@ -4,12 +4,11 @@
   font-weight: 200;
   margin: auto;
   max-width: 300px;
-  padding-top: 30px;
   padding-bottom: 30px;
 }
 
 .counterBlockFooter {
-  font-size: 15px;
+  font-size: 17px;
   display: flex;
   flex-flow: column;
   align-items: self-end;
@@ -20,7 +19,7 @@
 }
 .counter {
   font-weight: bold;
-  font-size: 40px;
+  font-size: 50px;
   padding: 10px;
   color: #224b7a;
 }
@@ -77,4 +76,27 @@
   background: #0fde8c;
   color: #ffffff;
   padding: 10px;
+}
+.pickerWrapper {
+  transition: 0.2s;
+  overflow: hidden;
+  height: 380px;
+}
+
+.pickerClosed {
+  height: 0px;
+}
+.pencil {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  color: red;
+}
+
+.pencil > span > span > svg {
+  cursor: pointer;
+  fill: #9aa2b0;
+}
+.pencil:active > span > span > svg {
+  fill: #f72d6b;
 }
