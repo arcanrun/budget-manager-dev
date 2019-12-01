@@ -47,6 +47,25 @@ class Entrance extends React.Component<PROPS, STATE> {
 
   componentDidMount() {
     window.addEventListener("resize", this.setSize);
+    console.log("!!!!!!", this.props);
+    // if (this.props.budget) {
+    //   this.setState({ isBudgetShown: false, isCalendarShown: true });
+    // }
+  }
+  componentDidUpdate(prevProps) {
+    console.log(
+      this.props.history.location.pathname,
+      prevProps.history.location.pathname
+    );
+    // if (this.props.budget !== prevProps.budget) {
+    //   this.setState({ isBudgetShown: false, isCalendarShown: true });
+    // }
+    if (
+      this.props.history.location.pathname !==
+      prevProps.history.location.pathname
+    ) {
+      console.log("HEY");
+    }
   }
   shouldComponentUpdate(nextProps: Object, nextState: Object) {
     const body = document.getElementsByTagName("body")[0];
@@ -78,6 +97,7 @@ class Entrance extends React.Component<PROPS, STATE> {
     console.log(this.state);
     this.setState({ isBudgetShown: false, isCalendarShown: true });
     // this.props.addWholeBudget("1000", "add");
+    this.props.history.push("/calendarenter");
   };
 
   onChangeBudget = (e: Object) => {
