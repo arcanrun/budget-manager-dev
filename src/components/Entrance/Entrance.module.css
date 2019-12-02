@@ -52,7 +52,7 @@
 }
 
 .enterTitle {
-  color: var(--title_color);
+  color: #fff;
   font-weight: bold;
   font-size: 19px;
   text-align: center;
@@ -77,7 +77,7 @@
   align-items: center;
   padding: 20px;
   background-color: var(--background_color_card);
-  border-radius: 2px;
-  box-shadow: var(--box_shadow_card);
+  border-radius: 10px;
+  box-shadow: 5px 5px 4px 0px #00000030;
   position: relative;
 }
