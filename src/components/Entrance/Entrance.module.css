@@ -48,20 +48,36 @@
   align-items: center;
   height: 100%;
   transition: 0.3s;
-  padding-top: 35%;
+  padding-top: 20%;
 }
 
 .enterTitle {
-  color: #fff;
+  color: var(--title_color);
   font-weight: bold;
   font-size: 19px;
-  text-align: left;
+  text-align: center;
   padding: 0 0 10px 0;
+  width: 90%;
 }
 .enterDataItem {
-  width: 90%;
-  padding-bottom: 20%;
+  width: 100%;
+  padding-bottom: 5%;
 }
 .enterFooter {
-  width: 90%;
+  width: 92%;
+}
+
+.enterCard {
+  transition: 0.2s;
+  width: 80%;
+  display: flex;
+  flex-flow: column;
+  background: #fff;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--background_color_card);
+  border-radius: 2px;
+  box-shadow: var(--box_shadow_card);
+  position: relative;
 }

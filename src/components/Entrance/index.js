@@ -98,7 +98,10 @@ type STATE = {
   selectedPayDay: ?string,
   selectedCurrency: ?string,
   beautifyPayDay: ?string,
-  modal: ?string
+  modal: ?string,
+  errorExplain: ?string,
+  isErrorInput: boolean,
+  inputValue: ?string
 };
 
 class Entrance extends React.Component<PROPS, STATE> {
@@ -108,8 +111,11 @@ class Entrance extends React.Component<PROPS, STATE> {
     isVkId: false,
     selectedPayDay: undefined,
     selectedCurrency: undefined,
+    inputValue: undefined,
     beautifyPayDay: undefined,
-    modal: null
+    modal: null,
+    errorExplain: undefined,
+    isErrorInput: false
   };
 
   componentDidMount() {
@@ -185,12 +191,89 @@ class Entrance extends React.Component<PROPS, STATE> {
     const { value } = e.target;
     this.setState({ selectedCurrency: value, modal: null });
   };
+  onChange = (e: Object) => {
+    const { value } = e.currentTarget;
+    this.isVaild(value);
+  };
+  isVaild = (value: ?string) => {
+    const valToNumber = +value;
+    const valToStr = "" + value;
+    if (valToNumber <= 0) {
+      this.setState({
+        isErrorInput: true,
+        inputValue: valToStr,
+        errorExplain: "Недопустимый символ"
+      });
+      return false;
+    } else if (isNaN(value)) {
+      this.setState({
+        isErrorInput: true,
+        inputValue: valToStr,
+        errorExplain: "Недопустимый символ"
+      });
+      return false;
+    } else if (valToNumber === undefined) {
+      this.setState({
+        isErrorInput: true,
+        inputValue: valToStr,
+        errorExplain: "Недопустимый символ"
+      });
+      return false;
+    } else if (valToStr.includes("e")) {
+      this.setState({
+        isErrorInput: true,
+        inputValue: valToStr,
+        errorExplain: "Недопустимый символ"
+      });
+      return false;
+    } else if (valToNumber >= 999e9) {
+      this.setState({
+        isErrorInput: true,
+        inputValue: valToStr,
+        errorExplain: "Слишком большое число"
+      });
+      return false;
+    } else if (value[0] === ".") {
+      this.setState({
+        isErrorInput: true,
+        inputValue: valToStr,
+        errorExplain: "Недопустимый символ"
+      });
+      return false;
+    } else if (valToNumber < 0.01) {
+      this.setState({
+        isErrorInput: true,
+        inputValue: valToStr,
+        errorExplain: "Слишком маленькое число"
+      });
+      return false;
+    }
+    this.setState({
+      isErrorInput: false,
+      errorExplain: undefined,
+      inputValue: valToStr
+    });
+    return true;
+  };
   render() {
     const currencies = ["RUB", "USD", "YEN"];
-    const { screenHeight, screenWidth, isVkId } = this.state;
+    const {
+      screenHeight,
+      screenWidth,
+      isVkId,
+      errorExplain,
+      isErrorInput,
+      selectedPayDay,
+      selectedCurrency,
+      inputValue
+    } = this.state;
     const { isFetching, error, budget, payDay } = this.props;
     const isMinWidth = screenWidth <= 250 ? true : false;
     const isMinHeight = screenHeight < 480 ? true : false;
+
+    let bottomWarning = errorExplain
+      ? errorExplain
+      : "Введите число, которое больше нуля";
 
     const firstScreenText =
       "Правило 50/30/20 позволит Вам копить деньги и не отказывать себе в удовольствиях. ";
@@ -308,50 +391,62 @@ class Entrance extends React.Component<PROPS, STATE> {
     );
     const enterData = (
       <div className={style.enterContainer}>
-        <div className={style.enterDataItem}>
-          <div className={style.enterTitle}>Выберите валюту</div>
-          <div>
-            <SelectMimicry
-              top="Выберите валюту"
-              placeholder="Не выбрана"
-              onClick={() => this.setState({ modal: "currency" })}
-            >
-              {this.state.selectedCurrency}
-            </SelectMimicry>
-          </div>
+        <div className={style.enterTitle}>
+          Чтобы продолжить, введите необходимые данные
         </div>
-        <div className={style.enterDataItem}>
-          <div className={style.enterTitle}>Введите Ваш текущий бюджет</div>
-          <div>
-            <Input
-              inputMode="numeric"
-              // placeholder={placeholder}
-              placeholder={"placeholder"}
-              type="text"
-              // onChange={this.onChange}
-              // status={isErrorInput ? "error" : "default"}
-              status={"default"}
-              bottom={"bottomWarning"}
-              // bottom={bottomWarning}
-            />
+        <div className={style.enterCard}>
+          <div className={style.enterDataItem}>
+            <FormLayout>
+              <SelectMimicry
+                top="Выберите валюту"
+                placeholder="Не выбрана"
+                onClick={() => this.setState({ modal: "currency" })}
+              >
+                {this.state.selectedCurrency}
+              </SelectMimicry>
+            </FormLayout>
           </div>
-        </div>
-        <div className={style.enterDataItem}>
-          <div className={style.enterTitle}>Дата получения зарплаты</div>
-          <div>
-            <SelectMimicry
-              top="Выберите дату"
-              placeholder="Не выбрана"
-              onClick={() => this.setState({ modal: "calendar" })}
-            >
-              {this.state.beautifyPayDay}
-            </SelectMimicry>
+          <div className={style.enterDataItem}>
+            <FormLayout>
+              <Input
+                top="Введите Ваш текущий бюджет"
+                inputMode="numeric"
+                placeholder="0000.0"
+                type="text"
+                onChange={this.onChange}
+                status={isErrorInput ? "error" : "default"}
+                bottom={bottomWarning}
+              />
+            </FormLayout>
           </div>
-        </div>
-        <div className={style.enterFooter}>
-          <Button level={"destructive"} size={"xl"}>
-            Далее
-          </Button>
+          <div className={style.enterDataItem}>
+            <FormLayout>
+              <SelectMimicry
+                top="Выберите дату получения зарплаты"
+                placeholder="Не выбрана"
+                onClick={() => this.setState({ modal: "calendar" })}
+              >
+                {this.state.beautifyPayDay}
+              </SelectMimicry>
+            </FormLayout>
+          </div>
+          <CSSTransition
+            in={
+              !isErrorInput &&
+              !!selectedPayDay &&
+              !!selectedCurrency &&
+              !!inputValue
+            }
+            timeout={300}
+            classNames={"zooming"}
+            unmountOnExit
+          >
+            <div className={style.enterFooter}>
+              <Button level={"destructive"} size={"xl"}>
+                Далее
+              </Button>
+            </div>
+          </CSSTransition>
         </div>
       </div>
     );

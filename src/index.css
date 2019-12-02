@@ -104,6 +104,9 @@ code {
 
   /* Donut*/
   --info_donut_color: #110261;
+
+  /* Entrance */
+  --title_color: #200a9c;
 }
 
 body[scheme="client_dark"] {
@@ -139,4 +142,7 @@ body[scheme="client_dark"] {
 
   /* Donut*/
   --info_donut_color: #9aa2b0;
+
+  /* Entrance */
+  --title_color: #9aa2b0;
 }
