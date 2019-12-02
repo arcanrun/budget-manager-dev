@@ -442,9 +442,11 @@ class Entrance extends React.Component<PROPS, STATE> {
             unmountOnExit
           >
             <div className={style.enterFooter}>
-              <Button level={"destructive"} size={"xl"}>
-                Далее
-              </Button>
+              <FormLayout>
+                <Button level={"destructive"} size={"xl"}>
+                  Далее
+                </Button>
+              </FormLayout>
             </div>
           </CSSTransition>
         </div>
