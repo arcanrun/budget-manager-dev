@@ -11,7 +11,10 @@ import {
   ModalPage,
   ModalRoot,
   ModalPageHeader,
-  HeaderButton
+  HeaderButton,
+  FormLayout,
+  FormLayoutGroup,
+  Radio
 } from "@vkontakte/vkui";
 import { CSSTransition } from "react-transition-group";
 import { IS_PLATFORM_IOS, IS_PLATFORM_ANDROID } from "@vkontakte/vkui";
@@ -178,11 +181,12 @@ class Entrance extends React.Component<PROPS, STATE> {
     }
   };
 
-  // onChangeBudget = (e: Object) => {
-  //   const { value } = e.currentTarget;
-  //   this.setState({ isBudgetValue: true });
-  // };
+  handleCurrencyClick = (e: Object) => {
+    const { value } = e.target;
+    this.setState({ selectedCurrency: value, modal: null });
+  };
   render() {
+    const currencies = ["RUB", "USD", "YEN"];
     const { screenHeight, screenWidth, isVkId } = this.state;
     const { isFetching, error, budget, payDay } = this.props;
     const isMinWidth = screenWidth <= 250 ? true : false;
@@ -273,7 +277,24 @@ class Entrance extends React.Component<PROPS, STATE> {
             </ModalPageHeader>
           }
         >
-          currency
+          <FormLayout>
+            <FormLayoutGroup onClick={this.handleCurrencyClick}>
+              {currencies.map((e, i) => {
+                return (
+                  <Radio
+                    key={i}
+                    name="currency"
+                    value={e}
+                    defaultChecked={
+                      this.state.selectedCurrency === e ? true : false
+                    }
+                  >
+                    {e}
+                  </Radio>
+                );
+              })}
+            </FormLayoutGroup>
+          </FormLayout>
         </ModalPage>
       </ModalRoot>
     );
