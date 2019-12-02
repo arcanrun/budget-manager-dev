@@ -2,7 +2,6 @@
 
 import React from "react";
 import DayPicker from "react-day-picker";
-// import "react-day-picker/lib/style.css";
 
 import "./style.css";
 import style from "./Calendar.module.css";
@@ -80,7 +79,6 @@ class Calendar extends React.Component<PROPS, STATE> {
   handleToDayBtn = () => {
     const { handleDayClick } = this.props;
     const toDay = new Date();
-    console.log(toDay);
     handleDayClick(toDay);
   };
   render() {
