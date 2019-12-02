@@ -35,11 +35,15 @@ import {
   TUTORIAL_CHANGE_REQUEST,
   TUTORUAL_CHANGE_ERROR,
   TOGGLE_VK_CLIENT_SUCCESS,
-  TOGGLE_CUSTOM_DARK_THEME_SUCCESS
+  TOGGLE_CUSTOM_DARK_THEME_SUCCESS,
+  SEND_ENTER_DATA_FAILED,
+  SEND_ENTER_DATA_REQUEST,
+  SEND_ENTER_DATA_SUCCESS
 } from "../constants";
 
 type UserState = {
   // params: string,
+  currency: ?string,
   is_full_history: boolean,
   themeVkClient: string,
   is_vk_theme: boolean,
@@ -112,6 +116,7 @@ type UserState = {
 
 export const initialState: UserState = {
   // params: undefined,
+  currency: undefined,
   is_full_history: true,
   themeVkClient: undefined,
   is_vk_theme: true,
@@ -508,6 +513,22 @@ export function user(state: UserState = initialState, action: Object) {
         ...state,
         is_costom_dark_theme: action.payload.is_costom_dark_theme
       };
+
+    case SEND_ENTER_DATA_REQUEST:
+      return {
+        ...state,
+        isFetching: true
+      };
+    case SEND_ENTER_DATA_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        currency: action.payload.currency,
+        budget: action.payload.budget,
+        pay_day: action.payload.payload
+      };
+    case SEND_ENTER_DATA_FAILED:
+      return { ...state, isFetching: false, error: true };
 
     default:
       return state;

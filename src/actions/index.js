@@ -15,6 +15,7 @@ import { tutorialChangeState } from "./tutorialAction";
 import { getHistoryShort } from "./getHsitoryShort";
 import { toggleVkClientTheme } from "./vkClientThemeActions";
 import { toggleCustomDarkTheme } from "./customDarkThemeActions";
+import { sendEnterData } from "./enterDataActions";
 
 export {
   addWholeBudget,
@@ -35,5 +36,6 @@ export {
   tutorialChangeState,
   getHistoryShort,
   toggleVkClientTheme,
-  toggleCustomDarkTheme
+  toggleCustomDarkTheme,
+  sendEnterData
 };

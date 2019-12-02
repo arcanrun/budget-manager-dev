@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 import * as connectVK from "@vkontakte/vkui-connect-promise";
 
 import { Entrance } from "../components/index";
-import { signUp, addWholeBudget } from "../actions";
+import { signUp, addWholeBudget, sendEnterData } from "../actions";
 
 const mapStateToProps = (state: Object) => ({
   vk_id: state.user.vk_id,
@@ -21,6 +21,6 @@ const mapStateToProps = (state: Object) => ({
 });
 
 const EntranceContainer = withRouter(
-  connect(mapStateToProps, { signUp, addWholeBudget })(Entrance)
+  connect(mapStateToProps, { signUp, addWholeBudget, sendEnterData })(Entrance)
 );
 export default EntranceContainer;

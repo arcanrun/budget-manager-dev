@@ -87,8 +87,8 @@ type PROPS = {
   isCostomDarkTheme: boolean,
   themeVkClient: string,
   budget: string,
-  addWholeBudget: Function,
-  payDay: string
+  payDay: string,
+  sendEnterData: Function,
 };
 
 type STATE = {
@@ -267,7 +267,7 @@ class Entrance extends React.Component<PROPS, STATE> {
       selectedCurrency,
       inputValue
     } = this.state;
-    const { isFetching, error, budget, payDay } = this.props;
+    const { isFetching, error, budget, payDay, sendEnterData } = this.props;
     const isMinWidth = screenWidth <= 250 ? true : false;
     const isMinHeight = screenHeight < 480 ? true : false;
 
@@ -443,7 +443,13 @@ class Entrance extends React.Component<PROPS, STATE> {
           >
             <div className={style.enterFooter}>
               <FormLayout>
-                <Button level={"destructive"} size={"xl"}>
+                <Button
+                  level={"destructive"}
+                  size={"xl"}
+                  onClick={() =>
+                    sendEnterData(selectedCurrency, inputValue, selectedPayDay)
+                  }
+                >
                   Далее
                 </Button>
               </FormLayout>

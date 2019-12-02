@@ -40,7 +40,8 @@ type PROPS = {
   isCostomDarkTheme: boolean,
   themeVkClient: string,
   budget: string,
-  payDay: string
+  payDay: string,
+  currency: string
 };
 
 type STATE = {
@@ -217,7 +218,8 @@ export class App extends React.Component<PROPS, STATE> {
       isFetching,
       isTutorDone,
       budget,
-      payDay
+      payDay,
+      currency
     } = this.props;
 
     const { activeStory } = this.state;
@@ -329,6 +331,6 @@ export class App extends React.Component<PROPS, STATE> {
         <EntranceContainer />
       </>
     );
-    return <>{vk_id && budget && payDay ? epic : entrance}</>;
+    return <>{vk_id && budget && payDay && currency ? epic : entrance}</>;
   }
 }
