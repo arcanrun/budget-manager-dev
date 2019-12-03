@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
   isVkTheme: state.user.is_vk_theme,
   isCostomDarkTheme: state.user.is_costom_dark_theme,
   themeVkClient: state.user.themeVkClient,
-  budget: state.user.calc.budget,
+  budget: state.user.budget,
   payDay: state.user.calc.pay_day,
   currency: state.user.currency
 });

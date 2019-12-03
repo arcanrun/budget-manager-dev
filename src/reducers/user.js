@@ -420,6 +420,8 @@ export function user(state: UserState = initialState, action: Object) {
       return {
         ...state,
         // params: action.payload.params,
+        calc: { ...state.calc, pay_day: action.payload.pay_day },
+        currency: action.payload.currency,
         budget: action.payload.budget,
         is_full_history: action.payload.is_full_history,
         themeVkClient: action.payload.theme,
@@ -517,18 +519,18 @@ export function user(state: UserState = initialState, action: Object) {
     case SEND_ENTER_DATA_REQUEST:
       return {
         ...state,
-        isFetching: true
+        isFetching_signup: true
       };
     case SEND_ENTER_DATA_SUCCESS:
       return {
         ...state,
-        isFetching: false,
+        isFetching_signup: false,
         currency: action.payload.currency,
         budget: action.payload.budget,
-        pay_day: action.payload.payload
+        calc: { ...state.cale, pay_day: action.payload.payload }
       };
     case SEND_ENTER_DATA_FAILED:
-      return { ...state, isFetching: false, error: true };
+      return { ...state, isFetching_signup: false, error: true };
 
     default:
       return state;

@@ -27,7 +27,7 @@ import DayPicker from "react-day-picker";
 // import "swiper/dist/css/swiper.css";
 import style from "./Entrance.module.css";
 import "./costumizedSwiper.css";
-import { EntranceItem } from "../index";
+import { EntranceItem, Spinner } from "../index";
 import {
   stringToDate,
   dateToString,
@@ -438,7 +438,8 @@ class Entrance extends React.Component<PROPS, STATE> {
               !isErrorInput &&
               !!selectedPayDay &&
               !!selectedCurrency &&
-              !!inputValue
+              !!inputValue &&
+              !isFetching
             }
             timeout={300}
             classNames={"zooming"}
@@ -456,6 +457,16 @@ class Entrance extends React.Component<PROPS, STATE> {
                   Далее
                 </Button>
               </FormLayout>
+            </div>
+          </CSSTransition>
+          <CSSTransition
+            in={isFetching}
+            timeout={300}
+            classNames={"zooming"}
+            unmountOnExit
+          >
+            <div className={style.enterFooter}>
+              <Spinner size={"m"} />
             </div>
           </CSSTransition>
         </div>

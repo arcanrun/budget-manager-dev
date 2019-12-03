@@ -53,10 +53,7 @@ export const sendEnterData = (
       })
     })
       .then(res => res.json())
-      .then(res =>
-        dispatch(sendEnterDataSuccess(res.PAYLOAD)).catch(err =>
-          sendEnterDataFailed(err)
-        )
-      );
+      .then(res => dispatch(sendEnterDataSuccess(res.PAYLOAD)))
+      .catch(err => sendEnterDataFailed(err));
   };
 };
