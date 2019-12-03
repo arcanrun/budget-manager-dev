@@ -81,3 +81,16 @@
   box-shadow: 5px 5px 4px 0px #00000030;
   position: relative;
 }
+
+@media (max-height: 600px) {
+  .enterContainer {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    transition: 0.3s;
+    padding-top: 1%;
+    transform: scale(0.8);
+  }
+}

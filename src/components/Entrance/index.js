@@ -14,7 +14,8 @@ import {
   HeaderButton,
   FormLayout,
   FormLayoutGroup,
-  Radio
+  Radio,
+  List
 } from "@vkontakte/vkui";
 import { CSSTransition } from "react-transition-group";
 import { IS_PLATFORM_IOS, IS_PLATFORM_ANDROID } from "@vkontakte/vkui";
@@ -88,7 +89,7 @@ type PROPS = {
   themeVkClient: string,
   budget: string,
   payDay: string,
-  sendEnterData: Function,
+  sendEnterData: Function
 };
 
 type STATE = {
@@ -362,20 +363,22 @@ class Entrance extends React.Component<PROPS, STATE> {
         >
           <FormLayout>
             <FormLayoutGroup onClick={this.handleCurrencyClick}>
-              {currencies.map((e, i) => {
-                return (
-                  <Radio
-                    key={i}
-                    name="currency"
-                    value={e}
-                    defaultChecked={
-                      this.state.selectedCurrency === e ? true : false
-                    }
-                  >
-                    {e}
-                  </Radio>
-                );
-              })}
+              <List>
+                {currencies.map((e, i) => {
+                  return (
+                    <Radio
+                      key={i}
+                      name="currency"
+                      value={e}
+                      defaultChecked={
+                        this.state.selectedCurrency === e ? true : false
+                      }
+                    >
+                      {e}
+                    </Radio>
+                  );
+                })}
+              </List>
             </FormLayoutGroup>
           </FormLayout>
         </ModalPage>
