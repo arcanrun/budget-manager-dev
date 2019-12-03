@@ -527,7 +527,7 @@ export function user(state: UserState = initialState, action: Object) {
         isFetching_signup: false,
         currency: action.payload.currency,
         budget: action.payload.budget,
-        calc: { ...state.cale, pay_day: action.payload.payload }
+        calc: { ...state.calc, pay_day: action.payload.pay_day }
       };
     case SEND_ENTER_DATA_FAILED:
       return { ...state, isFetching_signup: false, error: true };

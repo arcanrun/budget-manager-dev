@@ -30,7 +30,7 @@ const sendEnterDataFailed = (err: string) => {
 const sendEnterDataSuccess = res => {
   return {
     type: SEND_ENTER_DATA_SUCCESS,
-    payload: res,
+    payload: res.PAYLOAD,
     error: false,
     isFetching: false
   };
@@ -53,7 +53,7 @@ export const sendEnterData = (
       })
     })
       .then(res => res.json())
-      .then(res => dispatch(sendEnterDataSuccess(res.PAYLOAD)))
+      .then(res => dispatch(sendEnterDataSuccess(res)))
       .catch(err => sendEnterDataFailed(err));
   };
 };
