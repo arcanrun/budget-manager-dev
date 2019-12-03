@@ -169,7 +169,7 @@ class Entrance extends React.Component<PROPS, STATE> {
   handleToDayBtn = () => {
     const toDay = new Date();
     this.setState({
-      selectedPayDay: "" + toDay,
+      selectedPayDay: toDay,
       modal: null,
       beautifyPayDay: dateToString(toDay)
     });
