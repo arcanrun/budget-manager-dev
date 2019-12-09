@@ -11,6 +11,7 @@
     "@vkontakte/vkui": "^2.32.4",
     "@vkontakte/vkui-connect-promise": "^0.1.19",
     "chartist": "^0.11.4",
+    "currency-symbol-map": "^4.0.4",
     "deepcopy": "^2.0.0",
     "flow-bin": "^0.95.1",
     "moment": "^2.24.0",

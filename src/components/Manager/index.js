@@ -223,25 +223,6 @@ class Manager extends React.Component<PROPS, STATE> {
       hideModal
     } = this.props;
     const { tempPayDay, steps } = this.state;
-    const enterBudgetCard = isFetching_calc ? (
-      ""
-    ) : (
-      <Card
-        headerTitle={"общий бюджет"}
-        icon={"money-bag"}
-        rightIcon={budget ? "pencil" : ""}
-        onClick={() => onClickToggleModal("budget")}
-      >
-        <WholeBudget
-          onClickToggleModal={onClickToggleModal}
-          typeModal={"budget"}
-          wholeBudget={budget}
-          daysToPayday={daysToPayday}
-          isFetching={isFetching_calc}
-          isEnterBudget
-        />
-      </Card>
-    );
     const wholeBudgetCard = (
       <Card
         headerTitle={"общий бюджет"}
@@ -408,13 +389,12 @@ class Manager extends React.Component<PROPS, STATE> {
           unmountOnExit
         >
           <div className={style.manager}>
-            {budget ? "" : enterBudgetCard}
-            {budget ? wholeBudgetCard : ""}
-            {budget ? calendarCard : ""}
-            {budget && payday ? budgetCardCommon : ""}
-            {budget && payday ? budgetCardFun : ""}
-            {budget && payday ? budgetCardInvest : ""}
-            {!is_tutorial_done ? (budget && payday ? guide : "") : ""}
+            {wholeBudgetCard}
+            {calendarCard}
+            {budgetCardCommon}
+            {budgetCardFun}
+            {budgetCardInvest}
+            {!is_tutorial_done ? guide : ""}
           </div>
         </CSSTransition>
       </>
