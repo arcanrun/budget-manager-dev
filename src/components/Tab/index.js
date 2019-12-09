@@ -8,7 +8,8 @@ import { toPrettyNumber } from "../../helpers/prettyNumbers";
 type PROPS = {
   costs: Object,
   income: Object,
-  history: Array<any>
+  history: Array<any>,
+  currency: string
 };
 type STATE = {
   switcher: boolean
@@ -23,7 +24,7 @@ export class Tab extends React.Component<PROPS, STATE> {
   };
   render() {
     const { switcher } = this.state;
-    const { income, costs, history } = this.props;
+    const { income, costs, history, currency } = this.props;
     return (
       <div>
         <div className={style.nav} onClick={this.handleSwtich}>
@@ -57,7 +58,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "0.00a",
                     "0.0",
-                    "14px"
+                    false,
+                    currency
                   )}
                 </div>
               </div>
@@ -78,7 +80,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "0.00a",
                     "0.0",
-                    "14px"
+                    false,
+                    currency
                   )}
                 </div>
               </div>
@@ -99,7 +102,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "0.00a",
                     "0.0",
-                    "14px"
+                    false,
+                    currency
                   )}
                 </div>
               </div>
@@ -120,7 +124,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "0.00a",
                     "0.0",
-                    "14px"
+                    false,
+                    currency
                   )}
                 </div>
               </div>
@@ -144,7 +149,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "0.00a",
                     "0.0",
-                    "14px"
+                    false,
+                    currency
                   )}
                 </div>
               </div>
@@ -165,7 +171,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "0.00a",
                     "0.0",
-                    "14px"
+                    false,
+                    currency
                   )}
                 </div>
               </div>
@@ -186,7 +193,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "0.00a",
                     "0.0",
-                    "14px"
+                    false,
+                    currency
                   )}
                 </div>
               </div>
@@ -207,7 +215,8 @@ export class Tab extends React.Component<PROPS, STATE> {
                     "",
                     "0.00a",
                     "0.0",
-                    "14px"
+                    false,
+                    currency
                   )}
                 </div>
               </div>
