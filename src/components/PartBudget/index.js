@@ -8,12 +8,19 @@ type PROPS = {
   onClickToggleModal: Function,
   typeModal: string,
   costs: Object,
-  budget: number
+  budget: number,
+  currency: string
 };
 
 class PartBudget extends React.Component<PROPS, {}> {
   render() {
-    const { costs, onClickToggleModal, typeModal, budget } = this.props;
+    const {
+      costs,
+      onClickToggleModal,
+      typeModal,
+      budget,
+      currency
+    } = this.props;
     let title = "";
     let costsValue = "";
     let temp = "";
@@ -116,6 +123,7 @@ class PartBudget extends React.Component<PROPS, {}> {
         temp={+temp}
         maxToday={+maxTodayValue}
         color={color}
+        currency={currency}
       />
     );
     return (

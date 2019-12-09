@@ -264,6 +264,7 @@ class Manager extends React.Component<PROPS, STATE> {
         onClick={() => onClickToggleModal("common_transfer")}
       >
         <PartBudget
+          currency={currency}
           onClickToggleModal={onClickToggleModal}
           typeModal={"common"}
           costs={calc}
@@ -279,6 +280,7 @@ class Manager extends React.Component<PROPS, STATE> {
         onClick={() => onClickToggleModal("fun_transfer")}
       >
         <PartBudget
+          currency={currency}
           onClickToggleModal={onClickToggleModal}
           typeModal={"fun"}
           costs={calc}
@@ -294,6 +296,7 @@ class Manager extends React.Component<PROPS, STATE> {
         onClick={() => onClickToggleModal("invest_transfer")}
       >
         <PartBudget
+          currency={currency}
           onClickToggleModal={onClickToggleModal}
           typeModal={"invest"}
           costs={calc}

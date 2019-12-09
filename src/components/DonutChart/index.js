@@ -11,7 +11,8 @@ type PROPS = {
   cost: number,
   temp: number,
   maxToday: number,
-  tempMonth: number
+  tempMonth: number,
+  currency: string
 };
 
 const DonutChart = ({
@@ -20,7 +21,8 @@ const DonutChart = ({
   cost,
   temp,
   maxToday,
-  tempMonth
+  tempMonth,
+  currency
 }: PROPS) => {
   let tempValueInPercents = "";
   if (temp <= 0) {
@@ -87,7 +89,8 @@ const DonutChart = ({
             "",
             "0.00a",
             "0.0",
-            "14px"
+            false,
+            currency
           )}
           /
           {toPrettyNumber(
@@ -99,7 +102,8 @@ const DonutChart = ({
             "",
             "0.00a",
             "0.0",
-            "14px"
+            false,
+            currency
           )}
         </div>
         <div className={style.footerTitle}>На сегодня:</div>
@@ -113,7 +117,8 @@ const DonutChart = ({
             "",
             "0.00a",
             "0.0",
-            "12px"
+            false,
+            currency
           )}
           /
           {toPrettyNumber(
@@ -125,7 +130,8 @@ const DonutChart = ({
             "",
             "0.00a",
             "0.0",
-            "12px"
+            false,
+            currency
           )}
         </div>
       </div>
