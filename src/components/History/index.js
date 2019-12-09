@@ -28,7 +28,8 @@ type PROPS = {
   params: string,
   getHistory: Function,
   toggleModal: Function,
-  hideModal: Function
+  hideModal: Function,
+  currency: string
 };
 
 type STATE = {
@@ -52,7 +53,7 @@ class History extends React.Component<PROPS, STATE> {
   };
 
   render() {
-    const { history, isFetching, vk_id, toggleModal } = this.props;
+    const { history, isFetching, vk_id, toggleModal, currency } = this.props;
 
     // const overlay = <Overlay isTransparent={true} />;
     const verticalLine = <div className={styleHistory.verticalLine} />;
@@ -122,7 +123,10 @@ class History extends React.Component<PROPS, STATE> {
                           <OperationSign>{elem.operation}</OperationSign>
                         )}
 
-                        <OperationValue sign={elem.operation}>
+                        <OperationValue
+                          sign={elem.operation}
+                          currency={currency}
+                        >
                           {elem.value}
                         </OperationValue>
                       </div>
