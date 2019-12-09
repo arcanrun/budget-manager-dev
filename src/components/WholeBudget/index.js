@@ -14,7 +14,8 @@ type PROPS = {
   wholeBudget: ?number,
   daysToPayday: ?string,
   isFetching: boolean,
-  isEnterBudget?: boolean
+  isEnterBudget?: boolean,
+  currency: string
 };
 const WholeBudget = ({
   wholeBudget,
@@ -22,7 +23,8 @@ const WholeBudget = ({
   typeModal,
   daysToPayday,
   isFetching,
-  isEnterBudget
+  isEnterBudget,
+  currency
 }: PROPS) => {
   const footer = daysToPayday ? (
     <div className={style.footer}>
@@ -58,7 +60,8 @@ const WholeBudget = ({
           "max",
           "0.00a",
           "0.00",
-          "25px"
+          false,
+          currency
         )}
       </div>
       {footer}

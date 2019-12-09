@@ -76,8 +76,9 @@ export const logIn = (params: string) => {
     old.send("VKWebAppUpdateConfig", {});
 
     old.subscribe(e => {
-      if (e.detail.data.scheme) {
-        vkRes.theme = e.detail.data.scheme;
+      if (e.detail.hasOwnProperty("data")) {
+        if (e.detail.data.hasOwnProperty("scheme"))
+          vkRes.theme = e.detail.data.scheme;
       }
     });
     connect

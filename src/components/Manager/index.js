@@ -38,7 +38,8 @@ type PROPS = {
   isVkTheme: boolean,
   isCostomDarkTheme: boolean,
   themeVkClient: string,
-  hideModal: Function
+  hideModal: Function,
+  currency: string
 };
 
 type STATE = {
@@ -220,7 +221,8 @@ class Manager extends React.Component<PROPS, STATE> {
       calcBudget,
       is_first_time,
       is_tutorial_done,
-      hideModal
+      hideModal,
+      currency
     } = this.props;
     const { tempPayDay, steps } = this.state;
     const wholeBudgetCard = (
@@ -231,6 +233,7 @@ class Manager extends React.Component<PROPS, STATE> {
         onClick={() => onClickToggleModal("budget")}
       >
         <WholeBudget
+          currency={currency}
           onClickToggleModal={onClickToggleModal}
           typeModal={"budget"}
           wholeBudget={budget}

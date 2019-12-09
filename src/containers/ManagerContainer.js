@@ -35,7 +35,8 @@ const mapStateToProps = state => ({
   params: state.user.params,
   isVkTheme: state.user.is_vk_theme,
   isCostomDarkTheme: state.user.is_costom_dark_theme,
-  themeVkClient: state.user.themeVkClient
+  themeVkClient: state.user.themeVkClient,
+  currency: state.user.currency
 });
 
 export const ManagerContainer = connect(mapStateToProps, {
