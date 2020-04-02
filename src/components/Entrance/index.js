@@ -535,26 +535,24 @@ class Entrance extends React.Component<PROPS, STATE> {
             </ModalPageHeader>
           }
         >
-          <FormLayout>
-            <FormLayoutGroup onClick={this.handleCurrencyClick}>
-              <List>
-                {currencies.map((e, i) => {
-                  return (
-                    <Radio
-                      key={i}
-                      name="currency"
-                      value={e}
-                      defaultChecked={
-                        this.state.selectedCurrency === e ? true : false
-                      }
-                    >
-                      {e}
-                    </Radio>
-                  );
-                })}
-              </List>
-            </FormLayoutGroup>
-          </FormLayout>
+          <FormLayoutGroup onClick={this.handleCurrencyClick}>
+            <List>
+              {currencies.map((e, i) => {
+                return (
+                  <Radio
+                    key={i}
+                    name="currency"
+                    value={e}
+                    defaultChecked={
+                      this.state.selectedCurrency === e ? true : false
+                    }
+                  >
+                    {e}
+                  </Radio>
+                );
+              })}
+            </List>
+          </FormLayoutGroup>
         </ModalPage>
       </ModalRoot>
     );
