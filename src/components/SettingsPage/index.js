@@ -135,7 +135,7 @@ export const SettingsPage = ({ openAlert, changePanelSetting }: PROPS) => {
               />
             }
           >
-            Показть обучение
+            Показать обучение
           </Cell>
         </Card>
         <Card headerTitle={"История"} icon={"history"}>
