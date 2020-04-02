@@ -15,13 +15,22 @@ import {
   FormLayout,
   FormLayoutGroup,
   Radio,
-  List
+  List,
+  Root,
+  PanelHeader,
+  PanelHeaderButton,
+  PanelHeaderClose,
+  IOS,
+  platform
 } from "@vkontakte/vkui";
 import { CSSTransition } from "react-transition-group";
 import { IS_PLATFORM_IOS, IS_PLATFORM_ANDROID } from "@vkontakte/vkui";
 import Icon24Cancel from "@vkontakte/icons/dist/24/cancel";
+import Icon24Back from "@vkontakte/icons/dist/24/back";
+import Icon28ChevronBack from "@vkontakte/icons/dist/28/chevron_back";
 import Icon24Done from "@vkontakte/icons/dist/24/done";
 import Icon24Dismiss from "@vkontakte/icons/dist/24/dismiss";
+import Icon24BrowserBack from "@vkontakte/icons/dist/24/browser_back";
 import DayPicker from "react-day-picker";
 
 // import "swiper/dist/css/swiper.css";
@@ -102,9 +111,10 @@ type STATE = {
   modal: ?string,
   errorExplain: ?string,
   isErrorInput: boolean,
-  inputValue: ?string
+  inputValue: ?string,
+  activeView: string
 };
-
+const osname = platform();
 class Entrance extends React.Component<PROPS, STATE> {
   state = {
     screenHeight: window.innerHeight,
@@ -116,7 +126,8 @@ class Entrance extends React.Component<PROPS, STATE> {
     beautifyPayDay: undefined,
     modal: null,
     errorExplain: undefined,
-    isErrorInput: false
+    isErrorInput: false,
+    activeView: "mainView"
   };
 
   componentDidMount() {
@@ -171,7 +182,8 @@ class Entrance extends React.Component<PROPS, STATE> {
     this.setState({
       selectedPayDay: toDay,
       modal: null,
-      beautifyPayDay: dateToString(toDay)
+      beautifyPayDay: dateToString(toDay),
+      activeView: "mainView"
     });
   };
   handleDayClick = (day: any) => {
@@ -183,14 +195,15 @@ class Entrance extends React.Component<PROPS, STATE> {
       this.setState({
         selectedPayDay: day,
         modal: null,
-        beautifyPayDay: dateToString(day)
+        beautifyPayDay: dateToString(day),
+        activeView: "mainView"
       });
     }
   };
 
   handleCurrencyClick = (e: Object) => {
     const { value } = e.target;
-    this.setState({ selectedCurrency: value, modal: null });
+    this.setState({ selectedCurrency: value, activeView: "mainView" });
   };
   onChange = (e: Object) => {
     const { value } = e.currentTarget;
@@ -535,24 +548,26 @@ class Entrance extends React.Component<PROPS, STATE> {
             </ModalPageHeader>
           }
         >
-          <FormLayoutGroup onClick={this.handleCurrencyClick}>
-            <List>
-              {currencies.map((e, i) => {
-                return (
-                  <Radio
-                    key={i}
-                    name="currency"
-                    value={e}
-                    defaultChecked={
-                      this.state.selectedCurrency === e ? true : false
-                    }
-                  >
-                    {e}
-                  </Radio>
-                );
-              })}
-            </List>
-          </FormLayoutGroup>
+          <FormLayout>
+            <FormLayoutGroup onClick={this.handleCurrencyClick}>
+              <List>
+                {currencies.map((e, i) => {
+                  return (
+                    <Radio
+                      key={i}
+                      name="currency"
+                      value={e}
+                      defaultChecked={
+                        this.state.selectedCurrency === e ? true : false
+                      }
+                    >
+                      {e}
+                    </Radio>
+                  );
+                })}
+              </List>
+            </FormLayoutGroup>
+          </FormLayout>
         </ModalPage>
       </ModalRoot>
     );
@@ -575,7 +590,7 @@ class Entrance extends React.Component<PROPS, STATE> {
               <SelectMimicry
                 top="Выберите валюту"
                 placeholder="Не выбрана"
-                onClick={() => this.setState({ modal: "currency" })}
+                onClick={() => this.setState({ activeView: "currencyView" })}
               >
                 {this.state.selectedCurrency}
               </SelectMimicry>
@@ -599,7 +614,7 @@ class Entrance extends React.Component<PROPS, STATE> {
               <SelectMimicry
                 top="Выберите дату получения зарплаты"
                 placeholder="Не выбрана"
-                onClick={() => this.setState({ modal: "calendar" })}
+                onClick={() => this.setState({ activeView: "calendarView" })}
               >
                 {this.state.beautifyPayDay}
               </SelectMimicry>
@@ -645,8 +660,8 @@ class Entrance extends React.Component<PROPS, STATE> {
       </div>
     );
 
-    return (
-      <View activePanel={"main_panel"} modal={modal}>
+    const mainView = (
+      <View activePanel={"main_panel"} modal={modal} id="mainView">
         <Panel id="main_panel">
           <div className={style.entrance}>
             <CSSTransition
@@ -731,6 +746,100 @@ class Entrance extends React.Component<PROPS, STATE> {
           </div>
         </Panel>
       </View>
+    );
+    const calendarView = (
+      <View activePanel={"mainPanel"} id="calendarView">
+        <Panel
+          id="mainPanel"
+          left={
+            <PanelHeaderClose
+              onClick={() => this.setState({ activeView: "mainView" })}
+            />
+          }
+        >
+          <PanelHeader
+            addon={
+              <HeaderButton
+                onClick={() => this.setState({ activeView: "mainView" })}
+              >
+                Назад
+              </HeaderButton>
+            }
+            left={
+              <HeaderButton
+                onClick={() => this.setState({ activeView: "mainView" })}
+              >
+                {osname === IOS ? <Icon28ChevronBack /> : <Icon24Back />}
+              </HeaderButton>
+            }
+          >
+            Календарь
+          </PanelHeader>
+          <DayPicker
+            locale={"ru"}
+            months={MONTHS["ru"]}
+            weekdaysLong={WEEKDAYS_LONG["ru"]}
+            weekdaysShort={WEEKDAYS_SHORT["ru"]}
+            firstDayOfWeek={FIRST_DAY_OF_WEEK["ru"]}
+            labels={LABELS["ru"]}
+            todayButton={"сегодня"}
+            onTodayButtonClick={this.handleToDayBtn}
+            onDayClick={this.handleDayClick}
+            selectedDays={[stringToDate(this.state.selectedPayDay)]}
+            disabledDays={[{ before: new Date() }]}
+          />
+        </Panel>
+      </View>
+    );
+    const currencyView = (
+      <View activePanel="mainPanel" id="currencyView">
+        <Panel id="mainPanel">
+          <PanelHeader
+            addon={
+              <HeaderButton
+                onClick={() => this.setState({ activeView: "mainView" })}
+              >
+                Назад
+              </HeaderButton>
+            }
+            left={
+              <HeaderButton
+                onClick={() => this.setState({ activeView: "mainView" })}
+              >
+                {osname === IOS ? <Icon28ChevronBack /> : <Icon24Back />}
+              </HeaderButton>
+            }
+          >
+            Валюта
+          </PanelHeader>
+
+          <FormLayoutGroup onClick={this.handleCurrencyClick}>
+            <List>
+              {currencies.map((e, i) => {
+                return (
+                  <Radio
+                    key={i}
+                    name="currency"
+                    value={e}
+                    defaultChecked={
+                      this.state.selectedCurrency === e ? true : false
+                    }
+                  >
+                    {e}
+                  </Radio>
+                );
+              })}
+            </List>
+          </FormLayoutGroup>
+        </Panel>
+      </View>
+    );
+    return (
+      <Root activeView={this.state.activeView}>
+        {mainView}
+        {calendarView}
+        {currencyView}
+      </Root>
     );
   }
 }
