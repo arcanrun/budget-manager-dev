@@ -32,6 +32,7 @@ import Icon24Done from "@vkontakte/icons/dist/24/done";
 import Icon24Dismiss from "@vkontakte/icons/dist/24/dismiss";
 import Icon24BrowserBack from "@vkontakte/icons/dist/24/browser_back";
 import DayPicker from "react-day-picker";
+import { MainView } from "./SubComponents/MainView/index";
 
 // import "swiper/dist/css/swiper.css";
 import style from "./Entrance.module.css";
@@ -660,93 +661,93 @@ class Entrance extends React.Component<PROPS, STATE> {
       </div>
     );
 
-    const mainView = (
-      <View activePanel={"main_panel"} modal={modal} id="mainView">
-        <Panel id="main_panel">
-          <div className={style.entrance}>
-            <CSSTransition
-              in={isVkId}
-              timeout={300}
-              classNames={"zooming"}
-              unmountOnExit
-            >
-              {enterData}
-            </CSSTransition>
+    // const mainView = (
+    //   <View activePanel={"main_panel"} modal={modal} id="mainView">
+    //     <Panel id="main_panel">
+    //       <div className={style.entrance}>
+    //         <CSSTransition
+    //           in={isVkId}
+    //           timeout={300}
+    //           classNames={"zooming"}
+    //           unmountOnExit
+    //         >
+    //           {enterData}
+    //         </CSSTransition>
 
-            <CSSTransition
-              in={!isVkId}
-              timeout={300}
-              classNames={"zooming"}
-              unmountOnExit
-            >
-              <Swiper {...params}>
-                <div className={style.item}>
-                  <EntranceItem
-                    isMinWidth={isMinWidth}
-                    isMinHeight={isMinHeight}
-                    image={"budget-logo"}
-                    title={"50/30/20"}
-                    text={firstScreenText}
-                    imgHeight="140px"
-                    imgWidth="140px"
-                  />
-                </div>
-                <div className={style.item}>
-                  <EntranceItem
-                    isMinWidth={isMinWidth}
-                    isMinHeight={isMinHeight}
-                    image={"payment-logo"}
-                    title={"ОБЯЗАТЕЛЬНЫЕ НУЖДЫ"}
-                    text={secondScreenText}
-                    bgText="50"
-                    imgHeight="170px"
-                    imgWidth="170px"
-                  />
-                </div>
-                <div className={style.item}>
-                  <EntranceItem
-                    isMinWidth={isMinWidth}
-                    isMinHeight={isMinHeight}
-                    image={"fun-logo"}
-                    title={"ЖЕЛАНИЯ"}
-                    text={thirdScreenText}
-                    bgText="30"
-                    imgHeight="190px"
-                    imgWidth="190px"
-                  />
-                </div>
-                <div className={style.item}>
-                  <EntranceItem
-                    isMinWidth={isMinWidth}
-                    isMinHeight={isMinHeight}
-                    image={"invest-logo"}
-                    title={"БУДУЩЕЕ"}
-                    text={fourthScreenText}
-                    bgText="20"
-                    imgHeight="190px"
-                    imgWidth="190px"
-                  />
-                </div>
-                <div className={style.item}>
-                  <EntranceItem
-                    error={error}
-                    isFetching={isFetching}
-                    isMinWidth={isMinWidth}
-                    isMinHeight={isMinHeight}
-                    image={"protect-logo"}
-                    title={""}
-                    text={fivthScreen}
-                    imgHeight="140px"
-                    imgWidth="140px"
-                    btnLogin={btnLogin}
-                  />
-                </div>
-              </Swiper>
-            </CSSTransition>
-          </div>
-        </Panel>
-      </View>
-    );
+    //         <CSSTransition
+    //           in={!isVkId}
+    //           timeout={300}
+    //           classNames={"zooming"}
+    //           unmountOnExit
+    //         >
+    //           <Swiper {...params}>
+    //             <div className={style.item}>
+    //               <EntranceItem
+    //                 isMinWidth={isMinWidth}
+    //                 isMinHeight={isMinHeight}
+    //                 image={"budget-logo"}
+    //                 title={"50/30/20"}
+    //                 text={firstScreenText}
+    //                 imgHeight="140px"
+    //                 imgWidth="140px"
+    //               />
+    //             </div>
+    //             <div className={style.item}>
+    //               <EntranceItem
+    //                 isMinWidth={isMinWidth}
+    //                 isMinHeight={isMinHeight}
+    //                 image={"payment-logo"}
+    //                 title={"ОБЯЗАТЕЛЬНЫЕ НУЖДЫ"}
+    //                 text={secondScreenText}
+    //                 bgText="50"
+    //                 imgHeight="170px"
+    //                 imgWidth="170px"
+    //               />
+    //             </div>
+    //             <div className={style.item}>
+    //               <EntranceItem
+    //                 isMinWidth={isMinWidth}
+    //                 isMinHeight={isMinHeight}
+    //                 image={"fun-logo"}
+    //                 title={"ЖЕЛАНИЯ"}
+    //                 text={thirdScreenText}
+    //                 bgText="30"
+    //                 imgHeight="190px"
+    //                 imgWidth="190px"
+    //               />
+    //             </div>
+    //             <div className={style.item}>
+    //               <EntranceItem
+    //                 isMinWidth={isMinWidth}
+    //                 isMinHeight={isMinHeight}
+    //                 image={"invest-logo"}
+    //                 title={"БУДУЩЕЕ"}
+    //                 text={fourthScreenText}
+    //                 bgText="20"
+    //                 imgHeight="190px"
+    //                 imgWidth="190px"
+    //               />
+    //             </div>
+    //             <div className={style.item}>
+    //               <EntranceItem
+    //                 error={error}
+    //                 isFetching={isFetching}
+    //                 isMinWidth={isMinWidth}
+    //                 isMinHeight={isMinHeight}
+    //                 image={"protect-logo"}
+    //                 title={""}
+    //                 text={fivthScreen}
+    //                 imgHeight="140px"
+    //                 imgWidth="140px"
+    //                 btnLogin={btnLogin}
+    //               />
+    //             </div>
+    //           </Swiper>
+    //         </CSSTransition>
+    //       </div>
+    //     </Panel>
+    //   </View>
+    // );
     const calendarView = (
       <View activePanel={"mainPanel"} id="calendarView">
         <Panel
@@ -836,7 +837,14 @@ class Entrance extends React.Component<PROPS, STATE> {
     );
     return (
       <Root activeView={this.state.activeView}>
-        {mainView}
+        <MainView
+          signUp={this.props.signUp}
+          enterData={enterData}
+          isVkId={isVkId}
+          btnLogin={btnLogin}
+          error={error}
+          isFetching={isFetching}
+        />
         {calendarView}
         {currencyView}
       </Root>
