@@ -3,41 +3,29 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { View, Panel } from "@vkontakte/vkui";
+
 import Swiper from "react-id-swiper";
 import { CSSTransition } from "react-transition-group";
 import { EntranceItem } from "../../../index";
 import style from "./MainView.module.css";
+import "./costumizedSwiper.css";
+import {
+  SWIPER_PARAMS,
+  FIRST_SCREEN_TEXT,
+  SECOND_SCREEN_TEXT,
+  THIRD_SCREEN_TEXT,
+  FOURTH_SCREEN_TEXT,
+  FIVTH_SCREEN_TEXT
+} from "./helpers";
 
 type PROPS = {
   isVkId: boolean,
-  enterData: React.Node,
-  signUp: Funciton,
+  enterData: React.Element<"div">,
+  signUp: () => void,
   btnLogin: React.Node,
   error: boolean,
   isFetching: boolean
 };
-const params = {
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-    modifierClass: "customized-swiper-pagination",
-    bulletClass: "customized-swiper-pagination-bullet",
-    bulletActiveClass: "customized-swiper-pagination-bullet-active"
-  },
-  containerClass: "customized-swiper-container"
-};
-
-const firstScreenText =
-  "Правило 50/30/20 позволит Вам копить деньги и не отказывать себе в удовольствиях. ";
-
-const secondScreenText =
-  "50% ежемесячного заработка должны уходить на все необходимые траты: аренду или ипотеку, транспорт, продукты, коммунальные услуги и прочие вещи, без которых никуда.";
-const thirdScreenText =
-  "30% — на развлечения: шоппинг, рестораны, уход за собой и другое. ";
-const fourthScreenText =
-  "20% должны уходить на накопления, выплату долгов, инвестиции.";
-const fivthScreen =
-  "50/30/20 поможет распланировать личные денежные средства максимально рационально.";
 
 export const MainView = ({
   isVkId,
@@ -85,14 +73,14 @@ export const MainView = ({
           classNames={"zooming"}
           unmountOnExit
         >
-          <Swiper {...params}>
+          <Swiper {...SWIPER_PARAMS}>
             <div className={style.item}>
               <EntranceItem
                 isMinWidth={isMinWidth}
                 isMinHeight={isMinHeight}
                 image={"budget-logo"}
                 title={"50/30/20"}
-                text={firstScreenText}
+                text={FIRST_SCREEN_TEXT}
                 imgHeight="140px"
                 imgWidth="140px"
               />
@@ -103,7 +91,7 @@ export const MainView = ({
                 isMinHeight={isMinHeight}
                 image={"payment-logo"}
                 title={"ОБЯЗАТЕЛЬНЫЕ НУЖДЫ"}
-                text={secondScreenText}
+                text={SECOND_SCREEN_TEXT}
                 bgText="50"
                 imgHeight="170px"
                 imgWidth="170px"
@@ -115,7 +103,7 @@ export const MainView = ({
                 isMinHeight={isMinHeight}
                 image={"fun-logo"}
                 title={"ЖЕЛАНИЯ"}
-                text={thirdScreenText}
+                text={THIRD_SCREEN_TEXT}
                 bgText="30"
                 imgHeight="190px"
                 imgWidth="190px"
@@ -127,7 +115,7 @@ export const MainView = ({
                 isMinHeight={isMinHeight}
                 image={"invest-logo"}
                 title={"БУДУЩЕЕ"}
-                text={fourthScreenText}
+                text={FOURTH_SCREEN_TEXT}
                 bgText="20"
                 imgHeight="190px"
                 imgWidth="190px"
@@ -141,7 +129,7 @@ export const MainView = ({
                 isMinHeight={isMinHeight}
                 image={"protect-logo"}
                 title={""}
-                text={fivthScreen}
+                text={FIVTH_SCREEN_TEXT}
                 imgHeight="140px"
                 imgWidth="140px"
                 btnLogin={btnLogin}

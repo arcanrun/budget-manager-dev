@@ -33,56 +33,17 @@ import Icon24Dismiss from "@vkontakte/icons/dist/24/dismiss";
 import Icon24BrowserBack from "@vkontakte/icons/dist/24/browser_back";
 import DayPicker from "react-day-picker";
 import { MainView } from "./SubComponents/MainView/index";
-
+import { CalendarView } from "./SubComponents/CalendarView/index";
+import { CurrencyView } from "./SubComponents/CurrencyView/index";
 // import "swiper/dist/css/swiper.css";
 import style from "./Entrance.module.css";
-import "./costumizedSwiper.css";
+
 import { EntranceItem, Spinner } from "../index";
 import {
   stringToDate,
   dateToString,
   addSuffix
 } from "../Calendar/calendarHelper";
-
-const WEEKDAYS_SHORT = {
-  ru: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]
-};
-const MONTHS = {
-  ru: [
-    "Январь",
-    "Февраль",
-    "Март",
-    "Апрель",
-    "Май",
-    "Июнь",
-    "Июль",
-    "Август",
-    "Сентябрь",
-    "Октябрь",
-    "Ноябрь",
-    "Декабрь"
-  ]
-};
-
-const WEEKDAYS_LONG = {
-  ru: [
-    "Воскресенье",
-    "Понедельник",
-    "Вторник",
-    "Среда",
-    "Четверг",
-    "Пятница",
-    "Суббота"
-  ]
-};
-
-const FIRST_DAY_OF_WEEK = {
-  ru: 1
-};
-// Translate aria-labels
-const LABELS = {
-  ru: { nextMonth: "следующий месяц", previousMonth: "предыдущий месяц" }
-};
 
 type PROPS = {
   signUp: Function,
@@ -271,181 +232,6 @@ class Entrance extends React.Component<PROPS, STATE> {
     return true;
   };
   render() {
-    const currencies = [
-      "AED",
-      "AFN",
-      "ALL",
-      "AMD",
-      "ANG",
-      "AOA",
-      "ARS",
-      "AUD",
-      "AWG",
-      "AZN",
-      "BAM",
-      "BBD",
-      "BDT",
-      "BGN",
-      "BHD",
-      "BIF",
-      "BMD",
-      "BND",
-      "BOB",
-      "BRL",
-      "BSD",
-      "BTC",
-      "BTN",
-      "BWP",
-      "BYR",
-      "BYN",
-      "BZD",
-      "CAD",
-      "CDF",
-      "CHF",
-      "CLP",
-      "CNY",
-      "COP",
-      "CRC",
-      "CUC",
-      "CUP",
-      "CVE",
-      "CZK",
-      "DJF",
-      "DKK",
-      "DOP",
-      "DZD",
-      "EEK",
-      "EGP",
-      "ERN",
-      "ETB",
-      "ETH",
-      "EUR",
-      "FJD",
-      "FKP",
-      "GBP",
-      "GEL",
-      "GGP",
-      "GHC",
-      "GHS",
-      "GIP",
-      "GMD",
-      "GNF",
-      "GTQ",
-      "GYD",
-      "HKD",
-      "HNL",
-      "HRK",
-      "HTG",
-      "HUF",
-      "IDR",
-      "ILS",
-      "IMP",
-      "INR",
-      "IQD",
-      "IRR",
-      "ISK",
-      "JEP",
-      "JMD",
-      "JOD",
-      "JPY",
-      "KES",
-      "KGS",
-      "KHR",
-      "KMF",
-      "KPW",
-      "KRW",
-      "KWD",
-      "KYD",
-      "KZT",
-      "LAK",
-      "LBP",
-      "LKR",
-      "LRD",
-      "LSL",
-      "LTC",
-      "LTL",
-      "LVL",
-      "LYD",
-      "MAD",
-      "MDL",
-      "MGA",
-      "MKD",
-      "MMK",
-      "MNT",
-      "MOP",
-      "MRO",
-      "MRU",
-      "MUR",
-      "MVR",
-      "MWK",
-      "MXN",
-      "MYR",
-      "MZN",
-      "NAD",
-      "NGN",
-      "NIO",
-      "NOK",
-      "NPR",
-      "NZD",
-      "OMR",
-      "PAB",
-      "PEN",
-      "PGK",
-      "PHP",
-      "PKR",
-      "PLN",
-      "PYG",
-      "QAR",
-      "RMB",
-      "RON",
-      "RSD",
-      "RUB",
-      "RWF",
-      "SAR",
-      "SBD",
-      "SCR",
-      "SDG",
-      "SEK",
-      "SGD",
-      "SHP",
-      "SLL",
-      "SOS",
-      "SRD",
-      "SSP",
-      "STD",
-      "STN",
-      "SVC",
-      "SYP",
-      "SZL",
-      "THB",
-      "TJS",
-      "TMT",
-      "TND",
-      "TOP",
-      "TRL",
-      "TRY",
-      "TTD",
-      "TVD",
-      "TWD",
-      "TZS",
-      "UAH",
-      "UGX",
-      "USD",
-      "UYU",
-      "UZS",
-      "VEF",
-      "VND",
-      "VUV",
-      "WST",
-      "XAF",
-      "XBT",
-      "XCD",
-      "XOF",
-      "XPF",
-      "YER",
-      "ZAR",
-      "ZWD"
-    ];
     const {
       screenHeight,
       screenWidth,
@@ -457,121 +243,11 @@ class Entrance extends React.Component<PROPS, STATE> {
       inputValue
     } = this.state;
     const { isFetching, error, budget, payDay, sendEnterData } = this.props;
-    const isMinWidth = screenWidth <= 250 ? true : false;
-    const isMinHeight = screenHeight < 480 ? true : false;
 
     let bottomWarning = errorExplain
       ? errorExplain
       : "Введите число, которое больше нуля";
 
-    const firstScreenText =
-      "Правило 50/30/20 позволит Вам копить деньги и не отказывать себе в удовольствиях. ";
-
-    const secondScreenText =
-      "50% ежемесячного заработка должны уходить на все необходимые траты: аренду или ипотеку, транспорт, продукты, коммунальные услуги и прочие вещи, без которых никуда.";
-    const thirdScreenText =
-      "30% — на развлечения: шоппинг, рестораны, уход за собой и другое. ";
-    const fourthScreenText =
-      "20% должны уходить на накопления, выплату долгов, инвестиции.";
-    const fivthScreen =
-      "50/30/20 поможет распланировать личные денежные средства максимально рационально.";
-    const params = {
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-        modifierClass: "customized-swiper-pagination",
-        bulletClass: "customized-swiper-pagination-bullet",
-        bulletActiveClass: "customized-swiper-pagination-bullet-active"
-      },
-      containerClass: "customized-swiper-container"
-    };
-    const modal = (
-      <ModalRoot activeModal={this.state.modal}>
-        <ModalPage
-          id="calendar"
-          onClose={this.onCloseModal}
-          header={
-            <ModalPageHeader
-              left={
-                IS_PLATFORM_ANDROID && (
-                  <HeaderButton onClick={this.onCloseModal}>
-                    <Icon24Cancel />
-                  </HeaderButton>
-                )
-              }
-              right={
-                IS_PLATFORM_IOS && (
-                  <HeaderButton onClick={this.onCloseModal}>
-                    <Icon24Dismiss />
-                  </HeaderButton>
-                )
-              }
-            >
-              Дата получения зарплаты
-            </ModalPageHeader>
-          }
-        >
-          <DayPicker
-            locale={"ru"}
-            months={MONTHS["ru"]}
-            weekdaysLong={WEEKDAYS_LONG["ru"]}
-            weekdaysShort={WEEKDAYS_SHORT["ru"]}
-            firstDayOfWeek={FIRST_DAY_OF_WEEK["ru"]}
-            labels={LABELS["ru"]}
-            todayButton={"сегодня"}
-            onTodayButtonClick={this.handleToDayBtn}
-            onDayClick={this.handleDayClick}
-            selectedDays={[stringToDate(this.state.selectedPayDay)]}
-            disabledDays={[{ before: new Date() }]}
-          />
-        </ModalPage>
-        <ModalPage
-          id="currency"
-          onClose={this.onCloseModal}
-          header={
-            <ModalPageHeader
-              left={
-                IS_PLATFORM_ANDROID && (
-                  <HeaderButton onClick={this.onCloseModal}>
-                    <Icon24Cancel />
-                  </HeaderButton>
-                )
-              }
-              right={
-                IS_PLATFORM_IOS && (
-                  <HeaderButton onClick={this.onCloseModal}>
-                    <Icon24Dismiss />
-                  </HeaderButton>
-                )
-              }
-            >
-              Валюта
-            </ModalPageHeader>
-          }
-        >
-          <FormLayout>
-            <FormLayoutGroup onClick={this.handleCurrencyClick}>
-              <List>
-                {currencies.map((e, i) => {
-                  return (
-                    <Radio
-                      key={i}
-                      name="currency"
-                      value={e}
-                      defaultChecked={
-                        this.state.selectedCurrency === e ? true : false
-                      }
-                    >
-                      {e}
-                    </Radio>
-                  );
-                })}
-              </List>
-            </FormLayoutGroup>
-          </FormLayout>
-        </ModalPage>
-      </ModalRoot>
-    );
     const btnLogin = (
       <button
         onClick={() => this.props.signUp(this.props.params)}
@@ -661,95 +337,34 @@ class Entrance extends React.Component<PROPS, STATE> {
       </div>
     );
 
-    // const mainView = (
-    //   <View activePanel={"main_panel"} modal={modal} id="mainView">
-    //     <Panel id="main_panel">
-    //       <div className={style.entrance}>
-    //         <CSSTransition
-    //           in={isVkId}
-    //           timeout={300}
-    //           classNames={"zooming"}
-    //           unmountOnExit
-    //         >
-    //           {enterData}
-    //         </CSSTransition>
+    const currencyView = (
+      <View activePanel="mainPanel" id="currencyView">
+        <Panel id="mainPanel">
+          <CurrencyView
+            goBack={() => this.setState({ activeView: "mainView" })}
+            handleCurrencyClick={this.handleCurrencyClick}
+            selectedCurrency={this.state.selectedCurrency}
+          />
+        </Panel>
+      </View>
+    );
 
-    //         <CSSTransition
-    //           in={!isVkId}
-    //           timeout={300}
-    //           classNames={"zooming"}
-    //           unmountOnExit
-    //         >
-    //           <Swiper {...params}>
-    //             <div className={style.item}>
-    //               <EntranceItem
-    //                 isMinWidth={isMinWidth}
-    //                 isMinHeight={isMinHeight}
-    //                 image={"budget-logo"}
-    //                 title={"50/30/20"}
-    //                 text={firstScreenText}
-    //                 imgHeight="140px"
-    //                 imgWidth="140px"
-    //               />
-    //             </div>
-    //             <div className={style.item}>
-    //               <EntranceItem
-    //                 isMinWidth={isMinWidth}
-    //                 isMinHeight={isMinHeight}
-    //                 image={"payment-logo"}
-    //                 title={"ОБЯЗАТЕЛЬНЫЕ НУЖДЫ"}
-    //                 text={secondScreenText}
-    //                 bgText="50"
-    //                 imgHeight="170px"
-    //                 imgWidth="170px"
-    //               />
-    //             </div>
-    //             <div className={style.item}>
-    //               <EntranceItem
-    //                 isMinWidth={isMinWidth}
-    //                 isMinHeight={isMinHeight}
-    //                 image={"fun-logo"}
-    //                 title={"ЖЕЛАНИЯ"}
-    //                 text={thirdScreenText}
-    //                 bgText="30"
-    //                 imgHeight="190px"
-    //                 imgWidth="190px"
-    //               />
-    //             </div>
-    //             <div className={style.item}>
-    //               <EntranceItem
-    //                 isMinWidth={isMinWidth}
-    //                 isMinHeight={isMinHeight}
-    //                 image={"invest-logo"}
-    //                 title={"БУДУЩЕЕ"}
-    //                 text={fourthScreenText}
-    //                 bgText="20"
-    //                 imgHeight="190px"
-    //                 imgWidth="190px"
-    //               />
-    //             </div>
-    //             <div className={style.item}>
-    //               <EntranceItem
-    //                 error={error}
-    //                 isFetching={isFetching}
-    //                 isMinWidth={isMinWidth}
-    //                 isMinHeight={isMinHeight}
-    //                 image={"protect-logo"}
-    //                 title={""}
-    //                 text={fivthScreen}
-    //                 imgHeight="140px"
-    //                 imgWidth="140px"
-    //                 btnLogin={btnLogin}
-    //               />
-    //             </div>
-    //           </Swiper>
-    //         </CSSTransition>
-    //       </div>
-    //     </Panel>
-    //   </View>
-    // );
+    const mainView = (
+      <View activePanel="main_panel" id="mainView">
+        <Panel id="main_panel">
+          <MainView
+            signUp={this.props.signUp}
+            enterData={enterData}
+            isVkId={isVkId}
+            btnLogin={btnLogin}
+            error={error}
+            isFetching={isFetching}
+          />
+        </Panel>
+      </View>
+    );
     const calendarView = (
-      <View activePanel={"mainPanel"} id="calendarView">
+      <View activePanel="mainPanel" id="calendarView">
         <Panel
           id="mainPanel"
           left={
@@ -758,97 +373,19 @@ class Entrance extends React.Component<PROPS, STATE> {
             />
           }
         >
-          <PanelHeader
-            addon={
-              <HeaderButton
-                onClick={() => this.setState({ activeView: "mainView" })}
-              >
-                Назад
-              </HeaderButton>
-            }
-            left={
-              <HeaderButton
-                onClick={() => this.setState({ activeView: "mainView" })}
-              >
-                {osname === IOS ? <Icon28ChevronBack /> : <Icon24Back />}
-              </HeaderButton>
-            }
-          >
-            Календарь
-          </PanelHeader>
-          <DayPicker
-            locale={"ru"}
-            months={MONTHS["ru"]}
-            weekdaysLong={WEEKDAYS_LONG["ru"]}
-            weekdaysShort={WEEKDAYS_SHORT["ru"]}
-            firstDayOfWeek={FIRST_DAY_OF_WEEK["ru"]}
-            labels={LABELS["ru"]}
-            todayButton={"сегодня"}
+          <CalendarView
             onTodayButtonClick={this.handleToDayBtn}
             onDayClick={this.handleDayClick}
-            selectedDays={[stringToDate(this.state.selectedPayDay)]}
-            disabledDays={[{ before: new Date() }]}
+            goBack={() => this.setState({ activeView: "mainView" })}
+            selectedPayDay={this.state.selectedPayDay}
           />
         </Panel>
       </View>
     );
-    const currencyView = (
-      <View activePanel="mainPanel" id="currencyView">
-        <Panel id="mainPanel">
-          <PanelHeader
-            addon={
-              <HeaderButton
-                onClick={() => this.setState({ activeView: "mainView" })}
-              >
-                Назад
-              </HeaderButton>
-            }
-            left={
-              <HeaderButton
-                onClick={() => this.setState({ activeView: "mainView" })}
-              >
-                {osname === IOS ? <Icon28ChevronBack /> : <Icon24Back />}
-              </HeaderButton>
-            }
-          >
-            Валюта
-          </PanelHeader>
 
-          <FormLayoutGroup onClick={this.handleCurrencyClick}>
-            <List>
-              {currencies.map((e, i) => {
-                return (
-                  <Radio
-                    key={i}
-                    name="currency"
-                    value={e}
-                    defaultChecked={
-                      this.state.selectedCurrency === e ? true : false
-                    }
-                  >
-                    {e}
-                  </Radio>
-                );
-              })}
-            </List>
-          </FormLayoutGroup>
-        </Panel>
-      </View>
-    );
     return (
       <Root activeView={this.state.activeView}>
-        <View activePanel={"main_panel"} id="mainView">
-          <Panel id="main_panel">
-            <MainView
-              signUp={this.props.signUp}
-              enterData={enterData}
-              isVkId={isVkId}
-              btnLogin={btnLogin}
-              error={error}
-              isFetching={isFetching}
-            />
-          </Panel>
-        </View>
+        {mainView}
         {calendarView}
         {currencyView}
       </Root>
