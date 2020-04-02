@@ -837,14 +837,18 @@ class Entrance extends React.Component<PROPS, STATE> {
     );
     return (
       <Root activeView={this.state.activeView}>
-        <MainView
-          signUp={this.props.signUp}
-          enterData={enterData}
-          isVkId={isVkId}
-          btnLogin={btnLogin}
-          error={error}
-          isFetching={isFetching}
-        />
+        <View activePanel={"main_panel"} id="mainView">
+          <Panel id="main_panel">
+            <MainView
+              signUp={this.props.signUp}
+              enterData={enterData}
+              isVkId={isVkId}
+              btnLogin={btnLogin}
+              error={error}
+              isFetching={isFetching}
+            />
+          </Panel>
+        </View>
         {calendarView}
         {currencyView}
       </Root>
