@@ -26,6 +26,7 @@ export const CurrencyView = ({
   handleCurrencyClick,
   selectedCurrency
 }: PROPS) => {
+    //todo: useCostumHook
   const [osname, setOsname] = useState(platform());
 
   useEffect(() => {

@@ -36,6 +36,7 @@ export const CalendarView = ({
   goBack,
   selectedPayDay
 }: PROPS) => {
+    //todo: useCostumHook
   const [osname, setOsname] = useState(platform());
 
   useEffect(() => {
