@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "3d3f1838abc0417f8d85",
+    "revision": "9faf2f78017d5a0cb7c9",
     "url": "/budget-manager-dev/static/css/main.33de3b7d.chunk.css"
   },
   {
-    "revision": "3d3f1838abc0417f8d85",
-    "url": "/budget-manager-dev/static/js/main.8e97f28a.chunk.js"
+    "revision": "9faf2f78017d5a0cb7c9",
+    "url": "/budget-manager-dev/static/js/main.3cbea2ae.chunk.js"
   },
   {
     "revision": "094d6f4077ec791109e4",
@@ -56,20 +56,24 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/fa-brands-400.ec3cfdde.woff"
   },
   {
-    "revision": "c20b5b7362d8d7bb7eddf94344ace33e",
-    "url": "/budget-manager-dev/static/media/fa-regular-400.c20b5b73.woff2"
+    "revision": "f89ea91ecd1ca2db7e09baa2c4b156d1",
+    "url": "/budget-manager-dev/static/media/fa-regular-400.f89ea91e.woff"
   },
   {
     "revision": "261d666b0147c6c5cda07265f98b8f8c",
     "url": "/budget-manager-dev/static/media/fa-regular-400.261d666b.eot"
   },
   {
+    "revision": "c20b5b7362d8d7bb7eddf94344ace33e",
+    "url": "/budget-manager-dev/static/media/fa-regular-400.c20b5b73.woff2"
+  },
+  {
     "revision": "db78b9359171f24936b16d84f63af378",
     "url": "/budget-manager-dev/static/media/fa-regular-400.db78b935.ttf"
   },
   {
-    "revision": "f89ea91ecd1ca2db7e09baa2c4b156d1",
-    "url": "/budget-manager-dev/static/media/fa-regular-400.f89ea91e.woff"
+    "revision": "89ffa3aba80d30ee0a9371b25c968bbb",
+    "url": "/budget-manager-dev/static/media/fa-regular-400.89ffa3ab.svg"
   },
   {
     "revision": "b15db15f746f29ffa02638cb455b8ec0",
@@ -78,10 +82,6 @@ self.__precacheManifest = [
   {
     "revision": "bea989e82b07e9687c26fc58a4805021",
     "url": "/budget-manager-dev/static/media/fa-solid-900.bea989e8.woff"
-  },
-  {
-    "revision": "89ffa3aba80d30ee0a9371b25c968bbb",
-    "url": "/budget-manager-dev/static/media/fa-regular-400.89ffa3ab.svg"
   },
   {
     "revision": "1ab236ed440ee51810c56bd16628aef0",
@@ -204,7 +204,7 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/lightbulb.c81046f0.svg"
   },
   {
-    "revision": "2b2c01921ab2d0722a2a63b4425838d8",
+    "revision": "0c311aee1dfcc969aaa80d2d48238a77",
     "url": "/budget-manager-dev/index.html"
   }
 ];
