@@ -2,6 +2,8 @@
 import * as React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import {useHistory} from "react-router-dom";
+
 import {
   PanelHeader,
   HeaderButton,
@@ -16,19 +18,21 @@ import Icon28ChevronBack from "@vkontakte/icons/dist/28/chevron_back";
 
 import { CURRENCIES } from "./helpers";
 
+
 type PROPS = {
-  goBack: () => void,
   handleCurrencyClick: () => void,
   selectedCurrency: ?string
 };
 export const CurrencyView = ({
-  goBack,
   handleCurrencyClick,
   selectedCurrency
 }: PROPS) => {
     //todo: useCostumHook
   const [osname, setOsname] = useState(platform());
-
+  let history = useHistory();
+  const goBack = () =>{
+    history.push("mainView");
+  }
   useEffect(() => {
     setOsname(platform());
   });

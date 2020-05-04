@@ -174,6 +174,7 @@ export class App extends React.Component<PROPS, STATE> {
     }
 
     if (nextState.activeStory !== window.location.pathname) {
+
       this.props.hideModal();
       this.setState({ activeStory: window.location.pathname });
       this.setState({ popupAlert: null });

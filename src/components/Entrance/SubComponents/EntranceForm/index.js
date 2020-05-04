@@ -3,6 +3,7 @@
 import * as React from "react";
 import {useState} from "react";
 import {FormLayout, SelectMimicry, Input, Button} from "@vkontakte/vkui";
+import {useHistory} from "react-router-dom";
 
 import {CSSTransition} from "react-transition-group";
 import style from "./EntranceForm.module.css";
@@ -14,24 +15,24 @@ type PROPS = {
     selectedCurrency: ?string,
     isFetching: boolean,
     sendEnterData: ()=>void,
-    goTo: ()=>void,
+
     beautifyPayDay: ?string,
 
 };
 
-export const EntranceForm = ({isVkId, selectedPayDay, selectedCurrency, isFetching, sendEnterData, goTo, beautifyPayDay}: PROPS) => {
+export const EntranceForm = ({isVkId, selectedPayDay, selectedCurrency, isFetching, sendEnterData, beautifyPayDay}: PROPS) => {
     const [isErrorInput, setIsErrorInput] = useState(false);
     const [inputValue, setInputValue] = useState(undefined);
     const [errorExplain, setErrorExplain] = useState(undefined);
-
+    const history = useHistory();
 
     let bottomWarning = errorExplain
         ? errorExplain
         : "Введите число, которое больше нуля";
 
-    // const goToWithHistory = (route:string)=>{
-    //
-    // }
+    const goToWithHistory = (route: string) => {
+        history.push(route);
+    }
 
     const onChange = (e: Object) => {
         const {value} = e.currentTarget;
@@ -80,7 +81,7 @@ export const EntranceForm = ({isVkId, selectedPayDay, selectedCurrency, isFetchi
                                 <SelectMimicry
                                     top="Выберите валюту"
                                     placeholder="Не выбрана"
-                                    onClick={() => goTo("currencyView")}
+                                    onClick={() => goToWithHistory("currencyView")}
                                 >
                                     {selectedCurrency}
                                 </SelectMimicry>
@@ -104,7 +105,7 @@ export const EntranceForm = ({isVkId, selectedPayDay, selectedCurrency, isFetchi
                                 <SelectMimicry
                                     top="Выберите дату получения зарплаты"
                                     placeholder="Не выбрана"
-                                    onClick={() => goTo("calendarView")}
+                                    onClick={() => goToWithHistory("calendarView")}
                                 >
                                     {beautifyPayDay}
                                 </SelectMimicry>

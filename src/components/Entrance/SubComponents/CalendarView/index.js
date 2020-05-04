@@ -2,6 +2,8 @@
 import * as React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import {useHistory} from "react-router-dom";
+
 import {
   Panel,
   PanelHeaderClose,
@@ -26,18 +28,21 @@ import { stringToDate } from "../../../Calendar/calendarHelper";
 type PROPS = {
   onTodayButtonClick: () => void,
   onDayClick: () => void,
-  goBack: () => void,
   selectedPayDay: ?string
 };
 
 export const CalendarView = ({
   onTodayButtonClick,
   onDayClick,
-  goBack,
   selectedPayDay
 }: PROPS) => {
     //todo: useCostumHook
   const [osname, setOsname] = useState(platform());
+  let history = useHistory();
+  const goBack = () =>{
+        history.push("mainView");
+  }
+
 
   useEffect(() => {
     setOsname(platform());

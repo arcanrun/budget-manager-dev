@@ -5,7 +5,6 @@ import {
     View,
     Panel,
     Root,
-    PanelHeaderClose,
 } from "@vkontakte/vkui";
 import {EntranceForm} from "./SubComponents/EntranceForm/index";
 import {CalendarView} from "./SubComponents/CalendarView/index";
@@ -44,7 +43,7 @@ type STATE = {
     errorExplain: ?string,
     isErrorInput: boolean,
     inputValue: ?string,
-    activeView: string
+
 };
 
 
@@ -59,7 +58,7 @@ class Entrance extends React.Component<PROPS, STATE> {
         beautifyPayDay: undefined,
         errorExplain: undefined,
         isErrorInput: false,
-        activeView: "mainView"
+
     };
 
     componentDidMount() {
@@ -75,6 +74,7 @@ class Entrance extends React.Component<PROPS, STATE> {
     }
 
     componentDidUpdate(prevProps: Object) {
+
         // if (this.props.budget !== prevProps.budget) {
         //   this.setState({ isBudgetShown: false, isCalendarShown: true });
         // }
@@ -110,16 +110,15 @@ class Entrance extends React.Component<PROPS, STATE> {
         });
     };
 
-    goTo = (dest: string) => {
-        this.setState({activeView: dest})
-    }
+
     handleToDayBtn = () => {
         const toDay = new Date();
+        this.props.history.push("mainView");
         this.setState({
             selectedPayDay: toDay,
             beautifyPayDay: dateToString(toDay),
-            activeView: "mainView"
         });
+
     };
     handleDayClick = (day: any) => {
         let toDay = new Date();
@@ -127,19 +126,35 @@ class Entrance extends React.Component<PROPS, STATE> {
         const selectedDay = Date.parse(day.toDateString());
 
         if (selectedDay >= toDay) {
+            this.props.history.push("mainView");
             this.setState({
                 selectedPayDay: day,
 
                 beautifyPayDay: dateToString(day),
-                activeView: "mainView"
             });
         }
     };
 
     handleCurrencyClick = (e: Object) => {
         const {value} = e.target;
-        this.setState({selectedCurrency: value, activeView: "mainView"});
+        this.props.history.push("mainView");
+        this.setState({selectedCurrency: value});
     };
+
+    convertLocation = (location: string): string => {
+
+        switch (location) {
+            case '/':
+                return 'mainView';
+            case '/currencyView':
+                return 'currencyView';
+            case '/calendarView':
+                return 'calendarView';
+
+            default:
+                return "mainView";
+        }
+    }
 
 
     render() {
@@ -149,7 +164,7 @@ class Entrance extends React.Component<PROPS, STATE> {
             selectedCurrency,
             beautifyPayDay
         } = this.state;
-        const {isFetching, error,  sendEnterData} = this.props;
+        const {isFetching, error, sendEnterData} = this.props;
 
 
         const btnLogin = (
@@ -165,7 +180,6 @@ class Entrance extends React.Component<PROPS, STATE> {
             <View activePanel="mainPanel" id="currencyView">
                 <Panel id="mainPanel">
                     <CurrencyView
-                        goBack={() => this.setState({activeView: "mainView"})}
                         handleCurrencyClick={this.handleCurrencyClick}
                         selectedCurrency={selectedCurrency}
                     />
@@ -181,7 +195,7 @@ class Entrance extends React.Component<PROPS, STATE> {
                             isVkId={isVkId}
                             selectedPayDay={selectedPayDay}
                             selectedCurrency={selectedCurrency} isFetching={isFetching} sendEnterData={sendEnterData}
-                            beautifyPayDay={beautifyPayDay} goTo={this.goTo}/>
+                            beautifyPayDay={beautifyPayDay}/>
 
                         <EntranceSwiper
                             btnLogin={btnLogin}
@@ -196,17 +210,10 @@ class Entrance extends React.Component<PROPS, STATE> {
         const calendarView = (
             <View activePanel="mainPanel" id="calendarView">
                 <Panel
-                    id="mainPanel"
-                    left={
-                        <PanelHeaderClose
-                            onClick={() => this.setState({activeView: "mainView"})}
-                        />
-                    }
-                >
+                    id="mainPanel">
                     <CalendarView
                         onTodayButtonClick={this.handleToDayBtn}
                         onDayClick={this.handleDayClick}
-                        goBack={() => this.setState({activeView: "mainView"})}
                         selectedPayDay={this.state.selectedPayDay}
                     />
                 </Panel>
@@ -214,7 +221,7 @@ class Entrance extends React.Component<PROPS, STATE> {
         );
 
         return (
-            <Root activeView={this.state.activeView}>
+            <Root activeView={this.convertLocation(this.props.location.pathname)}>
                 {mainView}
                 {calendarView}
                 {currencyView}

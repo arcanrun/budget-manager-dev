@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://arcanrun.github.io/budget-manager-dev",
   "dependencies": {
+    "@babel/runtime": "^7.9.6",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@vkontakte/icons": "^1.20.2",
     "@vkontakte/mvk-mini-apps-scroll-helper": "^1.2.0",
@@ -14,7 +15,7 @@
     "currency-symbol-map": "^4.0.4",
     "deepcopy": "^2.0.0",
     "flow-bin": "^0.95.1",
-    "moment": "^2.25.2",
+    "moment": "^2.25.3",
     "node-sass": "^4.14.0",
     "numeral": "^2.0.6",
     "prop-types": "^15.7.2",
@@ -26,7 +27,7 @@
     "react-joyride": "^2.2.1",
     "react-pretty-numbers": "^3.0.0",
     "react-redux": "^7.2.0",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "2.1.8",
     "react-sticky-el": "^1.1.1",
     "react-svg": "^8.0.8",
@@ -34,7 +35,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "rmc-date-picker": "^6.0.10",
-    "swiper": "^4.5.1"
+    "swiper": "^5.3.8"
   },
   "scripts": {
     "start": "react-scripts start",
