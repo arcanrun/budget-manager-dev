@@ -23,9 +23,16 @@ export const EntranceForm = ({isVkId, selectedPayDay, selectedCurrency, isFetchi
     const [isErrorInput, setIsErrorInput] = useState(false);
     const [inputValue, setInputValue] = useState(undefined);
     const [errorExplain, setErrorExplain] = useState(undefined);
+
+
     let bottomWarning = errorExplain
         ? errorExplain
         : "Введите число, которое больше нуля";
+
+    // const goToWithHistory = (route:string)=>{
+    //
+    // }
+
     const onChange = (e: Object) => {
         const {value} = e.currentTarget;
         isValid(value);
