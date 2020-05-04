@@ -1,23 +1,23 @@
 self.__precacheManifest = [
   {
-    "revision": "9faf2f78017d5a0cb7c9",
+    "revision": "4afcd5f63b3ca06aff77",
     "url": "/budget-manager-dev/static/css/main.33de3b7d.chunk.css"
   },
   {
-    "revision": "9faf2f78017d5a0cb7c9",
-    "url": "/budget-manager-dev/static/js/main.3cbea2ae.chunk.js"
+    "revision": "4afcd5f63b3ca06aff77",
+    "url": "/budget-manager-dev/static/js/main.652892b4.chunk.js"
   },
   {
     "revision": "094d6f4077ec791109e4",
     "url": "/budget-manager-dev/static/js/runtime~main.966289e5.js"
   },
   {
-    "revision": "5ae2a766ed423646e6e0",
+    "revision": "a64f41b8b69ca05e9301",
     "url": "/budget-manager-dev/static/css/2.e9df64cc.chunk.css"
   },
   {
-    "revision": "5ae2a766ed423646e6e0",
-    "url": "/budget-manager-dev/static/js/2.325adb4d.chunk.js"
+    "revision": "a64f41b8b69ca05e9301",
+    "url": "/budget-manager-dev/static/js/2.eacc20d6.chunk.js"
   },
   {
     "revision": "210aad6494b434a0c18f0fae8367c21c",
@@ -44,24 +44,16 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/fa-brands-400.13685372.ttf"
   },
   {
-    "revision": "a06da7f0950f9dd366fc9db9d56d618a",
-    "url": "/budget-manager-dev/static/media/fa-brands-400.a06da7f0.woff2"
-  },
-  {
     "revision": "c1868c9545d2de1cf8488f1dadd8c9d0",
     "url": "/budget-manager-dev/static/media/fa-brands-400.c1868c95.eot"
   },
   {
+    "revision": "a06da7f0950f9dd366fc9db9d56d618a",
+    "url": "/budget-manager-dev/static/media/fa-brands-400.a06da7f0.woff2"
+  },
+  {
     "revision": "ec3cfddedb8bebd2d7a3fdf511f7c1cc",
     "url": "/budget-manager-dev/static/media/fa-brands-400.ec3cfdde.woff"
-  },
-  {
-    "revision": "f89ea91ecd1ca2db7e09baa2c4b156d1",
-    "url": "/budget-manager-dev/static/media/fa-regular-400.f89ea91e.woff"
-  },
-  {
-    "revision": "261d666b0147c6c5cda07265f98b8f8c",
-    "url": "/budget-manager-dev/static/media/fa-regular-400.261d666b.eot"
   },
   {
     "revision": "c20b5b7362d8d7bb7eddf94344ace33e",
@@ -72,12 +64,20 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/fa-regular-400.db78b935.ttf"
   },
   {
+    "revision": "f89ea91ecd1ca2db7e09baa2c4b156d1",
+    "url": "/budget-manager-dev/static/media/fa-regular-400.f89ea91e.woff"
+  },
+  {
+    "revision": "261d666b0147c6c5cda07265f98b8f8c",
+    "url": "/budget-manager-dev/static/media/fa-regular-400.261d666b.eot"
+  },
+  {
     "revision": "89ffa3aba80d30ee0a9371b25c968bbb",
     "url": "/budget-manager-dev/static/media/fa-regular-400.89ffa3ab.svg"
   },
   {
-    "revision": "b15db15f746f29ffa02638cb455b8ec0",
-    "url": "/budget-manager-dev/static/media/fa-solid-900.b15db15f.woff2"
+    "revision": "a0369ea57eb6d3843d6474c035111f29",
+    "url": "/budget-manager-dev/static/media/fa-solid-900.a0369ea5.eot"
   },
   {
     "revision": "bea989e82b07e9687c26fc58a4805021",
@@ -88,8 +88,8 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/fa-solid-900.1ab236ed.ttf"
   },
   {
-    "revision": "a0369ea57eb6d3843d6474c035111f29",
-    "url": "/budget-manager-dev/static/media/fa-solid-900.a0369ea5.eot"
+    "revision": "b15db15f746f29ffa02638cb455b8ec0",
+    "url": "/budget-manager-dev/static/media/fa-solid-900.b15db15f.woff2"
   },
   {
     "revision": "0cb5a5c0d251c109458c85c6afeffbaa",
@@ -204,7 +204,7 @@ self.__precacheManifest = [
     "url": "/budget-manager-dev/static/media/lightbulb.c81046f0.svg"
   },
   {
-    "revision": "0c311aee1dfcc969aaa80d2d48238a77",
+    "revision": "a88805e3b9232125990444cc840b7122",
     "url": "/budget-manager-dev/index.html"
   }
 ];
