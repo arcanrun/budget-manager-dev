@@ -7,7 +7,6 @@ import { Card, Overlay } from "../index";
 import { WholeBudget, Calendar, PartBudget } from "../index";
 import style from "./Manager.module.css";
 import { msToDays } from "../Calendar/calendarHelper";
-import "./animations.css";
 import { stopGuide } from "../../actions";
 import { type } from "os";
 
@@ -35,7 +34,12 @@ type PROPS = {
   common: Object,
   is_first_time: boolean,
   is_tutorial_done: boolean,
-  params: string
+  params: string,
+  isVkTheme: boolean,
+  isCostomDarkTheme: boolean,
+  themeVkClient: string,
+  hideModal: Function,
+  currency: string
 };
 
 type STATE = {
@@ -51,6 +55,15 @@ class Manager extends React.Component<PROPS, STATE> {
       tempPayDay: undefined,
       in: false,
       steps: [
+        {
+          target: "body",
+          title: "Добро пожаловать!",
+          content:
+            "Сейчас я покажу Вам как пользоваться приложением, которое позволит грамотнее распоряжаться Вашим бюджетом.",
+          disableBeacon: true,
+          placement: "center",
+          isFixed: true
+        },
         {
           target: ".first-step",
           title: "Общий бюджет",
@@ -120,6 +133,20 @@ class Manager extends React.Component<PROPS, STATE> {
     this.setState({ in: !this.state.in });
   };
 
+  shouldComponentUpdate(nextProps: Object, nextState: Object) {
+    const body = document.getElementsByTagName("body")[0];
+    if (this.props.isVkTheme) {
+      body.setAttribute("scheme", this.props.themeVkClient);
+    }
+    if (this.props.isCostomDarkTheme && !this.props.isVkTheme) {
+      body.setAttribute("scheme", "client_dark");
+    }
+    if (!this.props.isCostomDarkTheme && !this.props.isVkTheme) {
+      body.setAttribute("scheme", "client_light");
+    }
+    return true;
+  }
+
   componentWillUnmount() {
     this.toggleAnimation();
   }
@@ -174,11 +201,11 @@ class Manager extends React.Component<PROPS, STATE> {
     }
   };
   handleTour = (data: any) => {
-    const { stopGuide, tutorialChangeState, params } = this.props;
+    const { stopGuide, tutorialChangeState } = this.props;
     const { action } = data;
     if (action === "reset") {
       stopGuide();
-      tutorialChangeState(true, params);
+      tutorialChangeState(true);
     }
   };
   render() {
@@ -193,28 +220,11 @@ class Manager extends React.Component<PROPS, STATE> {
       calc,
       calcBudget,
       is_first_time,
-      is_tutorial_done
+      is_tutorial_done,
+      hideModal,
+      currency
     } = this.props;
     const { tempPayDay, steps } = this.state;
-    const enterBudgetCard = isFetching_calc ? (
-      ""
-    ) : (
-      <Card
-        headerTitle={"общий бюджет"}
-        icon={"money-bag"}
-        rightIcon={budget ? "pencil" : ""}
-        onClick={() => onClickToggleModal("budget")}
-      >
-        <WholeBudget
-          onClickToggleModal={onClickToggleModal}
-          typeModal={"budget"}
-          wholeBudget={budget}
-          daysToPayday={daysToPayday}
-          isFetching={isFetching_calc}
-          isEnterBudget
-        />
-      </Card>
-    );
     const wholeBudgetCard = (
       <Card
         headerTitle={"общий бюджет"}
@@ -223,6 +233,7 @@ class Manager extends React.Component<PROPS, STATE> {
         onClick={() => onClickToggleModal("budget")}
       >
         <WholeBudget
+          currency={currency}
           onClickToggleModal={onClickToggleModal}
           typeModal={"budget"}
           wholeBudget={budget}
@@ -240,6 +251,7 @@ class Manager extends React.Component<PROPS, STATE> {
           tempPayDay={tempPayDay}
           payday={payday}
           daysToPayday={daysToPayday}
+          isTutorialDone={is_tutorial_done}
         />
       </Card>
     );
@@ -252,6 +264,7 @@ class Manager extends React.Component<PROPS, STATE> {
         onClick={() => onClickToggleModal("common_transfer")}
       >
         <PartBudget
+          currency={currency}
           onClickToggleModal={onClickToggleModal}
           typeModal={"common"}
           costs={calc}
@@ -267,6 +280,7 @@ class Manager extends React.Component<PROPS, STATE> {
         onClick={() => onClickToggleModal("fun_transfer")}
       >
         <PartBudget
+          currency={currency}
           onClickToggleModal={onClickToggleModal}
           typeModal={"fun"}
           costs={calc}
@@ -282,6 +296,7 @@ class Manager extends React.Component<PROPS, STATE> {
         onClick={() => onClickToggleModal("invest_transfer")}
       >
         <PartBudget
+          currency={currency}
           onClickToggleModal={onClickToggleModal}
           typeModal={"invest"}
           costs={calc}
@@ -380,13 +395,12 @@ class Manager extends React.Component<PROPS, STATE> {
           unmountOnExit
         >
           <div className={style.manager}>
-            {budget ? "" : enterBudgetCard}
-            {budget ? wholeBudgetCard : ""}
-            {budget ? calendarCard : ""}
-            {budget && payday ? budgetCardCommon : ""}
-            {budget && payday ? budgetCardFun : ""}
-            {budget && payday ? budgetCardInvest : ""}
-            {!is_tutorial_done ? (budget && payday ? guide : "") : ""}
+            {wholeBudgetCard}
+            {calendarCard}
+            {budgetCardCommon}
+            {budgetCardFun}
+            {budgetCardInvest}
+            {!is_tutorial_done ? guide : ""}
           </div>
         </CSSTransition>
       </>

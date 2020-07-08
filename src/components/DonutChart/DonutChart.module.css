@@ -8,6 +8,19 @@
   width: 100%;
   height: 100%;
   position: absolute;
+  transform: scale(0.9);
+}
+.infoDonutBlack {
+  z-index: 1;
+  color: var(--info_donut_color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform: scale(0.9);
 }
 
 .circle {
@@ -16,6 +29,23 @@
   stroke-width: 1.3px;
   transition: 0.2s;
   will-change: transform, opacity;
+}
+.circleOutter {
+  /* fill: #110261; */
+
+  stroke: #2405c6;
+  stroke-width: 1.3px;
+  transition: 0.2s;
+  will-change: transform, opacity;
+}
+.circleOutterCommon {
+  stroke: #2405c6;
+}
+.circleOutterFun {
+  stroke: #ffb200;
+}
+.circleOutterInvest {
+  stroke: #f72d6b;
 }
 .text {
   font-weight: bold;
@@ -32,6 +62,7 @@
   font-weight: bold;
   font-size: 60px;
   opacity: 0.5;
+  color: #0fde8c;
 }
 .cost {
   font-weight: bold;
@@ -44,16 +75,21 @@
 .footer {
   font-weight: bold;
 }
-.footerTitle {
-}
+
 .footerCost {
   font-weight: bold;
   font-size: 2px;
 }
 
 .donut {
-  transform: rotate(-90deg);
+  transform: rotate(-90deg) scale(0.9);
   border-radius: 100%;
+}
+.donutOuter {
+  transform: rotate(-90deg) scale(0.97);
+  border-radius: 100%;
+  position: absolute;
+  left: 0;
 }
 .donutContainer {
   max-width: 250px;
@@ -65,17 +101,6 @@
   animation: pulse 1.5s infinite;
 }
 
-/* @keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(247, 45, 107, 1);
-  }
-  70% {
-    box-shadow: 0 0 0 40px rgba(247, 45, 107, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(247, 45, 107, 0);
-  }
-} */
 @keyframes pulse {
   0% {
     opacity: 1;
@@ -88,5 +113,40 @@
   100% {
     opacity: 1;
     transform: scale(1) rotate(-90deg);
+  }
+}
+
+.flashAnimation {
+  animation: flash 1.5s infinite;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.pulseAnimationInner {
+  animation: pulseInner 1.5s infinite;
+}
+
+@keyframes pulseInner {
+  0% {
+    opacity: 1;
+    transform: scale(0.9) rotate(-90deg);
+  }
+  70% {
+    opacity: 0.5;
+    transform: scale(0.85) rotate(-90deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(0.9) rotate(-90deg);
   }
 }

@@ -154,7 +154,7 @@ export const LineChart = ({ switcher, history }: PROPS) => {
       line: switcher ? style.greenLine : style.redLine,
       point: switcher ? style.greenPoint : style.redPoint,
       area: switcher ? style.greenArea : style.redArea,
-      grid: "ct-grid",
+      grid: style.customGrid,
       gridGroup: "ct-grids",
       vertical: "ct-vertical",
       horizontal: "ct-horizontal",

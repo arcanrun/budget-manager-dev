@@ -6,10 +6,11 @@ import { toPrettyNumber } from "../../helpers/prettyNumbers";
 
 type PROPS = {
   children: string,
-  sign: string
+  sign: string,
+  currency: string
 };
 
-const OperationValue = ({ children, sign }: PROPS) => {
+const OperationValue = ({ children, sign, currency }: PROPS) => {
   return (
     <div
       className={
@@ -29,7 +30,8 @@ const OperationValue = ({ children, sign }: PROPS) => {
         "",
         "0.00a",
         "0.00",
-        "13px"
+        false,
+        currency
       )}
     </div>
   );

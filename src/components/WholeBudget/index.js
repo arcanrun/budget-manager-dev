@@ -1,11 +1,12 @@
 //@flow
 
 import React from "react";
-import { Button } from "@vkontakte/vkui";
+import { Button, Placeholder } from "@vkontakte/vkui";
 
 import style from "./WholeBudget.module.css";
 import { RoundButton, ShortenNumber } from "../index";
 import { toPrettyNumber } from "../../helpers/prettyNumbers";
+import Icon56WriteOutline from "@vkontakte/icons/dist/56/write_outline";
 
 type PROPS = {
   onClickToggleModal: Function,
@@ -13,7 +14,8 @@ type PROPS = {
   wholeBudget: ?number,
   daysToPayday: ?string,
   isFetching: boolean,
-  isEnterBudget?: boolean
+  isEnterBudget?: boolean,
+  currency: string
 };
 const WholeBudget = ({
   wholeBudget,
@@ -21,7 +23,8 @@ const WholeBudget = ({
   typeModal,
   daysToPayday,
   isFetching,
-  isEnterBudget
+  isEnterBudget,
+  currency
 }: PROPS) => {
   const footer = daysToPayday ? (
     <div className={style.footer}>
@@ -57,7 +60,8 @@ const WholeBudget = ({
           "max",
           "0.00a",
           "0.00",
-          "25px"
+          false,
+          currency
         )}
       </div>
       {footer}
@@ -66,17 +70,18 @@ const WholeBudget = ({
   const enterBlock = (
     <div className={style.budgetBlock}>
       <div className={style.enter}>
-        <div className={style.enterItem}>
-          Для начала введите бюджет, которым обладаете на данный момент.
-        </div>
-
-        <Button
-          size="xl"
-          level="secondary"
-          onClick={() => onClickToggleModal(typeModal)}
+        <Placeholder
+          icon={<Icon56WriteOutline />}
+          streched
+          title={"Введите ваш текущий бюджет"}
+          action={
+            <Button size="xl" onClick={() => onClickToggleModal(typeModal)}>
+              Ввести данные
+            </Button>
+          }
         >
-          Введите ваш текущий бюджет
-        </Button>
+          Для начала введите бюджет, которым обладаете на данный момент.
+        </Placeholder>
       </div>
     </div>
   );

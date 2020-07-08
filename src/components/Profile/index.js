@@ -27,7 +27,8 @@ type PROPS = {
   costs: Object,
   income: Object,
   calc: Object,
-  params: string
+  params: string,
+  currency: string
 };
 
 type STATE = {
@@ -60,7 +61,8 @@ class Profile extends React.Component<PROPS, STATE> {
       costs,
       income,
       registerDate,
-      history
+      history,
+      currency
     } = this.props;
     // const overlay = <Overlay isTransparent={true} />;
     // const showPreloader = isFetching ? overlay : "";
@@ -86,27 +88,13 @@ class Profile extends React.Component<PROPS, STATE> {
     const statisticCard = (
       <Card icon={"pie-chart-logo"} headerTitle={"статистика за текущий месяц"}>
         <div>
-          <Tab costs={costs} income={income} history={history} />
+          <Tab
+            costs={costs}
+            income={income}
+            history={history}
+            currency={currency}
+          />
         </div>
-      </Card>
-    );
-    const settingsCard = (
-      <Card icon={"settings"} headerTitle="настройки">
-        {/*
-       <Button size="xl" level="secondary">
-          Очистка истории
-        </Button>
-      
-      */}
-
-        <hr style={{ opacity: 0 }} />
-        <Button
-          size="xl"
-          level="destructive"
-          onClick={() => toggleModal("profile_delete")}
-        >
-          Удалить профиль
-        </Button>
       </Card>
     );
 
@@ -122,7 +110,6 @@ class Profile extends React.Component<PROPS, STATE> {
               <div className={style.profile}>
                 {commonSettingsCard}
                 {statisticCard}
-                {settingsCard}
               </div>
             </CSSTransition>
           </>

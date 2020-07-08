@@ -1,8 +1,10 @@
 import React from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
+import getSymbolFromCurrency from "currency-symbol-map";
 
 import { Icon } from "../components/Icon";
 import numeral from "numeral";
+import { get } from "http";
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -19,7 +21,8 @@ export function toPrettyNumber(
   easterEggSize = "",
   format = "0.00a",
   alwaysFromat = false,
-  alterSign = false
+  alterSign = false,
+  currency = "RUB"
 ) {
   let res = num;
   const randNumber = getRandomInt(1, 4);
@@ -40,11 +43,11 @@ export function toPrettyNumber(
   }
   // ADDITIONS:
   if (iScurrSign && !alterSign) {
-    res += " ₽";
+    res += getSymbolFromCurrency(currency);
   } else if (iScurrSign && alterSign) {
     res = (
       <>
-        {res}{" "}
+        {res}
         <i
           style={{ fontSize: `${alterSign}` }}
           className="fas fa-ruble-sign"

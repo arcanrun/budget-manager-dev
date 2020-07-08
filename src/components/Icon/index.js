@@ -30,6 +30,8 @@ import Rich_2 from "../../static/rich_2.svg";
 import Rich_3 from "../../static/rich_3.svg";
 import Rich_4 from "../../static/rich_4.svg";
 import MoneyFlow from "../../static/money-flow-loader.svg";
+import Eye from "../../static/eye.svg";
+import Bulb from "../../static/lightbulb.svg";
 
 type PROPS = {|
   icon: string,
@@ -303,6 +305,24 @@ const Icon = ({ icon, color, width, height, fontSize, classes }: PROPS) => {
           wrapper="span"
           svgClassName={classes ? classes : "money-flow"}
           svgStyle={{ width: width, height: height, fill: color }}
+        />
+      );
+    case "eye":
+      return (
+        <ReactSVG
+          src={Eye}
+          wrapper="span"
+          svgClassName="eye"
+          svgStyle={{ fill: color }}
+        />
+      );
+    case "bulb":
+      return (
+        <ReactSVG
+          src={Bulb}
+          wrapper="span"
+          svgClassName="bulb"
+          svgStyle={{ fill: color }}
         />
       );
 

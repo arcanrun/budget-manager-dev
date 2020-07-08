@@ -10,10 +10,20 @@ type PROPS = {
   title: string,
   cost: number,
   temp: number,
-  maxToday: number
+  maxToday: number,
+  tempMonth: number,
+  currency: string
 };
 
-const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
+const DonutChart = ({
+  color,
+  title,
+  cost,
+  temp,
+  maxToday,
+  tempMonth,
+  currency
+}: PROPS) => {
   let tempValueInPercents = "";
   if (temp <= 0) {
     tempValueInPercents = 0;
@@ -21,21 +31,79 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
     tempValueInPercents = (100 * temp) / maxToday;
   }
 
+  let tempMonthInPercents = "";
+  if (tempMonth <= 0) {
+    tempMonthInPercents = 0;
+  } else {
+    tempMonthInPercents = (100 * tempMonth) / cost;
+  }
+  let circleOutter = "";
+  if (title === "50") {
+    circleOutter = (
+      <circle
+        r="15.91549430918952"
+        cx="50%"
+        cy="50%"
+        className={[style.circleOutter, style.circleOutterCommon].join(" ")}
+        strokeDasharray={`${tempMonthInPercents}, 100`}
+        fillOpacity="0"
+      />
+    );
+  }
+  if (title === "30") {
+    circleOutter = (
+      <circle
+        r="15.91549430918952"
+        cx="50%"
+        cy="50%"
+        className={[style.circleOutter, style.circleOutterFun].join(" ")}
+        strokeDasharray={`${tempMonthInPercents}, 100`}
+        fillOpacity="0"
+      />
+    );
+  }
+  if (title === "20") {
+    circleOutter = (
+      <circle
+        r="15.91549430918952"
+        cx="50%"
+        cy="50%"
+        className={[style.circleOutter, style.circleOutterInvest].join(" ")}
+        strokeDasharray={`${tempMonthInPercents}, 100`}
+        fillOpacity="0"
+      />
+    );
+  }
+
   return (
     <div className={[style.donutContainer, "fifth-step"].join(" ")}>
-      <div className={style.infoDonut}>
+      <div className={style.infoDonutBlack}>
         <div className={style.title}>{title}</div>
         <div className={style.cost}>
           {toPrettyNumber(
-            cost,
+            tempMonth,
             true,
-            100000000,
+            10000000,
             false,
             "",
             "",
             "0.00a",
             "0.0",
-            "14px"
+            false,
+            currency
+          )}
+          /
+          {toPrettyNumber(
+            cost,
+            true,
+            10000000,
+            false,
+            "",
+            "",
+            "0.00a",
+            "0.0",
+            false,
+            currency
           )}
         </div>
         <div className={style.footerTitle}>На сегодня:</div>
@@ -49,7 +117,8 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
             "",
             "0.00a",
             "0.0",
-            "12px"
+            false,
+            currency
           )}
           /
           {toPrettyNumber(
@@ -61,7 +130,8 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
             "",
             "0.00a",
             "0.0",
-            "12px"
+            false,
+            currency
           )}
         </div>
       </div>
@@ -69,8 +139,10 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
         viewBox="0 0 35 35"
         className={
           tempValueInPercents <= 20
-            ? [style.donut, style.pulseAnimation].join(" ")
-            : style.donut
+            ? [style.donut, style.pulseAnimationInner, style.svgCircle].join(
+                " "
+              )
+            : [style.donut, style.svgCircle].join(" ")
         }
       >
         <circle
@@ -79,8 +151,18 @@ const DonutChart = ({ color, title, cost, temp, maxToday }: PROPS) => {
           cy="50%"
           className={style.circle}
           strokeDasharray={`${tempValueInPercents}, 100`}
-          fill={tempValueInPercents <= 20 ? "#F72D6B" : color}
+          fillOpacity="0"
         />
+      </svg>
+      <svg
+        viewBox="0 0 35 35"
+        className={
+          tempMonthInPercents <= 20
+            ? [style.donutOuter, style.pulseAnimation].join(" ")
+            : style.donutOuter
+        }
+      >
+        {circleOutter}
       </svg>
     </div>
   );

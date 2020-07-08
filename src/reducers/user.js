@@ -30,11 +30,24 @@ import {
   SIGNUP_STOP_GUIDE,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
-  SIGNUP_REQUEST
+  SIGNUP_REQUEST,
+  TUTORUAL_CHANGE_SUCCESS,
+  TUTORIAL_CHANGE_REQUEST,
+  TUTORUAL_CHANGE_ERROR,
+  TOGGLE_VK_CLIENT_SUCCESS,
+  TOGGLE_CUSTOM_DARK_THEME_SUCCESS,
+  SEND_ENTER_DATA_FAILED,
+  SEND_ENTER_DATA_REQUEST,
+  SEND_ENTER_DATA_SUCCESS
 } from "../constants";
 
 type UserState = {
   // params: string,
+  currency: ?string,
+  is_full_history: boolean,
+  themeVkClient: string,
+  is_vk_theme: boolean,
+  is_costom_dark_theme: boolean,
   is_first_time: boolean,
   is_tutorial_done: boolean,
   vk_id: ?number,
@@ -76,6 +89,7 @@ type UserState = {
     toDayFormated: ?string,
     common: {
       value: ?number,
+      tempMonth: ?number,
       maxToday: {
         value: ?number,
         temp: ?number
@@ -83,6 +97,7 @@ type UserState = {
     },
     fun: {
       value: ?number,
+      tempMonth: ?number,
       maxToday: {
         value: ?number,
         temp: ?number
@@ -90,6 +105,7 @@ type UserState = {
     },
     invest: {
       value: ?number,
+      tempMonth: ?number,
       maxToday: {
         value: ?number,
         temp: ?number
@@ -100,6 +116,11 @@ type UserState = {
 
 export const initialState: UserState = {
   // params: undefined,
+  currency: undefined,
+  is_full_history: true,
+  themeVkClient: undefined,
+  is_vk_theme: true,
+  is_costom_dark_theme: true,
   is_tutorial_done: false,
   is_first_time: true,
   // vk_id: 65122543,
@@ -132,6 +153,7 @@ export const initialState: UserState = {
     error_message: undefined,
     common: {
       value: undefined,
+      tempMonth: undefined,
       maxToday: {
         value: undefined,
         temp: undefined
@@ -139,6 +161,7 @@ export const initialState: UserState = {
     },
     fun: {
       value: undefined,
+      tempMonth: undefined,
       maxToday: {
         value: undefined,
         temp: undefined
@@ -146,6 +169,7 @@ export const initialState: UserState = {
     },
     invest: {
       value: undefined,
+      tempMonth: undefined,
       maxToday: {
         value: undefined,
         temp: undefined
@@ -158,12 +182,14 @@ export const initialState: UserState = {
     error_message: undefined,
     costs: {
       total: 0,
+      tempMonth: 0,
       common: 0,
       fun: 0,
       invest: 0
     },
     income: {
       total: 0,
+      tempMonth: 0,
       common: 0,
       fun: 0,
       invest: 0
@@ -244,6 +270,7 @@ export function user(state: UserState = initialState, action: Object) {
           common: {
             ...state.calc.common,
             value: action.payload.payload.common.value,
+            tempMonth: action.payload.payload.common.tempMonth,
             maxToday: {
               ...state.calc.common.maxToday,
               value: action.payload.payload.common.maxToday,
@@ -253,6 +280,7 @@ export function user(state: UserState = initialState, action: Object) {
           fun: {
             ...state.calc.fun,
             value: action.payload.payload.fun.value,
+            tempMonth: action.payload.payload.fun.tempMonth,
             maxToday: {
               ...state.calc.fun.maxToday,
               value: action.payload.payload.fun.maxToday,
@@ -262,6 +290,7 @@ export function user(state: UserState = initialState, action: Object) {
           invest: {
             ...state.calc.invest,
             value: action.payload.payload.invest.value,
+            tempMonth: action.payload.payload.invest.tempMonth,
             maxToday: {
               ...state.calc.invest.maxToday,
               value: action.payload.payload.invest.maxToday,
@@ -288,6 +317,7 @@ export function user(state: UserState = initialState, action: Object) {
           common: {
             ...state.calc.common,
             value: action.payload.payload.common.value,
+            tempMonth: action.payload.payload.common.tempMonth,
             maxToday: {
               ...state.calc.common.maxToday,
               value: action.payload.payload.common.maxToday,
@@ -297,6 +327,7 @@ export function user(state: UserState = initialState, action: Object) {
           fun: {
             ...state.calc.fun,
             value: action.payload.payload.fun.value,
+            tempMonth: action.payload.payload.fun.tempMonth,
             maxToday: {
               ...state.calc.fun.maxToday,
               value: action.payload.payload.fun.maxToday,
@@ -306,6 +337,7 @@ export function user(state: UserState = initialState, action: Object) {
           invest: {
             ...state.calc.invest,
             value: action.payload.payload.invest.value,
+            tempMonth: action.payload.payload.invest.tempMonth,
             maxToday: {
               ...state.calc.invest.maxToday,
               value: action.payload.payload.invest.maxToday,
@@ -340,7 +372,6 @@ export function user(state: UserState = initialState, action: Object) {
     case LOGIN_REQUEST:
       return {
         ...state,
-        // params: action.payload.params,
         isFetching: true,
         error: false
       };
@@ -371,7 +402,10 @@ export function user(state: UserState = initialState, action: Object) {
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        // params: action.payload.params,
+        is_full_history: action.payload.is_full_history,
+        themeVkClient: action.payload.theme,
+        is_vk_theme: action.payload.is_vk_theme,
+        is_costom_dark_theme: action.payload.is_costom_dark_theme,
         register_date: action.payload.register_date,
         isFetching_signup: false,
         vk_id: action.payload.vk_id,
@@ -386,6 +420,13 @@ export function user(state: UserState = initialState, action: Object) {
       return {
         ...state,
         // params: action.payload.params,
+        calc: { ...state.calc, pay_day: action.payload.pay_day },
+        currency: action.payload.currency,
+        budget: action.payload.budget,
+        is_full_history: action.payload.is_full_history,
+        themeVkClient: action.payload.theme,
+        is_vk_theme: action.payload.is_vk_theme,
+        is_costom_dark_theme: action.payload.is_costom_dark_theme,
         register_date: action.payload.register_date,
         isFetching: false,
         vk_id: action.payload.vk_id,
@@ -401,7 +442,20 @@ export function user(state: UserState = initialState, action: Object) {
         return {
           ...initialState,
           isFetching: false
-          // params: state.params
+        };
+      }
+      if (action.payload.payload.RESPONSE === "HISTORY_DELETE_ALL") {
+        return {
+          ...state,
+          history: { ...state.history, value: [] },
+          isFetching: false
+        };
+      }
+      if (action.payload.payload.RESPONSE === "TOGGLE_IS_FULL_HISTORY") {
+        return {
+          ...state,
+          is_full_history: action.payload.payload.PAYLOAD,
+          isFetching: false
         };
       }
       return { ...state };
@@ -445,6 +499,38 @@ export function user(state: UserState = initialState, action: Object) {
           }
         }
       };
+    case TUTORUAL_CHANGE_SUCCESS:
+      return {
+        ...state,
+        is_tutorial_done: action.payload.is_tutorial_done
+      };
+    case TOGGLE_VK_CLIENT_SUCCESS:
+      return {
+        ...state,
+        is_vk_theme: action.payload.is_vk_theme,
+        is_costom_dark_theme: action.payload.is_costom_dark_theme
+      };
+    case TOGGLE_CUSTOM_DARK_THEME_SUCCESS:
+      return {
+        ...state,
+        is_costom_dark_theme: action.payload.is_costom_dark_theme
+      };
+
+    case SEND_ENTER_DATA_REQUEST:
+      return {
+        ...state,
+        isFetching_signup: true
+      };
+    case SEND_ENTER_DATA_SUCCESS:
+      return {
+        ...state,
+        isFetching_signup: false,
+        currency: action.payload.currency,
+        budget: action.payload.budget,
+        calc: { ...state.calc, pay_day: action.payload.pay_day }
+      };
+    case SEND_ENTER_DATA_FAILED:
+      return { ...state, isFetching_signup: false, error: true };
 
     default:
       return state;

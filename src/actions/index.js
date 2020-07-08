@@ -13,6 +13,9 @@ import { getStatistics } from "./staisticsActions";
 import { calcBudget } from "./calcBudgetActions";
 import { tutorialChangeState } from "./tutorialAction";
 import { getHistoryShort } from "./getHsitoryShort";
+import { toggleVkClientTheme } from "./vkClientThemeActions";
+import { toggleCustomDarkTheme } from "./customDarkThemeActions";
+import { sendEnterData } from "./enterDataActions";
 
 export {
   addWholeBudget,
@@ -31,5 +34,8 @@ export {
   stopGuide,
   hideModal,
   tutorialChangeState,
-  getHistoryShort
+  getHistoryShort,
+  toggleVkClientTheme,
+  toggleCustomDarkTheme,
+  sendEnterData
 };

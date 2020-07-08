@@ -1,5 +1,6 @@
 //@flow
 import connect from "@vkontakte/vkui-connect-promise";
+import * as old from "@vkontakte/vk-connect";
 
 import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "../constants";
 import { API } from "../API";
@@ -10,16 +11,44 @@ const requestLogIn = () => ({
     isFetching: true
   }
 });
-export const successLogIn = (res: Object, vkRes: Object) => ({
-  type: LOGIN_SUCCESS,
-  payload: {
-    ...res,
-    name: vkRes.name,
-    sure_name: vkRes.sure_name,
-    avatar: vkRes.avatar,
-    params: vkRes.params
+export const successLogIn = (res: Object, vkRes: Object) => {
+  if (res.is_vk_theme && vkRes.theme === "client_light") {
+    connect.send("VKWebAppSetViewSettings", {
+      status_bar_style: "light",
+      action_bar_color: "#110261"
+    });
   }
-});
+  if (res.is_vk_theme && vkRes.theme === "client_black") {
+    connect.send("VKWebAppSetViewSettings", {
+      status_bar_style: "light",
+      action_bar_color: "#2C2D2F"
+    });
+  }
+  if (!res.is_vk_theme && !res.is_costom_dark_theme) {
+    connect.send("VKWebAppSetViewSettings", {
+      status_bar_style: "light",
+      action_bar_color: "#110261"
+    });
+  }
+  if (!res.is_vk_theme && res.is_costom_dark_theme) {
+    connect.send("VKWebAppSetViewSettings", {
+      status_bar_style: "light",
+      action_bar_color: "#2C2D2F"
+    });
+  }
+
+  return {
+    type: LOGIN_SUCCESS,
+    payload: {
+      ...res,
+      name: vkRes.name,
+      sure_name: vkRes.sure_name,
+      avatar: vkRes.avatar,
+      params: vkRes.params,
+      theme: vkRes.theme
+    }
+  };
+};
 export const failureLogIn = (msg: string) => ({
   type: LOGIN_FAILURE,
   error: {
@@ -32,17 +61,26 @@ export const failureLogIn = (msg: string) => ({
 export const logIn = (params: string) => {
   return (dispatch: Function) => {
     window.vkSign = window.location.search;
+
     dispatch(requestLogIn());
     let vkRes = {
       name: undefined,
       sure_name: undefined,
       avatar: undefined,
       timezone: undefined,
-      params: undefined
+      params: undefined,
+      theme: "client_light" //not sending to server it just for redux store
     };
 
     connect.send("VKWebAppInit", {});
+    old.send("VKWebAppUpdateConfig", {});
 
+    old.subscribe(e => {
+      if (e.detail.hasOwnProperty("data")) {
+        if (e.detail.data.hasOwnProperty("scheme"))
+          vkRes.theme = e.detail.data.scheme;
+      }
+    });
     connect
       .send("VKWebAppGetUserInfo", {})
       .then(res => {

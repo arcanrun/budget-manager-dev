@@ -1,155 +1,233 @@
 //@flow
 import React from "react";
-import { Redirect } from "react-router-dom";
-import Swiper from "react-id-swiper";
 
-// import "swiper/dist/css/swiper.css";
+import {
+    View,
+    Panel,
+    Root,
+} from "@vkontakte/vkui";
+import {EntranceForm} from "./SubComponents/EntranceForm/index";
+import {CalendarView} from "./SubComponents/CalendarView/index";
+import {CurrencyView} from "./SubComponents/CurrencyView/index";
+import {EntranceSwiper} from "./SubComponents/EntranceSwiper/index";
+
 import style from "./Entrance.module.css";
-import "./costumizedSwiper.css";
-import { EntranceItem } from "../index";
+
+
+import {
+    dateToString,
+} from "../Calendar/calendarHelper";
 
 type PROPS = {
-  signUp: Function,
-  vk_id: ?number,
-  isFetching: boolean,
-  error: boolean,
-  params: string,
-  history: Array<any>
+    signUp: Function,
+    vk_id: ?number,
+    isFetching: boolean,
+    error: boolean,
+    params: string,
+    history: Array<any>,
+    isVkTheme: boolean,
+    isCostomDarkTheme: boolean,
+    themeVkClient: string,
+    budget: string,
+    payDay: string,
+    sendEnterData: Function
 };
 
 type STATE = {
-  screenHeight: ?number,
-  screenWidth: ?number
+    screenHeight: ?number,
+    screenWidth: ?number,
+    isVkId: boolean,
+    selectedPayDay: ?string,
+    selectedCurrency: ?string,
+    beautifyPayDay: ?string,
+    errorExplain: ?string,
+    isErrorInput: boolean,
+    inputValue: ?string,
+
 };
 
+
 class Entrance extends React.Component<PROPS, STATE> {
-  state = {
-    screenHeight: window.innerHeight,
-    screenWidth: window.innerWidth
-  };
+    state = {
+        screenHeight: window.innerHeight,
+        screenWidth: window.innerWidth,
+        isVkId: false,
+        selectedPayDay: undefined,
+        selectedCurrency: undefined,
+        inputValue: undefined,
+        beautifyPayDay: undefined,
+        errorExplain: undefined,
+        isErrorInput: false,
 
-  componentDidMount() {
-    window.addEventListener("resize", this.setSize);
-  }
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.setSize);
-  }
-
-  setSize = (e: Object) => {
-    const screenHeight = e.target.innerHeight;
-    const screenWidth = e.target.innerWidth;
-    this.setState({
-      screenHeight,
-      screenWidth
-    });
-  };
-
-  render() {
-    const { screenHeight, screenWidth } = this.state;
-    const { isFetching, error } = this.props;
-    const isMinWidth = screenWidth <= 250 ? true : false;
-    const isMinHeight = screenHeight < 480 ? true : false;
-
-    const firstScreenText =
-      "Правило 50/30/20 позволит Вам копить деньги и не отказывать себе в удовольствиях. ";
-
-    const secondScreenText =
-      "50% ежемесячного заработка должны уходить на все необходимые траты: аренду или ипотеку, транспорт, продукты, коммунальные услуги и прочие вещи, без которых никуда.";
-    const thirdScreenText =
-      "30% — на развлечения: шоппинг, рестораны, уход за собой и другое. ";
-    const fourthScreenText =
-      "20% должны уходить на накопления, выплату долгов, инвестиции.";
-    const fivthScreen =
-      "50/30/20 поможет распланировать личные денежные средства максимально рационально.";
-    const params = {
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-        modifierClass: "customized-swiper-pagination",
-        bulletClass: "customized-swiper-pagination-bullet",
-        bulletActiveClass: "customized-swiper-pagination-bullet-active"
-      },
-      containerClass: "customized-swiper-container"
     };
-    const btnLogin = (
-      <button
-        onClick={() => this.props.signUp(this.props.params)}
-        className={style.btn}
-      >
-        войти
-      </button>
-    );
-    return this.props.vk_id ? (
-      // <Redirect to="/" />
-      <Redirect to="/budget-manager" />
-    ) : (
-      <div className={style.entrance}>
-        <Swiper {...params}>
-          <div className={style.item}>
-            <EntranceItem
-              isMinWidth={isMinWidth}
-              isMinHeight={isMinHeight}
-              image={"budget-logo"}
-              title={"50/30/20"}
-              text={firstScreenText}
-              imgHeight="140px"
-              imgWidth="140px"
-            />
-          </div>
-          <div className={style.item}>
-            <EntranceItem
-              isMinWidth={isMinWidth}
-              isMinHeight={isMinHeight}
-              image={"payment-logo"}
-              title={"ОБЯЗАТЕЛЬНЫЕ НУЖДЫ"}
-              text={secondScreenText}
-              bgText="50"
-              imgHeight="170px"
-              imgWidth="170px"
-            />
-          </div>
-          <div className={style.item}>
-            <EntranceItem
-              isMinWidth={isMinWidth}
-              isMinHeight={isMinHeight}
-              image={"fun-logo"}
-              title={"ЖЕЛАНИЯ"}
-              text={thirdScreenText}
-              bgText="30"
-              imgHeight="190px"
-              imgWidth="190px"
-            />
-          </div>
-          <div className={style.item}>
-            <EntranceItem
-              isMinWidth={isMinWidth}
-              isMinHeight={isMinHeight}
-              image={"invest-logo"}
-              title={"БУДУЩЕЕ"}
-              text={fourthScreenText}
-              bgText="20"
-              imgHeight="190px"
-              imgWidth="190px"
-            />
-          </div>
-          <div className={style.item}>
-            <EntranceItem
-              error={error}
-              isFetching={isFetching}
-              isMinWidth={isMinWidth}
-              isMinHeight={isMinHeight}
-              image={"protect-logo"}
-              title={""}
-              text={fivthScreen}
-              imgHeight="140px"
-              imgWidth="140px"
-              btnLogin={btnLogin}
-            />
-          </div>
-        </Swiper>
-      </div>
-    );
-  }
+
+    componentDidMount() {
+        window.addEventListener("resize", this.setSize);
+        const {vk_id, budget} = this.props;
+        // if (this.props.budget) {
+        //   this.setState({ isBudgetShown: false, isCalendarShown: true });
+        // }
+
+        if (vk_id) {
+            this.setState({isVkId: true});
+        }
+    }
+
+    componentDidUpdate(prevProps: Object) {
+
+        // if (this.props.budget !== prevProps.budget) {
+        //   this.setState({ isBudgetShown: false, isCalendarShown: true });
+        // }
+        if (prevProps.vk_id !== this.props.vk_id) {
+            this.setState({isVkId: true});
+        }
+    }
+
+    shouldComponentUpdate(nextProps: Object, nextState: Object) {
+        const body = document.getElementsByTagName("body")[0];
+        if (this.props.isVkTheme) {
+            body.setAttribute("scheme", this.props.themeVkClient);
+        }
+        if (this.props.isCostomDarkTheme && !this.props.isVkTheme) {
+            body.setAttribute("scheme", "client_dark");
+        }
+        if (!this.props.isCostomDarkTheme && !this.props.isVkTheme) {
+            body.setAttribute("scheme", "client_light");
+        }
+        return true;
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.setSize);
+    }
+
+    setSize = (e: Object) => {
+        const screenHeight = e.target.innerHeight;
+        const screenWidth = e.target.innerWidth;
+        this.setState({
+            screenHeight,
+            screenWidth
+        });
+    };
+
+
+    handleToDayBtn = () => {
+        const toDay = new Date();
+        this.props.history.push("mainView");
+        this.setState({
+            selectedPayDay: toDay,
+            beautifyPayDay: dateToString(toDay),
+        });
+
+    };
+    handleDayClick = (day: any) => {
+        let toDay = new Date();
+        toDay = Date.parse(toDay.toDateString());
+        const selectedDay = Date.parse(day.toDateString());
+
+        if (selectedDay >= toDay) {
+            this.props.history.push("mainView");
+            this.setState({
+                selectedPayDay: day,
+
+                beautifyPayDay: dateToString(day),
+            });
+        }
+    };
+
+    handleCurrencyClick = (e: Object) => {
+        const {value} = e.target;
+        this.props.history.push("mainView");
+        this.setState({selectedCurrency: value});
+    };
+
+    convertLocation = (location: string): string => {
+
+        switch (location) {
+            case '/':
+                return 'mainView';
+            case '/currencyView':
+                return 'currencyView';
+            case '/calendarView':
+                return 'calendarView';
+
+            default:
+                return "mainView";
+        }
+    }
+
+
+    render() {
+        const {
+            isVkId,
+            selectedPayDay,
+            selectedCurrency,
+            beautifyPayDay
+        } = this.state;
+        const {isFetching, error, sendEnterData} = this.props;
+
+
+        const btnLogin = (
+            <button
+                onClick={() => this.props.signUp(this.props.params)}
+                className={style.btn}
+            >
+                войти
+            </button>
+        );
+
+        const currencyView = (
+            <View activePanel="mainPanel" id="currencyView">
+                <Panel id="mainPanel">
+                    <CurrencyView
+                        handleCurrencyClick={this.handleCurrencyClick}
+                        selectedCurrency={selectedCurrency}
+                    />
+                </Panel>
+            </View>
+        );
+
+        const mainView = (
+            <View activePanel="main_panel" id="mainView">
+                <Panel id="main_panel">
+                    <div className={style.entrance}>
+                        <EntranceForm
+                            isVkId={isVkId}
+                            selectedPayDay={selectedPayDay}
+                            selectedCurrency={selectedCurrency} isFetching={isFetching} sendEnterData={sendEnterData}
+                            beautifyPayDay={beautifyPayDay}/>
+
+                        <EntranceSwiper
+                            btnLogin={btnLogin}
+                            error={error}
+                            isFetching={isFetching}
+                            isVkId={isVkId}
+                        />
+                    </div>
+                </Panel>
+            </View>
+        );
+        const calendarView = (
+            <View activePanel="mainPanel" id="calendarView">
+                <Panel
+                    id="mainPanel">
+                    <CalendarView
+                        onTodayButtonClick={this.handleToDayBtn}
+                        onDayClick={this.handleDayClick}
+                        selectedPayDay={this.state.selectedPayDay}
+                    />
+                </Panel>
+            </View>
+        );
+
+        return (
+            <Root activeView={this.convertLocation(this.props.location.pathname)}>
+                {mainView}
+                {calendarView}
+                {currencyView}
+            </Root>
+        );
+    }
 }
 
-export { Entrance };
+export {Entrance};

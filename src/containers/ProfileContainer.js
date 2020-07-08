@@ -26,11 +26,14 @@ const mapStateToProps = state => ({
   calc: state.user.calc,
   history: state.user.history.value,
   timezone: state.user.timezone,
-  params: state.user.params
+  params: state.user.params,
+  currency: state.user.currency
 });
 export const ProfileContainer = withRouter(
-  connect(
-    mapStateToProps,
-    { toggleModal, makeProfileOperation, getStatistics, getHistoryShort }
-  )(Profile)
+  connect(mapStateToProps, {
+    toggleModal,
+    makeProfileOperation,
+    getStatistics,
+    getHistoryShort
+  })(Profile)
 );

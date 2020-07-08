@@ -1,0 +1,54 @@
+.enterContainer {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  transition: 0.3s;
+  padding-top: 20%;
+}
+
+.enterTitle {
+  color: #fff;
+  font-weight: bold;
+  font-size: 19px;
+  text-align: center;
+  padding: 0 0 10px 0;
+  width: 90%;
+}
+.enterDataItem {
+  width: 100%;
+  padding-bottom: 5%;
+}
+.enterFooter {
+  text-align: center;
+  width: 100%;
+}
+
+.enterCard {
+  transition: 0.2s;
+  width: 80%;
+  display: flex;
+  flex-flow: column;
+  background: #fff;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--background_color_card);
+  border-radius: 10px;
+  box-shadow: 5px 5px 4px 0px #00000030;
+  position: relative;
+}
+
+@media (max-height: 600px) {
+  .enterContainer {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    transition: 0.3s;
+    padding-top: 1%;
+    transform: scale(0.8);
+  }
+}

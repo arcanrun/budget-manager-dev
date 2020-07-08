@@ -30,6 +30,9 @@ import { LineChart } from "./LineChart";
 import { ShortenNumber } from "./ShortenNumber";
 import { Modal } from "./Modal";
 import { ModalHistory } from "./ModalHistory";
+import { PanelMonthPicker } from "./PanelMonthPicker";
+import { SettingsPage } from "./SettingsPage";
+import { SettingsView } from "./SettingsView";
 
 export {
   Header,
@@ -62,5 +65,8 @@ export {
   LineChart,
   ShortenNumber,
   Modal,
-  ModalHistory
+  ModalHistory,
+  SettingsPage,
+  PanelMonthPicker,
+  SettingsView
 };
